@@ -1,0 +1,62 @@
+#root {
+  /* max-width: 1280px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
+  /* text-align: center; */
+}
+
+.App {
+  display: grid;
+  gap: 25px;
+}
+
+.todos-table {
+  /* width: -webkit-fill-available; */
+  /* margin: 0 auto; */
+  padding: 2rem;
+  border-collapse: collapse;
+
+
+}
+
+.todos-table,
+td,
+th {
+  border: 3px solid black;
+}
+
+/* th {
+  padding-left: 10px;
+  padding-right: 10px;
+} */
+
+td {
+  padding: 10px;
+}
+
+.nav {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+.login-form {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.username,
+.password {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
