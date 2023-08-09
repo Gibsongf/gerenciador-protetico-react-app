@@ -1,11 +1,12 @@
 // import { useState } from 'react'
-import { DentistasList } from "./components/DentistasList";
+import { DentistasList } from "./pages/todos/DentistasList";
 import { FormLogin } from "./components/FormLogin";
 import { Header } from "./components/Header";
-import { LocalList } from "./components/LocalList";
-import { ProductList } from "./components/ProductList";
-import { ServiçoList } from "./components/ServiçoList";
+import { LocalList } from "./pages/todos/LocalList";
+import { ProductList } from "./pages/todos/ProductList";
+import { ServiçoList } from "./pages/todos/ServiçoList";
 import "./styles/App.css";
+import { FormDentist } from "./components/Form";
 function App() {
     const token = localStorage.getItem("token");
     // If has token and is valid send to index else delete token and redirect login
@@ -18,8 +19,9 @@ function App() {
             <Header />
             {/* <DentistasList /> */}
             {/* <LocalList /> */}
-            <ProductList />
+            {/* <ProductList /> */}
             {/* <ServiçoList /> */}
+            <FormDentist />
         </div>
     );
 }

@@ -1,0 +1,58 @@
+/* media query here for the phone size and below the config */
+
+.dentist-form>div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
+.dentist-form {
+    margin: 0 auto;
+    padding: 75px;
+    background-color: #1f1f1f;
+    color: whitesmoke;
+    text-align: center;
+    border-radius: 15px;
+}
+
+button {
+    margin: 10px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+input {
+    border-radius: 15px;
+    appearance: none;
+    border: none;
+    background-color: #DFE6EE;
+
+}
+
+/* input:focus,
+input:focus-visible {
+    outline: 1px auto #646cff;
+
+} */
+
+select {
+    border-radius: 5px;
+
+}
+
+@media (max-width: 720px) {
+    .dentist-form>div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dentist-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+}

@@ -1,8 +1,12 @@
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
+  padding: 0;
+  margin: 0;
+  background-color: #141414;
+  min-height: 100vh;
+  background-image: url('../assets/bk-odonto.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .App {
@@ -34,10 +38,18 @@ td {
   padding: 10px;
 }
 
+
+
 .nav {
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
+  color: white;
+}
+
+.header {
+  box-shadow: -2px -20px 20px 15px rgb(77, 84, 83);
+  min-height: 10vh;
+  background-color: rgb(34, 35, 35)
 }
 
 
