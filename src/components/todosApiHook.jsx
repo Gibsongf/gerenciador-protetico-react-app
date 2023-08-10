@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { APItodos } from "../Api";
 
 export function useTodosApi(category) {
+    // console.log(category);
     const [data, setData] = useState();
     useEffect(() => {
         const fetchingData = async () => {

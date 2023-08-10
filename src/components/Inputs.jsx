@@ -28,25 +28,30 @@ export function CepInput({ value, onChange }) {
                 name="cep"
                 pattern="\d{5}\-?\d{3}"
                 placeholder="xxxxx-xxx"
+                required
             ></input>
         </div>
     );
 }
 // Used for dentist form local dropdown option
-export function LocalSelect({ onChange, initialValue }) {
-    const data = useTodosApi("local");
+export function SelectInput({ onChange, initialValue, labelTxt, category }) {
+    const data = useTodosApi(category);
+
+    if (!data) {
+        return <div>Loading...</div>;
+    }
     return (
-        <div className="local-options">
-            <label htmlFor="local-options">Local de Trabalho:</label>
+        <div className="select-options">
+            <label htmlFor="options">{labelTxt}</label>
             <select
                 value={initialValue}
                 onChange={onChange}
-                name="local"
-                id="local-options"
+                name={`${category}`}
+                id="options"
             >
                 {data.map((local) => {
                     return (
-                        <option key={local.id} value={local._id}>
+                        <option key={local._id} value={local._id}>
                             {local.nome}
                         </option>
                     );
@@ -59,14 +64,15 @@ export function LocalSelect({ onChange, initialValue }) {
 export function CpfInput({ value, onChange }) {
     return (
         <div className="cpf">
-            <label htmlFor="cpf">CPF(formato: xxx.xxx.xxx-xx):</label>
+            <label htmlFor="cpf">CPF:</label>
             <input
                 value={value}
                 onChange={onChange}
                 type="text"
                 name="cpf"
                 pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
-                title="Digite um CPF no formato: xxx.xxx.xxx-xx"
+                placeholder="xxx.xxx.xxx-xx"
+                required
             ></input>
         </div>
     );
@@ -83,16 +89,17 @@ export function TelefoneInput({ value, onChange }) {
                 id="telefone"
                 placeholder="xxxxx-xxxx"
                 pattern="[0-9]{5}-[0-9]{4}"
+                required
             />
         </div>
     );
 }
-export function SimpleTextInput({ labelTxt, id, value, onChange }) {
+export function SimpleInput({ labelTxt, id, value, onChange, type = "text" }) {
     return (
         <div className={id}>
             <label htmlFor={id}>{labelTxt}</label>
             <input
-                type="text"
+                type={type}
                 name={id}
                 id={id}
                 value={value}
@@ -102,11 +109,12 @@ export function SimpleTextInput({ labelTxt, id, value, onChange }) {
     );
 }
 
-SimpleTextInput.propTypes = {
+SimpleInput.propTypes = {
     id: PropTypes.string.isRequired,
-    labelTxt: PropTypes.any,
+    labelTxt: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    type: PropTypes.string,
 };
 TelefoneInput.propTypes = {
     value: PropTypes.string,
@@ -129,7 +137,9 @@ TipoTabelaSelect.propTypes = {
 //     initialValue: "Normal",
 // };
 
-LocalSelect.propTypes = {
+SelectInput.propTypes = {
+    category: PropTypes.string,
     initialValue: PropTypes.string,
     onChange: PropTypes.any,
+    labelTxt: PropTypes.string,
 };
