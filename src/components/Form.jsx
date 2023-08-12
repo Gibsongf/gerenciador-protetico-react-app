@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     CepInput,
     CpfInput,
+    FilterDentistsByLocation,
     SelectInput,
     SimpleInput,
     TelefoneInput,
@@ -164,6 +165,7 @@ export function FormService() {
     const initialState = {
         dentista: "",
         produto: "",
+        local: "",
         paciente_nome: "",
     };
 
@@ -185,13 +187,21 @@ export function FormService() {
             />
             {/* select Local then from this local we 
                 show the dentist that work there as
-                option for the next select input  
+                option for the next select input
+                a props that will have the id of the select local
+                and pass that to the next select to search dentist(local:id)  
             */}
             <SelectInput
-                initialValue={formData.dentista}
+                initialValue={formData.local}
                 onChange={handleChange}
                 category={"local"}
                 labelTxt={"Local:"}
+            />
+
+            <FilterDentistsByLocation
+                initialValue={formData.dentista}
+                onChange={handleChange}
+                dbId={formData.local}
             />
 
             <button type="submit">Registrar</button>

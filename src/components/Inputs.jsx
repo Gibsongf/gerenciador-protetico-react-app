@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useTodosApi } from "./todosApiHook";
+import { useDetailsApi, useTodosApi } from "./todosApiHook";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (
@@ -49,13 +49,42 @@ export function SelectInput({ onChange, initialValue, labelTxt, category }) {
                 name={`${category}`}
                 id="options"
             >
-                {data.map((local) => {
+                <option></option>
+
+                {data.map((selectData) => {
                     return (
-                        <option key={local._id} value={local._id}>
-                            {local.nome}
+                        <option key={selectData._id} value={selectData._id}>
+                            {selectData.nome}
                         </option>
                     );
                 })}
+            </select>
+        </div>
+    );
+}
+export function FilterDentistsByLocation({ onChange, dbId }) {
+    let data = useDetailsApi("local", dbId);
+    const RenderOptions = () => {
+        if (!dbId) {
+            return <WaitSelectLocal />;
+        }
+        return data.dentistas.map((dentist) => {
+            return (
+                <option key={dentist._id} value={dentist._id}>
+                    {dentist.nome}
+                </option>
+            );
+        });
+    };
+    const WaitSelectLocal = () => {
+        return <option value={null}>Selecione Local</option>;
+    };
+
+    return (
+        <div className="select-options">
+            <label htmlFor="options">Dentistas:</label>
+            <select onChange={onChange} name="dentista" id="options">
+                {!data ? <WaitSelectLocal /> : <RenderOptions />}
             </select>
         </div>
     );
@@ -142,4 +171,9 @@ SelectInput.propTypes = {
     initialValue: PropTypes.string,
     onChange: PropTypes.any,
     labelTxt: PropTypes.string,
+};
+FilterDentistsByLocation.propTypes = {
+    initialValue: PropTypes.string,
+    onChange: PropTypes.any,
+    dbId: PropTypes.string,
 };

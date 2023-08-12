@@ -58,3 +58,8 @@ export async function APItodos(category) {
     const data = await setupFetch(url, "get");
     return data;
 }
+export async function APIDetails(category, id) {
+    const url = `http://localhost:3000/api/${category}/${id}`;
+    const data = await setupFetch(url, "get");
+    return data;
+}
