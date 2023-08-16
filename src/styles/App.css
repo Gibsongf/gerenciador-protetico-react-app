@@ -14,20 +14,25 @@
   gap: 25px;
 }
 
-.todos-table {
-  /* width: -webkit-fill-available; */
-  /* margin: 0 auto; */
-  padding: 2rem;
-  border-collapse: collapse;
-
-
-}
-
 .todos-table,
 td,
 th {
-  border: 3px solid black;
+  color: black;
+  border: 3px solid rgb(128, 82, 82);
+  padding: 15px;
+
 }
+
+.todos-table {
+  /* width: -webkit-fill-available; */
+  margin: 0 25px;
+  border-collapse: collapse;
+  background-color: white;
+  color: white;
+
+}
+
+
 
 /* th {
   padding-left: 10px;

@@ -22,14 +22,14 @@ function App() {
     return (
         <div className="App">
             <Header />
-            {/* <DentistasList /> */}
-            {/* <LocalList /> */}
-            {/* <ProductList /> */}
-            {/* <ServiçoList /> */}
+            <DentistasList />
+            <LocalList />
+            <ProductList />
+            <ServiçoList />
             {/* <FormLocal /> */}
             {/* <FormDentist /> */}
             {/* <FormProduct /> */}
-            <FormService />
+            {/* <FormService /> */}
         </div>
     );
 }
