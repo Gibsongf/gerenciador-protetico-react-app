@@ -56,6 +56,7 @@ async function setupFetch(url, reqMethod = "get", body) {
 export async function APItodos(category) {
     const url = `http://localhost:3000/api/${category}/todos`;
     const data = await setupFetch(url, "get");
+    // console.log(data);
     return data;
 }
 export async function APIDetails(category, id) {

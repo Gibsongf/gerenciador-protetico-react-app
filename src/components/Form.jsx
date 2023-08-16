@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import {
     CepInput,
     CpfInput,
     FilterDentistsByLocation,
+    SearchProducts,
     SelectInput,
     SimpleInput,
     TelefoneInput,
     TipoTabelaSelect,
 } from "./Inputs";
 import "../styles/Forms.css";
+import { useTodosApi } from "./todosApiHook";
 const UseForm = (formType, initialState) => {
     const [formData, setFormData] = useState(initialState);
 
@@ -168,12 +172,23 @@ export function FormService() {
         local: "",
         paciente_nome: "",
     };
-
+    const products = useTodosApi("produto");
+    const [productInput, setProductInput] = useState([]);
+    // console.log(products);
     const { formData, handleChange, handleSubmit } = UseForm(
         "new",
         initialState
     );
 
+    const AdditionalProduct = () => {
+        const key = uuidv4();
+        setProductInput((previous) => {
+            return [
+                ...previous,
+                <SearchProducts products={products} key={key} />,
+            ];
+        });
+    };
     return (
         <form action="">
             <legend>
@@ -185,12 +200,7 @@ export function FormService() {
                 value={formData.paciente_nome}
                 onChange={handleChange}
             />
-            {/* select Local then from this local we 
-                show the dentist that work there as
-                option for the next select input
-                a props that will have the id of the select local
-                and pass that to the next select to search dentist(local:id)  
-            */}
+
             <SelectInput
                 initialValue={formData.local}
                 onChange={handleChange}
@@ -203,7 +213,12 @@ export function FormService() {
                 onChange={handleChange}
                 dbId={formData.local}
             />
+            <SearchProducts products={products} />
+            {productInput.map((i) => i)}
 
+            <button onClick={AdditionalProduct} type="button">
+                Mais Produto
+            </button>
             <button type="submit">Registrar</button>
         </form>
     );

@@ -31,6 +31,7 @@ input {
     padding: 5px;
     appearance: none;
     border: none;
+    min-width: 300px;
 
 }
 
@@ -49,7 +50,7 @@ input:focus-visible {
 
 
 @media (max-width: 720px) {
-    form>div {
+    /* form>div {
         display: flex;
         justify-content: space-between;
     }
@@ -59,5 +60,5 @@ input:focus-visible {
         flex-direction: column;
         gap: 25px;
         align-items: center;
-    }
+    } */
 }

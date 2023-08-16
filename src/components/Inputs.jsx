@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDetailsApi, useTodosApi } from "./todosApiHook";
+import { useEffect, useRef, useState } from "react";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (
@@ -137,7 +138,50 @@ export function SimpleInput({ labelTxt, id, value, onChange, type = "text" }) {
         </div>
     );
 }
+export function SearchProducts({ products }) {
+    const [search, setSearch] = useState("");
+    const [result, setResult] = useState([]);
+    useEffect(() => {
+        // console.log(search, products);
+        const filter = () =>
+            products.filter((item) => {
+                if (item.nome.toLowerCase().includes(search.toLowerCase())) {
+                    return item;
+                }
+            });
+        if (products) {
+            setResult(() => filter());
+        }
+    }, [search, products]);
+    return (
+        <div>
+            <label htmlFor="search-product">Produto:</label>
+            <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                name="search-product"
+                type="text"
+                placeholder="Search..."
+            />
+            <select name="products" id="products">
+                Selecione o Produto
+                {!result
+                    ? ""
+                    : result.map((r) => {
+                          return (
+                              <option key={r._id} value={r._id}>
+                                  {r.nome}
+                              </option>
+                          );
+                      })}
+            </select>
+        </div>
+    );
+}
 
+SearchProducts.propTypes = {
+    products: PropTypes.array,
+};
 SimpleInput.propTypes = {
     id: PropTypes.string.isRequired,
     labelTxt: PropTypes.string,
