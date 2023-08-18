@@ -110,8 +110,16 @@ export function FormLocal() {
                 onChange={handleChange}
                 msg={!errorMsg.local ? "" : errorMsg.local.endereço}
             />
-            <CepInput value={formData.cep} onChange={handleChange} />
-            <TelefoneInput value={formData.telefone} onChange={handleChange} />
+            <CepInput
+                value={formData.cep}
+                onChange={handleChange}
+                msg={!errorMsg.local ? "" : errorMsg.local.cep}
+            />
+            <TelefoneInput
+                value={formData.telefone}
+                onChange={handleChange}
+                msg={!errorMsg.local ? "" : errorMsg.local.telefone}
+            />
             <TipoTabelaSelect value={formData.tabela} onChange={handleChange} />
             <button onClick={handleSubmit} type="submit">
                 Registrar

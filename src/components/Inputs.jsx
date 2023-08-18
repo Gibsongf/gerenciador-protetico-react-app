@@ -21,8 +21,8 @@ export function TipoTabelaSelect({ initialValue, onChange }) {
 export function CepInput({ value, onChange, msg }) {
     return (
         <div className="Cep">
-            <div>{msg}</div>
             <label htmlFor="cep">Cep</label>
+            <div className="error-message">{msg}</div>
             <input
                 value={value}
                 onChange={onChange}
@@ -85,9 +85,8 @@ export function FilterDentistsByLocation({ onChange, dbId, msg }) {
 
     return (
         <div className="select-options">
-            <div>{msg}</div>
-
             <label htmlFor="options">Dentistas:</label>
+            <div className="error-message">{msg}</div>
             <select onChange={onChange} name="dentista" id="options">
                 {!data ? <WaitSelectLocal /> : <RenderOptions />}
             </select>
@@ -98,9 +97,8 @@ export function FilterDentistsByLocation({ onChange, dbId, msg }) {
 export function CpfInput({ value, onChange, msg }) {
     return (
         <div className="cpf">
-            <div>{msg}</div>
-
             <label htmlFor="cpf">CPF</label>
+            <div className="error-message">{msg}</div>
             <input
                 value={value}
                 onChange={onChange}
@@ -117,9 +115,8 @@ export function CpfInput({ value, onChange, msg }) {
 export function TelefoneInput({ value, onChange, msg }) {
     return (
         <div>
-            <div>{msg}</div>
-
             <label htmlFor="telefone">Telefone</label>
+            <div className="error-message">{msg}</div>
             <input
                 value={value}
                 onChange={onChange}
@@ -144,7 +141,7 @@ export function SimpleInput({
     return (
         <div className={id}>
             <label htmlFor={id}>{labelTxt}</label>
-            {!msg ? "" : <div className="error-message">{msg}</div>}
+            <div className="error-message">{msg}</div>
             <input
                 type={type}
                 name={id}
