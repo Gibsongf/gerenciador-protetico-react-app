@@ -12,6 +12,11 @@ import {
     FormProduct,
     FormService,
 } from "./components/Form";
+import { createContext } from "react";
+
+export const FormErrorMsg = createContext({
+    errorMsg: {},
+});
 function App() {
     const token = localStorage.getItem("token");
     // If has token and is valid send to index else delete token and redirect login
@@ -21,15 +26,18 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
-            <DentistasList />
+            <FormErrorMsg.Provider value={{ errorMsg: {} }}>
+                <Header />
+                <LocalList />
+                {/* <DentistasList />
             <LocalList />
             <ProductList />
-            <ServiçoList />
-            {/* <FormLocal /> */}
-            {/* <FormDentist /> */}
-            {/* <FormProduct /> */}
-            {/* <FormService /> */}
+            <ServiçoList /> */}
+                <FormLocal />
+                {/* <FormDentist />
+            <FormProduct />
+            <FormService /> */}
+            </FormErrorMsg.Provider>
         </div>
     );
 }

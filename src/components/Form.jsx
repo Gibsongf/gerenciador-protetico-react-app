@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -13,51 +13,90 @@ import {
 } from "./Inputs";
 import "../styles/Forms.css";
 import { useTodosApi } from "./todosApiHook";
-const UseForm = (formType, initialState) => {
-    const [formData, setFormData] = useState(initialState);
+import { APIPostNewData } from "../Api";
+import { FormErrorMsg } from "../App";
 
+const UseForm = (formType, initialState, formElements) => {
+    const [formData, setFormData] = useState(initialState);
+    const [error, setError] = useState();
+    const { errorMsg } = useContext(FormErrorMsg);
     const handleChange = (e) => {
-        // console.log(e.target);
-        // console.log(formData);
         setFormData({ ...formData, [e.target.name]: e.target.value });
         // newContentValidator(e);
     };
+    useEffect(() => {
+        // console.log(error, formElements);
+        const handleFormElementErrors = () => {
+            const lstMsg = {};
+            Array.from(formElements).forEach((e) => {
+                // iterate Api error case response and
+                //compare with the el id to check if has error
+                error.forEach((erro) => {
+                    if (e.id === erro.path) {
+                        // save msg and element id
+                        lstMsg[e.id] = erro.msg;
+                    }
+                });
+                if (Object.keys(lstMsg).includes(e.id)) {
+                    e.className = "invalid-form";
+                } else {
+                    e.className = "";
+                }
+            });
+            return lstMsg;
+        };
+
+        if (Array.isArray(error)) {
+            // iterate form elements inputs
+            const errorObj = handleFormElementErrors();
+            errorMsg[formData.category] = errorObj;
+        }
+
+        return setError(() => "");
+    }, [error, formElements, formData.category, errorMsg]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const validData = newContentValidator(e.target.parentElement);
-
-        // if (validData) {
-        //     if (formType === "new") {
-        //         // await newPost(formData);
-        //         setFormData({ text: "", title: "", published: false });
-        //     }
-        //     if (formType === "edit") {
-        //         setWasUpdated((e) => !e);
-        //     }
-        // }
+        const apiResponse = APIPostNewData(formData);
+        // if valid is false active a pop-up
+        //indicante the location of the error with .msg
+        // and highlight the input using .path putting in class or something
+        apiResponse.then((e) => {
+            if (Object.keys(e).includes("errors")) {
+                // console.log(e.errors);
+                setError(e.errors);
+            }
+        });
     };
     return { formData, handleChange, handleSubmit };
 };
 
 export function FormLocal() {
-    const nomeTag = { id: "nome", txt: "Nome do Local ou a Franquia:" };
-    const initialState = {
+    const ref = useRef();
+    const { errorMsg } = useContext(FormErrorMsg);
+
+    const nomeTag = { id: "nome", txt: "Nome do Local ou a Franquia" };
+    const initState = {
         nome: "",
         endereço: "",
         cep: "",
         telefone: "",
         tabela: "",
+        category: "local",
     };
     const { formData, handleChange, handleSubmit } = UseForm(
         "new",
-        initialState
+        initState,
+        ref.current
     );
-
+    // useEffect(() => {
+    //     console.log(msgError);
+    // }, [msgError]);
     return (
-        <form action="">
+        <form action="" ref={ref}>
             <legend>
                 <h3>Registrar Novo Local</h3>
             </legend>
+
             <SimpleInput
                 id={nomeTag.id}
                 labelTxt={nomeTag.txt}
@@ -66,14 +105,17 @@ export function FormLocal() {
             />
             <SimpleInput
                 id={"endereço"}
-                labelTxt={"Endereço:"}
+                labelTxt={"Endereço"}
                 value={formData.endereço}
                 onChange={handleChange}
+                msg={!errorMsg.local ? "" : errorMsg.local.endereço}
             />
             <CepInput value={formData.cep} onChange={handleChange} />
             <TelefoneInput value={formData.telefone} onChange={handleChange} />
             <TipoTabelaSelect value={formData.tabela} onChange={handleChange} />
-            <button type="submit">Registrar</button>
+            <button onClick={handleSubmit} type="submit">
+                Registrar
+            </button>
         </form>
     );
 }
@@ -84,27 +126,30 @@ export function FormDentist() {
         local: "",
         telefone: "",
         cpf: "",
+        category: "dentista",
     };
-
+    const ref = useRef();
     const { formData, handleChange, handleSubmit } = UseForm(
         "new",
         initialState
     );
-
+    useEffect(() => {
+        console.log(ref);
+    }, [ref]);
     return (
-        <form action="">
+        <form action="" ref={ref}>
             <legend>
                 <h3>Registrar Novo Dentista</h3>
             </legend>
             <SimpleInput
                 id={"nome"}
-                labelTxt={"Nome:"}
+                labelTxt={"Nome"}
                 value={formData.nome}
                 onChange={handleChange}
             />
             <SimpleInput
                 id={"sobrenome"}
-                labelTxt={"Sobrenome:"}
+                labelTxt={"Sobrenome"}
                 value={formData.sobrenome}
                 onChange={handleChange}
             />
@@ -115,9 +160,11 @@ export function FormDentist() {
                 initialValue={formData.local}
                 onChange={handleChange}
                 category={"local"}
-                labelTxt={"Local de Trabalho:"}
+                labelTxt={"Local de Trabalho"}
             />
-            <button type="submit">Registrar</button>
+            <button onClick={handleSubmit} type="submit">
+                Registrar
+            </button>
         </form>
     );
 }
@@ -127,6 +174,7 @@ export function FormProduct() {
         nome: "",
         valor_normal: "",
         valor_reduzido: "",
+        category: "produto",
     };
 
     const { formData, handleChange, handleSubmit } = UseForm(
@@ -141,26 +189,28 @@ export function FormProduct() {
             </legend>
             <SimpleInput
                 id={"nome"}
-                labelTxt={"Nome:"}
+                labelTxt={"Nome"}
                 value={formData.nome}
                 onChange={handleChange}
             />
             <SimpleInput
                 id={"valor_normal"}
-                labelTxt={"Valor Normal:"}
+                labelTxt={"Valor Normal"}
                 value={formData.valor_normal}
                 onChange={handleChange}
                 type={"number"}
             />
             <SimpleInput
                 id={"valor_reduzido"}
-                labelTxt={"Valor Reduzido:"}
+                labelTxt={"Valor Reduzido"}
                 value={formData.valor_reduzido}
                 onChange={handleChange}
                 type={"number"}
             />
 
-            <button type="submit">Registrar</button>
+            <button onClick={handleSubmit} type="submit">
+                Registrar
+            </button>
         </form>
     );
 }
@@ -171,6 +221,7 @@ export function FormService() {
         produto: "",
         local: "",
         paciente_nome: "",
+        category: "servico",
     };
     const products = useTodosApi("produto");
     const [productInput, setProductInput] = useState([]);
@@ -219,7 +270,9 @@ export function FormService() {
             <button onClick={AdditionalProduct} type="button">
                 Mais Produto
             </button>
-            <button type="submit">Registrar</button>
+            <button onClick={handleSubmit} type="submit">
+                Registrar
+            </button>
         </form>
     );
 }

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useDetailsApi, useTodosApi } from "./todosApiHook";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (
         <div className="tabela-options">
-            <label htmlFor="tabela-options">Tipo de Tabela:</label>
+            <label htmlFor="tabela-options">Tipo de Tabela</label>
             <select
                 value={initialValue}
                 onChange={onChange}
@@ -18,15 +18,17 @@ export function TipoTabelaSelect({ initialValue, onChange }) {
         </div>
     );
 }
-export function CepInput({ value, onChange }) {
+export function CepInput({ value, onChange, msg }) {
     return (
         <div className="Cep">
-            <label htmlFor="cep">Cep:</label>
+            <div>{msg}</div>
+            <label htmlFor="cep">Cep</label>
             <input
                 value={value}
                 onChange={onChange}
                 type="text"
                 name="cep"
+                id="cep"
                 pattern="\d{5}\-?\d{3}"
                 placeholder="xxxxx-xxx"
                 required
@@ -63,7 +65,7 @@ export function SelectInput({ onChange, initialValue, labelTxt, category }) {
         </div>
     );
 }
-export function FilterDentistsByLocation({ onChange, dbId }) {
+export function FilterDentistsByLocation({ onChange, dbId, msg }) {
     let data = useDetailsApi("local", dbId);
     const RenderOptions = () => {
         if (!dbId) {
@@ -83,6 +85,8 @@ export function FilterDentistsByLocation({ onChange, dbId }) {
 
     return (
         <div className="select-options">
+            <div>{msg}</div>
+
             <label htmlFor="options">Dentistas:</label>
             <select onChange={onChange} name="dentista" id="options">
                 {!data ? <WaitSelectLocal /> : <RenderOptions />}
@@ -91,15 +95,18 @@ export function FilterDentistsByLocation({ onChange, dbId }) {
     );
 }
 
-export function CpfInput({ value, onChange }) {
+export function CpfInput({ value, onChange, msg }) {
     return (
         <div className="cpf">
-            <label htmlFor="cpf">CPF:</label>
+            <div>{msg}</div>
+
+            <label htmlFor="cpf">CPF</label>
             <input
                 value={value}
                 onChange={onChange}
                 type="text"
                 name="cpf"
+                id="cpf"
                 pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
                 placeholder="xxx.xxx.xxx-xx"
                 required
@@ -107,10 +114,12 @@ export function CpfInput({ value, onChange }) {
         </div>
     );
 }
-export function TelefoneInput({ value, onChange }) {
+export function TelefoneInput({ value, onChange, msg }) {
     return (
         <div>
-            <label htmlFor="telefone">Telefone:</label>
+            <div>{msg}</div>
+
+            <label htmlFor="telefone">Telefone</label>
             <input
                 value={value}
                 onChange={onChange}
@@ -124,10 +133,18 @@ export function TelefoneInput({ value, onChange }) {
         </div>
     );
 }
-export function SimpleInput({ labelTxt, id, value, onChange, type = "text" }) {
+export function SimpleInput({
+    labelTxt,
+    id,
+    value,
+    onChange,
+    type = "text",
+    msg,
+}) {
     return (
         <div className={id}>
             <label htmlFor={id}>{labelTxt}</label>
+            {!msg ? "" : <div className="error-message">{msg}</div>}
             <input
                 type={type}
                 name={id}
@@ -155,7 +172,7 @@ export function SearchProducts({ products }) {
     }, [search, products]);
     return (
         <div>
-            <label htmlFor="search-product">Produto:</label>
+            <label htmlFor="search-product">Produto</label>
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -188,18 +205,22 @@ SimpleInput.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
+    msg: PropTypes.string,
 };
 TelefoneInput.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
+    msg: PropTypes.string,
 };
 CpfInput.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
+    msg: PropTypes.string,
 };
 CepInput.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
+    msg: PropTypes.string,
 };
 
 TipoTabelaSelect.propTypes = {
@@ -220,4 +241,5 @@ FilterDentistsByLocation.propTypes = {
     initialValue: PropTypes.string,
     onChange: PropTypes.any,
     dbId: PropTypes.string,
+    msg: PropTypes.string,
 };

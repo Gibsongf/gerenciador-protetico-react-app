@@ -41,10 +41,11 @@ async function setupFetch(url, reqMethod = "get", body) {
     }
     try {
         const response = await fetch(url, reqConfig);
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 400) {
             const data = await response.json();
             return data;
         }
+
         if (response.status === 401) {
             localStorage.removeItem("token");
             return "Old token";
@@ -62,5 +63,13 @@ export async function APItodos(category) {
 export async function APIDetails(category, id) {
     const url = `http://localhost:3000/api/${category}/${id}`;
     const data = await setupFetch(url, "get");
+    return data;
+}
+
+export async function APIPostNewData(formData) {
+    const url = `http://localhost:3000/api/${formData["category"]}/novo`;
+    const data = await setupFetch(url, "post", formData);
+    // console.log(data);
+
     return data;
 }

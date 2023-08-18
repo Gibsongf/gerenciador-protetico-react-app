@@ -22,7 +22,7 @@ export function DentistasList() {
 
                 {data.map((d) => {
                     return (
-                        <tr key={d.nome}>
+                        <tr key={d._id}>
                             <td>
                                 {d.nome} {d.sobrenome}{" "}
                             </td>

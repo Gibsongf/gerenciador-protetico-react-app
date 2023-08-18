@@ -24,7 +24,7 @@ export function LocalList() {
 
                 {data.map((d) => {
                     return (
-                        <tr key={d.nome}>
+                        <tr key={d._id}>
                             <td>{d.nome}</td>
                             <td>{d.telefone}</td>
                             <td>{d.endereço}</td>
