@@ -37,7 +37,13 @@ export function CepInput({ value, onChange, msg }) {
     );
 }
 // Used for dentist form local dropdown option
-export function SelectInput({ onChange, initialValue, labelTxt, category }) {
+export function SelectInput({
+    onChange,
+    initialValue,
+    labelTxt,
+    category,
+    msg,
+}) {
     const data = useTodosApi(category);
 
     if (!data) {
@@ -45,12 +51,14 @@ export function SelectInput({ onChange, initialValue, labelTxt, category }) {
     }
     return (
         <div className="select-options">
-            <label htmlFor="options">{labelTxt}</label>
+            <label htmlFor={category}>{labelTxt}</label>
+            <div className="error-message">{msg}</div>
+
             <select
                 value={initialValue}
                 onChange={onChange}
                 name={`${category}`}
-                id="options"
+                id={category}
             >
                 <option></option>
 

@@ -18,52 +18,38 @@ import { FormErrorMsg } from "../App";
 
 const UseForm = (formType, initialState, formElements) => {
     const [formData, setFormData] = useState(initialState);
-    const [error, setError] = useState();
+    const [result, setResult] = useState({});
     const { errorMsg } = useContext(FormErrorMsg);
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        // newContentValidator(e);
     };
     useEffect(() => {
-        // console.log(error, formElements);
         const handleFormElementErrors = () => {
-            const lstMsg = {};
             Array.from(formElements).forEach((e) => {
                 // iterate Api error case response and
                 //compare with the el id to check if has error
-                error.forEach((erro) => {
-                    if (e.id === erro.path) {
-                        // save msg and element id
-                        lstMsg[e.id] = erro.msg;
-                    }
-                });
-                if (Object.keys(lstMsg).includes(e.id)) {
+                if (Object.keys(result).includes(e.id)) {
                     e.className = "invalid-form";
-                } else {
+                    errorMsg[e.id] = result[e.id];
+                } else if (Object.keys(result).length > 0) {
                     e.className = "";
+                    errorMsg[e.id] = "";
                 }
             });
-            return lstMsg;
         };
-
-        if (Array.isArray(error)) {
-            // iterate form elements inputs
-            const errorObj = handleFormElementErrors();
-            errorMsg[formData.category] = errorObj;
+        if (formElements) {
+            handleFormElementErrors();
         }
+        return setResult(() => "");
+    }, [result, formElements, errorMsg]);
 
-        return setError(() => "");
-    }, [error, formElements, formData.category, errorMsg]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiResponse = APIPostNewData(formData);
-        // if valid is false active a pop-up
-        //indicante the location of the error with .msg
-        // and highlight the input using .path putting in class or something
-        apiResponse.then((e) => {
+        APIPostNewData(formData).then((e) => {
             if (Object.keys(e).includes("errors")) {
-                // console.log(e.errors);
-                setError(e.errors);
+                setResult(e.errors);
+            } else {
+                setResult(e);
             }
         });
     };
@@ -108,17 +94,17 @@ export function FormLocal() {
                 labelTxt={"Endereço"}
                 value={formData.endereço}
                 onChange={handleChange}
-                msg={!errorMsg.local ? "" : errorMsg.local.endereço}
+                msg={!errorMsg ? "" : errorMsg.endereço}
             />
             <CepInput
                 value={formData.cep}
                 onChange={handleChange}
-                msg={!errorMsg.local ? "" : errorMsg.local.cep}
+                msg={!errorMsg ? "" : errorMsg.cep}
             />
             <TelefoneInput
                 value={formData.telefone}
                 onChange={handleChange}
-                msg={!errorMsg.local ? "" : errorMsg.local.telefone}
+                msg={!errorMsg ? "" : errorMsg.telefone}
             />
             <TipoTabelaSelect value={formData.tabela} onChange={handleChange} />
             <button onClick={handleSubmit} type="submit">
@@ -128,6 +114,9 @@ export function FormLocal() {
     );
 }
 export function FormDentist() {
+    const ref = useRef();
+    const { errorMsg } = useContext(FormErrorMsg);
+
     const initialState = {
         nome: "",
         sobrenome: "",
@@ -136,14 +125,11 @@ export function FormDentist() {
         cpf: "",
         category: "dentista",
     };
-    const ref = useRef();
     const { formData, handleChange, handleSubmit } = UseForm(
         "new",
-        initialState
+        initialState,
+        ref.current
     );
-    useEffect(() => {
-        console.log(ref);
-    }, [ref]);
     return (
         <form action="" ref={ref}>
             <legend>
@@ -154,6 +140,7 @@ export function FormDentist() {
                 labelTxt={"Nome"}
                 value={formData.nome}
                 onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.nome}
             />
             <SimpleInput
                 id={"sobrenome"}
@@ -161,14 +148,23 @@ export function FormDentist() {
                 value={formData.sobrenome}
                 onChange={handleChange}
             />
-            <TelefoneInput value={formData.telefone} onChange={handleChange} />
-            <CpfInput value={formData.cpf} onChange={handleChange} />
+            <TelefoneInput
+                value={formData.telefone}
+                onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.telefone}
+            />
+            <CpfInput
+                value={formData.cpf}
+                onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.cpf}
+            />
 
             <SelectInput
                 initialValue={formData.local}
                 onChange={handleChange}
                 category={"local"}
                 labelTxt={"Local de Trabalho"}
+                msg={!errorMsg ? "" : errorMsg.local}
             />
             <button onClick={handleSubmit} type="submit">
                 Registrar

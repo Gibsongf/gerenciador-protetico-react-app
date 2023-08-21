@@ -28,13 +28,14 @@ function App() {
         <div className="App">
             <FormErrorMsg.Provider value={{ errorMsg: {} }}>
                 <Header />
-                <LocalList />
+                {/* <LocalList /> */}
                 {/* <DentistasList />
             <LocalList />
             <ProductList />
             <ServiçoList /> */}
                 <FormLocal />
-                {/* <FormDentist />
+                {/* <FormDentist /> */}
+                {/* 
             <FormProduct />
             <FormService /> */}
             </FormErrorMsg.Provider>
