@@ -30,7 +30,6 @@ export function ServiçoList() {
                 </tr>
                 {/* need to fix the not render of product name */}
                 {data.map((d, index) => {
-                    console.log(d);
                     return (
                         <tr key={d.dentista.nome + index}>
                             <td>{d.dentista.nome}</td>
