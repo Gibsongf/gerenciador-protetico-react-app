@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useDetailsApi, useTodosApi } from "./todosApiHook";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (
@@ -49,14 +49,15 @@ export function SelectInput({
     if (!data) {
         return <div>Loading...</div>;
     }
+
     return (
         <div className="select-options">
             <label htmlFor={category}>{labelTxt}</label>
             <div className="error-message">{msg}</div>
 
             <select
-                value={initialValue}
-                onChange={onChange}
+                // value={initialValue}
+                onClick={onChange}
                 name={`${category}`}
                 id={category}
             >

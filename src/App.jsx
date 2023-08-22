@@ -28,17 +28,20 @@ function App() {
         <div className="App">
             <FormErrorMsg.Provider value={{ errorMsg: {} }}>
                 <Header />
+                {/* All List  */}
                 {/* <LocalList /> */}
-                {/* <DentistasList />
-            <LocalList />
-            <ProductList />
-            <ServiçoList /> */}
+                {/* <DentistasList />*/}
+                {/* <LocalList /> */}
+                {/* <ProductList /> */}
+                {/* <ServiçoList /> */}
+
+                {/* Forms */}
                 {/* <FormLocal /> */}
                 {/* <FormDentist /> */}
-
                 {/* <FormProduct /> */}
+                {/* <FormService /> */}
 
-                <FormService />
+                {/* Details */}
             </FormErrorMsg.Provider>
         </div>
     );

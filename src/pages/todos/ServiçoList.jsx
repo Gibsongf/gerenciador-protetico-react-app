@@ -29,12 +29,17 @@ export function ServiçoList() {
                     <th>Entregado</th>
                 </tr>
                 {/* need to fix the not render of product name */}
-                {data.map((d) => {
+                {data.map((d, index) => {
+                    console.log(d);
                     return (
-                        <tr key={d.dentista.nome}>
+                        <tr key={d.dentista.nome + index}>
                             <td>{d.dentista.nome}</td>
-                            <td>{d.paciente.nome}</td>
-                            <td>{d.produto.nome}</td>
+                            <td>{d.paciente}</td>
+                            <td>
+                                {d.produto.map(
+                                    (produto) => produto.nome + ", "
+                                )}
+                            </td>
                             <td>{booleanToString(d.statusEntrega)}</td>
                         </tr>
                     );
