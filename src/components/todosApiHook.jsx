@@ -6,7 +6,7 @@ export function useTodosApi(category) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                console.log("fetch data 'todos'");
+                console.log("fetch data 'todos' category:" + category);
                 const result = await APItodos(category);
                 // console.log(result);
                 setData(() => result.all);

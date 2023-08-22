@@ -33,11 +33,12 @@ function App() {
             <LocalList />
             <ProductList />
             <ServiçoList /> */}
-                <FormLocal />
+                {/* <FormLocal /> */}
                 {/* <FormDentist /> */}
-                {/* 
-            <FormProduct />
-            <FormService /> */}
+
+                {/* <FormProduct /> */}
+
+                <FormService />
             </FormErrorMsg.Provider>
         </div>
     );

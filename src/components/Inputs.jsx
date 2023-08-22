@@ -73,7 +73,12 @@ export function SelectInput({
         </div>
     );
 }
-export function FilterDentistsByLocation({ onChange, dbId, msg }) {
+export function FilterDentistsByLocation({
+    initialValue,
+    onChange,
+    dbId,
+    msg,
+}) {
     let data = useDetailsApi("local", dbId);
     const RenderOptions = () => {
         if (!dbId) {
@@ -90,12 +95,17 @@ export function FilterDentistsByLocation({ onChange, dbId, msg }) {
     const WaitSelectLocal = () => {
         return <option value={null}>Selecione Local</option>;
     };
-
     return (
         <div className="select-options">
-            <label htmlFor="options">Dentistas:</label>
+            <label htmlFor="dentista">Dentistas:</label>
             <div className="error-message">{msg}</div>
-            <select onChange={onChange} name="dentista" id="options">
+            <select
+                value={initialValue}
+                onChange={onChange}
+                name="dentista"
+                id="dentista"
+            >
+                <option></option>;
                 {!data ? <WaitSelectLocal /> : <RenderOptions />}
             </select>
         </div>
@@ -160,7 +170,7 @@ export function SimpleInput({
         </div>
     );
 }
-export function SearchProducts({ products }) {
+export function SearchProducts({ products, name, onChange }) {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
     useEffect(() => {
@@ -178,6 +188,7 @@ export function SearchProducts({ products }) {
     return (
         <div>
             <label htmlFor="search-product">Produto</label>
+
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -185,8 +196,8 @@ export function SearchProducts({ products }) {
                 type="text"
                 placeholder="Search..."
             />
-            <select name="products" id="products">
-                Selecione o Produto
+            <select onChange={onChange} name={name} id="produto">
+                <option value=""></option>
                 {!result
                     ? ""
                     : result.map((r) => {
@@ -241,6 +252,7 @@ SelectInput.propTypes = {
     initialValue: PropTypes.string,
     onChange: PropTypes.any,
     labelTxt: PropTypes.string,
+    msg: PropTypes.string,
 };
 FilterDentistsByLocation.propTypes = {
     initialValue: PropTypes.string,

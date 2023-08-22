@@ -16,13 +16,16 @@ import { useTodosApi } from "./todosApiHook";
 import { APIPostNewData } from "../Api";
 import { FormErrorMsg } from "../App";
 
-const UseForm = (formType, initialState, formElements) => {
+const useForm = (formType, initialState, formElements, produtoKeys) => {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(FormErrorMsg);
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData((prev) => {
+            return { ...prev, [e.target.name]: e.target.value };
+        });
     };
+
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {
@@ -43,15 +46,32 @@ const UseForm = (formType, initialState, formElements) => {
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        APIPostNewData(formData).then((e) => {
+    const formatProduct = () => {
+        const product = produtoKeys.map((k) => formData[k]);
+        const obj = { ...formData };
+        produtoKeys.forEach((k) => delete obj[k]);
+        obj.produto = product;
+        return obj;
+    };
+    const callAPI = (data) => {
+        APIPostNewData(data).then((e) => {
+            //console.log(e);
             if (Object.keys(e).includes("errors")) {
                 setResult(e.errors);
             } else {
                 setResult(e);
             }
         });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let data;
+        if (formData.category === "servico") {
+            data = formatProduct();
+            callAPI(data);
+        } else {
+            callAPI(formData);
+        }
     };
     return { formData, handleChange, handleSubmit };
 };
@@ -69,13 +89,13 @@ export function FormLocal() {
         tabela: "",
         category: "local",
     };
-    const { formData, handleChange, handleSubmit } = UseForm(
+    const { formData, handleChange, handleSubmit } = useForm(
         "new",
         initState,
         ref.current
     );
     // useEffect(() => {
-    //     console.log(msgError);
+    //     //console.log(msgError);
     // }, [msgError]);
     return (
         <form action="" ref={ref}>
@@ -88,6 +108,7 @@ export function FormLocal() {
                 labelTxt={nomeTag.txt}
                 value={formData.nome}
                 onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.nome}
             />
             <SimpleInput
                 id={"endereço"}
@@ -125,7 +146,7 @@ export function FormDentist() {
         cpf: "",
         category: "dentista",
     };
-    const { formData, handleChange, handleSubmit } = UseForm(
+    const { formData, handleChange, handleSubmit } = useForm(
         "new",
         initialState,
         ref.current
@@ -174,20 +195,24 @@ export function FormDentist() {
 }
 
 export function FormProduct() {
+    const ref = useRef();
+
     const initialState = {
         nome: "",
         valor_normal: "",
         valor_reduzido: "",
         category: "produto",
     };
+    const { errorMsg } = useContext(FormErrorMsg);
 
-    const { formData, handleChange, handleSubmit } = UseForm(
+    const { formData, handleChange, handleSubmit } = useForm(
         "new",
-        initialState
+        initialState,
+        ref.current
     );
 
     return (
-        <form action="">
+        <form action="" ref={ref}>
             <legend>
                 <h3>Registrar Novo Produto</h3>
             </legend>
@@ -196,6 +221,7 @@ export function FormProduct() {
                 labelTxt={"Nome"}
                 value={formData.nome}
                 onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.nome}
             />
             <SimpleInput
                 id={"valor_normal"}
@@ -203,6 +229,7 @@ export function FormProduct() {
                 value={formData.valor_normal}
                 onChange={handleChange}
                 type={"number"}
+                msg={!errorMsg ? "" : errorMsg.valor_normal}
             />
             <SimpleInput
                 id={"valor_reduzido"}
@@ -210,6 +237,7 @@ export function FormProduct() {
                 value={formData.valor_reduzido}
                 onChange={handleChange}
                 type={"number"}
+                msg={!errorMsg ? "" : errorMsg.valor_reduzido}
             />
 
             <button onClick={handleSubmit} type="submit">
@@ -220,32 +248,45 @@ export function FormProduct() {
 }
 
 export function FormService() {
+    const { errorMsg } = useContext(FormErrorMsg);
+    const [produtoKeys, setProdutoKeys] = useState(["produto"]);
+    const ref = useRef();
+
     const initialState = {
         dentista: "",
-        produto: "",
         local: "",
         paciente_nome: "",
         category: "servico",
     };
     const products = useTodosApi("produto");
     const [productInput, setProductInput] = useState([]);
-    // console.log(products);
-    const { formData, handleChange, handleSubmit } = UseForm(
+    // //console.log(products);
+    const { formData, handleChange, handleSubmit } = useForm(
         "new",
-        initialState
+        initialState,
+        ref.current,
+        produtoKeys
     );
 
     const AdditionalProduct = () => {
         const key = uuidv4();
         setProductInput((previous) => {
+            const name = "produto" + String(previous.length + 1);
+            setProdutoKeys((prev) => [...prev, name]);
             return [
                 ...previous,
-                <SearchProducts products={products} key={key} />,
+                <SearchProducts
+                    products={products}
+                    onChange={handleChange}
+                    key={key}
+                    name={name}
+                />,
             ];
         });
     };
+    // //console.log(errorMsg);
     return (
-        <form action="">
+        <form action="" ref={ref}>
             <legend>
                 <h3>Registrar Novo Serviço</h3>
             </legend>
@@ -254,6 +295,7 @@ export function FormService() {
                 labelTxt={"Nome do Paciente:"}
                 value={formData.paciente_nome}
                 onChange={handleChange}
+                msg={!errorMsg ? "" : errorMsg.paciente_nome}
             />
 
             <SelectInput
@@ -261,14 +303,20 @@ export function FormService() {
                 onChange={handleChange}
                 category={"local"}
                 labelTxt={"Local:"}
+                msg={!errorMsg ? "" : errorMsg.local}
             />
 
             <FilterDentistsByLocation
                 initialValue={formData.dentista}
                 onChange={handleChange}
                 dbId={formData.local}
+                msg={!errorMsg ? "" : errorMsg.dentista}
             />
-            <SearchProducts products={products} />
+            <SearchProducts
+                products={products}
+                name="produto"
+                onChange={handleChange}
+            />
             {productInput.map((i) => i)}
 
             <button onClick={AdditionalProduct} type="button">
