@@ -1,41 +1,30 @@
 // import { useState } from 'react'
-import { DentistasList } from "./pages/todos/DentistasList";
-import { FormLogin } from "./components/FormLogin";
 import { Header } from "./components/Header";
+
+import { DentistasList } from "./pages/todos/DentistasList";
 import { LocalList } from "./pages/todos/LocalList";
 import { ProductList } from "./pages/todos/ProductList";
 import { ServiçoList } from "./pages/todos/ServiçoList";
-import "./styles/App.css";
-import {
-    FormDentist,
-    FormLocal,
-    FormProduct,
-    FormService,
-} from "./components/Form";
 import { createContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import "./styles/App.css";
+import { FormDentist } from "./components/Form/FormDentist";
+import { FormLocal } from "./components/Form/FormLocal";
+import { FormService } from "./components/Form/FormService";
+import { FormProduct } from "./components/Form/FormProduct";
+import { FormLogin } from "./components/Form/FormLogin";
 
 export const FormErrorMsg = createContext({
     errorMsg: {},
 });
 
-{
-    /* <Routes>
-<Route path="cart" element={<Order />} />
-<Route path="shop/*">
-    <Route index element={<Shop />} />
-    <Route path=":id" element={<ProductDetails />} />
-</Route>
-<Route path="/" element={<Home />} />
-</Routes> */
-}
 function App() {
     const token = localStorage.getItem("token");
     // If has token and is valid send to index else delete token and redirect login
     if (!token) {
         return <FormLogin />;
     }
-
+    // Need to change phone format of saving and read todo of details
     return (
         <div className="App">
             <FormErrorMsg.Provider value={{ errorMsg: {} }}>

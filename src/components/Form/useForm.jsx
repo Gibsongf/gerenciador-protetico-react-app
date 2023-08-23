@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { APIPostNewData } from "../Api";
-import { FormErrorMsg } from "../App";
+import { APIPostNewData } from "../../Api";
+import { FormErrorMsg } from "../../App";
 
 export function useForm(formType, initialState, formElements, produtoKeys) {
     const [formData, setFormData] = useState(initialState);
