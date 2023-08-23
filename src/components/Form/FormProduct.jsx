@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 
 import { SimpleInput } from "../Inputs";
 import "../../styles/Forms.css";
-import { FormErrorMsg } from "../../App";
+import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 
 export function FormProduct() {
@@ -14,7 +14,7 @@ export function FormProduct() {
         valor_reduzido: "",
         category: "produto",
     };
-    const { errorMsg } = useContext(FormErrorMsg);
+    const { errorMsg } = useContext(AppContext);
 
     const { formData, handleChange, handleSubmit } = useForm(
         "new",

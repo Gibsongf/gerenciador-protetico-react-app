@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useDetailsApi, useTodosApi } from "./todosApiHook";
-import { useEffect, useRef, useState } from "react";
+import { useDetailsApi, useTodosApi } from "./ApiHooks";
+import { useEffect, useState } from "react";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (

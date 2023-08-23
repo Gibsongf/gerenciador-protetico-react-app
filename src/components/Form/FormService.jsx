@@ -9,12 +9,12 @@ import {
 } from "../Inputs";
 
 import "../../styles/Forms.css";
-import { useTodosApi } from "../todosApiHook";
-import { FormErrorMsg } from "../../App";
+import { useTodosApi } from "../ApiHooks";
+import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 
 export function FormService() {
-    const { errorMsg } = useContext(FormErrorMsg);
+    const { errorMsg } = useContext(AppContext);
     const [produtoKeys, setProdutoKeys] = useState(["produto"]);
     const ref = useRef();
 

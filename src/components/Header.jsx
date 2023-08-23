@@ -13,7 +13,7 @@ export function Header() {
                         <Link to="/todos-servicos">Serviços</Link>
                     </h3>
                     <h3>
-                        <Link to="/todos-dentistas">Dentistas</Link>
+                        <Link to="/dentista/todos">Dentistas</Link>
                     </h3>
                     <h3>
                         <Link to="/todos-locais">Locais</Link>

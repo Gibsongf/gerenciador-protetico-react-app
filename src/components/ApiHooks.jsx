@@ -20,7 +20,7 @@ export function useTodosApi(category) {
 }
 export function useDetailsApi(category, id) {
     const [data, setData] = useState();
-
+    // console.log(category, id);
     useEffect(() => {
         const fetchingData = async () => {
             try {

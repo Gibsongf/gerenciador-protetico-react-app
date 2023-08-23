@@ -7,12 +7,12 @@ import {
     TipoTabelaSelect,
 } from "../Inputs";
 import "../../styles/Forms.css";
-import { FormErrorMsg } from "../../App";
+import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 
 export function FormLocal() {
     const ref = useRef();
-    const { errorMsg } = useContext(FormErrorMsg);
+    const { errorMsg } = useContext(AppContext);
 
     const nomeTag = { id: "nome", txt: "Nome do Local ou a Franquia" };
     const initState = {

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { APIPostNewData } from "../../Api";
-import { FormErrorMsg } from "../../App";
+import { AppContext } from "../../App";
 
 export function useForm(formType, initialState, formElements, produtoKeys) {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
-    const { errorMsg } = useContext(FormErrorMsg);
+    const { errorMsg } = useContext(AppContext);
     const handleChange = (e) => {
         setFormData((prev) => {
             return { ...prev, [e.target.name]: e.target.value };

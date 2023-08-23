@@ -4,11 +4,11 @@ import { CpfInput, SelectInput, SimpleInput, TelefoneInput } from "../Inputs";
 import "../../styles/Forms.css";
 
 import { useForm } from "./useForm";
-import { FormErrorMsg } from "../../App";
+import { AppContext } from "../../App";
 
 export function FormDentist() {
     const ref = useRef();
-    const { errorMsg } = useContext(FormErrorMsg);
+    const { errorMsg } = useContext(AppContext);
 
     const initialState = {
         nome: "",

@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 // import { APItodos } from "../Api";
-import { useTodosApi } from "../../components/todosApiHook";
+import { useTodosApi } from "../../components/ApiHooks";
 
 export function ServiçoList() {
     const data = useTodosApi("servico");

@@ -1,7 +1,11 @@
-import { useTodosApi } from "../../components/todosApiHook";
+import { Link, NavLink } from "react-router-dom";
+import { useTodosApi } from "../../components/ApiHooks";
+import { useContext } from "react";
+import { AppContext } from "../../App";
 
 export function DentistasList() {
     const data = useTodosApi("dentista");
+    const { saveDbId } = useContext(AppContext);
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -24,7 +28,13 @@ export function DentistasList() {
                     return (
                         <tr key={d._id}>
                             <td>
-                                {d.nome} {d.sobrenome}{" "}
+                                <Link
+                                    onClick={saveDbId}
+                                    to={`/dentista/${d._id}`}
+                                    id={d._id}
+                                >
+                                    {d.nome} {d.sobrenome}{" "}
+                                </Link>
                             </td>
                             <td>{d.telefone}</td>
 
