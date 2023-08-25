@@ -1,8 +1,33 @@
 import { useContext, useEffect, useState } from "react";
-import { APIPostNewData } from "../../Api";
+import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
-
-export function useForm(formType, initialState, formElements, produtoKeys) {
+const formatCpf = (cpf) => {
+    //123.456.789-09.
+    //829.862.523-40
+    let arr = String(cpf).split("");
+    let a = arr.map((n, indx) => {
+        if (indx === 2 || indx === 5) {
+            return n + ".";
+        }
+        if (indx === 8) {
+            return n + "-";
+        }
+        return n;
+    });
+    return a.toString().replaceAll(",", "");
+};
+const removeFormattedCpf = (cpf) => {
+    return cpf.toString().replaceAll(".", "").replace("-", "");
+};
+const replaceUndefined = (obj) => {
+    Object.keys(obj).forEach((k) => {
+        if (obj[k] === undefined) {
+            obj[k] = "";
+        }
+    });
+};
+export function useForm(initialState, formElements, produtoKeys) {
+    replaceUndefined(initialState);
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
@@ -31,7 +56,6 @@ export function useForm(formType, initialState, formElements, produtoKeys) {
         }
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
-
     const formatProduct = () => {
         const product = produtoKeys.map((k) => formData[k]);
         const obj = { ...formData };
@@ -40,7 +64,10 @@ export function useForm(formType, initialState, formElements, produtoKeys) {
         return obj;
     };
     const callAPI = (data) => {
-        APIPostNewData(data).then((e) => {
+        const type = initialState.formType;
+        const whichAPI = { new: APIPostNewData, edit: APIPutData };
+
+        whichAPI[type](data, initialState.dbId).then((e) => {
             //console.log(e);
             if (Object.keys(e).includes("errors")) {
                 setResult(e.errors);
@@ -55,9 +82,15 @@ export function useForm(formType, initialState, formElements, produtoKeys) {
         if (formData.category === "servico") {
             data = formatProduct();
             callAPI(data);
-        } else {
-            callAPI(formData);
+            return;
         }
+        if (formData.category === "dentista") {
+            console.log("yoy");
+            setFormData((prev) => {
+                return { ...prev, [prev.cpf]: removeFormattedCpf(prev.cpf) };
+            });
+        }
+        callAPI(formData);
     };
     return { formData, handleChange, handleSubmit };
 }

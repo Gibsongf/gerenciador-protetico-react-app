@@ -7,28 +7,32 @@ import {
     SelectInput,
     SimpleInput,
 } from "../Inputs";
-
+import PropTypes from "prop-types";
 import "../../styles/Forms.css";
 import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 
-export function FormService() {
+FormService.propTypes = {
+    initialState: PropTypes.object,
+};
+export function FormService({ initialState }) {
     const { errorMsg } = useContext(AppContext);
     const [produtoKeys, setProdutoKeys] = useState(["produto"]);
     const ref = useRef();
-
-    const initialState = {
-        dentista: "",
-        local: "",
-        paciente_nome: "",
-        category: "servico",
-    };
+    if (!initialState) {
+        initialState = {
+            dentista: "",
+            local: "",
+            paciente_nome: "",
+            category: "servico",
+            formType: "new",
+        };
+    }
     const products = useTodosApi("produto");
     const [productInput, setProductInput] = useState([]);
     // //console.log(products);
     const { formData, handleChange, handleSubmit } = useForm(
-        "new",
         initialState,
         ref.current,
         produtoKeys

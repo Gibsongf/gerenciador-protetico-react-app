@@ -2,24 +2,27 @@ import { useContext, useRef, useState } from "react";
 
 import { CpfInput, SelectInput, SimpleInput, TelefoneInput } from "../Inputs";
 import "../../styles/Forms.css";
+import PropTypes from "prop-types";
 
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
 
-export function FormDentist() {
+export function FormDentist({ initialState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
+    if (!initialState) {
+        initialState = {
+            nome: "",
+            sobrenome: "",
+            local: "",
+            telefone: "",
+            cpf: "",
+            category: "dentista",
+            formType: "new",
+        };
+    }
 
-    const initialState = {
-        nome: "",
-        sobrenome: "",
-        local: "",
-        telefone: "",
-        cpf: "",
-        category: "dentista",
-    };
     const { formData, handleChange, handleSubmit } = useForm(
-        "new",
         initialState,
         ref.current
     );
@@ -65,3 +68,6 @@ export function FormDentist() {
         </form>
     );
 }
+FormDentist.propTypes = {
+    initialState: PropTypes.object,
+};

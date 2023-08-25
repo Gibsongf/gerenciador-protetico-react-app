@@ -4,20 +4,24 @@ import { SimpleInput } from "../Inputs";
 import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
+import PropTypes from "prop-types";
 
-export function FormProduct() {
+FormProduct.propTypes = {
+    initialState: PropTypes.object,
+};
+export function FormProduct({ initialState }) {
     const ref = useRef();
-
-    const initialState = {
-        nome: "",
-        valor_normal: "",
-        valor_reduzido: "",
-        category: "produto",
-    };
+    if (!initialState) {
+        initialState = {
+            nome: "",
+            valor_normal: "",
+            valor_reduzido: "",
+            category: "produto",
+            formType: "new",
+        };
+    }
     const { errorMsg } = useContext(AppContext);
-
     const { formData, handleChange, handleSubmit } = useForm(
-        "new",
         initialState,
         ref.current
     );

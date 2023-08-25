@@ -9,22 +9,25 @@ import {
 import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
+import PropTypes from "prop-types";
 
-export function FormLocal() {
+export function FormLocal({ initState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
 
-    const nomeTag = { id: "nome", txt: "Nome do Local ou a Franquia" };
-    const initState = {
-        nome: "",
-        endereço: "",
-        cep: "",
-        telefone: "",
-        tabela: "",
-        category: "local",
-    };
+    const nomeTag = { id: "nome", txt: "Nome do Local" };
+    if (!initState) {
+        initState = {
+            nome: "",
+            endereço: "",
+            cep: "",
+            telefone: "",
+            tabela: "",
+            category: "local",
+            formType: "new",
+        };
+    }
     const { formData, handleChange, handleSubmit } = useForm(
-        "new",
         initState,
         ref.current
     );
@@ -68,3 +71,6 @@ export function FormLocal() {
         </form>
     );
 }
+FormLocal.propTypes = {
+    initState: PropTypes.object,
+};

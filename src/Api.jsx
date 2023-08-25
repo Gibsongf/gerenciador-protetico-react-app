@@ -71,6 +71,13 @@ export async function APIPostNewData(formData) {
     console.log(formData);
     const data = await setupFetch(url, "post", formData);
     console.log(data);
+    return data;
+}
+export async function APIPutData(formData, id) {
+    const url = `http://localhost:3000/api/${formData["category"]}/${id}/edit`;
+    console.log(formData);
+    const data = await setupFetch(url, "put", formData);
+    console.log(data);
 
     return data;
 }

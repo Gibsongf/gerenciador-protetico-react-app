@@ -5,10 +5,12 @@
 //     (edit, delete) btn
 //     services requested
 //       list services
+import PropTypes from "prop-types";
 
 import { useState } from "react";
 import { useDetailsApi } from "../../components/ApiHooks";
 import "../../styles/Details.css";
+import { FormDentist } from "../../components/Form/FormDentist";
 // }
 // const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
 // const citrus = fruits.slice(1, 3);
@@ -38,6 +40,43 @@ const formatTelefone = (tel) => {
         .toString()
         .replaceAll(",", "")} `;
 };
+const IdentidadeInfo = ({ data }) => {
+    const { nome, sobrenome, cpf, telefone, local } = data.dentista;
+    const initialState = {
+        nome,
+        sobrenome: sobrenome,
+        cpf: String(cpf),
+        telefone: telefone,
+        local: local._id,
+        category: "dentista",
+        formType: "edit",
+        dbId: data.dentista._id,
+    };
+    // {data.dentista.nome,data.dentista.sobrenome},data.dentista.cpf,data.dentista.telefone,data.dentista.local.endereço}
+    return (
+        <div className="identidade">
+            <p className="nome-sobrenome">
+                <strong>Nome:</strong> {nome} {sobrenome}
+            </p>
+            <p>
+                <strong>CPF:</strong> {formatCpf(cpf)}
+            </p>
+            <p>
+                <strong>Telefone:</strong> {formatTelefone(telefone)}
+            </p>
+            <p className="endereço">
+                <strong>Franquia:</strong> {local.nome}
+            </p>
+            <p className="endereço">
+                <strong>Endereço:</strong> {local.endereço}
+            </p>
+            <FormDentist initialState={initialState} />
+        </div>
+    );
+};
+IdentidadeInfo.propTypes = {
+    data: PropTypes.object,
+};
 export function DentistaDetails() {
     const dbId = localStorage.getItem("dbID");
     const data = useDetailsApi("dentista", dbId);
@@ -53,28 +92,10 @@ export function DentistaDetails() {
     if (!data) {
         return <div className="loading">Carregando...</div>;
     }
-    console.log(data);
+    // console.log(data);
     return (
         <>
-            <div className="identidade">
-                <p className="nome-sobrenome">
-                    <strong>Nome:</strong> {data.dentista.nome}{" "}
-                    {data.dentista.sobrenome}
-                </p>
-                <p>
-                    <strong>CPF:</strong> {formatCpf(data.dentista.cpf)}
-                </p>
-                <p>
-                    <strong>Telefone:</strong>{" "}
-                    {formatTelefone(data.dentista.telefone)}
-                </p>
-                <p className="endereço">
-                    <strong>Franquia:</strong> {data.dentista.local.nome}
-                </p>
-                <p className="endereço">
-                    <strong>Endereço:</strong> {data.dentista.local.endereço}
-                </p>
-            </div>
+            <IdentidadeInfo data={data} />
             <div className="serviço">
                 <table className="todos-table">
                     <caption>
@@ -90,7 +111,7 @@ export function DentistaDetails() {
                         {/* need to fix the not render of product name */}
                         {data.serviços
                             ? data.serviços.map((d, index) => {
-                                  console.log(d);
+                                  //   console.log(d);
                                   return (
                                       <tr key={index}>
                                           <td>{d.paciente}</td>
