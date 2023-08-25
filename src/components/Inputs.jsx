@@ -117,7 +117,8 @@ export function CpfInput({ value, onChange, msg }) {
     const formatCpf = (cpf) => {
         //123.456.789-09.
         //829.862.523-40
-        let arr = String(cpf).split("");
+        let arr = String(cpf).replaceAll(".", "").replace("-", "").split("");
+
         let a = arr.map((n, indx) => {
             if (indx === 2 || indx === 5) {
                 return n + ".";
@@ -240,7 +241,7 @@ SimpleInput.propTypes = {
     msg: PropTypes.string,
 };
 TelefoneInput.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.any,
     onChange: PropTypes.func,
     msg: PropTypes.string,
 };

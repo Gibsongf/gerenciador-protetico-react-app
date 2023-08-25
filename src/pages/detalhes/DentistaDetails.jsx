@@ -7,7 +7,7 @@
 //       list services
 import PropTypes from "prop-types";
 
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { useDetailsApi } from "../../components/ApiHooks";
 import "../../styles/Details.css";
 import { FormDentist } from "../../components/Form/FormDentist";
@@ -40,7 +40,7 @@ const formatTelefone = (tel) => {
         .toString()
         .replaceAll(",", "")} `;
 };
-const IdentidadeInfo = ({ data }) => {
+const IdentidadeInfo = ({ data, setEdit }) => {
     const { nome, sobrenome, cpf, telefone, local } = data.dentista;
     const initialState = {
         nome,
@@ -70,16 +70,26 @@ const IdentidadeInfo = ({ data }) => {
             <p className="endereço">
                 <strong>Endereço:</strong> {local.endereço}
             </p>
-            <FormDentist initialState={initialState} />
+            <button className="edit" onClick={() => setEdit((e) => !e)}>
+                Editar
+            </button>
+
+            {/* <FormDentist initialState={initialState} /> */}
         </div>
     );
 };
 IdentidadeInfo.propTypes = {
     data: PropTypes.object,
 };
+
+export const EditContext = createContext({
+    setEdit: () => {},
+});
+
 export function DentistaDetails() {
     const dbId = localStorage.getItem("dbID");
     const data = useDetailsApi("dentista", dbId);
+    const [edit, setEdit] = useState(true);
     const booleanToString = (b) => {
         if (b === true) {
             return "Sim";
@@ -92,45 +102,67 @@ export function DentistaDetails() {
     if (!data) {
         return <div className="loading">Carregando...</div>;
     }
+    const initialState = () => {
+        const { nome, sobrenome, cpf, telefone, local } = data.dentista;
+        return {
+            nome,
+            sobrenome,
+            cpf: formatCpf(cpf),
+            telefone,
+            local: local._id,
+            category: "dentista",
+            formType: "edit",
+            dbId: data.dentista._id,
+        };
+    };
     // console.log(data);
     return (
         <>
-            <IdentidadeInfo data={data} />
-            <div className="serviço">
-                <table className="todos-table">
-                    <caption>
-                        <h4>Serviços Registrados</h4>
-                    </caption>
+            {" "}
+            <EditContext.Provider value={{ setEdit }}>
+                {edit ? (
+                    <IdentidadeInfo data={data} setEdit={setEdit} />
+                ) : (
+                    <FormDentist initialState={initialState()} />
+                )}
+                <div className="serviço">
+                    <table className="todos-table">
+                        <caption>
+                            <h4>Serviços Registrados</h4>
+                        </caption>
 
-                    <tbody>
-                        <tr>
-                            <th>Paciente</th>
-                            <th>Produto</th>
-                            <th>Entregado</th>
-                        </tr>
-                        {/* need to fix the not render of product name */}
-                        {data.serviços
-                            ? data.serviços.map((d, index) => {
-                                  //   console.log(d);
-                                  return (
-                                      <tr key={index}>
-                                          <td>{d.paciente}</td>
-                                          <td>
-                                              {d.produto.map(
-                                                  (produto) =>
-                                                      produto.nome + ", "
-                                              )}
-                                          </td>
-                                          <td>
-                                              {booleanToString(d.statusEntrega)}
-                                          </td>
-                                      </tr>
-                                  );
-                              })
-                            : ""}
-                    </tbody>
-                </table>
-            </div>
+                        <tbody>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Produto</th>
+                                <th>Entregado</th>
+                            </tr>
+                            {/* need to fix the not render of product name */}
+                            {data.serviços
+                                ? data.serviços.map((d, index) => {
+                                      //   console.log(d);
+                                      return (
+                                          <tr key={index}>
+                                              <td>{d.paciente}</td>
+                                              <td>
+                                                  {d.produto.map(
+                                                      (produto) =>
+                                                          produto.nome + ", "
+                                                  )}
+                                              </td>
+                                              <td>
+                                                  {booleanToString(
+                                                      d.statusEntrega
+                                                  )}
+                                              </td>
+                                          </tr>
+                                      );
+                                  })
+                                : ""}
+                        </tbody>
+                    </table>
+                </div>
+            </EditContext.Provider>
         </>
     );
 }

@@ -17,6 +17,7 @@ const formatCpf = (cpf) => {
     return a.toString().replaceAll(",", "");
 };
 const removeFormattedCpf = (cpf) => {
+    console.log(cpf.toString().replaceAll(".", "").replace("-", ""));
     return cpf.toString().replaceAll(".", "").replace("-", "");
 };
 const replaceUndefined = (obj) => {
@@ -31,6 +32,7 @@ export function useForm(initialState, formElements, produtoKeys) {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
+
     const handleChange = (e) => {
         setFormData((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
@@ -87,7 +89,8 @@ export function useForm(initialState, formElements, produtoKeys) {
         if (formData.category === "dentista") {
             console.log("yoy");
             setFormData((prev) => {
-                return { ...prev, [prev.cpf]: removeFormattedCpf(prev.cpf) };
+                prev.cpf = removeFormattedCpf(prev.cpf);
+                return { ...prev };
             });
         }
         callAPI(formData);

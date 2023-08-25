@@ -9,6 +9,16 @@ form>div {
 
 }
 
+.form-container {
+    text-align: center;
+    background-color: rgb(218, 199, 174);
+    margin: 0 auto;
+    padding: 25px;
+    border-top: 15px solid rgb(255, 244, 244);
+    border-radius: 1em;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.445);
+}
+
 form {
     margin: 0 auto;
     padding: 75px;

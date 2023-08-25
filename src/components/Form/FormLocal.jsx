@@ -35,40 +35,45 @@ export function FormLocal({ initState }) {
     //     //console.log(msgError);
     // }, [msgError]);
     return (
-        <form action="" ref={ref}>
-            <legend>
-                <h3>Registrar Novo Local</h3>
-            </legend>
+        <div className="form-container">
+            <form action="" ref={ref}>
+                <legend>
+                    <h3>Registrar Novo Local</h3>
+                </legend>
 
-            <SimpleInput
-                id={nomeTag.id}
-                labelTxt={nomeTag.txt}
-                value={formData.nome}
-                onChange={handleChange}
-                msg={!errorMsg ? "" : errorMsg.nome}
-            />
-            <SimpleInput
-                id={"endereço"}
-                labelTxt={"Endereço"}
-                value={formData.endereço}
-                onChange={handleChange}
-                msg={!errorMsg ? "" : errorMsg.endereço}
-            />
-            <CepInput
-                value={formData.cep}
-                onChange={handleChange}
-                msg={!errorMsg ? "" : errorMsg.cep}
-            />
-            <TelefoneInput
-                value={formData.telefone}
-                onChange={handleChange}
-                msg={!errorMsg ? "" : errorMsg.telefone}
-            />
-            <TipoTabelaSelect value={formData.tabela} onChange={handleChange} />
-            <button onClick={handleSubmit} type="submit">
-                Registrar
-            </button>
-        </form>
+                <SimpleInput
+                    id={nomeTag.id}
+                    labelTxt={nomeTag.txt}
+                    value={formData.nome}
+                    onChange={handleChange}
+                    msg={!errorMsg ? "" : errorMsg.nome}
+                />
+                <SimpleInput
+                    id={"endereço"}
+                    labelTxt={"Endereço"}
+                    value={formData.endereço}
+                    onChange={handleChange}
+                    msg={!errorMsg ? "" : errorMsg.endereço}
+                />
+                <CepInput
+                    value={formData.cep}
+                    onChange={handleChange}
+                    msg={!errorMsg ? "" : errorMsg.cep}
+                />
+                <TelefoneInput
+                    value={formData.telefone}
+                    onChange={handleChange}
+                    msg={!errorMsg ? "" : errorMsg.telefone}
+                />
+                <TipoTabelaSelect
+                    value={formData.tabela}
+                    onChange={handleChange}
+                />
+                <button onClick={handleSubmit} type="submit">
+                    Registrar
+                </button>
+            </form>
+        </div>
     );
 }
 FormLocal.propTypes = {

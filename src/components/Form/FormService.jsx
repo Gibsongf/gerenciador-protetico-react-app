@@ -56,45 +56,47 @@ export function FormService({ initialState }) {
     };
     // //console.log(errorMsg);
     return (
-        <form action="" ref={ref}>
-            <legend>
-                <h3>Registrar Novo Serviço</h3>
-            </legend>
-            <SimpleInput
-                id={"paciente_nome"}
-                labelTxt={"Nome do Paciente:"}
-                value={formData.paciente_nome}
-                onChange={handleChange}
-                msg={!errorMsg ? "" : errorMsg.paciente_nome}
-            />
+        <div className="form-container">
+            <form action="" ref={ref}>
+                <legend>
+                    <h3>Registrar Novo Serviço</h3>
+                </legend>
+                <SimpleInput
+                    id={"paciente_nome"}
+                    labelTxt={"Nome do Paciente:"}
+                    value={formData.paciente_nome}
+                    onChange={handleChange}
+                    msg={!errorMsg ? "" : errorMsg.paciente_nome}
+                />
 
-            <SelectInput
-                initialValue={formData.local}
-                onChange={handleChange}
-                category={"local"}
-                labelTxt={"Local:"}
-                msg={!errorMsg ? "" : errorMsg.local}
-            />
+                <SelectInput
+                    initialValue={formData.local}
+                    onChange={handleChange}
+                    category={"local"}
+                    labelTxt={"Local:"}
+                    msg={!errorMsg ? "" : errorMsg.local}
+                />
 
-            <FilterDentistsByLocation
-                initialValue={formData.dentista}
-                onChange={handleChange}
-                dbId={formData.local}
-                msg={!errorMsg ? "" : errorMsg.dentista}
-            />
-            <SearchProducts
-                products={products}
-                name="produto"
-                onChange={handleChange}
-            />
-            {productInput.map((i) => i)}
+                <FilterDentistsByLocation
+                    initialValue={formData.dentista}
+                    onChange={handleChange}
+                    dbId={formData.local}
+                    msg={!errorMsg ? "" : errorMsg.dentista}
+                />
+                <SearchProducts
+                    products={products}
+                    name="produto"
+                    onChange={handleChange}
+                />
+                {productInput.map((i) => i)}
 
-            <button onClick={AdditionalProduct} type="button">
-                Mais Produto
-            </button>
-            <button onClick={handleSubmit} type="submit">
-                Registrar
-            </button>
-        </form>
+                <button onClick={AdditionalProduct} type="button">
+                    Mais Produto
+                </button>
+                <button onClick={handleSubmit} type="submit">
+                    Registrar
+                </button>
+            </form>
+        </div>
     );
 }
