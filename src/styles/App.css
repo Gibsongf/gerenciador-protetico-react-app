@@ -25,7 +25,7 @@ th {
 
 .todos-table {
   width: -webkit-fill-available;
-  margin: 0 25px;
+  /* margin: 0 25px; */
   border-collapse: collapse;
   background-color: white;
   color: white;

@@ -5,7 +5,9 @@ import { AppContext } from "../../App";
 
 export function DentistasList() {
     const data = useTodosApi("dentista");
-    const { saveDbId } = useContext(AppContext);
+    const saveDbId = (e) => {
+        localStorage.setItem("dentistaID", e.target.id);
+    };
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;

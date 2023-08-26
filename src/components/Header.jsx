@@ -10,13 +10,13 @@ export function Header() {
             <div className="header">
                 <div className="nav">
                     <h3>
-                        <Link to="/todos-servicos">Serviços</Link>
+                        <Link to="/servico/todos">Serviços</Link>
                     </h3>
                     <h3>
                         <Link to="/dentista/todos">Dentistas</Link>
                     </h3>
                     <h3>
-                        <Link to="/todos-locais">Locais</Link>
+                        <Link to="/local/todos">Locais</Link>
                     </h3>
                     <h3>
                         <Link to="/todos-produtos">Produtos</Link>

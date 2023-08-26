@@ -10,17 +10,16 @@ import { Route, Router, Routes } from "react-router-dom";
 import "./styles/App.css";
 import { FormDentist } from "./components/Form/FormDentist";
 import { FormLocal } from "./components/Form/FormLocal";
-import { FormService } from "./components/Form/FormService";
-import { FormProduct } from "./components/Form/FormProduct";
+// import { FormService } from "./components/Form/FormService";
+// import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
 import { DentistaDetails } from "./pages/detalhes/DentistaDetails";
 import { LocalDetails } from "./pages/detalhes/LocalDetails";
 import { ServiçoDetails } from "./pages/detalhes/ServiçoDetails";
-import { ProdutoDetails } from "./pages/detalhes/ProdutoDetails";
+// import { ProdutoDetails } from "./pages/detalhes/ProdutoDetails";
 
 export const AppContext = createContext({
     errorMsg: {},
-    saveDbId: () => {},
 });
 function App() {
     const token = localStorage.getItem("token");
@@ -29,14 +28,10 @@ function App() {
     if (!token) {
         return <FormLogin />;
     }
-    const saveDbId = (e) => {
-        localStorage.setItem("dbID", e.target.id);
-    };
-    // Need to change phone format of saving and read todo of details
-    Router;
+    // Need to change phone format of saving
     return (
         <div className="App">
-            <AppContext.Provider value={{ errorMsg: {}, saveDbId }}>
+            <AppContext.Provider value={{ errorMsg: {} }}>
                 <Header />
                 <Routes>
                     <Route path="/dentista">
@@ -49,8 +44,20 @@ function App() {
                             element={<DentistaDetails />}
                         />
                     </Route>
-                    <Route path="/todos-locais" element={<LocalList />} />
-                    <Route path="/todos-servicos" element={<ServiçoList />} />
+                    <Route path="/servico">
+                        <Route
+                            path="/servico/todos"
+                            element={<ServiçoList />}
+                        />
+                        <Route
+                            path="/servico/:id"
+                            element={<ServiçoDetails />}
+                        />
+                    </Route>
+                    <Route path="/local">
+                        <Route path="/local/todos" element={<LocalList />} />
+                        <Route path="/local/:id" element={<LocalDetails />} />
+                    </Route>
                     <Route path="/todos-produtos" element={<ProductList />} />
                 </Routes>
                 {/* All List  */}

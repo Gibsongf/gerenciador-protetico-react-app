@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 // import { APItodos } from "../Api";
 import { useTodosApi } from "../../components/ApiHooks";
+import { booleanToString } from "../../utils";
 
 export function ServiçoList() {
     const data = useTodosApi("servico");
@@ -8,13 +9,7 @@ export function ServiçoList() {
         // Data is still being fetched
         return <div>Loading...</div>;
     }
-    const booleanToString = (b) => {
-        if (b === true) {
-            return "Sim";
-        } else {
-            return "Não";
-        }
-    };
+
     return (
         <table className="todos-table">
             <caption>
@@ -28,7 +23,6 @@ export function ServiçoList() {
                     <th>Produto</th>
                     <th>Entregado</th>
                 </tr>
-                {/* need to fix the not render of product name */}
                 {data.map((d, index) => {
                     return (
                         <tr key={d.dentista.nome + index}>
