@@ -49,7 +49,7 @@ export function SelectInput({
     if (!data) {
         return <div>Loading...</div>;
     }
-    console.log(initialValue);
+    // console.log(initialValue);
     return (
         <div className="select-options">
             <label htmlFor={category}>{labelTxt}</label>
@@ -114,22 +114,6 @@ export function FilterDentistsByLocation({
 }
 
 export function CpfInput({ value, onChange, msg }) {
-    const formatCpf = (cpf) => {
-        //123.456.789-09.
-        //829.862.523-40
-        let arr = String(cpf).replaceAll(".", "").replace("-", "").split("");
-
-        let a = arr.map((n, indx) => {
-            if (indx === 2 || indx === 5) {
-                return n + ".";
-            }
-            if (indx === 8) {
-                return n + "-";
-            }
-            return n;
-        });
-        return a.toString().replaceAll(",", "");
-    };
     return (
         <div className="cpf">
             <label htmlFor="cpf">CPF</label>
@@ -159,7 +143,7 @@ export function TelefoneInput({ value, onChange, msg }) {
                 name="telefone"
                 id="telefone"
                 placeholder="xxxxx-xxxx"
-                pattern="[0-9]{5}-[0-9]{4}"
+                pattern="[0-9]{4-5}-[0-9]{4}"
                 required
             />
         </div>

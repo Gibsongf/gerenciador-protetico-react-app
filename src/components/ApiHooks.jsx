@@ -46,6 +46,7 @@ const detailsDentistaObj = (data) => {
 };
 export function useDetailsApi(category, id) {
     const [data, setData] = useState();
+    const [update, setUpdate] = useState(false);
     // const whichObj = () => {};
     // console.log(category, id);
     useEffect(() => {
@@ -63,6 +64,6 @@ export function useDetailsApi(category, id) {
             // console.log(id);
             fetchingData();
         }
-    }, [category, id]);
-    return data;
+    }, [category, id, update]);
+    return { data, setUpdate };
 }

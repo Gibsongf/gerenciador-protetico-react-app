@@ -6,25 +6,8 @@ import PropTypes from "prop-types";
 
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
-import { EditContext } from "../../pages/detalhes/DentistaDetails";
-const ButtonRegister = ({ handleSubmit }) => {
-    return (
-        <button onClick={handleSubmit} type="submit">
-            Registrar
-        </button>
-    );
-};
-const ButtonEdit = ({ handleSubmit }) => {
-    const { setEdit } = useContext(EditContext);
-    return (
-        <>
-            <button onClick={handleSubmit} type="submit">
-                Confirm
-            </button>
-            <button onClick={() => setEdit((e) => !e)}>Cancel</button>
-        </>
-    );
-};
+import { ButtonEdit, ButtonRegister } from "./Buttons";
+
 export function FormDentist({ initialState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
@@ -44,6 +27,7 @@ export function FormDentist({ initialState }) {
         initialState,
         ref.current
     );
+    // console.log(initialState, formData);
     return (
         <div className="form-container">
             <form action="" ref={ref}>

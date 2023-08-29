@@ -1,31 +1,34 @@
 import PropTypes from "prop-types";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useDetailsApi } from "../../components/ApiHooks";
 import "../../styles/Details.css";
 import { FormDentist } from "../../components/Form/FormDentist";
 import { Caption, TableRow, DentistServiceList } from "../../components/Table";
 import { formatCpf, formatTelefone } from "../../utils";
 
-const IdentidadeInfo = ({ data, setEdit }) => {
+const Info = ({ data }) => {
+    const { setEdit } = useContext(EditContext);
+
     const { nome, sobrenome, cpf, telefone, local } = data.dentista;
+    const key = {
+        Nome: nome,
+        CPF: formatCpf(cpf),
+        Telefone: formatTelefone(telefone),
+        Franquia: local.nome,
+        Endereço: local.endereço,
+    };
 
     return (
         <div className="info">
-            <p className="nome-sobrenome">
-                <strong>Nome:</strong> {nome} {sobrenome}
-            </p>
-            <p>
-                <strong>CPF:</strong> {formatCpf(cpf)}
-            </p>
-            <p>
-                <strong>Telefone:</strong> {formatTelefone(telefone)}
-            </p>
-            <p className="endereço">
-                <strong>Franquia:</strong> {local.nome}
-            </p>
-            <p className="endereço">
-                <strong>Endereço:</strong> {local.endereço}
-            </p>
+            {Object.keys(key).map((k, index) => {
+                return (
+                    <p key={index + k}>
+                        <strong>{k}:</strong>
+                        {key[k]}
+                    </p>
+                );
+            })}
+
             <button className="edit" onClick={() => setEdit((e) => !e)}>
                 Editar
             </button>
@@ -44,7 +47,6 @@ export function TableDentistService({ data }) {
 
                 <tbody>
                     <TableRow rowNames={row} />
-                    {/* need to fix the not render of product name */}
                     {data.serviços ? <DentistServiceList data={data} /> : ""}
                 </tbody>
             </table>
@@ -57,11 +59,12 @@ TableDentistService.propTypes = {
 
 export const EditContext = createContext({
     setEdit: () => {},
+    setUpdate: () => {},
 });
 
 export function DentistaDetails() {
     const dbId = localStorage.getItem("dentistaID");
-    const data = useDetailsApi("dentista", dbId);
+    const { data, setUpdate } = useDetailsApi("dentista", dbId);
     const [edit, setEdit] = useState(true);
 
     if (!data) {
@@ -85,9 +88,9 @@ export function DentistaDetails() {
     //
     return (
         <>
-            <EditContext.Provider value={{ setEdit }}>
+            <EditContext.Provider value={{ setEdit, setUpdate }}>
                 {edit ? (
-                    <IdentidadeInfo data={data} setEdit={setEdit} />
+                    <Info data={data} />
                 ) : (
                     <FormDentist initialState={initialState()} />
                 )}

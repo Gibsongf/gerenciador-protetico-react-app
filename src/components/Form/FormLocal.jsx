@@ -10,14 +10,15 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
+import { ButtonEdit, ButtonRegister } from "./Buttons";
 
-export function FormLocal({ initState }) {
+export function FormLocal({ initialState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
 
     const nomeTag = { id: "nome", txt: "Nome do Local" };
-    if (!initState) {
-        initState = {
+    if (!initialState) {
+        initialState = {
             nome: "",
             endereço: "",
             cep: "",
@@ -28,7 +29,7 @@ export function FormLocal({ initState }) {
         };
     }
     const { formData, handleChange, handleSubmit } = useForm(
-        initState,
+        initialState,
         ref.current
     );
     // useEffect(() => {
@@ -69,13 +70,15 @@ export function FormLocal({ initState }) {
                     value={formData.tabela}
                     onChange={handleChange}
                 />
-                <button onClick={handleSubmit} type="submit">
-                    Registrar
-                </button>
+                {!initialState.formType === "edit" ? (
+                    <ButtonRegister handleSubmit={handleSubmit} />
+                ) : (
+                    <ButtonEdit handleSubmit={handleSubmit} />
+                )}
             </form>
         </div>
     );
 }
 FormLocal.propTypes = {
-    initState: PropTypes.object,
+    initialState: PropTypes.object,
 };

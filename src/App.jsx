@@ -16,6 +16,7 @@ import { FormLogin } from "./components/Form/FormLogin";
 import { DentistaDetails } from "./pages/detalhes/DentistaDetails";
 import { LocalDetails } from "./pages/detalhes/LocalDetails";
 import { ServiçoDetails } from "./pages/detalhes/ServiçoDetails";
+import { Details } from "./pages/detalhes/Details";
 // import { ProdutoDetails } from "./pages/detalhes/ProdutoDetails";
 
 export const AppContext = createContext({
@@ -29,6 +30,7 @@ function App() {
         return <FormLogin />;
     }
     // Need to change phone format of saving
+
     return (
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
@@ -41,7 +43,7 @@ function App() {
                         />
                         <Route
                             path="/dentista/:id"
-                            element={<DentistaDetails />}
+                            element={<Details type="dentista" />}
                         />
                     </Route>
                     <Route path="/servico">
@@ -56,7 +58,10 @@ function App() {
                     </Route>
                     <Route path="/local">
                         <Route path="/local/todos" element={<LocalList />} />
-                        <Route path="/local/:id" element={<LocalDetails />} />
+                        <Route
+                            path="/local/:id"
+                            element={<Details type="local" />}
+                        />
                     </Route>
                     <Route path="/todos-produtos" element={<ProductList />} />
                 </Routes>

@@ -42,7 +42,6 @@ const TableLocalDentist = ({ data }) => {
 };
 const Info = ({ data, setEdit }) => {
     const { nome, endereço, cep, telefone, tipo_tabela } = data.local;
-
     return (
         <div className="info">
             <p className="nome-sobrenome">

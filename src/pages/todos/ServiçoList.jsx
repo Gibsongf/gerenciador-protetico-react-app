@@ -10,7 +10,7 @@ export function ServiceTableBody({ data }) {
         localStorage.setItem("dentistaID", e.target.id);
     };
     return data.map((d, index) => {
-        console.log(d.dentista._id);
+        // console.log(d._id);
         return (
             <tr key={d.dentista.nome + index}>
                 <td>

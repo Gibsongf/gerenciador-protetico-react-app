@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
+import { EditContext } from "../../pages/detalhes/Details";
 const formatCpf = (cpf) => {
     //123.456.789-09.
     //829.862.523-40
@@ -16,10 +17,7 @@ const formatCpf = (cpf) => {
     });
     return a.toString().replaceAll(",", "");
 };
-const removeFormattedCpf = (cpf) => {
-    console.log(cpf.toString().replaceAll(".", "").replace("-", ""));
-    return cpf.toString().replaceAll(".", "").replace("-", "");
-};
+
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
         if (obj[k] === undefined) {
@@ -32,7 +30,7 @@ export function useForm(initialState, formElements, produtoKeys) {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
-
+    const { setEdit, setUpdate } = useContext(EditContext);
     const handleChange = (e) => {
         setFormData((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
@@ -65,6 +63,11 @@ export function useForm(initialState, formElements, produtoKeys) {
         obj.produto = product;
         return obj;
     };
+    const removeFormattedCpf = () => {
+        const obj = { ...formData };
+        obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
+        return obj;
+    };
     const callAPI = (data) => {
         const type = initialState.formType;
         const whichAPI = { new: APIPostNewData, edit: APIPutData };
@@ -74,6 +77,11 @@ export function useForm(initialState, formElements, produtoKeys) {
             if (Object.keys(e).includes("errors")) {
                 setResult(e.errors);
             } else {
+                if (initialState.dbId) {
+                    console.log("update");
+                    setUpdate((e) => !e);
+                    setEdit((e) => !e);
+                }
                 setResult(e);
             }
         });
@@ -88,12 +96,10 @@ export function useForm(initialState, formElements, produtoKeys) {
         }
         if (formData.category === "dentista") {
             console.log("yoy");
-            setFormData((prev) => {
-                prev.cpf = removeFormattedCpf(prev.cpf);
-                return { ...prev };
-            });
+            data = removeFormattedCpf();
+            callAPI(data);
+            return;
         }
-        callAPI(formData);
     };
     return { formData, handleChange, handleSubmit };
 }
