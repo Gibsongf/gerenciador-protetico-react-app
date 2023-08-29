@@ -5,7 +5,41 @@ import "../../styles/Details.css";
 import { FormDentist } from "../../components/Form/FormDentist";
 import { formatTelefone } from "../../utils";
 // import { TableService } from "../../components/Tables";
+// export function TableDentistService({ data }) {
+//     const row = ["Dentista", "Paciente", "Produto", "Entregado"];
+//     return (
+//         <div className="serviço">
+//             <table className="todos-table">
+//                 <Caption txt={"Serviços Registrados"} />
 
+//                 <tbody>
+//                     <TableRow rowNames={row} />
+//                     {/* need to fix the not render of product name */}
+//                     {data.serviços ? <DentistServiceList data={data} /> : ""}
+//                 </tbody>
+//             </table>
+//         </div>
+//     );
+// }
+// TableDentistService.propTypes = {
+//     data: PropTypes.object,
+// };
+const TableLocalDentist = ({ data }) => {
+    return data.map((d) => {
+        return (
+            <tr key={d._id}>
+                <td>
+                    <Link onClick={saveDbId} id={d._id} to={`/local/${d._id}`}>
+                        {d.nome}
+                    </Link>
+                </td>
+                <td>{d.telefone}</td>
+                <td>{d.endereço}</td>
+                <td>{d.tipo_tabela}</td>
+            </tr>
+        );
+    });
+};
 const Info = ({ data, setEdit }) => {
     const { nome, endereço, cep, telefone, tipo_tabela } = data.local;
 

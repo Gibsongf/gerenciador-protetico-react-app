@@ -2,14 +2,32 @@
 
 import { Link } from "react-router-dom";
 import { useTodosApi } from "../../components/ApiHooks";
+import { Caption, TableRow } from "../../components/Table";
 
-// import { APItodos } from "../Api";
-
-export function LocalList() {
-    const data = useTodosApi("local");
+export function LocalTableBody({ data }) {
     const saveDbId = (e) => {
         localStorage.setItem("localID", e.target.id);
     };
+    return data.map((d) => {
+        return (
+            <tr key={d._id}>
+                <td>
+                    <Link onClick={saveDbId} id={d._id} to={`/local/${d._id}`}>
+                        {d.nome}
+                    </Link>
+                </td>
+                <td>{d.telefone}</td>
+                <td>{d.endereço}</td>
+                <td>{d.tipo_tabela}</td>
+            </tr>
+        );
+    });
+}
+// import { APItodos } from "../Api";
+export function LocalList() {
+    const data = useTodosApi("local");
+    const row = ["Nome", "Telefone", "Endereço", "Tipo de Tabela"];
+
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -17,36 +35,11 @@ export function LocalList() {
 
     return (
         <table className="todos-table">
-            <caption>
-                <h4>Locais Registrados</h4>
-            </caption>
+            <Caption txt={"Locais Registrados"} />
 
             <tbody>
-                <tr>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Endereço</th>
-                    <th>Tipo de Tabela</th>
-                </tr>
-
-                {data.map((d) => {
-                    return (
-                        <tr key={d._id}>
-                            <td>
-                                <Link
-                                    onClick={saveDbId}
-                                    id={d._id}
-                                    to={`/local/${d._id}`}
-                                >
-                                    {d.nome}
-                                </Link>
-                            </td>
-                            <td>{d.telefone}</td>
-                            <td>{d.endereço}</td>
-                            <td>{d.tipo_tabela}</td>
-                        </tr>
-                    );
-                })}
+                <TableRow rowNames={row} />
+                <LocalTableBody data={data} />
             </tbody>
         </table>
     );

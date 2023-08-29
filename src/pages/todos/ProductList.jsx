@@ -1,7 +1,19 @@
 import { useTodosApi } from "../../components/ApiHooks";
-
+import { Caption, TableRow } from "../../components/Table";
+export function ProductTableBody({ data }) {
+    return data.map((d) => {
+        return (
+            <tr key={d.nome}>
+                <td>{d.nome}</td>
+                <td>R$ {d.valor_normal}</td>
+                <td>R$ {d.valor_reduzido}</td>
+            </tr>
+        );
+    });
+}
 export function ProductList() {
     const data = useTodosApi("produto");
+    const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -21,26 +33,11 @@ export function ProductList() {
     // data.sort(compare);
     return (
         <table className="todos-table">
-            <caption>
-                <h4>Produtos Registrados</h4>
-            </caption>
+            <Caption txt={"Produtos Registrados"} />
 
             <tbody>
-                <tr>
-                    <th>Nome</th>
-                    <th>Valor Normal</th>
-                    <th>Valor Reduzido</th>
-                </tr>
-
-                {data.map((d) => {
-                    return (
-                        <tr key={d.nome}>
-                            <td>{d.nome}</td>
-                            <td>R$ {d.valor_normal}</td>
-                            <td>R$ {d.valor_reduzido}</td>
-                        </tr>
-                    );
-                })}
+                <TableRow rowNames={row} />
+                <ProductTableBody data={data} />
             </tbody>
         </table>
     );
