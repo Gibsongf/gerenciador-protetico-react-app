@@ -13,11 +13,7 @@ import { FormLocal } from "./components/Form/FormLocal";
 // import { FormService } from "./components/Form/FormService";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
-import { DentistaDetails } from "./pages/detalhes/DentistaDetails";
-import { LocalDetails } from "./pages/detalhes/LocalDetails";
-import { ServiçoDetails } from "./pages/detalhes/ServiçoDetails";
-import { Details } from "./pages/detalhes/Details";
-// import { ProdutoDetails } from "./pages/detalhes/ProdutoDetails";
+import { Details } from "./pages/Details";
 
 export const AppContext = createContext({
     errorMsg: {},
@@ -53,7 +49,7 @@ function App() {
                         />
                         <Route
                             path="/servico/:id"
-                            element={<ServiçoDetails />}
+                            element={<Details type="servico" />}
                         />
                     </Route>
                     <Route path="/local">

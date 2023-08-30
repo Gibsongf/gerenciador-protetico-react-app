@@ -1,22 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
-import { EditContext } from "../../pages/detalhes/Details";
-const formatCpf = (cpf) => {
-    //123.456.789-09.
-    //829.862.523-40
-    let arr = String(cpf).split("");
-    let a = arr.map((n, indx) => {
-        if (indx === 2 || indx === 5) {
-            return n + ".";
-        }
-        if (indx === 8) {
-            return n + "-";
-        }
-        return n;
-    });
-    return a.toString().replaceAll(",", "");
-};
+import { EditContext } from "../../pages/Details";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {

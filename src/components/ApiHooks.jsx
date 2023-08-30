@@ -18,32 +18,7 @@ export function useTodosApi(category) {
     }, [category]);
     return data;
 }
-const formatCpf = (cpf) => {
-    let arr = String(cpf).split("");
-    let a = arr.map((n, indx) => {
-        if (indx === 2 || indx === 5) {
-            return n + ".";
-        }
-        if (indx === 8) {
-            return n + "-";
-        }
-        return n;
-    });
-    return a.toString().replaceAll(",", "");
-};
-const detailsDentistaObj = (data) => {
-    const { nome, sobrenome, cpf, telefone, local } = data.dentista;
-    return {
-        nome,
-        sobrenome,
-        cpf: formatCpf(cpf),
-        telefone,
-        local: local._id,
-        category: "dentista",
-        formType: "edit",
-        dbId: data.dentista._id,
-    };
-};
+
 export function useDetailsApi(category, id) {
     const [data, setData] = useState();
     const [update, setUpdate] = useState(false);
