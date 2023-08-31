@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { booleanToString } from "../utils";
-
 export function DentistTableBody({ data }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
@@ -8,12 +7,13 @@ export function DentistTableBody({ data }) {
     const saveLocalId = (e) => {
         localStorage.setItem("localID", e.target.id);
     };
-    console.log(data);
+    // console.log(data);
     return data.map((d) => {
         return (
             <tr key={d._id}>
                 <td>
                     <Link
+                        className="link"
                         onClick={saveDentistId}
                         to={`/dentista/${d._id}`}
                         id={d._id}
@@ -25,6 +25,7 @@ export function DentistTableBody({ data }) {
 
                 <td>
                     <Link
+                        className="link"
                         onClick={saveLocalId}
                         to={`/local/${d.local._id}`}
                         id={d.local._id}
@@ -45,7 +46,12 @@ export function LocalTableBody({ data }) {
         return (
             <tr key={d._id}>
                 <td>
-                    <Link onClick={saveDbId} id={d._id} to={`/local/${d._id}`}>
+                    <Link
+                        className="link"
+                        onClick={saveDbId}
+                        id={d._id}
+                        to={`/local/${d._id}`}
+                    >
                         {d.nome}
                     </Link>
                 </td>
@@ -70,17 +76,21 @@ export function ProductTableBody({ data }) {
 }
 
 export function ServiceTableBody({ data }) {
-    const saveDbId = (e) => {
+    const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
     };
-    console.log(data);
+    const saveServiceId = (e) => {
+        localStorage.setItem("servicoID", e.target.id);
+    };
+    // console.log(data);
     return data.map((d, index) => {
         // console.log(d._id);
         return (
             <tr key={d.dentista.nome + index}>
                 <td>
                     <Link
-                        onClick={saveDbId}
+                        className="link"
+                        onClick={saveDentistId}
                         to={`/dentista/${d.dentista._id}`}
                         id={d.dentista._id}
                     >
@@ -94,6 +104,16 @@ export function ServiceTableBody({ data }) {
                         : d.produto[0].nome}
                 </td>
                 <td>{booleanToString(d.statusEntrega)}</td>
+                <td>
+                    <Link
+                        className="link"
+                        onClick={saveServiceId}
+                        to={`/servico/${d._id}`}
+                        id={d._id}
+                    >
+                        Editar
+                    </Link>
+                </td>
             </tr>
         );
     });

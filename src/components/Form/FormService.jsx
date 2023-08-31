@@ -20,6 +20,7 @@ export function FormService({ initialState }) {
     const { errorMsg } = useContext(AppContext);
     const [produtoKeys, setProdutoKeys] = useState(["produto"]);
     const ref = useRef();
+    // console.log(initialState);
     if (!initialState) {
         initialState = {
             dentista: "",
@@ -87,12 +88,14 @@ export function FormService({ initialState }) {
                     products={products}
                     name="produto"
                     onChange={handleChange}
+                    data={formData.produto}
                 />
-                {productInput.map((i) => i)}
+
+                {/* {productInput.map((i) => i)}
 
                 <button onClick={AdditionalProduct} type="button">
                     Mais Produto
-                </button>
+                </button> */}
                 <button onClick={handleSubmit} type="submit">
                     Registrar
                 </button>

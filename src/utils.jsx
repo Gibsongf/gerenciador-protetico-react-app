@@ -85,9 +85,9 @@ export function stateDetails(data, type) {
         return { infoContent, formState };
     };
 
-    const serviço = () => {
-        const { statusEntrega } = data.serviço;
-        const { nome, sobrenome, _id } = data.dentista;
+    const servico = () => {
+        const { statusEntrega, paciente } = data.serviço;
+        const { nome, sobrenome, _id, local } = data.dentista;
         const infoContent = {
             Paciente: data.paciente,
             Dentista_nome: fullName(nome, sobrenome),
@@ -95,18 +95,20 @@ export function stateDetails(data, type) {
             Entregado: statusEntrega,
         };
         const formState = {
-            paciente_nome: data.paciente,
-            dentista_nome: _id,
+            paciente_nome: paciente,
+            dentista: _id, //just id to be pre-selected at select input
+            local,
             produtos: data.produto,
             statusEntrega,
             category: "servico",
             formType: "edit",
             dbId: data.serviço._id,
         };
+        // console.log(data, formState);
         return { infoContent, formState };
     };
     const obj = {
-        serviço,
+        servico,
         local,
         dentista,
     };

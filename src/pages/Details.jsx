@@ -104,7 +104,7 @@ export function Details({ type }) {
         const obj = {
             dentista: <DentistServices data={data} />,
             local: <LocalDentistWorkers data={data} />,
-            servico: <FormService initialState={formState} />,
+            servico: "",
         };
         return obj[type];
     };
@@ -115,8 +115,9 @@ export function Details({ type }) {
     return (
         <>
             <EditContext.Provider value={{ setEdit, setUpdate }}>
-                {edit ? <Info data={data} content={infoContent} /> : Form()}
-                {Table()}
+                <FormService initialState={formState} />
+                {/* {edit ? <Info data={data} content={infoContent} /> : Form()} */}
+                <Table />
             </EditContext.Provider>
         </>
     );

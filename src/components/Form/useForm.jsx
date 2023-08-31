@@ -21,7 +21,9 @@ export function useForm(initialState, formElements, produtoKeys) {
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
-
+    useEffect(() => {
+        console.log(formData);
+    }, [formData]);
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {
@@ -76,7 +78,9 @@ export function useForm(initialState, formElements, produtoKeys) {
         let data;
         if (formData.category === "servico") {
             data = formatProduct();
-            callAPI(data);
+            console.log(formData, e.target);
+            // console.log("api", data);
+            // callAPI(data);
             return;
         }
         if (formData.category === "dentista") {

@@ -80,7 +80,8 @@ export function FilterDentistsByLocation({
     dbId,
     msg,
 }) {
-    let data = useDetailsApi("local", dbId);
+    let { data } = useDetailsApi("local", dbId);
+    // console.log(initialValue);
     const RenderOptions = () => {
         if (!dbId) {
             return <WaitSelectLocal />;
@@ -106,8 +107,7 @@ export function FilterDentistsByLocation({
                 name="dentista"
                 id="dentista"
             >
-                <option></option>;
-                {!data ? <WaitSelectLocal /> : <RenderOptions />}
+                <option></option>;{!data ? "" : <RenderOptions />}
             </select>
         </div>
     );
@@ -171,9 +171,19 @@ export function SimpleInput({
         </div>
     );
 }
-export function SearchProducts({ products, name, onChange }) {
+
+// just load one of these when user confirm the product
+// it will be show as checkbox above with it check and reset the search
+// if is a edit case the checkbox will already be rendered and the user can uncheck it
+export function SearchProducts({ products, name, onChange, data }) {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
+    const [selectNames, setSelectNames] = useState([]);
+    const [saveName, setSaveName] = useState([]);
+    const beforeSaveData = (e) => {
+        setSaveName(e.target.options[e.target.selectedIndex].text);
+        onChange(e);
+    };
     useEffect(() => {
         // console.log(search, products);
         const filter = () =>
@@ -186,9 +196,12 @@ export function SearchProducts({ products, name, onChange }) {
             setResult(() => filter());
         }
     }, [search, products]);
+    const saveSelectedName = () => {
+        setSelectNames((prev) => [...prev, saveName]);
+    };
     return (
-        <div>
-            <label htmlFor="search-product">Produto</label>
+        <div className="search-product">
+            <label htmlFor="search-product">Produto:</label>
 
             <input
                 value={search}
@@ -197,7 +210,7 @@ export function SearchProducts({ products, name, onChange }) {
                 type="text"
                 placeholder="Search..."
             />
-            <select onChange={onChange} name={name} id="produto">
+            <select onChange={beforeSaveData} name={name} id="produto">
                 <option value=""></option>
                 {!result
                     ? ""
@@ -209,10 +222,54 @@ export function SearchProducts({ products, name, onChange }) {
                           );
                       })}
             </select>
+            <button
+                onClick={saveSelectedName}
+                type="button"
+                className="confirm-search"
+            >
+                Selecionar Produto
+            </button>
+            <label htmlFor="selected-products">
+                Selecionado:
+                <RenderCheckBox arr={selectNames} />
+            </label>
         </div>
     );
 }
+function RenderCheckBox({ arr }) {
+    RenderCheckBox.propTypes = {
+        arr: PropTypes.array,
+    };
+    if (arr.length < 1) {
+        return;
+    }
+    return (
+        <div className="selected-checkbox">
+            {arr.map((item, indx) => {
+                if (item.length < 1) return;
+                return <CheckBox key={item + indx} name={item} />;
+            })}
+        </div>
+    );
+}
+function CheckBox({ name }) {
+    const [isChecked, setIsChecked] = useState(true);
 
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
+
+    return (
+        <label className="checkbox-label">
+            <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+            />
+            {name}
+        </label>
+    );
+}
 SearchProducts.propTypes = {
     products: PropTypes.array,
 };

@@ -14,6 +14,7 @@ import { FormLocal } from "./components/Form/FormLocal";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
 import { Details } from "./pages/Details";
+import { FormService } from "./components/Form/FormService";
 
 export const AppContext = createContext({
     errorMsg: {},
@@ -72,7 +73,7 @@ function App() {
                 {/* <FormLocal /> */}
                 {/* <FormDentist /> */}
                 {/* <FormProduct /> */}
-                {/* <FormService /> */}
+                <FormService />
 
                 {/* Details */}
                 {/* <DentistaDetails /> */}

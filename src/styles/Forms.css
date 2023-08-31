@@ -9,18 +9,39 @@ form>div {
 
 }
 
+.confirm-search {
+    width: 50%;
+    align-self: center;
+}
+
+/* .search-product {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding-bottom: 10px;
+} */
+.selected-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+}
+
 .form-container {
     text-align: center;
     background-color: rgb(218, 199, 174);
-    margin: 0 auto;
-    padding: 25px;
+    /* margin: 0 auto; */
+    /* padding: 25px; */
     border-top: 15px solid rgb(255, 244, 244);
     border-radius: 1em;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.445);
 }
 
 form {
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 75px;
     background-color: #1f1f1f;
     color: whitesmoke;
@@ -36,13 +57,14 @@ form label {
     font-weight: bold;
 }
 
-input {
+input[type="text"],
+input[type="tel"],
+input[type="number"] {
     border-radius: 10px;
     padding: 5px;
     appearance: none;
     border: none;
     min-width: 300px;
-
 }
 
 select {
@@ -52,11 +74,11 @@ select {
 
 }
 
-input:focus,
+/* input:focus,
 input:focus-visible {
     outline: 3px solid #646cff;
 
-}
+} */
 
 .invalid-form {
     border: 3px solid red;

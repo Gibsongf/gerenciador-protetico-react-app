@@ -9,18 +9,18 @@ export function Header() {
         <>
             <div className="header">
                 <div className="nav">
-                    <h3>
+                    <button>
                         <Link to="/servico/todos">Serviços</Link>
-                    </h3>
-                    <h3>
+                    </button>
+                    <button>
                         <Link to="/dentista/todos">Dentistas</Link>
-                    </h3>
-                    <h3>
+                    </button>
+                    <button>
                         <Link to="/local/todos">Locais</Link>
-                    </h3>
-                    <h3>
+                    </button>
+                    <button>
                         <Link to="/todos-produtos">Produtos</Link>
-                    </h3>
+                    </button>
                 </div>
             </div>
         </>
