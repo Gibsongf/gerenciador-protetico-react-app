@@ -21,9 +21,7 @@ export function useForm(initialState, formElements, produtoKeys) {
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
+
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {
@@ -43,13 +41,13 @@ export function useForm(initialState, formElements, produtoKeys) {
         }
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
-    const formatProduct = () => {
-        const product = produtoKeys.map((k) => formData[k]);
-        const obj = { ...formData };
-        produtoKeys.forEach((k) => delete obj[k]);
-        obj.produto = product;
-        return obj;
-    };
+    // const formatProduct = () => {
+    //     const product = produtoKeys.map((k) => formData[k]);
+    //     const obj = { ...formData };
+    //     produtoKeys.forEach((k) => delete obj[k]);
+    //     obj.produto = product;
+    //     return obj;
+    // };
     const removeFormattedCpf = () => {
         const obj = { ...formData };
         obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
@@ -77,10 +75,8 @@ export function useForm(initialState, formElements, produtoKeys) {
         e.preventDefault();
         let data;
         if (formData.category === "servico") {
-            data = formatProduct();
-            console.log(formData, e.target);
-            // console.log("api", data);
-            // callAPI(data);
+            console.log(formData);
+
             return;
         }
         if (formData.category === "dentista") {
@@ -90,5 +86,5 @@ export function useForm(initialState, formElements, produtoKeys) {
             return;
         }
     };
-    return { formData, handleChange, handleSubmit };
+    return { formData, handleChange, handleSubmit, setFormData };
 }

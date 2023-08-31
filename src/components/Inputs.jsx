@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useDetailsApi, useTodosApi } from "./ApiHooks";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RefContext } from "./Form/FormService";
 
 export function TipoTabelaSelect({ initialValue, onChange }) {
     return (
@@ -175,13 +176,16 @@ export function SimpleInput({
 // just load one of these when user confirm the product
 // it will be show as checkbox above with it check and reset the search
 // if is a edit case the checkbox will already be rendered and the user can uncheck it
-export function SearchProducts({ products, name, onChange, data }) {
+export function SearchProducts({ products, name, onChange }) {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
     const [selectNames, setSelectNames] = useState([]);
     const [saveName, setSaveName] = useState([]);
     const beforeSaveData = (e) => {
-        setSaveName(e.target.options[e.target.selectedIndex].text);
+        if (e.target.value !== "") {
+            const name = e.target.options[e.target.selectedIndex].text;
+            setSaveName({ name, value: e.target.value });
+        }
         onChange(e);
     };
     useEffect(() => {
@@ -197,7 +201,9 @@ export function SearchProducts({ products, name, onChange, data }) {
         }
     }, [search, products]);
     const saveSelectedName = () => {
+        if (saveName.length < 1) return;
         setSelectNames((prev) => [...prev, saveName]);
+        // setProduct((prev) => [...prev, saveName]);
     };
     return (
         <div className="search-product">
@@ -229,10 +235,8 @@ export function SearchProducts({ products, name, onChange, data }) {
             >
                 Selecionar Produto
             </button>
-            <label htmlFor="selected-products">
-                Selecionado:
-                <RenderCheckBox arr={selectNames} />
-            </label>
+            <label htmlFor="selected-products">Selecionado:</label>
+            <RenderCheckBox arr={selectNames} />
         </div>
     );
 }
@@ -240,21 +244,28 @@ function RenderCheckBox({ arr }) {
     RenderCheckBox.propTypes = {
         arr: PropTypes.array,
     };
+    const { checkBoxRef } = useContext(RefContext);
+
     if (arr.length < 1) {
         return;
     }
     return (
-        <div className="selected-checkbox">
+        <div ref={checkBoxRef} className="selected-checkbox">
             {arr.map((item, indx) => {
                 if (item.length < 1) return;
-                return <CheckBox key={item + indx} name={item} />;
+                return (
+                    <CheckBox
+                        key={item + indx}
+                        name={item.name}
+                        value={item.value}
+                    />
+                );
             })}
         </div>
     );
 }
-function CheckBox({ name }) {
+function CheckBox({ name, value }) {
     const [isChecked, setIsChecked] = useState(true);
-
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -262,8 +273,10 @@ function CheckBox({ name }) {
     return (
         <label className="checkbox-label">
             <input
+                name="produto"
                 type="checkbox"
                 checked={isChecked}
+                value={value}
                 onChange={handleCheckboxChange}
             />
             {name}

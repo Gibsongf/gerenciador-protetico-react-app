@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -16,10 +16,14 @@ import { useForm } from "./useForm";
 FormService.propTypes = {
     initialState: PropTypes.object,
 };
+export const RefContext = createContext({
+    checkBoxRef: "",
+});
 export function FormService({ initialState }) {
     const { errorMsg } = useContext(AppContext);
     const [produtoKeys, setProdutoKeys] = useState(["produto"]);
     const ref = useRef();
+    const checkBoxRef = useRef();
     // console.log(initialState);
     if (!initialState) {
         initialState = {
@@ -31,31 +35,39 @@ export function FormService({ initialState }) {
         };
     }
     const products = useTodosApi("produto");
-    const [productInput, setProductInput] = useState([]);
-    // //console.log(products);
-    const { formData, handleChange, handleSubmit } = useForm(
+    const { formData, setFormData, handleChange, handleSubmit } = useForm(
         initialState,
         ref.current,
         produtoKeys
     );
 
-    const AdditionalProduct = () => {
-        const key = uuidv4();
-        setProductInput((previous) => {
-            const name = "produto" + String(previous.length + 1);
-            setProdutoKeys((prev) => [...prev, name]);
-            return [
-                ...previous,
-                <SearchProducts
-                    products={products}
-                    onChange={handleChange}
-                    key={key}
-                    name={name}
-                />,
-            ];
+    // use the ref context to filter the selected checkbox and
+    //format to array and save to the form data
+    const formatFilterProducts = () => {
+        let el = Array.from(checkBoxRef.current.children);
+        const boxIsChecked = el.filter((ele) => {
+            if (ele.children[0].checked) {
+                return ele;
+            }
+        });
+        const boxValues = boxIsChecked.map(
+            (checkbox) => checkbox.children[0].value
+        );
+        setFormData((prev) => {
+            prev.produto = boxValues;
+            return { ...prev };
         });
     };
-    // //console.log(errorMsg);
+    //before submit we format the product
+    const handleProductSubmit = (e) => {
+        e.preventDefault();
+        if (checkBoxRef.current) {
+            formatFilterProducts();
+        }
+
+        handleSubmit(e);
+    };
+
     return (
         <div className="form-container">
             <form action="" ref={ref}>
@@ -84,19 +96,20 @@ export function FormService({ initialState }) {
                     dbId={formData.local}
                     msg={!errorMsg ? "" : errorMsg.dentista}
                 />
-                <SearchProducts
-                    products={products}
-                    name="produto"
-                    onChange={handleChange}
-                    data={formData.produto}
-                />
+                <RefContext.Provider value={{ checkBoxRef }}>
+                    <SearchProducts
+                        products={products}
+                        name="produto"
+                        onChange={handleChange}
+                    />
+                </RefContext.Provider>
 
                 {/* {productInput.map((i) => i)}
 
                 <button onClick={AdditionalProduct} type="button">
                     Mais Produto
                 </button> */}
-                <button onClick={handleSubmit} type="submit">
+                <button onClick={handleProductSubmit} type="submit">
                     Registrar
                 </button>
             </form>

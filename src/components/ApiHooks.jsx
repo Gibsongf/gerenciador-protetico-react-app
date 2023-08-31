@@ -6,7 +6,7 @@ export function useTodosApi(category) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                console.log("fetch data 'todos' category:" + category);
+                // console.log("fetch data 'todos' category:" + category);
                 const result = await APItodos(category);
                 // console.log(result);
                 setData(() => result.all);
@@ -27,7 +27,7 @@ export function useDetailsApi(category, id) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                console.log("fetch data details");
+                // console.log("fetch data details");
                 const result = await APIDetails(category, id);
                 // console.log(result);
                 setData(() => result);
