@@ -1,7 +1,8 @@
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import {
+    EntregaStatus,
     FilterDentistsByLocation,
     SearchProducts,
     SelectInput,
@@ -21,15 +22,13 @@ export const RefContext = createContext({
 });
 export function FormService({ initialState }) {
     const { errorMsg } = useContext(AppContext);
-    const [produtoKeys, setProdutoKeys] = useState(["produto"]);
     const ref = useRef();
     const checkBoxRef = useRef();
-    // console.log(initialState);
     if (!initialState) {
         initialState = {
             dentista: "",
             local: "",
-            paciente_nome: "",
+            paciente: "",
             category: "servico",
             formType: "new",
         };
@@ -37,8 +36,7 @@ export function FormService({ initialState }) {
     const products = useTodosApi("produto");
     const { formData, setFormData, handleChange, handleSubmit } = useForm(
         initialState,
-        ref.current,
-        produtoKeys
+        ref.current
     );
 
     // use the ref context to filter the selected checkbox and
@@ -72,14 +70,14 @@ export function FormService({ initialState }) {
         <div className="form-container">
             <form action="" ref={ref}>
                 <legend>
-                    <h3>Registrar Novo Serviço</h3>
+                    <h3>Serviço</h3>
                 </legend>
                 <SimpleInput
-                    id={"paciente_nome"}
+                    id={"paciente"}
                     labelTxt={"Nome do Paciente:"}
-                    value={formData.paciente_nome}
+                    value={formData.paciente}
                     onChange={handleChange}
-                    msg={!errorMsg ? "" : errorMsg.paciente_nome}
+                    msg={!errorMsg ? "" : errorMsg.paciente}
                 />
 
                 <SelectInput
@@ -101,16 +99,19 @@ export function FormService({ initialState }) {
                         products={products}
                         name="produto"
                         onChange={handleChange}
+                        preSelectProduct={formData.produtos}
                     />
                 </RefContext.Provider>
-
-                {/* {productInput.map((i) => i)}
-
-                <button onClick={AdditionalProduct} type="button">
-                    Mais Produto
-                </button> */}
+                {String(formData.statusEntrega) ? (
+                    <EntregaStatus
+                        value={formData.statusEntrega}
+                        onChange={handleChange}
+                    />
+                ) : (
+                    ""
+                )}
                 <button onClick={handleProductSubmit} type="submit">
-                    Registrar
+                    Confirm
                 </button>
             </form>
         </div>

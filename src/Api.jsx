@@ -68,16 +68,16 @@ export async function APIDetails(category, id) {
 
 export async function APIPostNewData(formData) {
     const url = `http://localhost:3000/api/${formData["category"]}/novo`;
-    console.log(formData);
+    // console.log(formData);
     const data = await setupFetch(url, "post", formData);
-    console.log(data);
+    // console.log(data);
     return data;
 }
 export async function APIPutData(formData, id) {
     const url = `http://localhost:3000/api/${formData["category"]}/${id}/edit`;
-    console.log(formData);
+    // console.log(formData);
     const data = await setupFetch(url, "put", formData);
-    console.log(data);
+    // console.log(data);
 
     return data;
 }

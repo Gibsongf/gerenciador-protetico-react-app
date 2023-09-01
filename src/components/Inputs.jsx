@@ -172,14 +172,37 @@ export function SimpleInput({
         </div>
     );
 }
-
+export function EntregaStatus({ onChange, value }) {
+    return (
+        <div className="status-entrega">
+            <label htmlFor="statusEntrega">Entregado:</label>
+            <select
+                name="statusEntrega"
+                id="status-entrega"
+                onChange={onChange}
+                value={value}
+            >
+                <option value={false}>Não</option>
+                <option value={true}>Sim</option>
+            </select>
+        </div>
+    );
+}
 // just load one of these when user confirm the product
 // it will be show as checkbox above with it check and reset the search
 // if is a edit case the checkbox will already be rendered and the user can uncheck it
-export function SearchProducts({ products, name, onChange }) {
+const getNameValue = (arr) => {
+    if (!arr) return [];
+    return arr.map((a) => {
+        return { name: a.nome, value: a._id };
+    });
+};
+export function SearchProducts({ products, name, onChange, preSelectProduct }) {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
-    const [selectNames, setSelectNames] = useState([]);
+    const [selectNames, setSelectNames] = useState(
+        getNameValue(preSelectProduct)
+    );
     const [saveName, setSaveName] = useState([]);
     const beforeSaveData = (e) => {
         if (e.target.value !== "") {

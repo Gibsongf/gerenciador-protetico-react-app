@@ -73,7 +73,7 @@ function App() {
                 {/* <FormLocal /> */}
                 {/* <FormDentist /> */}
                 {/* <FormProduct /> */}
-                <FormService />
+                {/* <FormService /> */}
 
                 {/* Details */}
                 {/* <DentistaDetails /> */}

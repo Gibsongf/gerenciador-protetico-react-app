@@ -95,7 +95,7 @@ export function stateDetails(data, type) {
             Entregado: statusEntrega,
         };
         const formState = {
-            paciente_nome: paciente,
+            paciente: paciente,
             dentista: _id, //just id to be pre-selected at select input
             local,
             produtos: data.produto,

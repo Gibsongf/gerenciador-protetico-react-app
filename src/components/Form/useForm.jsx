@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
 import { EditContext } from "../../pages/Details";
+import { useNavigate } from "react-router-dom";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
@@ -10,18 +11,20 @@ const replaceUndefined = (obj) => {
         }
     });
 };
-export function useForm(initialState, formElements, produtoKeys) {
+
+export function useForm(initialState, formElements) {
     replaceUndefined(initialState);
+    const nav = useNavigate();
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
     const { setEdit, setUpdate } = useContext(EditContext);
     const handleChange = (e) => {
         setFormData((prev) => {
+            console.log([e.target.name], e.target.value);
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
-
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {
@@ -41,13 +44,7 @@ export function useForm(initialState, formElements, produtoKeys) {
         }
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
-    // const formatProduct = () => {
-    //     const product = produtoKeys.map((k) => formData[k]);
-    //     const obj = { ...formData };
-    //     produtoKeys.forEach((k) => delete obj[k]);
-    //     obj.produto = product;
-    //     return obj;
-    // };
+
     const removeFormattedCpf = () => {
         const obj = { ...formData };
         obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
@@ -68,6 +65,7 @@ export function useForm(initialState, formElements, produtoKeys) {
                     setEdit((e) => !e);
                 }
                 setResult(e);
+                // nav("/");
             }
         });
     };
@@ -75,10 +73,10 @@ export function useForm(initialState, formElements, produtoKeys) {
         e.preventDefault();
         let data;
         if (formData.category === "servico") {
-            console.log(formData);
-
+            callAPI(formData);
             return;
         }
+
         if (formData.category === "dentista") {
             console.log("yoy");
             data = removeFormattedCpf();
