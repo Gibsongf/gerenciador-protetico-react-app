@@ -17,15 +17,16 @@ export const EditContext = createContext({
     setEdit: () => {},
     setUpdate: () => {},
 });
+
 const Info = ({ data, content }) => {
     const { setEdit } = useContext(EditContext);
-
+    // console.log(content);
     return (
         <div className="info">
             {Object.keys(content).map((k, index) => {
                 return (
                     <p key={index + k}>
-                        <strong>{k}:</strong>
+                        <strong>{k}: </strong>
                         {content[k]}
                     </p>
                 );
@@ -40,7 +41,7 @@ const Info = ({ data, content }) => {
 
 export function DentistServices({ data }) {
     const row = ["Dentista", "Paciente", "Produto", "Entregado"];
-    console.log(data);
+    // console.log(data);
     return (
         <div className="serviço">
             <table className="todos-table">
@@ -104,7 +105,7 @@ export function Details({ type }) {
         const obj = {
             dentista: <DentistServices data={data} />,
             local: <LocalDentistWorkers data={data} />,
-            servico: "",
+            servico: <h1>ah</h1>,
         };
         return obj[type];
     };
@@ -115,8 +116,8 @@ export function Details({ type }) {
     return (
         <>
             <EditContext.Provider value={{ setEdit, setUpdate }}>
-                <FormService initialState={formState} />
-                {/* {edit ? <Info data={data} content={infoContent} /> : Form()} */}
+                {/* <FormService initialState={formState} /> */}
+                {edit ? <Info data={data} content={infoContent} /> : Form()}
                 <Table />
             </EditContext.Provider>
         </>

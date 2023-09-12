@@ -65,13 +65,14 @@ export function FormService({ initialState }) {
 
         handleSubmit(e);
     };
-
+    // console.log(initialState);
     return (
         <div className="form-container">
             <form action="" ref={ref}>
                 <legend>
                     <h3>Serviço</h3>
                 </legend>
+
                 <SimpleInput
                     id={"paciente"}
                     labelTxt={"Nome do Paciente:"}

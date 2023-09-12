@@ -87,12 +87,20 @@ export function stateDetails(data, type) {
 
     const servico = () => {
         const { statusEntrega, paciente } = data.serviço;
-        const { nome, sobrenome, _id, local } = data.dentista;
+        const { nome, sobrenome, _id, local } = data.serviço.dentista;
+        const produtoNomes = data.serviço.produto
+            .map((p, indx) => {
+                if (indx === 0) {
+                    return p.nome;
+                } else return " " + p.nome;
+            })
+            .toString();
+
         const infoContent = {
-            Paciente: data.paciente,
+            Paciente: paciente,
             Dentista_nome: fullName(nome, sobrenome),
-            produtos: data.produto,
-            Entregado: statusEntrega,
+            Produtos: produtoNomes,
+            Entregado: booleanToString(statusEntrega),
         };
         const formState = {
             paciente: paciente,
