@@ -42,7 +42,6 @@ const fullName = (nome, sobrenome) => {
 };
 export function stateDetails(data, type) {
     const local = () => {
-        // nome, endereço, cep, telefone,
         const { nome, endereço, cep, telefone } = data.local;
         const infoContent = {
             Nome: nome,
@@ -106,7 +105,7 @@ export function stateDetails(data, type) {
             paciente: paciente,
             dentista: _id, //just id to be pre-selected at select input
             local,
-            produtos: data.produto,
+            produtos: data.serviço.produto,
             statusEntrega,
             category: "servico",
             formType: "edit",

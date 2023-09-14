@@ -173,6 +173,8 @@ export function SimpleInput({
     );
 }
 export function EntregaStatus({ onChange, value }) {
+    // console.log(typeof value, value);
+
     return (
         <div className="status-entrega">
             <label htmlFor="statusEntrega">Entregado:</label>

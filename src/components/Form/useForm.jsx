@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
-import { EditContext } from "../../pages/Details";
+import { EditContext } from "../GenerateDetails";
 import { useNavigate } from "react-router-dom";
 
 const replaceUndefined = (obj) => {
@@ -21,7 +21,6 @@ export function useForm(initialState, formElements) {
     const { setEdit, setUpdate } = useContext(EditContext);
     const handleChange = (e) => {
         setFormData((prev) => {
-            console.log([e.target.name], e.target.value);
             return { ...prev, [e.target.name]: e.target.value };
         });
     };

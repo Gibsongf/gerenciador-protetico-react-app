@@ -13,8 +13,9 @@ import { FormLocal } from "./components/Form/FormLocal";
 // import { FormService } from "./components/Form/FormService";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
-import { Details } from "./pages/Details";
+import { Details } from "./components/GenerateDetails";
 import { FormService } from "./components/Form/FormService";
+import { DentistaDetails, LocalDetails, ServiceDetails } from "./pages/Details";
 
 export const AppContext = createContext({
     errorMsg: {},
@@ -40,7 +41,7 @@ function App() {
                         />
                         <Route
                             path="/dentista/:id"
-                            element={<Details type="dentista" />}
+                            element={<DentistaDetails />}
                         />
                     </Route>
                     <Route path="/servico">
@@ -50,15 +51,12 @@ function App() {
                         />
                         <Route
                             path="/servico/:id"
-                            element={<Details type="servico" />}
+                            element={<ServiceDetails />}
                         />
                     </Route>
                     <Route path="/local">
                         <Route path="/local/todos" element={<LocalList />} />
-                        <Route
-                            path="/local/:id"
-                            element={<Details type="local" />}
-                        />
+                        <Route path="/local/:id" element={<LocalDetails />} />
                     </Route>
                     <Route path="/todos-produtos" element={<ProductList />} />
                 </Routes>

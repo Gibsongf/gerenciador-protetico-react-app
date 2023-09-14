@@ -6,9 +6,7 @@ export function useTodosApi(category) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                // console.log("fetch data 'todos' category:" + category);
                 const result = await APItodos(category);
-                // console.log(result);
                 setData(() => result.all);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -22,23 +20,19 @@ export function useTodosApi(category) {
 export function useDetailsApi(category, id) {
     const [data, setData] = useState();
     const [update, setUpdate] = useState(false);
-    // const whichObj = () => {};
-    // console.log(category, id);
+
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                // console.log("fetch data details");
+                console.log("fetch data details");
                 const result = await APIDetails(category, id);
-                // console.log(result);
                 setData(() => result);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
-        if (id) {
-            // console.log(id);
-            fetchingData();
-        }
+
+        fetchingData();
     }, [category, id, update]);
     return { data, setUpdate };
 }

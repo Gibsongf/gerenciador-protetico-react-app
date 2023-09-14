@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { createContext, useContext, useRef } from "react";
 
 import {
     EntregaStatus,
@@ -13,6 +12,7 @@ import "../../styles/Forms.css";
 import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
+import { ButtonEdit, ButtonRegister } from "./Buttons";
 
 FormService.propTypes = {
     initialState: PropTypes.object,
@@ -65,7 +65,6 @@ export function FormService({ initialState }) {
 
         handleSubmit(e);
     };
-    // console.log(initialState);
     return (
         <div className="form-container">
             <form action="" ref={ref}>
@@ -103,17 +102,23 @@ export function FormService({ initialState }) {
                         preSelectProduct={formData.produtos}
                     />
                 </RefContext.Provider>
-                {String(formData.statusEntrega) ? (
+                <EntregaStatus
+                    value={formData.statusEntrega}
+                    onChange={handleChange}
+                />
+                {/* {String(formData.statusEntrega) ? (
                     <EntregaStatus
                         value={formData.statusEntrega}
                         onChange={handleChange}
                     />
                 ) : (
                     ""
+                )} */}
+                {!initialState.formType === "edit" ? (
+                    <ButtonRegister handleSubmit={handleProductSubmit} />
+                ) : (
+                    <ButtonEdit handleSubmit={handleProductSubmit} />
                 )}
-                <button onClick={handleProductSubmit} type="submit">
-                    Confirm
-                </button>
             </form>
         </div>
     );

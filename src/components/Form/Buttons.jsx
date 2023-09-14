@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import { EditContext } from "../../pages/Details";
+import { EditContext } from "../GenerateDetails";
 
 ButtonRegister.propTypes = {
     handleSubmit: PropTypes.func,
