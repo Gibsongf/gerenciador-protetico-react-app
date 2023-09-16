@@ -81,8 +81,8 @@ export async function APIPutData(formData, id) {
 
     return data;
 }
-export async function ExcelLink() {
-    const url = "http://localhost:3000/api/export";
+export async function ExcelLink(id) {
+    const url = `http://localhost:3000/api/export/${id}`;
     const reqConfig = {
         method: "Get",
         headers: {

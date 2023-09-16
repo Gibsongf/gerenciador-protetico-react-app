@@ -31,8 +31,9 @@ export function useDetailsApi(category, id) {
                 console.error("Error fetching data:", error);
             }
         };
-
-        fetchingData();
+        if (id) {
+            fetchingData();
+        }
     }, [category, id, update]);
     return { data, setUpdate };
 }

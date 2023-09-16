@@ -20,35 +20,14 @@ export function LocalDetails() {
     }
     return <Details type={"local"} data={data} setUpdate={setUpdate} />;
 }
-const MyComponent = () => {
-    const handleExport = () => {
-        // Make a GET request to the /export endpoint
-        fetch("http://localhost:3000/api/export")
-            .then((response) => response.blob())
-            .then((blob) => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "exported_data.xlsx";
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            });
-    };
-
-    return (
-        <div>
-            <button onClick={handleExport}>Export to Excel</button>
-        </div>
-    );
-};
 
 export function ServiceDetails() {
     const dbId = localStorage.getItem("servicoID");
     const { data, setUpdate } = useDetailsApi("servico", dbId);
-    const ref = useRef();
-    const test = async () => {
-        const blob = await ExcelLink();
+
+    const exportExcel = async () => {
+        // turn this to post http send data and receive excel file
+        const blob = await ExcelLink(dbId);
         const downloadLink = document.createElement("a");
         console.log(data);
         downloadLink.download = "yey";
@@ -63,7 +42,7 @@ export function ServiceDetails() {
 
     return (
         <>
-            <button onClick={test} type="button" className="export">
+            <button onClick={exportExcel} type="button" className="export">
                 Export
             </button>
             <Details type={"servico"} data={data} setUpdate={setUpdate} />
