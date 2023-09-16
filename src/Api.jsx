@@ -81,3 +81,23 @@ export async function APIPutData(formData, id) {
 
     return data;
 }
+export async function ExcelLink() {
+    const url = "http://localhost:3000/api/export";
+    const reqConfig = {
+        method: "Get",
+        headers: {
+            Authorization: "Bearer " + localStorage["token"],
+        },
+    };
+
+    try {
+        const response = await fetch(url, reqConfig);
+        if (response.status === 200) {
+            const blob = await response.blob();
+            // console.log(data);
+            return blob;
+        }
+    } catch (err) {
+        throw Error(err);
+    }
+}

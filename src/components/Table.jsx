@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { booleanToString } from "../utils";
 
 export function Caption({ txt }) {
     Caption.propTypes = {
@@ -8,7 +6,7 @@ export function Caption({ txt }) {
     };
     return (
         <caption>
-            <h4>{txt}</h4>
+            <h3>{txt}</h3>
         </caption>
     );
 }
@@ -16,6 +14,7 @@ export function TableRow({ rowNames }) {
     TableRow.propTypes = {
         rowNames: PropTypes.array,
     };
+
     return (
         <tr>
             {rowNames.map((name, index) => {

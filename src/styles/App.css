@@ -15,21 +15,26 @@
 }
 
 .todos-table,
-td,
-th {
+td {
   color: black;
-  border: 3px solid rgb(128, 82, 82);
+  border: 2px solid rgb(0, 0, 0);
   padding: 15px;
+}
 
+th {
+  height: 70px;
+  color: black;
+  border: 2px solid rgb(0, 0, 0);
+  border-bottom: 4px solid rgb(0, 0, 0);
+  padding: 15px;
 }
 
 .todos-table {
   width: -webkit-fill-available;
-  /* margin: 0 25px; */
   border-collapse: collapse;
   background-color: white;
   color: white;
-
+  text-align: center;
 }
 
 

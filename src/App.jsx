@@ -1,10 +1,6 @@
 // import { useState } from 'react'
 import { Header } from "./components/Header";
 
-import { DentistasList } from "./pages/todos/DentistasList";
-import { LocalList } from "./pages/todos/LocalList";
-import { ProductList } from "./pages/todos/ProductList";
-import { ServiçoList } from "./pages/todos/ServiçoList";
 import { createContext } from "react";
 import { Route, Router, Routes } from "react-router-dom";
 import "./styles/App.css";
@@ -13,9 +9,14 @@ import { FormLocal } from "./components/Form/FormLocal";
 // import { FormService } from "./components/Form/FormService";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
-import { Details } from "./components/GenerateDetails";
 import { FormService } from "./components/Form/FormService";
 import { DentistaDetails, LocalDetails, ServiceDetails } from "./pages/Details";
+import {
+    TodosDentistas,
+    TodosLocais,
+    TodosProdutos,
+    TodosServiços,
+} from "./pages/Todos";
 
 export const AppContext = createContext({
     errorMsg: {},
@@ -37,7 +38,7 @@ function App() {
                     <Route path="/dentista">
                         <Route
                             path="/dentista/todos"
-                            element={<DentistasList />}
+                            element={<TodosDentistas />}
                         />
                         <Route
                             path="/dentista/:id"
@@ -47,7 +48,7 @@ function App() {
                     <Route path="/servico">
                         <Route
                             path="/servico/todos"
-                            element={<ServiçoList />}
+                            element={<TodosServiços />}
                         />
                         <Route
                             path="/servico/:id"
@@ -55,10 +56,10 @@ function App() {
                         />
                     </Route>
                     <Route path="/local">
-                        <Route path="/local/todos" element={<LocalList />} />
+                        <Route path="/local/todos" element={<TodosLocais />} />
                         <Route path="/local/:id" element={<LocalDetails />} />
                     </Route>
-                    <Route path="/todos-produtos" element={<ProductList />} />
+                    <Route path="/todos-produtos" element={<TodosProdutos />} />
                 </Routes>
                 {/* All List  */}
                 {/* <LocalList /> */}
