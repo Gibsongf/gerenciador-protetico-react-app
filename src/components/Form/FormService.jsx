@@ -66,8 +66,8 @@ export function FormService({ initialState }) {
         handleSubmit(e);
     };
     return (
-        <div className="form-container">
-            <form action="" ref={ref}>
+        <div className="form-container" id="pop-up">
+            <form action="" ref={ref} id="pop-up-content">
                 <legend>
                     <h3>Serviço</h3>
                 </legend>

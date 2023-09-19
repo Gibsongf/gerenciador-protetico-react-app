@@ -119,7 +119,8 @@ export function Details({ type, data, setUpdate }) {
     return (
         <>
             <EditContext.Provider value={{ setEdit, setUpdate }}>
-                {edit ? <Info content={infoContent} /> : <Form />}
+                <Info content={infoContent} />
+                {edit ? "" : <Form />}
                 <Table />
             </EditContext.Provider>
         </>

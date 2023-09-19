@@ -36,8 +36,8 @@ export function FormLocal({ initialState }) {
     //     //console.log(msgError);
     // }, [msgError]);
     return (
-        <div className="form-container">
-            <form action="" ref={ref}>
+        <div className="form-container" id="pop-up">
+            <form action="" ref={ref} id="pop-up-content">
                 <legend>
                     <h3>Registrar Novo Local</h3>
                 </legend>

@@ -29,10 +29,10 @@ export function ServiceDetails() {
         // turn this to post http send data and receive excel file
         const blob = await ExcelLink(dbId);
         const downloadLink = document.createElement("a");
-        console.log(data);
-        downloadLink.download = "yey";
+        // console.log(data);
+        // downloadLink.download = "yey";
         downloadLink.href = URL.createObjectURL(blob);
-        // downloadLink.click();
+        downloadLink.click();
         URL.revokeObjectURL(downloadLink.href);
     };
     if (!data) {

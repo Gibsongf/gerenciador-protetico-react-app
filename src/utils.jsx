@@ -97,7 +97,7 @@ export function stateDetails(data, type) {
 
         const infoContent = {
             Paciente: paciente,
-            Dentista_nome: fullName(nome, sobrenome),
+            Dentista: fullName(nome, sobrenome),
             Produtos: produtoNomes,
             Entregado: booleanToString(statusEntrega),
         };
