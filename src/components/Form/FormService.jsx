@@ -16,14 +16,16 @@ import { ButtonEdit, ButtonRegister } from "./Buttons";
 
 FormService.propTypes = {
     initialState: PropTypes.object,
+    closeBtn: PropTypes.any,
 };
 export const RefContext = createContext({
     checkBoxRef: "",
 });
-export function FormService({ initialState }) {
+export function FormService({ initialState, closeBtn }) {
     const { errorMsg } = useContext(AppContext);
     const ref = useRef();
     const checkBoxRef = useRef();
+
     if (!initialState) {
         initialState = {
             dentista: "",
@@ -68,6 +70,7 @@ export function FormService({ initialState }) {
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
+                {closeBtn}
                 <legend>
                     <h3>Serviço</h3>
                 </legend>
@@ -106,18 +109,16 @@ export function FormService({ initialState }) {
                     value={formData.statusEntrega}
                     onChange={handleChange}
                 />
-                {/* {String(formData.statusEntrega) ? (
-                    <EntregaStatus
-                        value={formData.statusEntrega}
-                        onChange={handleChange}
-                    />
+
+                {initialState.formType === "edit" ? (
+                    <ButtonEdit handleSubmit={handleSubmit} />
                 ) : (
                     ""
-                )} */}
-                {!initialState.formType === "edit" ? (
+                )}
+                {initialState.formType === "new" ? (
                     <ButtonRegister handleSubmit={handleProductSubmit} />
                 ) : (
-                    <ButtonEdit handleSubmit={handleProductSubmit} />
+                    ""
                 )}
             </form>
         </div>

@@ -14,8 +14,8 @@ import { DentistaDetails, LocalDetails, ServiceDetails } from "./pages/Details";
 import {
     TodosDentistas,
     TodosLocais,
-    TodosProdutos,
-    TodosServiços,
+    ListProducts,
+    ListService,
 } from "./pages/Todos";
 
 export const AppContext = createContext({
@@ -48,7 +48,7 @@ function App() {
                     <Route path="/servico">
                         <Route
                             path="/servico/todos"
-                            element={<TodosServiços />}
+                            element={<ListService />}
                         />
                         <Route
                             path="/servico/:id"
@@ -59,7 +59,7 @@ function App() {
                         <Route path="/local/todos" element={<TodosLocais />} />
                         <Route path="/local/:id" element={<LocalDetails />} />
                     </Route>
-                    <Route path="/todos-produtos" element={<TodosProdutos />} />
+                    <Route path="/todos-produtos" element={<ListProducts />} />
                 </Routes>
                 {/* All List  */}
                 {/* <LocalList /> */}

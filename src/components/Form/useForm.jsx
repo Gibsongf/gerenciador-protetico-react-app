@@ -3,6 +3,7 @@ import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
 import { EditContext } from "../GenerateDetails";
 import { useNavigate } from "react-router-dom";
+import { NewFormContext } from "../NewFormButton";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
@@ -19,6 +20,7 @@ export function useForm(initialState, formElements) {
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
     const { setEdit, setUpdate } = useContext(EditContext);
+    const { setClose, setTableUpdate } = useContext(NewFormContext);
     const handleChange = (e) => {
         setFormData((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
@@ -64,6 +66,9 @@ export function useForm(initialState, formElements) {
                     setEdit((e) => !e);
                 }
                 setResult(e);
+                setTableUpdate((e) => !e);
+                setClose((e) => !e);
+
                 // nav("/");
             }
         });

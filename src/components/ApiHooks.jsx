@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { APIDetails, APItodos } from "../Api";
 
-export function useTodosApi(category) {
+export function useTodosApi(category, forTable) {
     const [data, setData] = useState();
+    const [tableUpdate, setTableUpdate] = useState(false);
     useEffect(() => {
         const fetchingData = async () => {
             try {
@@ -13,8 +14,12 @@ export function useTodosApi(category) {
             }
         };
         fetchingData();
-    }, [category]);
-    return data;
+    }, [category, tableUpdate]);
+    if (forTable) {
+        return { data, setTableUpdate };
+    } else {
+        return data;
+    }
 }
 
 export function useDetailsApi(category, id) {

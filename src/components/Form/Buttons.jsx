@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
 import { EditContext } from "../GenerateDetails";
+import { AppContext } from "../../App";
 
 ButtonRegister.propTypes = {
     handleSubmit: PropTypes.func,
@@ -12,6 +13,20 @@ export function ButtonRegister({ handleSubmit }) {
     return (
         <button onClick={handleSubmit} type="submit">
             Registrar
+        </button>
+    );
+}
+export function ButtonClose({ setClose }) {
+    const { errorMsg } = useContext(AppContext);
+    const resetError = () => {
+        setClose((e) => !e);
+        Object.keys(errorMsg).forEach((k) => {
+            errorMsg[k] = "";
+        });
+    };
+    return (
+        <button type="button" onClick={resetError}>
+            X
         </button>
     );
 }

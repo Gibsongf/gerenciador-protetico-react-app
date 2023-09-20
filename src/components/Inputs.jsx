@@ -177,9 +177,9 @@ export function EntregaStatus({ onChange, value }) {
 
     return (
         <div className="status-entrega">
-            <label htmlFor="statusEntrega">Entregado:</label>
+            <label htmlFor="status-entrega">Entregado:</label>
             <select
-                name="statusEntrega"
+                name="status-entrega"
                 id="status-entrega"
                 onChange={onChange}
                 value={value}
@@ -232,15 +232,19 @@ export function SearchProducts({ products, name, onChange, preSelectProduct }) {
     };
     return (
         <div className="search-product">
-            <label htmlFor="search-product">Produto:</label>
+            <label htmlFor="search-product" id="search-product">
+                Produto:
+            </label>
 
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 name="search-product"
+                id="search-product"
                 type="text"
                 placeholder="Search..."
             />
+
             <select onChange={beforeSaveData} name={name} id="produto">
                 <option value=""></option>
                 {!result

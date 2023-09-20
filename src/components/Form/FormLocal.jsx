@@ -32,9 +32,7 @@ export function FormLocal({ initialState }) {
         initialState,
         ref.current
     );
-    // useEffect(() => {
-    //     //console.log(msgError);
-    // }, [msgError]);
+
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">

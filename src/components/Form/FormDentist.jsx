@@ -27,9 +27,10 @@ export function FormDentist({ initialState }) {
         initialState,
         ref.current
     );
-    // console.log(initialState, formData);
+
     return (
         <div className="form-container" id="pop-up">
+            {initialState.formType === "new" ? "" : ""}
             <form action="" ref={ref} id="pop-up-content">
                 <legend>
                     <h3>Registrar Novo Dentista</h3>
