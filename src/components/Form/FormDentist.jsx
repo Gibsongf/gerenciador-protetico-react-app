@@ -8,7 +8,7 @@ import { useForm } from "./useForm";
 import { AppContext } from "../../App";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
 
-export function FormDentist({ initialState }) {
+export function FormDentist({ initialState, closeBtn }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     if (!initialState) {
@@ -32,6 +32,7 @@ export function FormDentist({ initialState }) {
         <div className="form-container" id="pop-up">
             {initialState.formType === "new" ? "" : ""}
             <form action="" ref={ref} id="pop-up-content">
+                {closeBtn}
                 <legend>
                     <h3>Registrar Novo Dentista</h3>
                 </legend>
@@ -66,15 +67,22 @@ export function FormDentist({ initialState }) {
                     labelTxt={"Local de Trabalho"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
-                {!initialState.formType === "edit" ? (
+                {initialState.formType === "edit" ? (
+                    <ButtonEdit handleSubmit={handleSubmit} />
+                ) : (
+                    ""
+                )}
+                {initialState.formType === "new" ? (
                     <ButtonRegister handleSubmit={handleSubmit} />
                 ) : (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    ""
                 )}
             </form>
         </div>
     );
 }
+
 FormDentist.propTypes = {
     initialState: PropTypes.object,
+    closeBtn: PropTypes.any,
 };

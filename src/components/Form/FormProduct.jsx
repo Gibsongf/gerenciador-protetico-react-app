@@ -5,11 +5,13 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
+import { ButtonEdit, ButtonRegister } from "./Buttons";
 
 FormProduct.propTypes = {
     initialState: PropTypes.object,
+    closeBtn: PropTypes.any,
 };
-export function FormProduct({ initialState }) {
+export function FormProduct({ initialState, closeBtn }) {
     const ref = useRef();
     if (!initialState) {
         initialState = {
@@ -29,6 +31,7 @@ export function FormProduct({ initialState }) {
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
+                {closeBtn}
                 <legend>
                     <h3>Registrar Novo Produto</h3>
                 </legend>
@@ -56,9 +59,16 @@ export function FormProduct({ initialState }) {
                     msg={!errorMsg ? "" : errorMsg.valor_reduzido}
                 />
 
-                <button onClick={handleSubmit} type="submit">
-                    Registrar
-                </button>
+                {initialState.formType === "edit" ? (
+                    <ButtonEdit handleSubmit={handleSubmit} />
+                ) : (
+                    ""
+                )}
+                {initialState.formType === "new" ? (
+                    <ButtonRegister handleSubmit={handleSubmit} />
+                ) : (
+                    ""
+                )}
             </form>{" "}
         </div>
     );

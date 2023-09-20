@@ -1,9 +1,4 @@
-import { createContext, useState } from "react";
 import { useTodosApi } from "../components/ApiHooks";
-import { FormDentist } from "../components/Form/FormDentist";
-import { FormLocal } from "../components/Form/FormLocal";
-import { FormProduct } from "../components/Form/FormProduct";
-import { FormService } from "../components/Form/FormService";
 import { Caption, TableRow } from "../components/Table";
 import {
     DentistTableBody,
@@ -14,7 +9,7 @@ import {
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
 
 export function TodosDentistas() {
-    const data = useTodosApi("dentista");
+    const { data, setTableUpdate } = useTodosApi("dentista", true);
     const row = ["Nome", "Telefone", "Endereço"];
     if (!data) {
         // Data is still being fetched
@@ -23,7 +18,8 @@ export function TodosDentistas() {
 
     return (
         <>
-            <button className="new-form">Novo</button>
+            {" "}
+            <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
             <table className="todos-table">
                 <Caption txt={"Dentistas Registrados"} />
 
@@ -37,7 +33,7 @@ export function TodosDentistas() {
 }
 
 export function TodosLocais() {
-    const data = useTodosApi("local");
+    const { data, setTableUpdate } = useTodosApi("local", true);
     const row = ["Nome", "Telefone", "Endereço", "Tipo de Tabela"];
     if (!data) {
         // Data is still being fetched
@@ -46,7 +42,7 @@ export function TodosLocais() {
 
     return (
         <>
-            <button className="new-form">Novo</button>
+            <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
             <table className="todos-table">
                 <Caption txt={"Locais Registrados"} />
 
@@ -59,8 +55,8 @@ export function TodosLocais() {
     );
 }
 
-export function ListProducts() {
-    const data = useTodosApi("produto");
+export function TodosProdutos() {
+    const { data, setTableUpdate } = useTodosApi("produto", true);
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
@@ -69,7 +65,7 @@ export function ListProducts() {
 
     return (
         <>
-            <button className="new-form">Novo</button>
+            <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
             <table className="todos-table">
                 <Caption txt={"Produtos Registrados"} />
 
@@ -82,7 +78,7 @@ export function ListProducts() {
     );
 }
 
-export function ListService() {
+export function TodosService() {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
     const { data, setTableUpdate } = useTodosApi("servico", true);

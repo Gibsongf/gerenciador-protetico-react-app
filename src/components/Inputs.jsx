@@ -232,9 +232,7 @@ export function SearchProducts({ products, name, onChange, preSelectProduct }) {
     };
     return (
         <div className="search-product">
-            <label htmlFor="search-product" id="search-product">
-                Produto:
-            </label>
+            <label htmlFor="search-product">Produto:</label>
 
             <input
                 value={search}

@@ -13,17 +13,26 @@ export function ButtonNewForm({ type, tableUpdate }) {
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
 
-    const obj = {
-        dentista: <FormDentist />,
-        local: <FormLocal />,
-        serviço: <FormService closeBtn={<ButtonClose setClose={setClose} />} />,
-        produto: <FormProduct />,
+    const selectedForm = () => {
+        const obj = {
+            dentista: (
+                <FormDentist closeBtn={<ButtonClose setClose={setClose} />} />
+            ),
+            local: <FormLocal closeBtn={<ButtonClose setClose={setClose} />} />,
+            serviço: (
+                <FormService closeBtn={<ButtonClose setClose={setClose} />} />
+            ),
+            produto: (
+                <FormProduct closeBtn={<ButtonClose setClose={setClose} />} />
+            ),
+        };
+        return obj[type];
     };
     const Form = () => {
-        return <>{form}</>;
+        return <>{selectedForm()}</>;
     };
     const onClick = () => {
-        setForm(obj[type]);
+        setForm(() => selectedForm());
         setClose((e) => !e);
     };
 

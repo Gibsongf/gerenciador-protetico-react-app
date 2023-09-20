@@ -12,7 +12,7 @@ import { useForm } from "./useForm";
 import PropTypes from "prop-types";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
 
-export function FormLocal({ initialState }) {
+export function FormLocal({ initialState, closeBtn }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
 
@@ -36,6 +36,7 @@ export function FormLocal({ initialState }) {
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
+                {closeBtn}
                 <legend>
                     <h3>Registrar Novo Local</h3>
                 </legend>
@@ -68,15 +69,22 @@ export function FormLocal({ initialState }) {
                     value={formData.tabela}
                     onChange={handleChange}
                 />
-                {!initialState.formType === "edit" ? (
+                {initialState.formType === "edit" ? (
+                    <ButtonEdit handleSubmit={handleSubmit} />
+                ) : (
+                    ""
+                )}
+                {initialState.formType === "new" ? (
                     <ButtonRegister handleSubmit={handleSubmit} />
                 ) : (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    ""
                 )}
             </form>
         </div>
     );
 }
+
 FormLocal.propTypes = {
     initialState: PropTypes.object,
+    closeBtn: PropTypes.any,
 };
