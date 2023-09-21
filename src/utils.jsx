@@ -1,3 +1,16 @@
+import { ExcelLink } from "./Api";
+
+const exportExcel = async () => {
+    // turn this to post http send data and receive excel file
+    const blob = await ExcelLink(dbId);
+    const downloadLink = document.createElement("a");
+    // console.log(data);
+    // downloadLink.download = "yey";
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.click();
+    URL.revokeObjectURL(downloadLink.href);
+};
+
 export function formatCpf(cpf) {
     let arr = String(cpf).split("");
     let a = arr.map((n, indx) => {
@@ -33,13 +46,13 @@ export function booleanToString(b) {
         return "Não";
     }
 }
-const fullName = (nome, sobrenome) => {
+export function fullName(nome, sobrenome) {
     if (!sobrenome) {
         return nome;
     } else {
         return `${nome} ${sobrenome}`;
     }
-};
+}
 export function stateDetails(data, type) {
     const local = () => {
         const { nome, endereço, cep, telefone } = data.local;

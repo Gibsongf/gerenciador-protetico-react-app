@@ -7,6 +7,7 @@ export function useTodosApi(category, forTable) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
+                console.log("yey");
                 const result = await APItodos(category);
                 setData(() => result.all);
             } catch (error) {

@@ -1,5 +1,5 @@
 import { useTodosApi } from "../components/ApiHooks";
-import { Caption, TableRow } from "../components/Table";
+import { Caption, NavSortTable, TableRow } from "../components/Table";
 import {
     DentistTableBody,
     LocalTableBody,
@@ -7,6 +7,7 @@ import {
     ServiceTableBody,
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
+import { useState } from "react";
 
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
@@ -83,6 +84,8 @@ export function TodosService() {
     //month and to export excel of all marked items ?
     const { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Entregado", ""];
+    const [sortDate, setSortDate] = useState();
+
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -92,11 +95,12 @@ export function TodosService() {
         <>
             {" "}
             <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
+            <NavSortTable setDate={setSortDate} />
             <table className="todos-table">
                 <Caption txt="Serviços Registrados" />
                 <tbody>
                     <TableRow rowNames={row} />
-                    <ServiceTableBody data={data} />
+                    <ServiceTableBody data={data} sortDate={sortDate} />
                 </tbody>
             </table>
         </>

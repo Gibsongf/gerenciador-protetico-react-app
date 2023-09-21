@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { booleanToString } from "../utils";
+
 export function DentistTableBody({ data }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
@@ -75,7 +76,7 @@ export function ProductTableBody({ data }) {
     });
 }
 
-export function ServiceTableBody({ data }) {
+export function ServiceTableBody({ data, sortDate }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
     };
@@ -84,7 +85,14 @@ export function ServiceTableBody({ data }) {
     };
     // console.log(data);
     return data.map((d, index) => {
-        // console.log(d._id);
+        // implement here a check with date
+        // with these we avoid change data and doing useless fetch
+        if (
+            sortDate &&
+            d.data_registro.split("-")[1] !== sortDate.split("-")[1]
+        ) {
+            return;
+        }
         return (
             <tr key={d.dentista.nome + index}>
                 <td>
