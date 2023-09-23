@@ -144,7 +144,6 @@ export function TelefoneInput({ value, onChange, msg }) {
                 name="telefone"
                 id="telefone"
                 placeholder="xxxxx-xxxx"
-                pattern="[0-9]{4-5}-[0-9]{4}"
                 required
             />
         </div>
@@ -177,7 +176,7 @@ export function EntregaStatus({ onChange, value }) {
 
     return (
         <div className="status-entrega">
-            <label htmlFor="status-entrega">Entregado:</label>
+            <label htmlFor="status-entrega">Finalizado:</label>
             <select
                 name="status-entrega"
                 id="status-entrega"
@@ -316,7 +315,7 @@ SearchProducts.propTypes = {
 SimpleInput.propTypes = {
     id: PropTypes.string.isRequired,
     labelTxt: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.any,
     onChange: PropTypes.func,
     type: PropTypes.string,
     msg: PropTypes.string,

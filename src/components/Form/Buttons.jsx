@@ -25,7 +25,7 @@ export function ButtonClose({ setClose }) {
         });
     };
     return (
-        <button type="button" onClick={resetError}>
+        <button className="close-btn" type="button" onClick={resetError}>
             X
         </button>
     );

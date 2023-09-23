@@ -13,6 +13,8 @@ import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { NewFormContext } from "../NewFormButton";
+import { EditContext } from "../GenerateDetails";
 
 FormService.propTypes = {
     initialState: PropTypes.object,
@@ -25,7 +27,8 @@ export function FormService({ initialState, closeBtn }) {
     const { errorMsg } = useContext(AppContext);
     const ref = useRef();
     const checkBoxRef = useRef();
-
+    const { setClose, setTableUpdate } = useContext(NewFormContext);
+    const { setEdit, setUpdate } = useContext(EditContext);
     if (!initialState) {
         initialState = {
             dentista: "",
@@ -59,13 +62,22 @@ export function FormService({ initialState, closeBtn }) {
         });
     };
     //before submit we format the product
-    const handleProductSubmit = (e) => {
+    const beforeSendSubmit = async (e) => {
         e.preventDefault();
         if (checkBoxRef.current) {
             formatFilterProducts();
         }
 
-        handleSubmit(e);
+        const success = await handleSubmit(e);
+        if (success) {
+            if (initialState.formType === "new") {
+                setClose((e) => !e);
+                setTableUpdate((e) => !e);
+            }
+            if (initialState.formType === "edit") {
+                setTableUpdate((e) => !e);
+            }
+        }
     };
     return (
         <div className="form-container" id="pop-up">
@@ -116,7 +128,7 @@ export function FormService({ initialState, closeBtn }) {
                     ""
                 )}
                 {initialState.formType === "new" ? (
-                    <ButtonRegister handleSubmit={handleProductSubmit} />
+                    <ButtonRegister handleSubmit={beforeSendSubmit} />
                 ) : (
                     ""
                 )}

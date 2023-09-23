@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
-import { EditContext } from "../GenerateDetails";
 import { useNavigate } from "react-router-dom";
-import { NewFormContext } from "../NewFormButton";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
@@ -19,8 +17,7 @@ export function useForm(initialState, formElements) {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
-    const { setEdit, setUpdate } = useContext(EditContext);
-    const { setClose, setTableUpdate } = useContext(NewFormContext);
+
     const handleChange = (e) => {
         setFormData((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
@@ -51,42 +48,28 @@ export function useForm(initialState, formElements) {
         obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
         return obj;
     };
-    const callAPI = (data) => {
-        const type = initialState.formType;
-        const whichAPI = { new: APIPostNewData, edit: APIPutData };
-
-        whichAPI[type](data, initialState.dbId).then((e) => {
-            //console.log(e);
-            if (Object.keys(e).includes("errors")) {
-                setResult(e.errors);
-            } else {
-                if (initialState.dbId) {
-                    console.log("update");
-                    setUpdate((e) => !e);
-                    setEdit((e) => !e);
-                }
-                setResult(e);
-                setTableUpdate((e) => !e);
-                setClose((e) => !e);
-
-                // nav("/");
-            }
-        });
+    const callAPI = (arr) => {
+        if (Object.keys(arr).includes("errors")) {
+            setResult(arr.errors);
+            return false;
+        } else {
+            setResult(arr);
+            return true;
+            // nav("/");
+        }
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const type = initialState.formType;
+        const whichAPI = { new: APIPostNewData, edit: APIPutData };
         let data;
-        if (formData.category === "servico") {
-            callAPI(formData);
-            return;
-        }
-
         if (formData.category === "dentista") {
-            console.log("yoy");
             data = removeFormattedCpf();
-            callAPI(data);
-            return;
+            const response = await whichAPI[type](data, initialState.dbId);
+            return callAPI(response);
         }
+        const response = await whichAPI[type](formData, initialState.dbId);
+        return callAPI(response);
     };
     return { formData, handleChange, handleSubmit, setFormData };
 }

@@ -65,6 +65,11 @@ export async function APIDetails(category, id) {
     const data = await setupFetch(url, "get");
     return data;
 }
+export async function APIServiceByLocal(local) {
+    const url = `http://localhost:3000/api/servico/todos/${local}`;
+    const data = await setupFetch(url, "get");
+    return data;
+}
 
 export async function APIPostNewData(formData) {
     const url = `http://localhost:3000/api/${formData["category"]}/novo`;

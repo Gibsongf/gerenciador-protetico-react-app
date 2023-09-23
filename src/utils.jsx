@@ -112,7 +112,7 @@ export function stateDetails(data, type) {
             Paciente: paciente,
             Dentista: fullName(nome, sobrenome),
             Produtos: produtoNomes,
-            Entregado: booleanToString(statusEntrega),
+            Finalizado: booleanToString(statusEntrega),
         };
         const formState = {
             paciente: paciente,

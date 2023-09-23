@@ -71,6 +71,10 @@ td {
   padding: 10px;
 }
 
+.table-sort {
+  color: white;
+}
+
 .username,
 .password {
   display: flex;

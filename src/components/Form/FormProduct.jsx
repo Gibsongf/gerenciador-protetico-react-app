@@ -6,6 +6,9 @@ import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { NewFormContext } from "../NewFormButton";
+import { EditContext } from "../GenerateDetails";
+import { AllProductsContext } from "../../pages/Todos";
 
 FormProduct.propTypes = {
     initialState: PropTypes.object,
@@ -13,6 +16,9 @@ FormProduct.propTypes = {
 };
 export function FormProduct({ initialState, closeBtn }) {
     const ref = useRef();
+    const { setClose, setTableUpdate } = useContext(NewFormContext);
+    const { setShowForm, setUpdate } = useContext(AllProductsContext);
+
     if (!initialState) {
         initialState = {
             nome: "",
@@ -27,13 +33,31 @@ export function FormProduct({ initialState, closeBtn }) {
         initialState,
         ref.current
     );
+    const beforeSendSubmit = async (e) => {
+        e.preventDefault();
 
+        const success = await handleSubmit(e);
+        if (success) {
+            if (initialState.formType === "new") {
+                //success set close to false to closed the form
+                setClose((e) => !e);
+                // update the table data
+                setTableUpdate((e) => !e);
+            }
+            if (initialState.formType === "edit") {
+                //success set close to false to closed the form
+                setShowForm((e) => !e);
+                // update the table data
+                setUpdate((e) => !e);
+            }
+        }
+    };
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
-                    <h3>Registrar Novo Produto</h3>
+                    <h3>Produto</h3>
                 </legend>
                 <SimpleInput
                     id={"nome"}
@@ -60,12 +84,14 @@ export function FormProduct({ initialState, closeBtn }) {
                 />
 
                 {initialState.formType === "edit" ? (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    <button onClick={beforeSendSubmit} type="submit">
+                        Confirm
+                    </button>
                 ) : (
                     ""
                 )}
                 {initialState.formType === "new" ? (
-                    <ButtonRegister handleSubmit={handleSubmit} />
+                    <ButtonRegister handleSubmit={beforeSendSubmit} />
                 ) : (
                     ""
                 )}

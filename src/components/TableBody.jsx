@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { booleanToString } from "../utils";
+import { ButtonEditForm } from "./NewFormButton";
 
 export function DentistTableBody({ data }) {
     const saveDentistId = (e) => {
@@ -65,10 +66,10 @@ export function LocalTableBody({ data }) {
 }
 
 export function ProductTableBody({ data }) {
-    return data.map((d) => {
+    return data.map((d, i) => {
         return (
-            <tr key={d.nome}>
-                <td>{d.nome}</td>
+            <tr key={d.nome + i}>
+                <ButtonEditForm type="produto" data={d} />
                 <td>R$ {d.valor_normal}</td>
                 <td>R$ {d.valor_reduzido}</td>
             </tr>
@@ -83,8 +84,12 @@ export function ServiceTableBody({ data, sortDate }) {
     const saveServiceId = (e) => {
         localStorage.setItem("servicoID", e.target.id);
     };
+    const showForm = (e) => {
+        console.log(e);
+    };
     // console.log(data);
     return data.map((d, index) => {
+        // console.log(d);
         // implement here a check with date
         // with these we avoid change data and doing useless fetch
         if (
@@ -112,16 +117,7 @@ export function ServiceTableBody({ data, sortDate }) {
                         : d.produto[0].nome}
                 </td>
                 <td>{booleanToString(d.statusEntrega)}</td>
-                <td>
-                    <Link
-                        className="link"
-                        onClick={saveServiceId}
-                        to={`/servico/${d._id}`}
-                        id={d._id}
-                    >
-                        Editar
-                    </Link>
-                </td>
+                <td onClick={() => showForm(d)}>Editar</td>
             </tr>
         );
     });

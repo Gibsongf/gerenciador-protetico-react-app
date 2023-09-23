@@ -54,7 +54,6 @@ input[type="number"] {
     border-radius: 10px;
     padding: 5px;
     appearance: none;
-    border: none;
     min-width: 300px;
 }
 

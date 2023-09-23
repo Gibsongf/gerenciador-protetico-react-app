@@ -7,10 +7,14 @@ import PropTypes from "prop-types";
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { NewFormContext } from "../NewFormButton";
+import { EditContext } from "../GenerateDetails";
 
 export function FormDentist({ initialState, closeBtn }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
+    const { setClose, setTableUpdate } = useContext(NewFormContext);
+    const { setEdit, setUpdate } = useContext(EditContext);
     if (!initialState) {
         initialState = {
             nome: "",
@@ -27,10 +31,25 @@ export function FormDentist({ initialState, closeBtn }) {
         initialState,
         ref.current
     );
+    const handleSubmitResponse = async (e) => {
+        e.preventDefault();
 
+        const success = await handleSubmit(e);
+        if (success) {
+            if (initialState.formType === "new") {
+                setClose((e) => !e);
+                setTableUpdate((e) => !e);
+            }
+            if (initialState.formType === "edit") {
+                setEdit((e) => !e);
+                setUpdate((e) => !e);
+            }
+        }
+    };
     return (
         <div className="form-container" id="pop-up">
             {initialState.formType === "new" ? "" : ""}
+            {/* {initialState.formType === "edit" ? "" : ""} */}
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
@@ -68,12 +87,12 @@ export function FormDentist({ initialState, closeBtn }) {
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
                 {initialState.formType === "edit" ? (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    <ButtonEdit handleSubmit={handleSubmitResponse} />
                 ) : (
                     ""
                 )}
                 {initialState.formType === "new" ? (
-                    <ButtonRegister handleSubmit={handleSubmit} />
+                    <ButtonRegister handleSubmit={handleSubmitResponse} />
                 ) : (
                     ""
                 )}

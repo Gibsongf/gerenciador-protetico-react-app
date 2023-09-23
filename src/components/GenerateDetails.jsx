@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useDetailsApi } from "./ApiHooks";
+import { useDetailsApi, useServiceByLocal } from "./ApiHooks";
 import "../styles/Details.css";
 import { FormDentist } from "./Form/FormDentist";
-import { Caption, TableRow } from "./Table";
+import { Caption, NavSortTable, TableRow } from "./Table";
 import { stateDetails } from "../utils";
 import { FormLocal } from "./Form/FormLocal";
 import { FormService } from "./Form/FormService";
@@ -12,11 +12,6 @@ import {
     LocalTableBody,
     ServiceTableBody,
 } from "./TableBody";
-
-export const EditContext = createContext({
-    setEdit: () => {},
-    setUpdate: () => {},
-});
 
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
@@ -40,17 +35,25 @@ const Info = ({ content }) => {
 };
 
 export function DentistServices({ data }) {
-    const row = ["Dentista", "Paciente", "Produto", "Entregado"];
+    const row = ["Dentista", "Paciente", "Produto", "Finalizado"];
+    const [sortDate, setSortDate] = useState();
+
     // console.log(data);
+    // create export excel of selected month and "entrega" status sim
     return (
         <div className="serviço">
+            <NavSortTable setDate={setSortDate} />
+
             <table className="todos-table">
                 <Caption txt={"Serviços Deste Dentista"} />
 
                 <tbody>
                     <TableRow rowNames={row} />
                     {data.serviços ? (
-                        <ServiceTableBody data={data.serviços} />
+                        <ServiceTableBody
+                            data={data.serviços}
+                            sortDate={sortDate}
+                        />
                     ) : (
                         ""
                     )}
@@ -62,15 +65,20 @@ export function DentistServices({ data }) {
 DentistServices.propTypes = {
     data: PropTypes.object,
 };
-
+LocalDentistWorkers.propTypes = {
+    data: PropTypes.object,
+};
 //Table with  "dentista" that work at detailed page of a "local" place
 function LocalDentistWorkers({ data }) {
     const row = ["Nome", "Telefone", "Endereço"];
-    // console.log(data);
+    const service = useServiceByLocal(data.local._id);
+    const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
+
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
     }
+
     //
     data.dentistas.forEach((key) => {
         key.local = data.local;
@@ -78,17 +86,29 @@ function LocalDentistWorkers({ data }) {
     });
 
     return (
-        <table className="todos-table">
-            <Caption txt={"Dentistas Neste Local"} />
+        <>
+            <table className="todos-table">
+                <Caption txt={"Dentistas Neste Local"} />
 
-            <tbody>
-                <TableRow rowNames={row} />
-                <DentistTableBody data={data.dentistas} />
-            </tbody>
-        </table>
+                <tbody>
+                    <TableRow rowNames={row} />
+                    <DentistTableBody data={data.dentistas} />
+                </tbody>
+            </table>
+            <table className="todos-table">
+                <Caption txt={"Serviços Neste Local"} />
+                <tbody>
+                    <TableRow rowNames={serviceRow} />
+                    {service ? <ServiceTableBody data={service} /> : ""}
+                </tbody>
+            </table>
+        </>
     );
 }
-
+export const EditContext = createContext({
+    setEdit: () => {},
+    setUpdate: () => {},
+});
 // Link to other Details is getting confused with the previous used Details
 // separate then each getting using they own Details and see if works
 export function Details({ type, data, setUpdate }) {

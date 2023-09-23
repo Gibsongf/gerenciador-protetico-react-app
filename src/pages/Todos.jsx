@@ -7,7 +7,7 @@ import {
     ServiceTableBody,
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
-import { useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
@@ -55,9 +55,20 @@ export function TodosLocais() {
         </>
     );
 }
-
+export const AllProductsContext = createContext({
+    data: {},
+    setShowForm: () => {},
+    close: "",
+    setForm: () => {},
+    setUpdate: () => {},
+});
 export function TodosProdutos() {
     const { data, setTableUpdate } = useTodosApi("produto", true);
+    const [close, setClose] = useState(false);
+    const [form, setForm] = useState();
+    useEffect(() => {
+        console.log(close);
+    }, [close]);
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
@@ -67,24 +78,37 @@ export function TodosProdutos() {
     return (
         <>
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
-            <table className="todos-table">
-                <Caption txt={"Produtos Registrados"} />
+            <AllProductsContext.Provider
+                value={{
+                    setForm,
+                    setUpdate: setTableUpdate,
+                    setShowForm: setClose,
+                }}
+            >
+                {close ? form : ""}
 
-                <tbody>
-                    <TableRow rowNames={row} />
-                    <ProductTableBody data={data} />
-                </tbody>
-            </table>
+                <table className="todos-table">
+                    <Caption txt={"Produtos Registrados"} />
+
+                    <tbody>
+                        <TableRow rowNames={row} />
+                        <ProductTableBody data={data} />
+                    </tbody>
+                </table>
+            </AllProductsContext.Provider>
         </>
     );
 }
-
+// create a button that show a window to the user decide stuffs about
+// the export all service of the items in the table page
 export function TodosService() {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
     const { data, setTableUpdate } = useTodosApi("servico", true);
-    const row = ["Dentista", "Paciente", "Produto", "Entregado", ""];
+    const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
     const [sortDate, setSortDate] = useState();
+    const [close, setClose] = useState(false);
+    const [editForm, setEditForm] = useState();
 
     if (!data) {
         // Data is still being fetched
