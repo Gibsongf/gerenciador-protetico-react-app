@@ -63,9 +63,10 @@ export function FormService({ initialState, closeBtn }) {
             return { ...prev };
         });
     };
-    //before submit we format the product
+
     const beforeSendSubmit = async (e) => {
         e.preventDefault();
+        //before submit we format the product
         if (checkBoxRef.current) {
             formatFilterProducts();
         }
@@ -119,6 +120,7 @@ export function FormService({ initialState, closeBtn }) {
                         name="produto"
                         onChange={handleChange}
                         preSelectProduct={formData.produtos}
+                        msg={!errorMsg ? "" : errorMsg.produto}
                     />
                 </RefContext.Provider>
                 <EntregaStatus

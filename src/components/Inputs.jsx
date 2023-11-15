@@ -98,7 +98,7 @@ export function FilterDentistsByLocation({
     const WaitSelectLocal = () => {
         return <option value={null}>Selecione Local</option>;
     };
-    console.log(initialValue);
+    // console.log(initialValue);
     return (
         <div className="select-options">
             <label htmlFor="dentista">Dentistas:</label>
@@ -200,7 +200,13 @@ const getNameValue = (arr) => {
         return { name: a.nome, value: a._id };
     });
 };
-export function SearchProducts({ products, name, onChange, preSelectProduct }) {
+export function SearchProducts({
+    products,
+    name,
+    onChange,
+    preSelectProduct,
+    msg,
+}) {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
     const [selectNames, setSelectNames] = useState(
@@ -234,6 +240,7 @@ export function SearchProducts({ products, name, onChange, preSelectProduct }) {
     return (
         <div className="search-product">
             <label htmlFor="search-product">Produto:</label>
+            <div className="error-message">{msg}</div>
 
             <input
                 value={search}
