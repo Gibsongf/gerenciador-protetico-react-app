@@ -98,6 +98,7 @@ export function FilterDentistsByLocation({
     const WaitSelectLocal = () => {
         return <option value={null}>Selecione Local</option>;
     };
+    console.log(initialValue);
     return (
         <div className="select-options">
             <label htmlFor="dentista">Dentistas:</label>
@@ -108,7 +109,8 @@ export function FilterDentistsByLocation({
                 name="dentista"
                 id="dentista"
             >
-                <option></option>;{!data ? "" : <RenderOptions />}
+                <option></option>
+                {!data ? "" : <RenderOptions />}
             </select>
         </div>
     );
@@ -352,7 +354,7 @@ SelectInput.propTypes = {
     msg: PropTypes.string,
 };
 FilterDentistsByLocation.propTypes = {
-    initialValue: PropTypes.string,
+    initialValue: PropTypes.any,
     onChange: PropTypes.any,
     dbId: PropTypes.string,
     msg: PropTypes.string,

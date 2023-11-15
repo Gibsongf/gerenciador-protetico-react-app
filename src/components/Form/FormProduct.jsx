@@ -5,10 +5,10 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { ButtonRegister } from "./Buttons";
 import { NewFormContext } from "../NewFormButton";
-import { EditContext } from "../GenerateDetails";
-import { AllProductsContext } from "../../pages/Todos";
+// import { EditContext } from "../GenerateDetails";
+import { PopUpEditContext } from "../../pages/Todos";
 
 FormProduct.propTypes = {
     initialState: PropTypes.object,
@@ -17,7 +17,7 @@ FormProduct.propTypes = {
 export function FormProduct({ initialState, closeBtn }) {
     const ref = useRef();
     const { setClose, setTableUpdate } = useContext(NewFormContext);
-    const { setShowForm, setUpdate } = useContext(AllProductsContext);
+    const { setShowForm, setUpdate } = useContext(PopUpEditContext);
 
     if (!initialState) {
         initialState = {
@@ -46,6 +46,7 @@ export function FormProduct({ initialState, closeBtn }) {
             }
             if (initialState.formType === "edit") {
                 //success set close to false to closed the form
+                // setClose((e) => !e);
                 setShowForm((e) => !e);
                 // update the table data
                 setUpdate((e) => !e);

@@ -55,10 +55,8 @@ export function TodosLocais() {
         </>
     );
 }
-export const AllProductsContext = createContext({
-    data: {},
+export const PopUpEditContext = createContext({
     setShowForm: () => {},
-    close: "",
     setForm: () => {},
     setUpdate: () => {},
 });
@@ -78,7 +76,7 @@ export function TodosProdutos() {
     return (
         <>
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
-            <AllProductsContext.Provider
+            <PopUpEditContext.Provider
                 value={{
                     setForm,
                     setUpdate: setTableUpdate,
@@ -95,7 +93,7 @@ export function TodosProdutos() {
                         <ProductTableBody data={data} />
                     </tbody>
                 </table>
-            </AllProductsContext.Provider>
+            </PopUpEditContext.Provider>
         </>
     );
 }
@@ -108,7 +106,7 @@ export function TodosService() {
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
-    const [editForm, setEditForm] = useState();
+    const [form, setForm] = useState();
 
     if (!data) {
         // Data is still being fetched
@@ -116,17 +114,38 @@ export function TodosService() {
     }
 
     return (
+        // <>
+        //     {" "}
+        //     <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
+        //     <NavSortTable setDate={setSortDate} />
+        //     <table className="todos-table">
+        //         <Caption txt="Serviços Registrados" />
+        //         <tbody>
+        //             <TableRow rowNames={row} />
+        //             <ServiceTableBody data={data} sortDate={sortDate} />
+        //         </tbody>
+        //     </table>
+        // </>
         <>
-            {" "}
             <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
-            <NavSortTable setDate={setSortDate} />
-            <table className="todos-table">
-                <Caption txt="Serviços Registrados" />
-                <tbody>
-                    <TableRow rowNames={row} />
-                    <ServiceTableBody data={data} sortDate={sortDate} />
-                </tbody>
-            </table>
+            <PopUpEditContext.Provider
+                value={{
+                    setForm,
+                    setUpdate: setTableUpdate,
+                    setShowForm: setClose,
+                }}
+            >
+                {close ? form : ""}
+
+                <table className="todos-table">
+                    <Caption txt={"Serviços Registrados"} />
+
+                    <tbody>
+                        <TableRow rowNames={row} />
+                        <ServiceTableBody data={data} />
+                    </tbody>
+                </table>
+            </PopUpEditContext.Provider>
         </>
     );
 }

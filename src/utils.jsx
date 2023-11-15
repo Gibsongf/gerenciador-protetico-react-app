@@ -145,5 +145,3 @@ export function sortBy(key, data) {
     );
     return { ascending, descending };
 }
-
-// data.sort(compare);

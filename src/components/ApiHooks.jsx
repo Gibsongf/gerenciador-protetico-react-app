@@ -15,7 +15,7 @@ export function useTodosApi(category, forTable) {
             }
         };
         fetchingData();
-        console.log(tableUpdate);
+        // console.log(tableUpdate);
     }, [category, tableUpdate]);
     if (forTable) {
         return { data, setTableUpdate };
@@ -31,7 +31,7 @@ export function useDetailsApi(category, id) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                console.log("fetch data details");
+                // console.log("fetch data details");
                 const result = await APIDetails(category, id);
                 setData(() => result);
             } catch (error) {

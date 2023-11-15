@@ -84,9 +84,7 @@ export function ServiceTableBody({ data, sortDate }) {
     const saveServiceId = (e) => {
         localStorage.setItem("servicoID", e.target.id);
     };
-    const showForm = (e) => {
-        console.log(e);
-    };
+
     // console.log(data);
     return data.map((d, index) => {
         // console.log(d);
@@ -117,7 +115,8 @@ export function ServiceTableBody({ data, sortDate }) {
                         : d.produto[0].nome}
                 </td>
                 <td>{booleanToString(d.statusEntrega)}</td>
-                <td onClick={() => showForm(d)}>Editar</td>
+                {/* <td onClick={() => showForm(d)}>Editar</td> */}
+                <ButtonEditForm type="servico" data={d} />
             </tr>
         );
     });

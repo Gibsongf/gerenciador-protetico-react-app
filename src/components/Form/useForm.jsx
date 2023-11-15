@@ -20,8 +20,9 @@ export function useForm(initialState, formElements) {
 
     const handleChange = (e) => {
         setFormData((prev) => {
+            // console.log(e.target.name, e.target.value);
             return { ...prev, [e.target.name]: e.target.value };
-        });
+        }, console.log(formData));
     };
     useEffect(() => {
         const handleFormElementErrors = () => {

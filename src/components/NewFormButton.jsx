@@ -5,7 +5,8 @@ import { FormProduct } from "./Form/FormProduct";
 import { FormService } from "./Form/FormService";
 import { ButtonClose } from "./Form/Buttons";
 import PropTypes from "prop-types";
-import { AllProductsContext } from "../pages/Todos";
+import { PopUpEditContext } from "../pages/Todos";
+import { stateDetails } from "../utils";
 
 ButtonNewForm.propTypes = {
     type: PropTypes.string,
@@ -65,22 +66,48 @@ export function ButtonNewForm({ type, tableUpdate }) {
         </div>
     );
 }
-export function ButtonEditForm({ type, data }) {
-    // console.log(data);
-    const initialState = {
-        nome: data.nome,
-        valor_normal: data.valor_normal,
-        valor_reduzido: data.valor_reduzido,
-        category: "produto",
-        formType: "edit",
-        dbId: data._id,
+ButtonEditForm.propTypes = {
+    type: PropTypes.string,
+    data: PropTypes.any,
+};
+
+const formatToForm = (type, data) => {
+    const produto = () => {
+        return {
+            nome: data.nome,
+            valor_normal: data.valor_normal,
+            valor_reduzido: data.valor_reduzido,
+            category: "produto",
+            formType: "edit",
+            dbId: data._id,
+        };
     };
-    const { setShowForm, setForm } = useContext(AllProductsContext);
+    const servico = () => {
+        return {
+            paciente: data.paciente,
+            dentista: data.dentista._id, //just id to be pre-selected at select input
+            local: data.local,
+            produtos: data.produto,
+            statusEntrega: data.statusEntrega,
+            category: "servico",
+            formType: "edit",
+            dbId: data._id,
+        };
+    };
+    const whichType = {
+        servico,
+        produto,
+    };
+    return whichType[type]();
+};
+export function ButtonEditForm({ type, data }) {
+    const { setShowForm, setForm } = useContext(PopUpEditContext);
+    const initialState = formatToForm(type, data);
     const selectedForm = () => {
         const obj = {
-            serviço: (
+            servico: (
                 <FormService
-                    initialState={data}
+                    initialState={initialState}
                     closeBtn={<ButtonClose setClose={setShowForm} />}
                 />
             ),
@@ -99,5 +126,7 @@ export function ButtonEditForm({ type, data }) {
         setShowForm((e) => !e);
     };
 
-    return <td onClick={onClick}>{data.nome}</td>;
+    return (
+        <td onClick={onClick}>{type === "servico" ? "Editar" : data.nome}</td>
+    );
 }

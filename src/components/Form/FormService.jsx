@@ -15,9 +15,10 @@ import { useForm } from "./useForm";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
+import { PopUpEditContext } from "../../pages/Todos";
 
 FormService.propTypes = {
-    initialState: PropTypes.object,
+    initialState: PropTypes.any,
     closeBtn: PropTypes.any,
 };
 export const RefContext = createContext({
@@ -28,7 +29,8 @@ export function FormService({ initialState, closeBtn }) {
     const ref = useRef();
     const checkBoxRef = useRef();
     const { setClose, setTableUpdate } = useContext(NewFormContext);
-    const { setEdit, setUpdate } = useContext(EditContext);
+    const { setShowForm, setUpdate } = useContext(PopUpEditContext);
+
     if (!initialState) {
         initialState = {
             dentista: "",
@@ -75,10 +77,12 @@ export function FormService({ initialState, closeBtn }) {
                 setTableUpdate((e) => !e);
             }
             if (initialState.formType === "edit") {
-                setTableUpdate((e) => !e);
+                setShowForm((e) => !e);
+                setUpdate((e) => !e);
             }
         }
     };
+
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
@@ -123,7 +127,9 @@ export function FormService({ initialState, closeBtn }) {
                 />
 
                 {initialState.formType === "edit" ? (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    <button onClick={beforeSendSubmit} type="submit">
+                        Confirm
+                    </button>
                 ) : (
                     ""
                 )}
