@@ -45,7 +45,7 @@ export function DentistServices({ data }) {
             <NavSortTable setDate={setSortDate} />
 
             <table className="todos-table">
-                <Caption txt={"Serviços Deste Dentista"} />
+                <Caption txt={"Serviços"} />
 
                 <tbody>
                     <TableRow rowNames={row} />
@@ -88,7 +88,7 @@ function LocalDentistWorkers({ data }) {
     return (
         <>
             <table className="todos-table">
-                <Caption txt={"Dentistas Neste Local"} />
+                <Caption txt={"Dentistas"} />
 
                 <tbody>
                     <TableRow rowNames={row} />
@@ -96,7 +96,7 @@ function LocalDentistWorkers({ data }) {
                 </tbody>
             </table>
             <table className="todos-table">
-                <Caption txt={"Serviços Neste Local"} />
+                <Caption txt={"Serviços"} />
                 <tbody>
                     <TableRow rowNames={serviceRow} />
                     {service ? <ServiceTableBody data={service} /> : ""}

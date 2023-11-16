@@ -35,9 +35,8 @@ h1 {
 } */
 
 a {
-  /* text-decoration: none; */
+  text-decoration: none;
   color: inherit;
-  /* This ensures the link color inherits from the parent element */
 }
 
 .link {

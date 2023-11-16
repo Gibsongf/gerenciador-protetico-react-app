@@ -6,7 +6,6 @@ import { FormService } from "./Form/FormService";
 import { ButtonClose } from "./Form/Buttons";
 import PropTypes from "prop-types";
 import { PopUpEditContext } from "../pages/Todos";
-import { stateDetails } from "../utils";
 
 ButtonNewForm.propTypes = {
     type: PropTypes.string,
@@ -52,16 +51,22 @@ export function ButtonNewForm({ type, tableUpdate }) {
         //boolean that will allow the form  to show
         setShowForm((e) => !e);
     };
-
+    const btnStyle = {
+        fontSize: "1.1em",
+        fontWeight: "bold",
+        padding: "10px",
+        borderRadius: "15px",
+    };
     return (
-        <div className="new-form-container">
+        <div className="new-form-container" style={{ justifySelf: "center" }}>
             <NewFormContext.Provider
                 value={{ setClose: setShowForm, setTableUpdate: tableUpdate }}
             >
                 {showForm ? <Form /> : ""}
             </NewFormContext.Provider>
-            <button onClick={onClick} className="new-form">
-                Novo
+            <button onClick={onClick} style={btnStyle} className="new-form">
+                Adicionar Novo{" "}
+                {type.toLowerCase().replace(type[0], type[0].toUpperCase())}
             </button>
         </div>
     );
@@ -127,6 +132,8 @@ export function ButtonEditForm({ type, data }) {
     };
 
     return (
-        <td onClick={onClick}>{type === "servico" ? "Editar" : data.nome}</td>
+        <td className="edit-td" onClick={onClick}>
+            {type === "servico" ? "Editar" : data.nome}
+        </td>
     );
 }

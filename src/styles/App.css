@@ -19,6 +19,10 @@ caption {
 
 }
 
+.edit-td {
+  color: blue;
+}
+
 .todos-table,
 td {
   color: black;
@@ -40,6 +44,8 @@ th {
   background-color: white;
   color: white;
   text-align: center;
+  border-left: white solid 5px;
+  border-right: white solid 5px;
 }
 
 /* th {
@@ -72,7 +78,19 @@ td {
 }
 
 .table-sort {
+  margin-bottom: 15px;
+  background-color: #141414;
+  max-height: 7vh;
+  padding: 0px 20px;
+  display: flex;
+  justify-self: center;
   color: white;
+  border: 3px white solid;
+  border-radius: 11px;
+  align-items: center;
+  gap: 10px;
+  /* to center in details page */
+  justify-content: center;
 }
 
 .username,

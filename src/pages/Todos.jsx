@@ -114,20 +114,9 @@ export function TodosService() {
     }
 
     return (
-        // <>
-        //     {" "}
-        //     <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
-        //     <NavSortTable setDate={setSortDate} />
-        //     <table className="todos-table">
-        //         <Caption txt="Serviços Registrados" />
-        //         <tbody>
-        //             <TableRow rowNames={row} />
-        //             <ServiceTableBody data={data} sortDate={sortDate} />
-        //         </tbody>
-        //     </table>
-        // </>
         <>
             <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
+            <NavSortTable setDate={setSortDate} />
             <PopUpEditContext.Provider
                 value={{
                     setForm,
@@ -142,7 +131,7 @@ export function TodosService() {
 
                     <tbody>
                         <TableRow rowNames={row} />
-                        <ServiceTableBody data={data} />
+                        <ServiceTableBody data={data} sortDate={sortDate} />
                     </tbody>
                 </table>
             </PopUpEditContext.Provider>
