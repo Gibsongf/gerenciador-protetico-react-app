@@ -92,7 +92,7 @@ const formatToForm = (type, data) => {
             paciente: data.paciente,
             dentista: data.dentista._id, //just id to be pre-selected at select input
             local: data.local,
-            produtos: data.produto,
+            produto: data.produto,
             statusEntrega: data.statusEntrega,
             category: "servico",
             formType: "edit",

@@ -118,7 +118,7 @@ export function stateDetails(data, type) {
             paciente: paciente,
             dentista: _id, //just id to be pre-selected at select input
             local,
-            produtos: data.serviço.produto,
+            produto: data.serviço.produto,
             statusEntrega,
             category: "servico",
             formType: "edit",

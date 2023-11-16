@@ -102,12 +102,14 @@ export function TodosProdutos() {
 export function TodosService() {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
-    const { data, setTableUpdate } = useTodosApi("servico", true);
+    let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-
+    useEffect(() => {
+        console.log(close);
+    }, [close]);
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;

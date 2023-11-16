@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { APIPostNewData, APIPutData } from "../../Api";
+import { APIGetServiceBy, APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { useGetServiceBy } from "../ApiHooks";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
@@ -17,10 +18,12 @@ export function useForm(initialState, formElements) {
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
-
     const handleChange = (e) => {
         setFormData((prev) => {
-            // console.log(e.target.name, e.target.value);
+            // if (e.target.name === "produto") {
+            //     prev[e.target.name].push(e.target.value);
+            //     return { ...prev };
+            // }
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
@@ -50,7 +53,7 @@ export function useForm(initialState, formElements) {
         return obj;
     };
     const callAPI = (arr) => {
-        console.log(arr);
+        // console.log(arr);
         if (Object.keys(arr).includes("errors")) {
             setResult(arr.errors);
             return false;
@@ -60,6 +63,18 @@ export function useForm(initialState, formElements) {
             // nav("/");
         }
     };
+
+    // update the local for all provided dentist services
+    const dentistLocalChange = async (dentista) => {
+        const data = await APIGetServiceBy(dentista._id, "dentista");
+        data.serviço.forEach(async (s) => {
+            s.category = "servico";
+            if (s.local !== dentista.local) {
+                s.local = dentista.local;
+                await APIPutData(s, s._id);
+            }
+        });
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const type = initialState.formType;
@@ -68,6 +83,9 @@ export function useForm(initialState, formElements) {
         if (formData.category === "dentista") {
             data = removeFormattedCpf();
             const response = await whichAPI[type](data, initialState.dbId);
+            if (type === "edit") {
+                dentistLocalChange(response.dentista);
+            }
             return callAPI(response);
         }
         const response = await whichAPI[type](formData, initialState.dbId);

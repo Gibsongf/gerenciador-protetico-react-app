@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useDetailsApi, useServiceByLocal } from "./ApiHooks";
+import { useDetailsApi, useGetServiceBy } from "./ApiHooks";
 import "../styles/Details.css";
 import { FormDentist } from "./Form/FormDentist";
 import { Caption, NavSortTable, TableRow } from "./Table";
@@ -33,9 +33,16 @@ const Info = ({ content }) => {
         </div>
     );
 };
-
+export const PopUpEditContext = createContext({
+    setShowForm: () => {},
+    setForm: () => {},
+    setUpdateServices: () => {},
+});
 export function DentistServices({ data }) {
     const row = ["Dentista", "Paciente", "Produto", "Finalizado"];
+
+    const [close, setClose] = useState(false);
+    const [form, setForm] = useState();
     const [sortDate, setSortDate] = useState();
 
     // console.log(data);
@@ -71,7 +78,7 @@ LocalDentistWorkers.propTypes = {
 //Table with  "dentista" that work at detailed page of a "local" place
 function LocalDentistWorkers({ data }) {
     const row = ["Nome", "Telefone", "Endereço"];
-    const service = useServiceByLocal(data.local._id);
+    const service = useGetServiceBy(data.local._id, "local");
     const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
 
     if (!data) {

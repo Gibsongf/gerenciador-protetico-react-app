@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APIDetails, APIServiceByLocal, APItodos } from "../Api";
+import { APIDetails, APIGetServiceBy, APItodos } from "../Api";
 
 export function useTodosApi(category, forTable) {
     const [data, setData] = useState();
@@ -45,23 +45,23 @@ export function useDetailsApi(category, id) {
     return { data, setUpdate };
 }
 
-export function useServiceByLocal(localId) {
+export function useGetServiceBy(id, by) {
     const [data, setData] = useState();
     const [update, setUpdate] = useState(false);
     useEffect(() => {
         const fetchingData = async () => {
             try {
                 console.log("fetch data details");
-                const result = await APIServiceByLocal(localId);
+                const result = await APIGetServiceBy(id, by);
                 // console.log(result);
                 setData(() => result.serviço);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
-        if (localId) {
+        if (id) {
             fetchingData();
         }
-    }, [localId, update]);
+    }, [id, update, by]);
     return data;
 }

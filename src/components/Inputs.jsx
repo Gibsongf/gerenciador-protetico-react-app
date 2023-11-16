@@ -174,8 +174,6 @@ export function SimpleInput({
     );
 }
 export function EntregaStatus({ onChange, value }) {
-    console.log(typeof value, value);
-
     return (
         <div className="status-entrega">
             <label htmlFor="status-entrega">Finalizado:</label>
@@ -185,8 +183,8 @@ export function EntregaStatus({ onChange, value }) {
                 onChange={onChange}
                 value={value}
             >
-                <option value={false}>Não</option>
-                <option value={true}>Sim</option>
+                <option value={true}>Não</option>
+                <option value={false}>Sim</option>
             </select>
         </div>
     );
@@ -195,7 +193,7 @@ export function EntregaStatus({ onChange, value }) {
 // it will be show as checkbox above with it check and reset the search
 // if is a edit case the checkbox will already be rendered and the user can uncheck it
 const getNameValue = (arr) => {
-    if (!arr) return [];
+    if (!arr || !Array.isArray(arr)) return [];
     return arr.map((a) => {
         return { name: a.nome, value: a._id };
     });
@@ -263,14 +261,10 @@ export function SearchProducts({
                           );
                       })}
             </select>
-            <button
-                onClick={saveSelectedName}
-                type="button"
-                className="confirm-search"
-            >
+            <button onClick={saveSelectedName} type="button">
                 Selecionar Produto
             </button>
-            <label htmlFor="selected-products">Selecionado:</label>
+            <div htmlFor="selected-products">Selecionado:</div>
             <RenderCheckBox arr={selectNames} />
         </div>
     );

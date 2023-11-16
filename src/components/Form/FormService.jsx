@@ -63,7 +63,7 @@ export function FormService({ initialState, closeBtn }) {
             return { ...prev };
         });
     };
-
+    // console.log(initialState, formData);
     const beforeSendSubmit = async (e) => {
         e.preventDefault();
         //before submit we format the product
@@ -78,7 +78,7 @@ export function FormService({ initialState, closeBtn }) {
                 setTableUpdate((e) => !e);
             }
             if (initialState.formType === "edit") {
-                setShowForm((e) => !e);
+                setShowForm(() => false);
                 setUpdate((e) => !e);
             }
         }
@@ -119,7 +119,7 @@ export function FormService({ initialState, closeBtn }) {
                         products={products}
                         name="produto"
                         onChange={handleChange}
-                        preSelectProduct={formData.produtos}
+                        preSelectProduct={formData.produto}
                         msg={!errorMsg ? "" : errorMsg.produto}
                     />
                 </RefContext.Provider>

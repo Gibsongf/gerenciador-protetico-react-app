@@ -1,5 +1,5 @@
 import { ExcelLink } from "../Api";
-import { useDetailsApi, useServiceByLocal } from "../components/ApiHooks";
+import { useDetailsApi, useGetServiceBy } from "../components/ApiHooks";
 import { Details } from "../components/GenerateDetails";
 import { fullName } from "../utils";
 
