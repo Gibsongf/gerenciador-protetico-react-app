@@ -175,16 +175,16 @@ export function SimpleInput({
 }
 export function EntregaStatus({ onChange, value }) {
     return (
-        <div className="status-entrega">
-            <label htmlFor="status-entrega">Finalizado:</label>
+        <div className="statusEntrega">
+            <label htmlFor="statusEntrega">Finalizado:</label>
             <select
-                name="status-entrega"
-                id="status-entrega"
+                name="statusEntrega"
+                id="statusEntrega"
                 onChange={onChange}
                 value={value}
             >
-                <option value={true}>Não</option>
-                <option value={false}>Sim</option>
+                <option value={false}>Não</option>
+                <option value={true}>Sim</option>
             </select>
         </div>
     );

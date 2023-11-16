@@ -20,13 +20,13 @@ export function useForm(initialState, formElements) {
     const { errorMsg } = useContext(AppContext);
     const handleChange = (e) => {
         setFormData((prev) => {
-            // if (e.target.name === "produto") {
-            //     prev[e.target.name].push(e.target.value);
-            //     return { ...prev };
-            // }
+            console.log(e.target);
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
+    useEffect(() => {
+        console.log(formData);
+    }, [formData]);
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {
@@ -64,8 +64,9 @@ export function useForm(initialState, formElements) {
         }
     };
 
-    // update the local for all provided dentist services
-    const dentistLocalChange = async (dentista) => {
+    // When a change occurs in a dentist's location of work,
+    // update all that dentist services with the new location
+    const updateDentistServicesLocation = async (dentista) => {
         const data = await APIGetServiceBy(dentista._id, "dentista");
         data.serviço.forEach(async (s) => {
             s.category = "servico";
@@ -73,6 +74,11 @@ export function useForm(initialState, formElements) {
                 s.local = dentista.local;
                 await APIPutData(s, s._id);
             }
+        });
+    };
+    const clearErrorMsg = () => {
+        Object.keys(errorMsg).forEach((k) => {
+            errorMsg[k] = "";
         });
     };
     const handleSubmit = async (e) => {
@@ -84,11 +90,12 @@ export function useForm(initialState, formElements) {
             data = removeFormattedCpf();
             const response = await whichAPI[type](data, initialState.dbId);
             if (type === "edit") {
-                dentistLocalChange(response.dentista);
+                updateDentistServicesLocation(response.dentista);
             }
             return callAPI(response);
         }
         const response = await whichAPI[type](formData, initialState.dbId);
+        clearErrorMsg();
         return callAPI(response);
     };
     return { formData, handleChange, handleSubmit, setFormData };
