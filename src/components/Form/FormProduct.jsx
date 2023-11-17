@@ -18,8 +18,9 @@ export function FormProduct({ initialState, closeBtn }) {
     const ref = useRef();
     const { setClose, setTableUpdate } = useContext(NewFormContext);
     const { setShowForm, setUpdate } = useContext(PopUpEditContext);
-
+    let legendTxt = "Editar Produto";
     if (!initialState) {
+        legendTxt = "Registrar Novo Produto";
         initialState = {
             nome: "",
             valor_normal: "",
@@ -58,7 +59,7 @@ export function FormProduct({ initialState, closeBtn }) {
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
-                    <h3>Produto</h3>
+                    <h3> {legendTxt} </h3>
                 </legend>
                 <SimpleInput
                     id={"nome"}
@@ -84,19 +85,15 @@ export function FormProduct({ initialState, closeBtn }) {
                     msg={!errorMsg ? "" : errorMsg.valor_reduzido}
                 />
 
-                {initialState.formType === "edit" ? (
+                {initialState.formType === "edit" && (
                     <button onClick={beforeSendSubmit} type="submit">
                         Confirm
                     </button>
-                ) : (
-                    ""
                 )}
-                {initialState.formType === "new" ? (
+                {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={beforeSendSubmit} />
-                ) : (
-                    ""
                 )}
-            </form>{" "}
+            </form>
         </div>
     );
 }

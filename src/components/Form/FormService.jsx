@@ -30,8 +30,10 @@ export function FormService({ initialState, closeBtn }) {
     const checkBoxRef = useRef();
     const { setClose, setTableUpdate } = useContext(NewFormContext);
     const { setShowForm, setUpdate } = useContext(PopUpEditContext);
+    let legendTxt = "Editar Detalhes do Serviço";
 
     if (!initialState) {
+        legendTxt = "Registrar Novo Serviço";
         initialState = {
             dentista: "",
             local: "",
@@ -89,7 +91,7 @@ export function FormService({ initialState, closeBtn }) {
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
-                    <h3>Serviço</h3>
+                    <h3>{legendTxt}</h3>
                 </legend>
 
                 <SimpleInput
@@ -128,17 +130,13 @@ export function FormService({ initialState, closeBtn }) {
                     onChange={handleChange}
                 />
 
-                {initialState.formType === "edit" ? (
+                {initialState.formType === "edit" && (
                     <button onClick={beforeSendSubmit} type="submit">
                         Confirm
                     </button>
-                ) : (
-                    ""
                 )}
-                {initialState.formType === "new" ? (
+                {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={beforeSendSubmit} />
-                ) : (
-                    ""
                 )}
             </form>
         </div>

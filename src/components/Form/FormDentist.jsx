@@ -15,7 +15,9 @@ export function FormDentist({ initialState, closeBtn }) {
     const { errorMsg } = useContext(AppContext);
     const { setClose, setTableUpdate } = useContext(NewFormContext);
     const { setEdit, setUpdate } = useContext(EditContext);
+    let legendTxt = "Editar Detalhes do Dentista";
     if (!initialState) {
+        legendTxt = "Registrar Novo Dentista";
         initialState = {
             nome: "",
             sobrenome: "",
@@ -48,12 +50,10 @@ export function FormDentist({ initialState, closeBtn }) {
     };
     return (
         <div className="form-container" id="pop-up">
-            {initialState.formType === "new" ? "" : ""}
-            {/* {initialState.formType === "edit" ? "" : ""} */}
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
-                    <h3>Registrar Novo Dentista</h3>
+                    <h3>{legendTxt}</h3>
                 </legend>
                 <SimpleInput
                     id={"nome"}
@@ -86,15 +86,11 @@ export function FormDentist({ initialState, closeBtn }) {
                     labelTxt={"Local de Trabalho"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
-                {initialState.formType === "edit" ? (
+                {initialState.formType === "edit" && (
                     <ButtonEdit handleSubmit={handleSubmitResponse} />
-                ) : (
-                    ""
                 )}
-                {initialState.formType === "new" ? (
+                {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={handleSubmitResponse} />
-                ) : (
-                    ""
                 )}
             </form>
         </div>

@@ -15,9 +15,10 @@ import { ButtonEdit, ButtonRegister } from "./Buttons";
 export function FormLocal({ initialState, closeBtn }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
-
     const nomeTag = { id: "nome", txt: "Nome do Local" };
+    let legendTxt = "Editar Detalhes do Local";
     if (!initialState) {
+        legendTxt = "Registrar Novo Local";
         initialState = {
             nome: "",
             endereço: "",
@@ -38,7 +39,7 @@ export function FormLocal({ initialState, closeBtn }) {
             <form action="" ref={ref} id="pop-up-content">
                 {closeBtn}
                 <legend>
-                    <h3>Registrar Novo Local</h3>
+                    <h3>{legendTxt}</h3>
                 </legend>
 
                 <SimpleInput
@@ -69,15 +70,11 @@ export function FormLocal({ initialState, closeBtn }) {
                     value={formData.tabela}
                     onChange={handleChange}
                 />
-                {initialState.formType === "edit" ? (
+                {initialState.formType === "edit" && (
                     <ButtonEdit handleSubmit={handleSubmit} />
-                ) : (
-                    ""
                 )}
-                {initialState.formType === "new" ? (
+                {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={handleSubmit} />
-                ) : (
-                    ""
                 )}
             </form>
         </div>

@@ -48,6 +48,27 @@ th {
   border-right: white solid 5px;
 }
 
+.select-product {
+  width: 50%;
+  align-self: center;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.form-close-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.close-btn {
+  font-size: 1.3em;
+  font-weight: bold;
+  background: none;
+  border: white solid 1px;
+  color: white;
+}
+
 /* th {
   padding-left: 10px;
   padding-right: 10px;

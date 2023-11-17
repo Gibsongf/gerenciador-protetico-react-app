@@ -25,9 +25,11 @@ export function ButtonClose({ setClose }) {
         });
     };
     return (
-        <button className="close-btn" type="button" onClick={resetError}>
-            X
-        </button>
+        <span className="form-close-btn">
+            <button className="close-btn" type="button" onClick={resetError}>
+                X
+            </button>
+        </span>
     );
 }
 export function ButtonEdit({ handleSubmit }) {

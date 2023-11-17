@@ -80,6 +80,7 @@ function LocalDentistWorkers({ data }) {
     const row = ["Nome", "Telefone", "Endereço"];
     const service = useGetServiceBy(data.local._id, "local");
     const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
+    const [sortDate, setSortDate] = useState();
 
     if (!data) {
         // Data is still being fetched
@@ -94,21 +95,33 @@ function LocalDentistWorkers({ data }) {
 
     return (
         <>
-            <table className="todos-table">
-                <Caption txt={"Dentistas"} />
+            <div>
+                <table className="todos-table">
+                    <Caption txt={"Dentistas"} />
 
-                <tbody>
-                    <TableRow rowNames={row} />
-                    <DentistTableBody data={data.dentistas} />
-                </tbody>
-            </table>
-            <table className="todos-table">
-                <Caption txt={"Serviços"} />
-                <tbody>
-                    <TableRow rowNames={serviceRow} />
-                    {service ? <ServiceTableBody data={service} /> : ""}
-                </tbody>
-            </table>
+                    <tbody>
+                        <TableRow rowNames={row} />
+                        <DentistTableBody data={data.dentistas} />
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <NavSortTable setDate={setSortDate} />
+                <table className="todos-table">
+                    <Caption txt={"Serviços"} />
+                    <tbody>
+                        <TableRow rowNames={serviceRow} />
+                        {service ? (
+                            <ServiceTableBody
+                                data={service}
+                                sortDate={sortDate}
+                            />
+                        ) : (
+                            ""
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }

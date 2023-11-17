@@ -261,7 +261,11 @@ export function SearchProducts({
                           );
                       })}
             </select>
-            <button onClick={saveSelectedName} type="button">
+            <button
+                className="select-product"
+                onClick={saveSelectedName}
+                type="button"
+            >
                 Selecionar Produto
             </button>
             <div htmlFor="selected-products">Selecionado:</div>
