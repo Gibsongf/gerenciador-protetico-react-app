@@ -15,7 +15,7 @@ import {
     TodosDentistas,
     TodosLocais,
     TodosProdutos,
-    TodosService,
+    TableService,
 } from "./pages/Todos";
 
 export const AppContext = createContext({
@@ -48,7 +48,7 @@ function App() {
                     <Route path="/servico">
                         <Route
                             path="/servico/todos"
-                            element={<TodosService />}
+                            element={<TableService />}
                         />
                         <Route
                             path="/servico/:id"

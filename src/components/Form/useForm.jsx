@@ -20,13 +20,11 @@ export function useForm(initialState, formElements) {
     const { errorMsg } = useContext(AppContext);
     const handleChange = (e) => {
         setFormData((prev) => {
-            console.log(e.target);
+            // console.log(e.target);
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
+
     useEffect(() => {
         const handleFormElementErrors = () => {
             Array.from(formElements).forEach((e) => {

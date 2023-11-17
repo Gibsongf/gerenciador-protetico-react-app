@@ -99,30 +99,35 @@ export function TodosProdutos() {
 }
 // create a button that show a window to the user decide stuffs about
 // the export all service of the items in the table page
-export function TodosService() {
+export function TableService({ providedData, setUpdateTable }) {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
+
     let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-    useEffect(() => {
-        console.log(close);
-    }, [close]);
+
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
     }
-
+    const updateFunction =
+        setUpdateTable !== undefined ? setUpdateTable : setTableUpdate;
+    const definiteData =
+        providedData !== undefined ? providedData.serviços : data;
+    const newBtnRender = providedData === undefined ? true : false;
     return (
         <>
-            <ButtonNewForm type="serviço" tableUpdate={setTableUpdate} />
+            {newBtnRender === true && (
+                <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
+            )}
             <NavSortTable setDate={setSortDate} />
             <PopUpEditContext.Provider
                 value={{
                     setForm,
-                    setUpdate: setTableUpdate,
+                    setUpdate: updateFunction,
                     setShowForm: setClose,
                 }}
             >
@@ -133,7 +138,10 @@ export function TodosService() {
 
                     <tbody>
                         <TableRow rowNames={row} />
-                        <ServiceTableBody data={data} sortDate={sortDate} />
+                        <ServiceTableBody
+                            data={definiteData}
+                            sortDate={sortDate}
+                        />
                     </tbody>
                 </table>
             </PopUpEditContext.Provider>

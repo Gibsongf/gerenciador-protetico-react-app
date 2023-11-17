@@ -7,17 +7,29 @@ import { Caption, NavSortTable, TableRow } from "./Table";
 import { stateDetails } from "../utils";
 import { FormLocal } from "./Form/FormLocal";
 import { FormService } from "./Form/FormService";
-import {
-    DentistTableBody,
-    LocalTableBody,
-    ServiceTableBody,
-} from "./TableBody";
-
+import { DentistTableBody, ServiceTableBody } from "./TableBody";
+import { mdiPencil } from "@mdi/js";
+import { TableService } from "../pages/Todos";
+import Icon from "@mdi/react";
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
     // console.log(content);
+
+    const divBtnContainer = {
+        display: "flex",
+        justifyContent: "flex-end",
+    };
     return (
         <div className="info">
+            <div style={divBtnContainer}>
+                <Icon
+                    onClick={() => setEdit((e) => !e)}
+                    path={mdiPencil}
+                    title="Pencil-edit"
+                    className="pencil-edit"
+                    // size={1.1}
+                />
+            </div>
             {Object.keys(content).map((k, index) => {
                 return (
                     <p key={index + k}>
@@ -26,10 +38,6 @@ const Info = ({ content }) => {
                     </p>
                 );
             })}
-
-            <button className="edit" onClick={() => setEdit((e) => !e)}>
-                Editar
-            </button>
         </div>
     );
 };
@@ -38,40 +46,40 @@ export const PopUpEditContext = createContext({
     setForm: () => {},
     setUpdateServices: () => {},
 });
-export function DentistServices({ data }) {
-    const row = ["Dentista", "Paciente", "Produto", "Finalizado"];
+// export function DentistServices({ data }) {
+//     const row = ["Dentista", "Paciente", "Produto", "Finalizado"];
 
-    const [close, setClose] = useState(false);
-    const [form, setForm] = useState();
-    const [sortDate, setSortDate] = useState();
+//     const [close, setClose] = useState(false);
+//     const [form, setForm] = useState();
+//     const [sortDate, setSortDate] = useState();
 
-    // console.log(data);
-    // create export excel of selected month and "entrega" status sim
-    return (
-        <div className="serviço">
-            <NavSortTable setDate={setSortDate} />
+//     // console.log(data);
+//     // create export excel of selected month and "entrega" status sim
+//     return (
+//         <div className="serviço">
+//             <NavSortTable setDate={setSortDate} />
 
-            <table className="todos-table">
-                <Caption txt={"Serviços"} />
+//             <table className="todos-table">
+//                 <Caption txt={"Serviços"} />
 
-                <tbody>
-                    <TableRow rowNames={row} />
-                    {data.serviços ? (
-                        <ServiceTableBody
-                            data={data.serviços}
-                            sortDate={sortDate}
-                        />
-                    ) : (
-                        ""
-                    )}
-                </tbody>
-            </table>
-        </div>
-    );
-}
-DentistServices.propTypes = {
-    data: PropTypes.object,
-};
+//                 <tbody>
+//                     <TableRow rowNames={row} />
+//                     {data.serviços ? (
+//                         <ServiceTableBody
+//                             data={data.serviços}
+//                             sortDate={sortDate}
+//                         />
+//                     ) : (
+//                         ""
+//                     )}
+//                 </tbody>
+//             </table>
+//         </div>
+//     );
+// }
+// DentistServices.propTypes = {
+//     data: PropTypes.object,
+// };
 LocalDentistWorkers.propTypes = {
     data: PropTypes.object,
 };
@@ -143,9 +151,12 @@ export function Details({ type, data, setUpdate }) {
         };
         return obj[type];
     };
+    //providedData, setUpdateTable
     const Table = () => {
         const obj = {
-            dentista: <DentistServices data={data} />,
+            dentista: (
+                <TableService providedData={data} setUpdateTable={setUpdate} />
+            ),
             local: <LocalDentistWorkers data={data} />,
             servico: "",
         };

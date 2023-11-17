@@ -10,8 +10,15 @@ ButtonEdit.propTypes = {
     handleSubmit: PropTypes.func,
 };
 export function ButtonRegister({ handleSubmit }) {
+    const style = {
+        width: "20vw",
+        alignSelf: "center",
+        padding: "5px",
+        fontSize: "1em",
+        fontWeight: "bold",
+    };
     return (
-        <button onClick={handleSubmit} type="submit">
+        <button style={style} onClick={handleSubmit} type="submit">
             Registrar
         </button>
     );
@@ -34,15 +41,32 @@ export function ButtonClose({ setClose }) {
 }
 export function ButtonEdit({ handleSubmit }) {
     const { setEdit } = useContext(EditContext);
+    const divStyle = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: "5px",
+    };
+    const btnStyle = {
+        width: "25vw",
+        padding: "5px",
+        fontSize: "1em",
+        fontWeight: "bold",
+        borderRadius: "10px",
+    };
     return (
-        <>
-            <button onClick={handleSubmit} type="submit">
+        <div className="container-edit-btn" style={divStyle}>
+            <button style={btnStyle} onClick={handleSubmit} type="submit">
                 Confirm
             </button>
 
-            <button type="button" onClick={() => setEdit((e) => !e)}>
+            <button
+                style={btnStyle}
+                type="button"
+                onClick={() => setEdit((e) => !e)}
+            >
                 Cancel
             </button>
-        </>
+        </div>
     );
 }

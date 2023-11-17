@@ -27,3 +27,11 @@
 .edit {
     border: 1px solid black;
 }
+
+.pencil-edit {
+    width: 6vw;
+    padding: 2px;
+    border: black solid 2px;
+    border-radius: 10px;
+    background: white;
+}
