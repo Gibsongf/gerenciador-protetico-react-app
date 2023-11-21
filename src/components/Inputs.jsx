@@ -3,12 +3,13 @@ import { useDetailsApi, useTodosApi } from "./ApiHooks";
 import { useContext, useEffect, useState } from "react";
 import { RefContext } from "./Form/FormService";
 
-export function TipoTabelaSelect({ initialValue, onChange }) {
+export function TipoTabelaSelect({ value, onChange }) {
+    // console.log(value);
     return (
         <div className="tabela-options">
             <label htmlFor="tabela-options">Tipo de Tabela</label>
             <select
-                value={initialValue}
+                value={value}
                 onChange={onChange}
                 name="tabela"
                 id="tabela-options"
@@ -30,9 +31,9 @@ export function CepInput({ value, onChange, msg }) {
                 type="text"
                 name="cep"
                 id="cep"
-                pattern="\d{5}\-?\d{3}"
                 placeholder="xxxxx-xxx"
-                required
+                // maxLength={9}
+                required={true}
             ></input>
         </div>
     );
@@ -146,6 +147,7 @@ export function TelefoneInput({ value, onChange, msg }) {
                 name="telefone"
                 id="telefone"
                 placeholder="xxxxx-xxxx"
+                maxLength={9}
                 required
             />
         </div>

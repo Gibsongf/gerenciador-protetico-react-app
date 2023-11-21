@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 
 import {
     CepInput,
@@ -11,11 +11,15 @@ import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
 import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { NewFormContext } from "../NewFormButton";
+import { EditContext } from "../GenerateDetails";
 
 export function FormLocal({ initialState, closeBtn }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     const nomeTag = { id: "nome", txt: "Nome do Local" };
+    const { setClose, setTableUpdate } = useContext(NewFormContext);
+    const { setEdit, setUpdate } = useContext(EditContext);
     let legendTxt = "Editar Detalhes do Local";
     if (!initialState) {
         legendTxt = "Registrar Novo Local";
@@ -33,7 +37,22 @@ export function FormLocal({ initialState, closeBtn }) {
         initialState,
         ref.current
     );
+    // console.log(formData);
+    const handleSubmitResponse = async (e) => {
+        e.preventDefault();
 
+        const success = await handleSubmit(e);
+        if (success) {
+            if (initialState.formType === "new") {
+                setClose((e) => !e);
+                setTableUpdate((e) => !e);
+            }
+            if (initialState.formType === "edit") {
+                setEdit((e) => !e);
+                setUpdate((e) => !e);
+            }
+        }
+    };
     return (
         <div className="form-container" id="pop-up">
             <form action="" ref={ref} id="pop-up-content">
@@ -71,10 +90,10 @@ export function FormLocal({ initialState, closeBtn }) {
                     onChange={handleChange}
                 />
                 {initialState.formType === "edit" && (
-                    <ButtonEdit handleSubmit={handleSubmit} />
+                    <ButtonEdit handleSubmit={handleSubmitResponse} />
                 )}
                 {initialState.formType === "new" && (
-                    <ButtonRegister handleSubmit={handleSubmit} />
+                    <ButtonRegister handleSubmit={handleSubmitResponse} />
                 )}
             </form>
         </div>

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import { createContext, useContext, useEffect, useState } from "react";
-import { useDetailsApi, useGetServiceBy } from "./ApiHooks";
+import { createContext, useContext, useState } from "react";
+import { useGetServiceBy } from "./ApiHooks";
 import "../styles/Details.css";
 import { FormDentist } from "./Form/FormDentist";
 import { Caption, NavSortTable, TableRow } from "./Table";
-import { stateDetails } from "../utils";
+import { formatTelefone, stateDetails } from "../utils";
 import { FormLocal } from "./Form/FormLocal";
 import { FormService } from "./Form/FormService";
 import { DentistTableBody, ServiceTableBody } from "./TableBody";
@@ -27,10 +27,13 @@ const Info = ({ content }) => {
                     path={mdiPencil}
                     title="Pencil-edit"
                     className="pencil-edit"
-                    // size={1.1}
                 />
             </div>
             {Object.keys(content).map((k, index) => {
+                if (k === "Telefone") {
+                    content[k] = formatTelefone(content[k]);
+                }
+
                 return (
                     <p key={index + k}>
                         <strong>{k}: </strong>
@@ -142,7 +145,7 @@ export const EditContext = createContext({
 export function Details({ type, data, setUpdate }) {
     const [edit, setEdit] = useState(true);
     const { formState, infoContent } = stateDetails(data, type);
-
+    // console.log(data);
     const Form = () => {
         const obj = {
             dentista: <FormDentist initialState={formState} />,

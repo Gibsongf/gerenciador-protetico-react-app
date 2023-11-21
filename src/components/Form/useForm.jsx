@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { APIGetServiceBy, APIPostNewData, APIPutData } from "../../Api";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { useGetServiceBy } from "../ApiHooks";
+// import { useGetServiceBy } from "../ApiHooks";
 
 const replaceUndefined = (obj) => {
     Object.keys(obj).forEach((k) => {
@@ -79,6 +79,11 @@ export function useForm(initialState, formElements) {
             errorMsg[k] = "";
         });
     };
+    const telefoneJustNumber = () => {
+        const obj = { ...formData };
+        obj.telefone = obj.telefone.replace("-", "");
+        return obj;
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const type = initialState.formType;
@@ -90,6 +95,13 @@ export function useForm(initialState, formElements) {
             if (type === "edit") {
                 updateDentistServicesLocation(response.dentista);
             }
+            // clearErrorMsg();
+            return callAPI(response);
+        }
+        if (formData.category === "local") {
+            data = telefoneJustNumber();
+            const response = await whichAPI[type](data, initialState.dbId);
+            // clearErrorMsg();
             return callAPI(response);
         }
         const response = await whichAPI[type](formData, initialState.dbId);

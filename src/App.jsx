@@ -2,14 +2,14 @@
 import { Header } from "./components/Header";
 
 import { createContext } from "react";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
-import { FormDentist } from "./components/Form/FormDentist";
-import { FormLocal } from "./components/Form/FormLocal";
+// import { FormDentist } from "./components/Form/FormDentist";
+// import { FormLocal } from "./components/Form/FormLocal";
 // import { FormService } from "./components/Form/FormService";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
-import { FormService } from "./components/Form/FormService";
+// import { FormService } from "./components/Form/FormService";
 import { DentistaDetails, LocalDetails, ServiceDetails } from "./pages/Details";
 import {
     TodosDentistas,

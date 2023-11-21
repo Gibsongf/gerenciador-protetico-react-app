@@ -25,18 +25,17 @@ export function formatCpf(cpf) {
     return a.toString().replaceAll(",", "");
 }
 export function formatTelefone(tel) {
+    let separator = 4;
     if (tel === undefined) {
         return;
     }
     if (tel.includes("-")) {
         return tel;
     }
-    let arr = String(tel).split("");
-    let splitIndex = Math.ceil(arr.length / 2);
-    return `${arr.slice(0, splitIndex).toString().replaceAll(",", "")}-${arr
-        .slice(splitIndex)
-        .toString()
-        .replaceAll(",", "")} `;
+    if (tel.length > 8) {
+        separator = 5;
+    }
+    return `${tel.substring(0, separator)}-${tel.substring(separator)} `;
 }
 
 export function booleanToString(b) {
@@ -61,7 +60,7 @@ export function stateDetails(data, type) {
             Endereço: endereço,
             CEP: cep,
             Telefone: telefone,
-            "Tipo de Tabela": data.local.tipo_tabela,
+            Tabela: data.local.tabela,
         };
 
         const formState = {
@@ -71,6 +70,7 @@ export function stateDetails(data, type) {
             telefone,
             category: "local",
             formType: "edit",
+            tabela: data.local.tabela,
             dbId: data.local._id,
         };
         return { infoContent, formState };

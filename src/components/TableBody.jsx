@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { booleanToString } from "../utils";
+import { booleanToString, formatTelefone } from "../utils";
 import { ButtonEditForm } from "./NewFormButton";
 
 export function DentistTableBody({ data }) {
@@ -57,9 +57,9 @@ export function LocalTableBody({ data }) {
                         {d.nome}
                     </Link>
                 </td>
-                <td>{d.telefone}</td>
+                <td>{formatTelefone(d.telefone)}</td>
                 <td>{d.endereço}</td>
-                <td>{d.tipo_tabela}</td>
+                <td>{d.tabela}</td>
             </tr>
         );
     });

@@ -1,7 +1,8 @@
 import { ExcelLink } from "../Api";
-import { useDetailsApi, useGetServiceBy } from "../components/ApiHooks";
+import { useDetailsApi } from "../components/ApiHooks";
+// , useGetServiceBy
 import { Details } from "../components/GenerateDetails";
-import { fullName } from "../utils";
+// import { fullName } from "../utils";
 
 export function DentistaDetails() {
     const dbId = localStorage.getItem("dentistaID");

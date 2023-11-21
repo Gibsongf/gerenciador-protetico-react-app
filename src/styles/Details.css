@@ -29,9 +29,18 @@
 }
 
 .pencil-edit {
-    width: 6vw;
-    padding: 2px;
-    border: black solid 2px;
+    width: 25px;
+    padding: 5px;
+    border: black solid 1px;
     border-radius: 10px;
     background: white;
+}
+
+@media screen and (max-width: 720px) {
+    .pencil-edit {
+        width: 5vw;
+        padding: 4px;
+    }
+
+
 }
