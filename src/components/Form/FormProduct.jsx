@@ -5,7 +5,7 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonRegister } from "./Buttons";
+import { ButtonConfirm, ButtonRegister } from "./Buttons";
 import { NewFormContext } from "../NewFormButton";
 // import { EditContext } from "../GenerateDetails";
 import { PopUpEditContext } from "../../pages/Todos";
@@ -86,9 +86,7 @@ export function FormProduct({ initialState, closeBtn }) {
                 />
 
                 {initialState.formType === "edit" && (
-                    <button onClick={beforeSendSubmit} type="submit">
-                        Confirm
-                    </button>
+                    <ButtonConfirm handleSubmit={beforeSendSubmit} />
                 )}
                 {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={beforeSendSubmit} />

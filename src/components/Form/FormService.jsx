@@ -12,7 +12,7 @@ import "../../styles/Forms.css";
 import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
-import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { ButtonConfirm, ButtonEdit, ButtonRegister } from "./Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 import { PopUpEditContext } from "../../pages/Todos";
@@ -131,9 +131,7 @@ export function FormService({ initialState, closeBtn }) {
                 />
 
                 {initialState.formType === "edit" && (
-                    <button onClick={beforeSendSubmit} type="submit">
-                        Confirm
-                    </button>
+                    <ButtonConfirm handleSubmit={beforeSendSubmit} />
                 )}
                 {initialState.formType === "new" && (
                     <ButtonRegister handleSubmit={beforeSendSubmit} />

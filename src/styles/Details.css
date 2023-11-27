@@ -15,11 +15,13 @@
 }
 
 .info {
+    font-size: 1.2em;
+    width: 60vw;
     text-align: center;
     background-color: rgb(218, 199, 174);
     margin: 0 auto;
-    padding: 25px;
-    border-top: 15px solid rgb(255, 244, 244);
+    padding: 5px 15px 5px 15px;
+    /* border-top: 15px solid rgb(255, 244, 244); */
     border-radius: 1em;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.445);
 }
@@ -38,7 +40,7 @@
 
 @media screen and (max-width: 720px) {
     .pencil-edit {
-        width: 5vw;
+        width: 4vw;
         padding: 4px;
     }
 

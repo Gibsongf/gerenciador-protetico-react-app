@@ -1,26 +1,35 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-// /todos-dentistas
-// /todos-locais
-// /todos-servicos
-// /todos-produtos
 export function Header() {
+    const style = {
+        minWidth: "15vw",
+        padding: "10px",
+        background: "white",
+        color: "black",
+        textAlign: "center",
+        fontWeight: "bold",
+        borderRadius: "5px",
+        marginTop: "15px",
+    };
+
     return (
         <>
             <div className="header">
                 <div className="nav">
-                    <button>
-                        <Link to="/servico/todos">Serviços</Link>
-                    </button>
-                    <button>
-                        <Link to="/dentista/todos">Dentistas</Link>
-                    </button>
-                    <button>
-                        <Link to="/local/todos">Locais</Link>
-                    </button>
-                    <button>
-                        <Link to="/todos-produtos">Produtos</Link>
-                    </button>
+                    {/* <button onClick={onclick}> */}
+                    <NavLink id="nav-btn" style={style} to="/servico/todos">
+                        Serviços
+                    </NavLink>
+                    {/* </button> */}
+                    <NavLink style={style} to="/dentista/todos">
+                        Dentistas
+                    </NavLink>
+                    <NavLink style={style} to="/local/todos">
+                        Locais
+                    </NavLink>
+                    <NavLink style={style} to="/todos-produtos">
+                        Produtos
+                    </NavLink>
                 </div>
             </div>
         </>

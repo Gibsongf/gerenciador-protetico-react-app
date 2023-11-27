@@ -87,12 +87,11 @@ LocalDentistWorkers.propTypes = {
     data: PropTypes.object,
 };
 //Table with  "dentista" that work at detailed page of a "local" place
-function LocalDentistWorkers({ data }) {
+function LocalDentistWorkers({ data, setUpdateServices }) {
     const row = ["Nome", "Telefone", "Endereço"];
-    const service = useGetServiceBy(data.local._id, "local");
-    const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
-    const [sortDate, setSortDate] = useState();
-
+    const serviços = useGetServiceBy(data.local._id, "local");
+    // const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
+    // const [sortDate, setSortDate] = useState();
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -117,21 +116,14 @@ function LocalDentistWorkers({ data }) {
                 </table>
             </div>
             <div>
-                <NavSortTable setDate={setSortDate} />
-                <table className="todos-table">
-                    <Caption txt={"Serviços"} />
-                    <tbody>
-                        <TableRow rowNames={serviceRow} />
-                        {service ? (
-                            <ServiceTableBody
-                                data={service}
-                                sortDate={sortDate}
-                            />
-                        ) : (
-                            ""
-                        )}
-                    </tbody>
-                </table>
+                {serviços ? (
+                    <TableService
+                        providedData={{ serviços }}
+                        setUpdateTable={setUpdateServices}
+                    />
+                ) : (
+                    ""
+                )}
             </div>
         </>
     );
@@ -160,7 +152,12 @@ export function Details({ type, data, setUpdate }) {
             dentista: (
                 <TableService providedData={data} setUpdateTable={setUpdate} />
             ),
-            local: <LocalDentistWorkers data={data} />,
+            local: (
+                <LocalDentistWorkers
+                    data={data}
+                    setUpdateServices={setUpdate}
+                />
+            ),
             servico: "",
         };
         return obj[type];

@@ -102,7 +102,7 @@ export function TodosProdutos() {
 export function TableService({ providedData, setUpdateTable }) {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
-
+    // console.log(providedData);
     let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
     const [sortDate, setSortDate] = useState();

@@ -70,3 +70,27 @@ export function ButtonEdit({ handleSubmit }) {
         </div>
     );
 }
+
+export function ButtonConfirm({ handleSubmit }) {
+    const divStyle = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: "5px",
+    };
+    const btnStyle = {
+        width: "25vw",
+        padding: "5px",
+        fontSize: "1em",
+        fontWeight: "bold",
+        borderRadius: "10px",
+    };
+    return (
+        // <div className="container-edit-btn" style={divStyle}>
+        <button style={btnStyle} onClick={handleSubmit} type="submit">
+            Confirm
+        </button>
+
+        /* </div> */
+    );
+}
