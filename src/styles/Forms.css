@@ -128,16 +128,14 @@ input:focus-visible {
     }
 }
 
-@media (max-width: 720px) {
-    /* form>div {
-        display: flex;
-        justify-content: space-between;
+@media screen and (min-width: 721px) {
+    form {
+        padding: 40px
     }
 
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-        align-items: center;
-    } */
+    #pop-up-content {
+        width: 35vw;
+        border-top: none;
+        margin: 0% auto;
+    }
 }

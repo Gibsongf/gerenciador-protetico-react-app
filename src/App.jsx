@@ -34,33 +34,45 @@ function App() {
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
                 <Header />
-                <Routes>
-                    <Route path="/dentista">
+                <div className="content">
+                    <Routes>
+                        <Route path="/dentista">
+                            <Route
+                                path="/dentista/todos"
+                                element={<TodosDentistas />}
+                            />
+                            <Route
+                                path="/dentista/:id"
+                                element={<DentistaDetails />}
+                            />
+                        </Route>
+                        <Route path="/servico">
+                            <Route
+                                path="/servico/todos"
+                                element={<TableService />}
+                            />
+                            <Route
+                                path="/servico/:id"
+                                element={<ServiceDetails />}
+                            />
+                        </Route>
+                        <Route path="/local">
+                            <Route
+                                path="/local/todos"
+                                element={<TodosLocais />}
+                            />
+                            <Route
+                                path="/local/:id"
+                                element={<LocalDetails />}
+                            />
+                        </Route>
                         <Route
-                            path="/dentista/todos"
-                            element={<TodosDentistas />}
+                            path="/todos-produtos"
+                            element={<TodosProdutos />}
                         />
-                        <Route
-                            path="/dentista/:id"
-                            element={<DentistaDetails />}
-                        />
-                    </Route>
-                    <Route path="/servico">
-                        <Route
-                            path="/servico/todos"
-                            element={<TableService />}
-                        />
-                        <Route
-                            path="/servico/:id"
-                            element={<ServiceDetails />}
-                        />
-                    </Route>
-                    <Route path="/local">
-                        <Route path="/local/todos" element={<TodosLocais />} />
-                        <Route path="/local/:id" element={<LocalDetails />} />
-                    </Route>
-                    <Route path="/todos-produtos" element={<TodosProdutos />} />
-                </Routes>
+                    </Routes>
+                </div>
+
                 {/* All List  */}
                 {/* <LocalList /> */}
                 {/* <DentistasList />*/}

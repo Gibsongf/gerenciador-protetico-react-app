@@ -5,7 +5,8 @@ export function Header() {
         minWidth: "15vw",
         padding: "10px",
         // background: "white",
-        color: "white",
+        // border: "solid white 1px",
+        // color: "white",
         textAlign: "center",
         fontWeight: "bold",
         borderRadius: "5px",
@@ -18,17 +19,17 @@ export function Header() {
             <div className="header">
                 <div className="nav">
                     {/* <button onClick={onclick}> */}
-                    <NavLink id="nav-btn" style={style} to="/servico/todos">
+                    <NavLink className="nav-btn" to="/servico/todos">
                         Serviços
                     </NavLink>
                     {/* </button> */}
-                    <NavLink style={style} to="/dentista/todos">
+                    <NavLink className="nav-btn" to="/dentista/todos">
                         Dentistas
                     </NavLink>
-                    <NavLink style={style} to="/local/todos">
+                    <NavLink className="nav-btn" to="/local/todos">
                         Locais
                     </NavLink>
-                    <NavLink style={style} to="/todos-produtos">
+                    <NavLink className="nav-btn" to="/todos-produtos">
                         Produtos
                     </NavLink>
                 </div>
