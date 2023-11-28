@@ -64,9 +64,9 @@ export function TodosProdutos() {
     const { data, setTableUpdate } = useTodosApi("produto", true);
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-    useEffect(() => {
-        console.log(close);
-    }, [close]);
+    // useEffect(() => {
+    //     console.log(close);
+    // }, [close]);
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched

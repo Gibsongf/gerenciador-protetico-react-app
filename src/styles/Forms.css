@@ -96,6 +96,36 @@ input:focus-visible {
     border-radius: 1em;
     margin: 5% auto;
     width: 70%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: rotate(2deg);
+    }
+
+    25% {
+        opacity: 0.25;
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: rotate(2deg);
+
+    }
+
+    75% {
+        opacity: 0.75;
+        transform: rotate(-2deg);
+
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 720px) {

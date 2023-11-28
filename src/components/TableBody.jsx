@@ -92,7 +92,7 @@ export function ServiceTableBody({ data, sortDate }) {
         // with these we avoid change data and doing useless fetch
         if (
             sortDate &&
-            d.data_registro.split("-")[1] !== sortDate.split("-")[1]
+            d.dataRegistro.split("-")[1] !== sortDate.split("-")[1]
         ) {
             return;
         }

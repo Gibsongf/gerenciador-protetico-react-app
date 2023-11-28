@@ -4,12 +4,13 @@ export function Header() {
     const style = {
         minWidth: "15vw",
         padding: "10px",
-        background: "white",
-        color: "black",
+        // background: "white",
+        color: "white",
         textAlign: "center",
         fontWeight: "bold",
         borderRadius: "5px",
         marginTop: "15px",
+        transition: "transform 0.5s,background-color 0.5s",
     };
 
     return (
