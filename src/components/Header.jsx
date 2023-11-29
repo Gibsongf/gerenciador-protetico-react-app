@@ -1,12 +1,38 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
+const ResponsiveLogo = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const style = {
+        width: "20vw",
+    };
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        console.log(windowWidth);
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [windowWidth]);
+
+    return (
+        <>
+            {windowWidth < 1124 ? (
+                ""
+            ) : (
+                <img style={style} src="../src/assets/dglogoblack.png" alt="" />
+            )}
+        </>
+    );
+};
 
 export function Header() {
     const style = {
         minWidth: "15vw",
         padding: "10px",
-        // background: "white",
-        // border: "solid white 1px",
-        // color: "white",
         textAlign: "center",
         fontWeight: "bold",
         borderRadius: "5px",
@@ -17,6 +43,7 @@ export function Header() {
     return (
         <>
             <div className="header">
+                <ResponsiveLogo />
                 <div className="nav">
                     {/* <button onClick={onclick}> */}
                     <NavLink className="nav-btn" to="/servico/todos">

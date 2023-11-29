@@ -21,6 +21,7 @@ import {
 export const AppContext = createContext({
     errorMsg: {},
 });
+
 function App() {
     const token = localStorage.getItem("token");
 
