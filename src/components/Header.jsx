@@ -20,7 +20,7 @@ const ResponsiveLogo = () => {
 
     return (
         <>
-            {windowWidth < 1124 ? (
+            {windowWidth < 820 ? (
                 ""
             ) : (
                 <img style={style} src="../src/assets/dglogoblack.png" alt="" />

@@ -7,8 +7,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
-
 }
 
 .content {
@@ -16,18 +14,13 @@
   flex-direction: column;
   gap: 30px;
   align-items: center;
+  justify-self: center;
 }
 
 table {
   transition: all 0.3s;
 }
 
-.App {
-  display: grid;
-  gap: 25px;
-
-
-}
 
 
 .nav-btn {
@@ -64,7 +57,7 @@ caption {
 td {
   color: black;
   border: 2px solid rgb(0, 0, 0);
-  padding: 15px;
+  padding: 10px 5px 10px 5px;
 }
 
 th {
@@ -72,20 +65,18 @@ th {
   color: black;
   border: 2px solid rgb(0, 0, 0);
   border-bottom: 4px solid rgb(0, 0, 0);
-  padding: 15px;
+  padding: 10px;
 }
 
 
 
 
 .todos-table {
-  width: -webkit-fill-available;
+  /* width: min-content; */
   border-collapse: collapse;
   background-color: white;
   color: white;
   text-align: center;
-  border-left: white solid 5px;
-  border-right: white solid 5px;
   animation: fadeInTable 0.5s ease-in-out;
 
 }
@@ -123,9 +114,9 @@ th {
 
 
 
-td {
+/* td {
   padding: 10px;
-}
+} */
 
 
 
@@ -169,7 +160,7 @@ td {
   flex-direction: column;
 }
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 820px) {
   #root {
     /* background-image: none */
   }
@@ -179,6 +170,8 @@ td {
   }
 
   .App {
+    display: grid;
+    gap: 25px;
     grid-template-columns: 20vw 70vw;
     /* grid-template-rows: 0.3fr 1fr 1fr; */
 

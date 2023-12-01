@@ -22,7 +22,7 @@ export function TodosDentistas() {
             {" "}
             <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
             <table className="todos-table">
-                <Caption txt={"Dentistas Registrados"} />
+                <Caption txt={"Dentistas"} />
 
                 <tbody>
                     <TableRow rowNames={row} />
@@ -45,7 +45,7 @@ export function TodosLocais() {
         <>
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
             <table className="todos-table">
-                <Caption txt={"Locais Registrados"} />
+                <Caption txt={"Locais"} />
 
                 <tbody>
                     <TableRow rowNames={row} />
@@ -86,7 +86,7 @@ export function TodosProdutos() {
                 {close ? form : ""}
 
                 <table className="todos-table">
-                    <Caption txt={"Produtos Registrados"} />
+                    <Caption txt={"Produtos"} />
 
                     <tbody>
                         <TableRow rowNames={row} />
@@ -104,7 +104,7 @@ export function TableService({ providedData, setUpdateTable }) {
     //month and to export excel of all marked items ?
     // console.log(providedData);
     let { data, setTableUpdate } = useTodosApi("servico", true);
-    const row = ["Dentista", "Paciente", "Produto", "Finalizado", ""];
+    const row = ["Dentista", "Paciente", "Produto", "Finalizado", "", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
@@ -124,6 +124,7 @@ export function TableService({ providedData, setUpdateTable }) {
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
             <NavSortTable setDate={setSortDate} />
+
             <PopUpEditContext.Provider
                 value={{
                     setForm,
@@ -134,7 +135,7 @@ export function TableService({ providedData, setUpdateTable }) {
                 {close ? form : ""}
 
                 <table className="todos-table">
-                    <Caption txt={"Serviços Registrados"} />
+                    <Caption txt={"Serviços"} />
 
                     <tbody>
                         <TableRow rowNames={row} />

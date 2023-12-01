@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import { EditContext } from "../GenerateDetails";
-import { AppContext } from "../../App";
+import { EditContext } from "./GenerateDetails";
+import { AppContext } from "../App";
+import { ExcelLink } from "../Api";
+import { useDetailsApi } from "./ApiHooks";
 
 ButtonRegister.propTypes = {
     handleSubmit: PropTypes.func,
@@ -9,30 +11,6 @@ ButtonRegister.propTypes = {
 ButtonEdit.propTypes = {
     handleSubmit: PropTypes.func,
 };
-export function BtnDownloadToExcel({ data }) {
-    // const dbId = localStorage.getItem("servicoID");
-    // const { data, setUpdate } = useDetailsApi("servico", dbId);
-
-    const exportExcel = async () => {
-        // turn this to post http send data and receive excel file
-        const blob = await ExcelLink(data._id);
-        const date = data.dataRegistro.split("T")[0];
-        const { nome, sobrenome } = data.dentista;
-        const fileName = `${nome}-${sobrenome}-${date}`;
-        // console.log(fileName);
-        const downloadLink = document.createElement("a");
-        downloadLink.download = fileName;
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.click();
-        URL.revokeObjectURL(downloadLink.href);
-    };
-
-    return (
-        <button onClick={exportExcel} type="button" className="export">
-            Export
-        </button>
-    );
-}
 export function ButtonRegister({ handleSubmit }) {
     const style = {
         width: "20vw",
@@ -116,5 +94,30 @@ export function ButtonConfirm({ handleSubmit }) {
         </button>
 
         /* </div> */
+    );
+}
+
+export function BtnDownloadToExcel({ data }) {
+    // const dbId = localStorage.getItem("servicoID");
+    // const { data, setUpdate } = useDetailsApi("servico", dbId);
+
+    const exportExcel = async () => {
+        // turn this to post http send data and receive excel file
+        const blob = await ExcelLink(data._id);
+        const date = data.dataRegistro.split("T")[0];
+        const { nome, sobrenome } = data.dentista;
+        const fileName = `${nome}-${sobrenome}-${date}`;
+        // console.log(fileName);
+        const downloadLink = document.createElement("a");
+        downloadLink.download = fileName;
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.click();
+        URL.revokeObjectURL(downloadLink.href);
+    };
+
+    return (
+        <button onClick={exportExcel} type="button" className="export">
+            Export
+        </button>
     );
 }

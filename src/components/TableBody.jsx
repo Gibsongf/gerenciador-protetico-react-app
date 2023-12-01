@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { booleanToString, formatTelefone } from "../utils";
 import { ButtonEditForm } from "./NewFormButton";
+import { BtnDownloadToExcel } from "./Buttons";
 
 export function DentistTableBody({ data }) {
     const saveDentistId = (e) => {
@@ -117,6 +118,9 @@ export function ServiceTableBody({ data, sortDate }) {
                 <td>{booleanToString(d.statusEntrega)}</td>
                 {/* <td onClick={() => showForm(d)}>Editar</td> */}
                 <ButtonEditForm type="servico" data={d} />
+                <td>
+                    <BtnDownloadToExcel data={d} />
+                </td>
             </tr>
         );
     });

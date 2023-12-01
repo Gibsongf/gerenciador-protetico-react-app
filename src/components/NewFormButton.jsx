@@ -65,7 +65,7 @@ export function ButtonNewForm({ type, tableUpdate }) {
                 {showForm ? <Form /> : ""}
             </NewFormContext.Provider>
             <button onClick={onClick} style={btnStyle} className="new-form">
-                Adicionar Novo{" "}
+                Novo{" "}
                 {type.toLowerCase().replace(type[0], type[0].toUpperCase())}
             </button>
         </div>
