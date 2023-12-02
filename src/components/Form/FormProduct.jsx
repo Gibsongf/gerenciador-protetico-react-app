@@ -5,7 +5,7 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonConfirm, ButtonRegister } from "./Buttons";
+import { ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 // import { EditContext } from "../GenerateDetails";
 import { PopUpEditContext } from "../../pages/Todos";

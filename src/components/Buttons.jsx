@@ -3,14 +3,52 @@ import PropTypes from "prop-types";
 import { EditContext } from "./GenerateDetails";
 import { AppContext } from "../App";
 import { ExcelLink } from "../Api";
-import { useDetailsApi } from "./ApiHooks";
+import Icon from "@mdi/react";
+import { mdiDownloadBoxOutline } from "@mdi/js";
 
 ButtonRegister.propTypes = {
+    handleSubmit: PropTypes.func,
+};
+ButtonConfirm.propTypes = {
     handleSubmit: PropTypes.func,
 };
 ButtonEdit.propTypes = {
     handleSubmit: PropTypes.func,
 };
+ButtonClose.propTypes = {
+    setClose: PropTypes.func,
+};
+
+BtnDownloadToExcel.propTypes = {
+    data: PropTypes.object,
+};
+export function BtnDownloadToExcel({ data }) {
+    // const dbId = localStorage.getItem("servicoID");
+    // const { data, setUpdate } = useDetailsApi("servico", dbId);
+
+    const exportExcel = async () => {
+        // turn this to post http send data and receive excel file
+        const blob = await ExcelLink(data._id);
+        const date = data.dataRegistro.split("T")[0];
+        const { nome, sobrenome } = data.dentista;
+        const fileName = `${nome}-${sobrenome}-${date}`;
+        // console.log(fileName);
+        const downloadLink = document.createElement("a");
+        downloadLink.download = fileName;
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.click();
+        URL.revokeObjectURL(downloadLink.href);
+    };
+
+    return (
+        <Icon
+            onClick={exportExcel}
+            path={mdiDownloadBoxOutline}
+            title="export-btn"
+            className="export-btn"
+        />
+    );
+}
 export function ButtonRegister({ handleSubmit }) {
     const style = {
         width: "20vw",
@@ -74,12 +112,6 @@ export function ButtonEdit({ handleSubmit }) {
 }
 
 export function ButtonConfirm({ handleSubmit }) {
-    const divStyle = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: "5px",
-    };
     const btnStyle = {
         width: "25vw",
         padding: "5px",
@@ -94,30 +126,5 @@ export function ButtonConfirm({ handleSubmit }) {
         </button>
 
         /* </div> */
-    );
-}
-
-export function BtnDownloadToExcel({ data }) {
-    // const dbId = localStorage.getItem("servicoID");
-    // const { data, setUpdate } = useDetailsApi("servico", dbId);
-
-    const exportExcel = async () => {
-        // turn this to post http send data and receive excel file
-        const blob = await ExcelLink(data._id);
-        const date = data.dataRegistro.split("T")[0];
-        const { nome, sobrenome } = data.dentista;
-        const fileName = `${nome}-${sobrenome}-${date}`;
-        // console.log(fileName);
-        const downloadLink = document.createElement("a");
-        downloadLink.download = fileName;
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.click();
-        URL.revokeObjectURL(downloadLink.href);
-    };
-
-    return (
-        <button onClick={exportExcel} type="button" className="export">
-            Export
-        </button>
     );
 }

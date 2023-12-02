@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
-import { ButtonEdit, ButtonRegister } from "./Buttons";
+import { ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 

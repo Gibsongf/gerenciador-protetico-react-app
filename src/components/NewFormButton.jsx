@@ -3,7 +3,7 @@ import { FormDentist } from "./Form/FormDentist";
 import { FormLocal } from "./Form/FormLocal";
 import { FormProduct } from "./Form/FormProduct";
 import { FormService } from "./Form/FormService";
-import { ButtonClose } from "./Form/Buttons";
+import { ButtonClose } from "./Buttons";
 import PropTypes from "prop-types";
 import { PopUpEditContext } from "../pages/Todos";
 
