@@ -10,7 +10,7 @@ import "./styles/App.css";
 // import { FormProduct } from "./components/Form/FormProduct";
 import { FormLogin } from "./components/Form/FormLogin";
 // import { FormService } from "./components/Form/FormService";
-import { DentistaDetails, LocalDetails, ServiceDetails } from "./pages/Details";
+import { DentistaDetails, LocalDetails } from "./pages/Details";
 import {
     TodosDentistas,
     TodosLocais,
@@ -52,10 +52,10 @@ function App() {
                                 path="/servico/todos"
                                 element={<TableService />}
                             />
-                            <Route
+                            {/* <Route
                                 path="/servico/:id"
                                 element={<ServiceDetails />}
-                            />
+                            /> */}
                         </Route>
                         <Route path="/local">
                             <Route
@@ -73,25 +73,6 @@ function App() {
                         />
                     </Routes>
                 </div>
-
-                {/* All List  */}
-                {/* <LocalList /> */}
-                {/* <DentistasList />*/}
-                {/* <LocalList /> */}
-                {/* <ProductList /> */}
-                {/* <ServiçoList /> */}
-
-                {/* Forms */}
-                {/* <FormLocal /> */}
-                {/* <FormDentist /> */}
-                {/* <FormProduct /> */}
-                {/* <FormService /> */}
-
-                {/* Details */}
-                {/* <DentistaDetails /> */}
-                {/* <LocalDetails/> */}
-                {/* <ServiçoDetails/> */}
-                {/* <ProdutoDetails/> */}
             </AppContext.Provider>
         </div>
     );

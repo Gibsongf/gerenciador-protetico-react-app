@@ -1,15 +1,10 @@
-import { ExcelLink } from "./Api";
-
-const exportExcel = async () => {
-    // turn this to post http send data and receive excel file
-    const blob = await ExcelLink(dbId);
+export function downloadExcelAction(blob, fileName) {
     const downloadLink = document.createElement("a");
-    // console.log(data);
-    // downloadLink.download = "yey";
+    downloadLink.download = fileName;
     downloadLink.href = URL.createObjectURL(blob);
     downloadLink.click();
     URL.revokeObjectURL(downloadLink.href);
-};
+}
 
 export function formatCpf(cpf) {
     let arr = String(cpf).split("");

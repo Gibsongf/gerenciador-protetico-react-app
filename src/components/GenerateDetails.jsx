@@ -7,10 +7,11 @@ import { Caption, NavSortTable, TableRow } from "./Table";
 import { formatTelefone, stateDetails } from "../utils";
 import { FormLocal } from "./Form/FormLocal";
 import { FormService } from "./Form/FormService";
-import { DentistTableBody, ServiceTableBody } from "./TableBody";
+import { DentistTableBody } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
 import Icon from "@mdi/react";
+import { FormExport } from "./Form/FormExport";
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
     // console.log(content);
@@ -49,40 +50,7 @@ export const PopUpEditContext = createContext({
     setForm: () => {},
     setUpdateServices: () => {},
 });
-// export function DentistServices({ data }) {
-//     const row = ["Dentista", "Paciente", "Produto", "Finalizado"];
 
-//     const [close, setClose] = useState(false);
-//     const [form, setForm] = useState();
-//     const [sortDate, setSortDate] = useState();
-
-//     // console.log(data);
-//     // create export excel of selected month and "entrega" status sim
-//     return (
-//         <div className="serviço">
-//             <NavSortTable setDate={setSortDate} />
-
-//             <table className="todos-table">
-//                 <Caption txt={"Serviços"} />
-
-//                 <tbody>
-//                     <TableRow rowNames={row} />
-//                     {data.serviços ? (
-//                         <ServiceTableBody
-//                             data={data.serviços}
-//                             sortDate={sortDate}
-//                         />
-//                     ) : (
-//                         ""
-//                     )}
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// }
-// DentistServices.propTypes = {
-//     data: PropTypes.object,
-// };
 LocalDentistWorkers.propTypes = {
     data: PropTypes.object,
 };
@@ -131,13 +99,14 @@ function LocalDentistWorkers({ data, setUpdateServices }) {
 export const EditContext = createContext({
     setEdit: () => {},
     setUpdate: () => {},
+    setExport: () => {},
 });
 // Link to other Details is getting confused with the previous used Details
 // separate then each getting using they own Details and see if works
 export function Details({ type, data, setUpdate }) {
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
+    const [exportPop, setExport] = useState(false);
     const { formState, infoContent } = stateDetails(data, type);
-    // console.log(data);
     const Form = () => {
         const obj = {
             dentista: <FormDentist initialState={formState} />,
@@ -146,11 +115,15 @@ export function Details({ type, data, setUpdate }) {
         };
         return obj[type];
     };
-    //providedData, setUpdateTable
+
     const Table = () => {
         const obj = {
             dentista: (
-                <TableService providedData={data} setUpdateTable={setUpdate} />
+                <TableService
+                    providedData={data}
+                    setUpdateTable={setUpdate}
+                    isDetails={true}
+                />
             ),
             local: (
                 <LocalDentistWorkers
@@ -163,16 +136,13 @@ export function Details({ type, data, setUpdate }) {
         return obj[type];
     };
 
-    // console.log(data);
-
-    // Format the data receive in details at the hook api
-    //
     return (
         <>
-            <EditContext.Provider value={{ setEdit, setUpdate }}>
+            <EditContext.Provider value={{ setEdit, setUpdate, setExport }}>
                 <Info content={infoContent} />
-                {edit ? "" : <Form />}
                 <Table />
+                {edit ? <Form /> : ""}
+                {exportPop ? <FormExport /> : ""}
             </EditContext.Provider>
         </>
     );

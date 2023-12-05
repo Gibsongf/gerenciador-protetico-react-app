@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useRef } from "react";
 
-export function NavSortTable({ setDate }) {
+export function NavSortTable({ setDate, isDetails, exportClick }) {
     NavSortTable.propTypes = {
         setDate: PropTypes.func,
     };
@@ -37,6 +37,7 @@ export function NavSortTable({ setDate }) {
                     id="month"
                 />
             </label>
+            {isDetails ? <button onClick={exportClick}>Export</button> : ""}
         </div>
     );
 }

@@ -24,7 +24,7 @@ table {
 
 
 .nav-btn {
-  min-width: 15vw;
+  /* min-width: 15vw; */
   padding: 10px;
   text-align: center;
   font-weight: bold;
@@ -113,10 +113,6 @@ th {
 }
 
 
-
-/* td {
-  padding: 10px;
-} */
 
 
 
@@ -214,16 +210,16 @@ th {
   }
 
   .nav-btn {
-    min-width: 5vw;
+    /* min-width: 5vw; */
     transition: border 0.3s;
     color: white;
     background-color: black;
-    border-left: solid 5px #141414;
+    border-left: solid 5px black;
     border-radius: 0px;
   }
 
   .active {
-    border-left: solid 15px red;
+    border-left: solid 10px red;
 
   }
 

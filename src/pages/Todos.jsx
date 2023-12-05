@@ -8,6 +8,9 @@ import {
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
 import { createContext, useEffect, useState } from "react";
+import { FormExport } from "../components/Form/FormExport.jsx";
+import { ApiMonthExcel } from "../Api.jsx";
+import { downloadExcelAction } from "../utils.jsx";
 
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
@@ -99,7 +102,7 @@ export function TodosProdutos() {
 }
 // create a button that show a window to the user decide stuffs about
 // the export all service of the items in the table page
-export function TableService({ providedData, setUpdateTable }) {
+export function TableService({ providedData, setUpdateTable, isDetails }) {
     // need a nav buttons with selection to choose if all/this month/specific
     //month and to export excel of all marked items ?
     // console.log(providedData);
@@ -108,7 +111,17 @@ export function TableService({ providedData, setUpdateTable }) {
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-
+    const onClickExport = async () => {
+        if (sortDate) {
+            const blob = await ApiMonthExcel(
+                providedData.dentista._id,
+                sortDate
+            );
+            const { nome, sobrenome } = providedData.dentista;
+            const fileName = `${nome}-${sobrenome}-${sortDate}`;
+            downloadExcelAction(blob, fileName);
+        }
+    };
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
@@ -118,12 +131,17 @@ export function TableService({ providedData, setUpdateTable }) {
     const definiteData =
         providedData !== undefined ? providedData.serviços : data;
     const newBtnRender = providedData === undefined ? true : false;
+
     return (
         <>
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
-            <NavSortTable setDate={setSortDate} />
+            <NavSortTable
+                setDate={setSortDate}
+                isDetails={isDetails}
+                exportClick={onClickExport}
+            />
 
             <PopUpEditContext.Provider
                 value={{

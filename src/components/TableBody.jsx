@@ -81,9 +81,7 @@ export function ProductTableBody({ data }) {
 export function ServiceTableBody({ data, sortDate }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
-    };
-    const saveServiceId = (e) => {
-        localStorage.setItem("servicoID", e.target.id);
+        // localStorage.setItem("data", JSON.stringify(data));
     };
 
     // console.log(data);
