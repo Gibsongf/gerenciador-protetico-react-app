@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import { useRef } from "react";
 
+NavSortTable.propTypes = {
+    setDate: PropTypes.func,
+    isDetails: PropTypes.bool,
+    exportClick: PropTypes.func,
+};
 export function NavSortTable({ setDate, isDetails, exportClick }) {
     NavSortTable.propTypes = {
         setDate: PropTypes.func,

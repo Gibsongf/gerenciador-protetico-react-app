@@ -11,7 +11,6 @@ import { DentistTableBody } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
 import Icon from "@mdi/react";
-import { FormExport } from "./Form/FormExport";
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
     // console.log(content);
@@ -142,7 +141,6 @@ export function Details({ type, data, setUpdate }) {
                 <Info content={infoContent} />
                 <Table />
                 {edit ? <Form /> : ""}
-                {exportPop ? <FormExport /> : ""}
             </EditContext.Provider>
         </>
     );

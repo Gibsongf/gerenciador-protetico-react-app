@@ -7,8 +7,7 @@ import {
     ServiceTableBody,
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
-import { createContext, useEffect, useState } from "react";
-import { FormExport } from "../components/Form/FormExport.jsx";
+import { createContext, useState } from "react";
 import { ApiMonthExcel } from "../Api.jsx";
 import { downloadExcelAction } from "../utils.jsx";
 
@@ -100,11 +99,16 @@ export function TodosProdutos() {
         </>
     );
 }
-// create a button that show a window to the user decide stuffs about
-// the export all service of the items in the table page
+
+import PropTypes from "prop-types";
+
+TableService.propTypes = {
+    providedData: PropTypes.object,
+    isDetails: PropTypes.bool,
+    setUpdateTable: PropTypes.func,
+};
+
 export function TableService({ providedData, setUpdateTable, isDetails }) {
-    // need a nav buttons with selection to choose if all/this month/specific
-    //month and to export excel of all marked items ?
     // console.log(providedData);
     let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", "", ""];
