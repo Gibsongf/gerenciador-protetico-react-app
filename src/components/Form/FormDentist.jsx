@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 
 import { CpfInput, SelectInput, SimpleInput, TelefoneInput } from "../Inputs";
 import "../../styles/Forms.css";
@@ -34,8 +34,6 @@ export function FormDentist({ initialState, closeBtn }) {
         ref.current
     );
     const handleSubmitResponse = async (e) => {
-        e.preventDefault();
-
         const success = await handleSubmit(e);
         if (success) {
             if (initialState.formType === "new") {
@@ -50,7 +48,12 @@ export function FormDentist({ initialState, closeBtn }) {
     };
     return (
         <div className="form-container" id="pop-up">
-            <form action="" ref={ref} id="pop-up-content">
+            <form
+                onSubmit={handleSubmitResponse}
+                action=""
+                ref={ref}
+                id="pop-up-content"
+            >
                 {closeBtn}
                 <legend>
                     <h3>{legendTxt}</h3>
@@ -86,12 +89,8 @@ export function FormDentist({ initialState, closeBtn }) {
                     labelTxt={"Local de Trabalho"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
-                {initialState.formType === "edit" && (
-                    <ButtonEdit handleSubmit={handleSubmitResponse} />
-                )}
-                {initialState.formType === "new" && (
-                    <ButtonRegister handleSubmit={handleSubmitResponse} />
-                )}
+                {initialState.formType === "edit" && <ButtonEdit />}
+                {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>
     );
