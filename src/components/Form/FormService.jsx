@@ -12,9 +12,8 @@ import "../../styles/Forms.css";
 import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
-import { ButtonConfirm, ButtonEdit, ButtonRegister } from "../Buttons";
+import { ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
-import { EditContext } from "../GenerateDetails";
 import { PopUpEditContext } from "../../pages/Todos";
 
 FormService.propTypes = {

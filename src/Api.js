@@ -12,7 +12,7 @@ export async function apiLogin(loginData) {
 
         if (response.status === 200) {
             const data = await response.json();
-            console.log("Login successfully");
+            // console.log("Login successfully");
             localStorage.setItem("token", data.token);
             return true;
         } else {
@@ -36,7 +36,7 @@ export async function apiRegister(loginData) {
 
         if (response.status === 200) {
             const data = await response.json();
-            console.log("Login successfully");
+            // console.log("Login successfully");
             localStorage.setItem("token", data.token);
             return true;
         } else {
@@ -96,7 +96,7 @@ export async function APIGetServiceBy(id, by) {
 
 export async function APIPostNewData(formData) {
     const url = `http://localhost:3000/api/${formData["category"]}/novo`;
-    console.log(formData);
+    // console.log(formData);
     const data = await setupFetch(url, "post", formData);
     // console.log(data);
     return data;
