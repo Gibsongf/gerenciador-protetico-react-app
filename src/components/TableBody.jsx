@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { booleanToString, formatTelefone } from "../utils";
+import { booleanToString, formatTelefone } from "../utils.js";
 import { ButtonEditForm } from "./NewFormButton";
 import { BtnDownloadToExcel } from "./Buttons";
 
@@ -10,7 +10,6 @@ export function DentistTableBody({ data }) {
     const saveLocalId = (e) => {
         localStorage.setItem("localID", e.target.id);
     };
-    // console.log(data);
     return data.map((d) => {
         return (
             <tr key={d._id}>
@@ -24,7 +23,7 @@ export function DentistTableBody({ data }) {
                         {d.nome} {d.sobrenome}{" "}
                     </Link>
                 </td>
-                <td>{d.telefone}</td>
+                <td>{formatTelefone(d.telefone)}</td>
 
                 <td>
                     <Link
@@ -81,14 +80,9 @@ export function ProductTableBody({ data }) {
 export function ServiceTableBody({ data, sortDate }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
-        // localStorage.setItem("data", JSON.stringify(data));
     };
 
-    // console.log(data);
     return data.map((d, index) => {
-        // console.log(d);
-        // implement here a check with date
-        // with these we avoid change data and doing useless fetch
         if (
             sortDate &&
             d.dataRegistro.split("-")[1] !== sortDate.split("-")[1]
@@ -114,7 +108,6 @@ export function ServiceTableBody({ data, sortDate }) {
                         : d.produto[0].nome}
                 </td>
                 <td>{booleanToString(d.statusEntrega)}</td>
-                {/* <td onClick={() => showForm(d)}>Editar</td> */}
                 <ButtonEditForm type="servico" data={d} />
                 <td>
                     <BtnDownloadToExcel data={d} />

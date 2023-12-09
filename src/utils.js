@@ -5,7 +5,23 @@ export function downloadExcelAction(blob, fileName) {
     downloadLink.click();
     URL.revokeObjectURL(downloadLink.href);
 }
-
+export const removeFormattedCpf = (formData) => {
+    const obj = { ...formData };
+    obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
+    return obj;
+};
+export const replaceUndefined = (obj) => {
+    Object.keys(obj).forEach((k) => {
+        if (obj[k] === undefined) {
+            obj[k] = "";
+        }
+    });
+};
+export const telephoneJustNumber = (formData) => {
+    const obj = { ...formData };
+    obj.telefone = obj.telefone.replace("-", "");
+    return obj;
+};
 export function formatCpf(cpf) {
     let arr = String(cpf).split("");
     let a = arr.map((n, indx) => {

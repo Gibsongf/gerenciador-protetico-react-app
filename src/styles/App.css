@@ -92,7 +92,7 @@ th {
 }
 
 .select-product {
-  width: 50%;
+  width: 40%;
   align-self: center;
   padding: 5px;
   font-weight: bold;
@@ -159,6 +159,7 @@ th {
 .export-btn {
   min-width: 6vw;
 }
+
 
 
 @media screen and (min-width: 820px) {

@@ -90,7 +90,7 @@ const formatToForm = (type, data) => {
     const servico = () => {
         return {
             paciente: data.paciente,
-            dentista: data.dentista._id, //just id to be pre-selected at select input
+            dentista: data.dentista._id,
             local: data.local,
             produto: data.produto,
             statusEntrega: data.statusEntrega,

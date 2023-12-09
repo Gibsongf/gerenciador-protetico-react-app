@@ -25,16 +25,12 @@ BtnDownloadToExcel.propTypes = {
 };
 
 export function BtnDownloadToExcel({ data }) {
-    // const dbId = localStorage.getItem("servicoID");
-    // const { data, setUpdate } = useDetailsApi("servico", dbId);
-
     const exportExcel = async () => {
         // turn this to post http send data and receive excel file
         const blob = await ApiOneExcel(data._id);
         const date = data.dataRegistro.split("T")[0];
         const { nome, sobrenome } = data.dentista;
         const fileName = `${nome}-${sobrenome}-${date}`;
-        // console.log(fileName);
         downloadExcelAction(blob, fileName);
     };
 

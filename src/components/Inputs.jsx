@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import { RefContext } from "./Form/FormService";
 
 export function TipoTabelaSelect({ value, onChange }) {
-    // console.log(value);
     return (
         <div className="tabela-options">
             <label htmlFor="tabela-options">Tipo de Tabela</label>
@@ -32,7 +31,6 @@ export function CepInput({ value, onChange, msg }) {
                 name="cep"
                 id="cep"
                 placeholder="xxxxx-xxx"
-                // maxLength={9}
                 required={true}
             ></input>
         </div>
@@ -51,7 +49,6 @@ export function SelectInput({
     if (!data) {
         return <div>Loading...</div>;
     }
-    // console.log(initialValue);
     return (
         <div className="select-options">
             <label htmlFor={category}>{labelTxt}</label>
@@ -83,7 +80,6 @@ export function FilterDentistsByLocation({
     msg,
 }) {
     let { data } = useDetailsApi("local", dbId);
-    // console.log(initialValue);
     const RenderOptions = () => {
         if (!dbId) {
             return <WaitSelectLocal />;
@@ -99,7 +95,6 @@ export function FilterDentistsByLocation({
     const WaitSelectLocal = () => {
         return <option value={null}>Selecione Local</option>;
     };
-    // console.log(initialValue);
     return (
         <div className="select-options">
             <label htmlFor="dentista">Dentistas:</label>
@@ -109,6 +104,7 @@ export function FilterDentistsByLocation({
                 onChange={onChange}
                 name="dentista"
                 id="dentista"
+                required={true}
             >
                 <option></option>
                 {!data ? "" : <RenderOptions />}
@@ -159,6 +155,7 @@ export function SimpleInput({
     value,
     onChange,
     type = "text",
+    require = true,
     msg,
 }) {
     return (
@@ -171,6 +168,7 @@ export function SimpleInput({
                 id={id}
                 value={value}
                 onChange={onChange}
+                required={require}
             />
         </div>
     );
@@ -221,7 +219,6 @@ export function SearchProducts({
         onChange(e);
     };
     useEffect(() => {
-        // console.log(search, products);
         const filter = () =>
             products.filter((item) => {
                 if (item.nome.toLowerCase().includes(search.toLowerCase())) {
@@ -235,7 +232,6 @@ export function SearchProducts({
     const saveSelectedName = () => {
         if (saveName.length < 1) return;
         setSelectNames((prev) => [...prev, saveName]);
-        // setProduct((prev) => [...prev, saveName]);
     };
     return (
         <div className="search-product">
@@ -318,8 +314,16 @@ function CheckBox({ name, value }) {
         </label>
     );
 }
+CheckBox.propTypes = {
+    name: PropTypes.string,
+    value: PropTypes.any,
+};
 SearchProducts.propTypes = {
     products: PropTypes.array,
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    preSelectProduct: PropTypes.any,
+    msg: PropTypes.string,
 };
 SimpleInput.propTypes = {
     id: PropTypes.string.isRequired,
@@ -328,6 +332,7 @@ SimpleInput.propTypes = {
     onChange: PropTypes.func,
     type: PropTypes.string,
     msg: PropTypes.string,
+    require: PropTypes.bool,
 };
 TelefoneInput.propTypes = {
     value: PropTypes.any,
@@ -346,13 +351,13 @@ CepInput.propTypes = {
 };
 
 TipoTabelaSelect.propTypes = {
-    initialValue: PropTypes.string,
+    value: PropTypes.string,
     onChange: PropTypes.func,
 };
-// TipoTabelaSelect.defaultProps = {
-//     initialValue: "Normal",
-// };
-
+EntregaStatus.propTypes = {
+    value: PropTypes.any,
+    onChange: PropTypes.func,
+};
 SelectInput.propTypes = {
     category: PropTypes.string,
     initialValue: PropTypes.string,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APIDetails, APIGetServiceBy, APItodos } from "../Api";
+import { APIDetails, APIGetServiceBy, APItodos } from "../Api.js";
 
 export function useTodosApi(category, forTable) {
     const [data, setData] = useState();

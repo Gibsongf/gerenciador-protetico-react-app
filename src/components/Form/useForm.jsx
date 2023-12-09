@@ -1,26 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { APIGetServiceBy, APIPostNewData, APIPutData } from "../../Api.js";
 import { AppContext } from "../../App";
-import { useNavigate } from "react-router-dom";
-// import { useGetServiceBy } from "../ApiHooks";
-
-const replaceUndefined = (obj) => {
-    Object.keys(obj).forEach((k) => {
-        if (obj[k] === undefined) {
-            obj[k] = "";
-        }
-    });
-};
+import {
+    removeFormattedCpf,
+    replaceUndefined,
+    telephoneJustNumber,
+} from "../../utils.js";
 
 export function useForm(initialState, formElements) {
     replaceUndefined(initialState);
-    const nav = useNavigate();
     const [formData, setFormData] = useState(initialState);
     const [result, setResult] = useState({});
     const { errorMsg } = useContext(AppContext);
     const handleChange = (e) => {
         setFormData((prev) => {
-            // console.log(e.target);
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
@@ -45,11 +38,6 @@ export function useForm(initialState, formElements) {
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
 
-    const removeFormattedCpf = () => {
-        const obj = { ...formData };
-        obj.cpf = obj.cpf.toString().replaceAll(".", "").replace("-", "");
-        return obj;
-    };
     const callAPI = (arr) => {
         // console.log(arr);
         if (Object.keys(arr).includes("errors")) {
@@ -79,18 +67,14 @@ export function useForm(initialState, formElements) {
             errorMsg[k] = "";
         });
     };
-    const telefoneJustNumber = () => {
-        const obj = { ...formData };
-        obj.telefone = obj.telefone.replace("-", "");
-        return obj;
-    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const type = initialState.formType;
         const whichAPI = { new: APIPostNewData, edit: APIPutData };
         let data;
         if (formData.category === "dentista") {
-            data = removeFormattedCpf();
+            data = removeFormattedCpf(formData);
             const response = await whichAPI[type](data, initialState.dbId);
             if (type === "edit") {
                 updateDentistServicesLocation(response.dentista);
@@ -99,7 +83,7 @@ export function useForm(initialState, formElements) {
             return callAPI(response);
         }
         if (formData.category === "local") {
-            data = telefoneJustNumber();
+            data = telephoneJustNumber(formData);
             const response = await whichAPI[type](data, initialState.dbId);
             clearErrorMsg();
             return callAPI(response);

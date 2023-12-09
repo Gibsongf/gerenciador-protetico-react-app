@@ -3,22 +3,33 @@ import { createContext, useContext, useState } from "react";
 import { useGetServiceBy } from "./ApiHooks";
 import "../styles/Details.css";
 import { FormDentist } from "./Form/FormDentist";
-import { Caption, NavSortTable, TableRow } from "./Table";
-import { formatTelefone, stateDetails } from "../utils";
+import { Caption, TableRow } from "./Table";
+import { formatTelefone, stateDetails } from "../utils.js";
 import { FormLocal } from "./Form/FormLocal";
 import { FormService } from "./Form/FormService";
 import { DentistTableBody } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
 import Icon from "@mdi/react";
+
+export const PopUpEditContext = createContext({
+    setShowForm: () => {},
+    setForm: () => {},
+    setUpdateServices: () => {},
+});
+export const EditContext = createContext({
+    setEdit: () => {},
+    setUpdate: () => {},
+    setExport: () => {},
+});
+
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
-    // console.log(content);
-
     const divBtnContainer = {
         display: "flex",
         justifyContent: "flex-end",
     };
+
     return (
         <div className="info">
             <div style={divBtnContainer}>
@@ -44,46 +55,35 @@ const Info = ({ content }) => {
         </div>
     );
 };
-export const PopUpEditContext = createContext({
-    setShowForm: () => {},
-    setForm: () => {},
-    setUpdateServices: () => {},
-});
 
-LocalDentistWorkers.propTypes = {
-    data: PropTypes.object,
-};
 //Table with  "dentista" that work at detailed page of a "local" place
 function LocalDentistWorkers({ data, setUpdateServices }) {
     const row = ["Nome", "Telefone", "Endereço"];
     const serviços = useGetServiceBy(data.local._id, "local");
-    // const serviceRow = ["Dentista", "Paciente", "Produto", "Finalizado"];
-    // const [sortDate, setSortDate] = useState();
     if (!data) {
         // Data is still being fetched
         return <div>Loading...</div>;
     }
 
-    //
-    data.dentistas.forEach((key) => {
-        key.local = data.local;
-        // console.log(key);
+    data.dentistas.forEach((dentista) => {
+        dentista.local = data.local;
     });
-
     return (
         <>
-            <div>
-                <table className="todos-table">
-                    <Caption txt={"Dentistas"} />
+            {data.dentistas.length > 0 && (
+                <div>
+                    <table className="todos-table">
+                        <Caption txt={"Dentistas"} />
 
-                    <tbody>
-                        <TableRow rowNames={row} />
-                        <DentistTableBody data={data.dentistas} />
-                    </tbody>
-                </table>
-            </div>
+                        <tbody>
+                            <TableRow rowNames={row} />
+                            <DentistTableBody data={data.dentistas} />
+                        </tbody>
+                    </table>
+                </div>
+            )}
             <div>
-                {serviços ? (
+                {serviços !== undefined && serviços.length > 0 ? (
                     <TableService
                         providedData={{ serviços }}
                         setUpdateTable={setUpdateServices}
@@ -95,16 +95,9 @@ function LocalDentistWorkers({ data, setUpdateServices }) {
         </>
     );
 }
-export const EditContext = createContext({
-    setEdit: () => {},
-    setUpdate: () => {},
-    setExport: () => {},
-});
-// Link to other Details is getting confused with the previous used Details
-// separate then each getting using they own Details and see if works
+
 export function Details({ type, data, setUpdate }) {
     const [edit, setEdit] = useState(false);
-    const [exportPop, setExport] = useState(false);
     const { formState, infoContent } = stateDetails(data, type);
     const Form = () => {
         const obj = {
@@ -114,7 +107,6 @@ export function Details({ type, data, setUpdate }) {
         };
         return obj[type];
     };
-
     const Table = () => {
         const obj = {
             dentista: (
@@ -137,7 +129,7 @@ export function Details({ type, data, setUpdate }) {
 
     return (
         <>
-            <EditContext.Provider value={{ setEdit, setUpdate, setExport }}>
+            <EditContext.Provider value={{ setEdit, setUpdate }}>
                 <Info content={infoContent} />
                 <Table />
                 {edit ? <Form /> : ""}
@@ -145,3 +137,16 @@ export function Details({ type, data, setUpdate }) {
         </>
     );
 }
+
+Info.propTypes = {
+    content: PropTypes.object,
+};
+LocalDentistWorkers.propTypes = {
+    data: PropTypes.object,
+    setUpdateServices: PropTypes.func,
+};
+Details.propTypes = {
+    type: PropTypes.string,
+    data: PropTypes.object,
+    setUpdate: PropTypes.func,
+};

@@ -50,7 +50,8 @@ form label {
 
 input[type="text"],
 input[type="tel"],
-input[type="number"] {
+input[type="number"],
+input[type='password'] {
     border-radius: 10px;
     padding: 5px;
     appearance: none;
@@ -66,11 +67,7 @@ select {
 
 }
 
-/* input:focus,
-input:focus-visible {
-    outline: 3px solid #646cff;
 
-} */
 
 .invalid-form {
     border: 3px solid red;
@@ -128,6 +125,31 @@ input:focus-visible {
     }
 }
 
+.login-container {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.login-container form {
+    padding: 35px;
+    border-top: 5px solid white;
+}
+
+.login-enter {
+    width: 10vw;
+    align-self: center;
+    padding: 5px;
+    font-size: 1em;
+    font-weight: bold;
+
+
+}
+
 @media screen and (min-width: 721px) {
     form {
         padding: 40px
@@ -136,6 +158,6 @@ input:focus-visible {
     #pop-up-content {
         width: 35vw;
         border-top: none;
-        margin: 0% auto;
+        margin: -5% auto;
     }
 }
