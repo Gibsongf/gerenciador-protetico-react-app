@@ -28,7 +28,7 @@ export function FormLocal({ initialState, closeBtn }) {
             endereço: "",
             cep: "",
             telefone: "",
-            tabela: "",
+            tabela: "Normal",
             category: "local",
             formType: "new",
         };
@@ -37,10 +37,7 @@ export function FormLocal({ initialState, closeBtn }) {
         initialState,
         ref.current
     );
-    // console.log(formData);
     const handleSubmitResponse = async (e) => {
-        e.preventDefault();
-
         const success = await handleSubmit(e);
         if (success) {
             if (initialState.formType === "new") {
@@ -55,7 +52,12 @@ export function FormLocal({ initialState, closeBtn }) {
     };
     return (
         <div className="form-container" id="pop-up">
-            <form action="" ref={ref} id="pop-up-content">
+            <form
+                onSubmit={handleSubmitResponse}
+                action=""
+                ref={ref}
+                id="pop-up-content"
+            >
                 {closeBtn}
                 <legend>
                     <h3>{legendTxt}</h3>
@@ -89,12 +91,8 @@ export function FormLocal({ initialState, closeBtn }) {
                     value={formData.tabela}
                     onChange={handleChange}
                 />
-                {initialState.formType === "edit" && (
-                    <ButtonEdit handleSubmit={handleSubmitResponse} />
-                )}
-                {initialState.formType === "new" && (
-                    <ButtonRegister handleSubmit={handleSubmitResponse} />
-                )}
+                {initialState.formType === "edit" && <ButtonEdit />}
+                {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>
     );
