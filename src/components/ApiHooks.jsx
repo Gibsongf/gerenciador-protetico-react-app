@@ -47,11 +47,11 @@ export function useDetailsApi(category, id) {
 
 export function useGetServiceBy(id, by) {
     const [data, setData] = useState();
-    const [update, setUpdate] = useState(false);
+    // const [update, setUpdate] = useState(false);
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                console.log("fetch data details");
+                // console.log("fetch data details");
                 const result = await APIGetServiceBy(id, by);
                 // console.log(result);
                 setData(() => result.serviço);
@@ -62,6 +62,6 @@ export function useGetServiceBy(id, by) {
         if (id) {
             fetchingData();
         }
-    }, [id, update, by]);
+    }, [id, by]);
     return data;
 }

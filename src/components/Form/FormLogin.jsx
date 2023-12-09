@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiLogin, apiRegister } from "../../Api.js";
+import { apiLogin } from "../../Api.js";
 
 export function FormLogin() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: "", password: "" });
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        // newContentValidator(e);
+        // newContentValidator(e);, apiRegister
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const valid = await apiRegister(formData);
+        const valid = await apiLogin(formData);
         if (valid) {
             console.log("redirect to index page");
-            // navigate('/')
+            navigate("/");
         }
     };
     return (

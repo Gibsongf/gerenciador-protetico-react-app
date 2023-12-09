@@ -10,7 +10,6 @@ import { ButtonNewForm } from "../components/NewFormButton.jsx";
 import { createContext, useState } from "react";
 import { ApiMonthExcel } from "../Api.js";
 import { downloadExcelAction } from "../utils.js";
-
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
     const row = ["Nome", "Telefone", "Endereço"];
@@ -59,16 +58,14 @@ export function TodosLocais() {
 }
 export const PopUpEditContext = createContext({
     setShowForm: () => {},
-    s// useEffect(() => {
-    //     console.log(close);
-    // }, [close]);etForm: () => {},
+    setForm: () => {},
     setUpdate: () => {},
 });
 export function TodosProdutos() {
     const { data, setTableUpdate } = useTodosApi("produto", true);
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-    
+
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
@@ -109,6 +106,7 @@ TableService.propTypes = {
 };
 
 export function TableService({ providedData, setUpdateTable, isDetails }) {
+    // console.log(providedData);
     let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", "", ""];
     const [sortDate, setSortDate] = useState();
