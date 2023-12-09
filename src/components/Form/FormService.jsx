@@ -67,7 +67,6 @@ export function FormService({ initialState, closeBtn }) {
     };
     // console.log(initialState, formData);
     const beforeSendSubmit = async (e) => {
-        e.preventDefault();
         //before submit we format the product
         if (checkBoxRef.current) {
             formatFilterProducts();
@@ -88,7 +87,12 @@ export function FormService({ initialState, closeBtn }) {
 
     return (
         <div className="form-container" id="pop-up">
-            <form action="" ref={ref} id="pop-up-content">
+            <form
+                onSubmit={beforeSendSubmit}
+                action=""
+                ref={ref}
+                id="pop-up-content"
+            >
                 {closeBtn}
                 <legend>
                     <h3>{legendTxt}</h3>
@@ -130,12 +134,8 @@ export function FormService({ initialState, closeBtn }) {
                     onChange={handleChange}
                 />
 
-                {initialState.formType === "edit" && (
-                    <ButtonConfirm handleSubmit={beforeSendSubmit} />
-                )}
-                {initialState.formType === "new" && (
-                    <ButtonRegister handleSubmit={beforeSendSubmit} />
-                )}
+                {initialState.formType === "edit" && <ButtonConfirm />}
+                {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>
     );

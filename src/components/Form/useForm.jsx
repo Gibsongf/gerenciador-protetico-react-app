@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { APIGetServiceBy, APIPostNewData, APIPutData } from "../../Api";
+import { APIGetServiceBy, APIPostNewData, APIPutData } from "../../Api.js";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 // import { useGetServiceBy } from "../ApiHooks";
@@ -95,13 +95,13 @@ export function useForm(initialState, formElements) {
             if (type === "edit") {
                 updateDentistServicesLocation(response.dentista);
             }
-            // clearErrorMsg();
+            clearErrorMsg();
             return callAPI(response);
         }
         if (formData.category === "local") {
             data = telefoneJustNumber();
             const response = await whichAPI[type](data, initialState.dbId);
-            // clearErrorMsg();
+            clearErrorMsg();
             return callAPI(response);
         }
         const response = await whichAPI[type](formData, initialState.dbId);

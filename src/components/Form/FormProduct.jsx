@@ -7,7 +7,6 @@ import { useForm } from "./useForm";
 import PropTypes from "prop-types";
 import { ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
-// import { EditContext } from "../GenerateDetails";
 import { PopUpEditContext } from "../../pages/Todos";
 
 FormProduct.propTypes = {
@@ -35,8 +34,6 @@ export function FormProduct({ initialState, closeBtn }) {
         ref.current
     );
     const beforeSendSubmit = async (e) => {
-        e.preventDefault();
-
         const success = await handleSubmit(e);
         if (success) {
             if (initialState.formType === "new") {
@@ -47,7 +44,6 @@ export function FormProduct({ initialState, closeBtn }) {
             }
             if (initialState.formType === "edit") {
                 //success set close to false to closed the form
-                // setClose((e) => !e);
                 setShowForm((e) => !e);
                 // update the table data
                 setUpdate((e) => !e);
@@ -56,7 +52,12 @@ export function FormProduct({ initialState, closeBtn }) {
     };
     return (
         <div className="form-container" id="pop-up">
-            <form action="" ref={ref} id="pop-up-content">
+            <form
+                onSubmit={beforeSendSubmit}
+                action=""
+                ref={ref}
+                id="pop-up-content"
+            >
                 {closeBtn}
                 <legend>
                     <h3> {legendTxt} </h3>
@@ -85,12 +86,8 @@ export function FormProduct({ initialState, closeBtn }) {
                     msg={!errorMsg ? "" : errorMsg.valor_reduzido}
                 />
 
-                {initialState.formType === "edit" && (
-                    <ButtonConfirm handleSubmit={beforeSendSubmit} />
-                )}
-                {initialState.formType === "new" && (
-                    <ButtonRegister handleSubmit={beforeSendSubmit} />
-                )}
+                {initialState.formType === "edit" && <ButtonConfirm />}
+                {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>
     );
