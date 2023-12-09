@@ -2,10 +2,10 @@ import { useContext } from "react";
 import PropTypes from "prop-types";
 import { EditContext } from "./GenerateDetails";
 import { AppContext } from "../App";
-import { ApiOneExcel } from "../Api";
+import { ApiOneExcel } from "../Api.js";
 import Icon from "@mdi/react";
 import { mdiDownloadBoxOutline } from "@mdi/js";
-import { downloadExcelAction } from "../utils";
+import { downloadExcelAction } from "../utils.js";
 
 ButtonRegister.propTypes = {
     handleSubmit: PropTypes.func,
@@ -47,7 +47,7 @@ export function BtnDownloadToExcel({ data }) {
         />
     );
 }
-export function ButtonRegister({ handleSubmit }) {
+export function ButtonRegister() {
     const style = {
         width: "20vw",
         alignSelf: "center",
@@ -56,7 +56,7 @@ export function ButtonRegister({ handleSubmit }) {
         fontWeight: "bold",
     };
     return (
-        <button style={style} onClick={handleSubmit} type="submit">
+        <button style={style} type="submit">
             Registrar
         </button>
     );
@@ -77,7 +77,7 @@ export function ButtonClose({ setClose }) {
         </span>
     );
 }
-export function ButtonEdit({ handleSubmit }) {
+export function ButtonEdit() {
     const { setEdit } = useContext(EditContext);
     const divStyle = {
         display: "flex",
@@ -94,7 +94,7 @@ export function ButtonEdit({ handleSubmit }) {
     };
     return (
         <div className="container-edit-btn" style={divStyle}>
-            <button style={btnStyle} onClick={handleSubmit} type="submit">
+            <button style={btnStyle} type="submit">
                 Confirm
             </button>
 
@@ -109,7 +109,7 @@ export function ButtonEdit({ handleSubmit }) {
     );
 }
 
-export function ButtonConfirm({ handleSubmit }) {
+export function ButtonConfirm() {
     const btnStyle = {
         width: "25vw",
         padding: "5px",
@@ -118,11 +118,8 @@ export function ButtonConfirm({ handleSubmit }) {
         borderRadius: "10px",
     };
     return (
-        // <div className="container-edit-btn" style={divStyle}>
-        <button style={btnStyle} onClick={handleSubmit} type="submit">
+        <button style={btnStyle} type="submit">
             Confirm
         </button>
-
-        /* </div> */
     );
 }
