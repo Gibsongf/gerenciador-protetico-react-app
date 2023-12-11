@@ -24,7 +24,6 @@ table {
 
 
 .nav-btn {
-  /* min-width: 15vw; */
   padding: 10px;
   text-align: center;
   font-weight: bold;
@@ -36,7 +35,6 @@ table {
 }
 
 .active {
-  /* border-bottom: solid 5px red; */
   transform: translateY(-5px);
   background-color: red;
   color: white
@@ -139,17 +137,14 @@ th {
 
 .table-sort {
   margin-bottom: 15px;
-  /* background-color: #141414; */
   max-height: 7vh;
   padding: 0px 20px;
   display: flex;
   justify-self: center;
   color: white;
   border-bottom: 3px white solid;
-  /* border-radius: 11px; */
   align-items: center;
   gap: 10px;
-  /* to center in details page */
   justify-content: center;
 }
 
@@ -215,7 +210,6 @@ th {
   }
 
   .nav-btn {
-    /* min-width: 5vw; */
     transition: border 0.3s;
     color: white;
     background-color: black;

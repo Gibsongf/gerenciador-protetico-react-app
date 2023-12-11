@@ -7,7 +7,6 @@ export function useTodosApi(category, forTable) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                // console.log("yey");
                 const result = await APItodos(category);
                 setData(() => result.all);
             } catch (error) {
@@ -15,7 +14,6 @@ export function useTodosApi(category, forTable) {
             }
         };
         fetchingData();
-        // console.log(tableUpdate);
     }, [category, tableUpdate]);
     if (forTable) {
         return { data, setTableUpdate };
@@ -31,7 +29,6 @@ export function useDetailsApi(category, id) {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                // console.log("fetch data details");
                 const result = await APIDetails(category, id);
                 setData(() => result);
             } catch (error) {
@@ -47,11 +44,9 @@ export function useDetailsApi(category, id) {
 
 export function useGetServiceBy(id, by) {
     const [data, setData] = useState();
-    // const [update, setUpdate] = useState(false);
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                // console.log("fetch data details");
                 const result = await APIGetServiceBy(id, by);
                 setData(() => result.serviço);
             } catch (error) {
