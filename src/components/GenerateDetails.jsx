@@ -25,10 +25,6 @@ export const EditContext = createContext({
 
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
-    // text-align: end;
-    // padding: 5px 0 5px 0px;
-    // display: "flex",
-    //     justifyContent: "flex-end",
     const divBtnContainer = {
         textAlign: "end",
         padding: "5px 0 5px 0",
