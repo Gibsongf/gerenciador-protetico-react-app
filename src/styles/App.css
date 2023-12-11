@@ -42,10 +42,7 @@ table {
   color: white
 }
 
-caption {
-  background-color: #1b1b1be7;
 
-}
 
 .edit-td {
   color: blue;
@@ -72,7 +69,6 @@ th {
 
 
 .todos-table {
-  /* width: min-content; */
   border-collapse: collapse;
   background-color: white;
   color: white;
@@ -134,16 +130,23 @@ th {
   padding: 10px;
 }
 
+.table-container {
+  background-color: #141414;
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
 .table-sort {
   margin-bottom: 15px;
-  background-color: #141414;
+  /* background-color: #141414; */
   max-height: 7vh;
   padding: 0px 20px;
   display: flex;
   justify-self: center;
   color: white;
-  border: 3px white solid;
-  border-radius: 11px;
+  border-bottom: 3px white solid;
+  /* border-radius: 11px; */
   align-items: center;
   gap: 10px;
   /* to center in details page */
@@ -160,7 +163,9 @@ th {
   min-width: 6vw;
 }
 
-
+#month {
+  width: 30vw;
+}
 
 @media screen and (min-width: 820px) {
 
@@ -177,7 +182,6 @@ th {
     display: grid;
     gap: 25px;
     grid-template-columns: 20vw 70vw;
-    /* grid-template-rows: 0.3fr 1fr 1fr; */
 
   }
 
@@ -226,5 +230,9 @@ th {
 
   .todos-table {
     border: none
+  }
+
+  #month {
+    width: 15vw;
   }
 }

@@ -33,7 +33,6 @@ export function NavSortTable({ setDate, isDetails, exportClick }) {
             <label htmlFor="month">
                 / Mês:{" "}
                 <input
-                    style={{ width: "160px" }}
                     ref={ref}
                     onChange={onChangeMonth}
                     lang="pt-BR"

@@ -25,11 +25,17 @@ export const EditContext = createContext({
 
 const Info = ({ content }) => {
     const { setEdit } = useContext(EditContext);
+    // text-align: end;
+    // padding: 5px 0 5px 0px;
+    // display: "flex",
+    //     justifyContent: "flex-end",
     const divBtnContainer = {
-        display: "flex",
-        justifyContent: "flex-end",
+        textAlign: "end",
+        padding: "5px 0 5px 0",
     };
-
+    const pStyle = {
+        borderBottom: "2px solid black",
+    };
     return (
         <div className="info">
             <div style={divBtnContainer}>
@@ -46,7 +52,7 @@ const Info = ({ content }) => {
                 }
 
                 return (
-                    <p key={index + k}>
+                    <p style={pStyle} key={index + k}>
                         <strong>{k}: </strong>
                         {content[k]}
                     </p>

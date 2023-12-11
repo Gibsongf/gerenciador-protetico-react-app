@@ -22,14 +22,16 @@ export function TodosDentistas() {
         <>
             {" "}
             <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
-            <table className="todos-table">
-                <Caption txt={"Dentistas"} />
+            <div className="table-container">
+                <table className="todos-table">
+                    <Caption txt={"Dentistas"} />
 
-                <tbody>
-                    <TableRow rowNames={row} />
-                    <DentistTableBody data={data} />
-                </tbody>
-            </table>
+                    <tbody>
+                        <TableRow rowNames={row} />
+                        <DentistTableBody data={data} />
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }
@@ -45,14 +47,16 @@ export function TodosLocais() {
     return (
         <>
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
-            <table className="todos-table">
-                <Caption txt={"Locais"} />
+            <div className="table-container">
+                <table className="todos-table">
+                    <Caption txt={"Locais"} />
 
-                <tbody>
-                    <TableRow rowNames={row} />
-                    <LocalTableBody data={data} />
-                </tbody>
-            </table>
+                    <tbody>
+                        <TableRow rowNames={row} />
+                        <LocalTableBody data={data} />
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }
@@ -83,15 +87,16 @@ export function TodosProdutos() {
                 }}
             >
                 {close ? form : ""}
+                <div className="table-container">
+                    <table className="todos-table">
+                        <Caption txt={"Produtos"} />
 
-                <table className="todos-table">
-                    <Caption txt={"Produtos"} />
-
-                    <tbody>
-                        <TableRow rowNames={row} />
-                        <ProductTableBody data={data} />
-                    </tbody>
-                </table>
+                        <tbody>
+                            <TableRow rowNames={row} />
+                            <ProductTableBody data={data} />
+                        </tbody>
+                    </table>
+                </div>
             </PopUpEditContext.Provider>
         </>
     );
@@ -138,33 +143,35 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
-            <NavSortTable
-                setDate={setSortDate}
-                isDetails={isDetails}
-                exportClick={onClickExport}
-            />
+            <div className="table-container">
+                <NavSortTable
+                    setDate={setSortDate}
+                    isDetails={isDetails}
+                    exportClick={onClickExport}
+                />
 
-            <PopUpEditContext.Provider
-                value={{
-                    setForm,
-                    setUpdate: updateFunction,
-                    setShowForm: setClose,
-                }}
-            >
-                {close ? form : ""}
+                <PopUpEditContext.Provider
+                    value={{
+                        setForm,
+                        setUpdate: updateFunction,
+                        setShowForm: setClose,
+                    }}
+                >
+                    {close ? form : ""}
 
-                <table className="todos-table">
-                    <Caption txt={"Serviços"} />
+                    <table className="todos-table">
+                        <Caption txt={"Serviços"} />
 
-                    <tbody>
-                        <TableRow rowNames={row} />
-                        <ServiceTableBody
-                            data={definiteData}
-                            sortDate={sortDate}
-                        />
-                    </tbody>
-                </table>
-            </PopUpEditContext.Provider>
+                        <tbody>
+                            <TableRow rowNames={row} />
+                            <ServiceTableBody
+                                data={definiteData}
+                                sortDate={sortDate}
+                            />
+                        </tbody>
+                    </table>
+                </PopUpEditContext.Provider>
+            </div>
         </>
     );
 }
