@@ -12,7 +12,7 @@ import "../../styles/Forms.css";
 import { useTodosApi } from "../ApiHooks";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
-import { ButtonConfirm, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { PopUpEditContext } from "../../pages/Todos";
 
@@ -78,7 +78,7 @@ export function FormService({ initialState, closeBtn }) {
                 setTableUpdate((e) => !e);
             }
             if (initialState.formType === "edit") {
-                setShowForm(() => false);
+                setShowForm((e) => !e);
                 setUpdate((e) => !e);
             }
         }
@@ -92,7 +92,11 @@ export function FormService({ initialState, closeBtn }) {
                 ref={ref}
                 id="pop-up-content"
             >
-                {closeBtn}
+                <ButtonClose
+                    setClose={
+                        initialState.formType === "new" ? setClose : setShowForm
+                    }
+                />
                 <legend>
                     <h3>{legendTxt}</h3>
                 </legend>

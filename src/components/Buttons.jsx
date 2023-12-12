@@ -59,6 +59,7 @@ export function ButtonRegister() {
 }
 export function ButtonClose({ setClose }) {
     const { errorMsg } = useContext(AppContext);
+    
     const resetError = () => {
         setClose((e) => !e);
         Object.keys(errorMsg).forEach((k) => {

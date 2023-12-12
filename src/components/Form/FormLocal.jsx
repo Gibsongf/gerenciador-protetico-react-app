@@ -10,7 +10,7 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonEdit, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 
@@ -50,6 +50,7 @@ export function FormLocal({ initialState, closeBtn }) {
             }
         }
     };
+
     return (
         <div className="form-container" id="pop-up">
             <form
@@ -58,7 +59,7 @@ export function FormLocal({ initialState, closeBtn }) {
                 ref={ref}
                 id="pop-up-content"
             >
-                {closeBtn}
+                {setClose && <ButtonClose setClose={setClose} />}
                 <legend>
                     <h3>{legendTxt}</h3>
                 </legend>

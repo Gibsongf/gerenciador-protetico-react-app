@@ -4,7 +4,7 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonConfirm, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { PopUpEditContext } from "../../pages/Todos";
 
@@ -12,7 +12,7 @@ FormProduct.propTypes = {
     initialState: PropTypes.object,
     closeBtn: PropTypes.any,
 };
-export function FormProduct({ initialState, closeBtn }) {
+export function FormProduct({ initialState }) {
     const ref = useRef();
     const { setClose, setTableUpdate } = useContext(NewFormContext);
     const { setShowForm, setUpdate } = useContext(PopUpEditContext);
@@ -49,6 +49,7 @@ export function FormProduct({ initialState, closeBtn }) {
             }
         }
     };
+
     return (
         <div className="form-container" id="pop-up">
             <form
@@ -57,7 +58,12 @@ export function FormProduct({ initialState, closeBtn }) {
                 ref={ref}
                 id="pop-up-content"
             >
-                {closeBtn}
+                <ButtonClose
+                    setClose={
+                        initialState.formType === "new" ? setClose : setShowForm
+                    }
+                />
+
                 <legend>
                     <h3> {legendTxt} </h3>
                 </legend>

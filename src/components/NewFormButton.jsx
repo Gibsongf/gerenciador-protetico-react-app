@@ -110,18 +110,8 @@ export function ButtonEditForm({ type, data }) {
     const initialState = formatToForm(type, data);
     const selectedForm = () => {
         const obj = {
-            servico: (
-                <FormService
-                    initialState={initialState}
-                    closeBtn={<ButtonClose setClose={setShowForm} />}
-                />
-            ),
-            produto: (
-                <FormProduct
-                    initialState={initialState}
-                    closeBtn={<ButtonClose setClose={setShowForm} />}
-                />
-            ),
+            servico: <FormService initialState={initialState} />,
+            produto: <FormProduct initialState={initialState} />,
         };
         return obj[type];
     };
