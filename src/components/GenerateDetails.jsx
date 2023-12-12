@@ -11,6 +11,7 @@ import { DentistTableBody } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
 import Icon from "@mdi/react";
+import { Loading } from "./Loading.jsx";
 
 export const PopUpEditContext = createContext({
     setShowForm: () => {},
@@ -64,7 +65,8 @@ function LocalDentistWorkers({ data, setUpdateServices }) {
     const serviços = useGetServiceBy(data.local._id, "local");
     if (!data) {
         // Data is still being fetched
-        return <div>Loading...</div>;
+
+        return <Loading />;
     }
 
     data.dentistas.forEach((dentista) => {

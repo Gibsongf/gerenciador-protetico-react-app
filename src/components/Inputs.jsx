@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useDetailsApi, useTodosApi } from "./ApiHooks";
 import { useContext, useEffect, useState } from "react";
 import { RefContext } from "./Form/FormService";
+import { Loading } from "./Loading";
 
 export function TipoTabelaSelect({ value, onChange }) {
     return (
@@ -47,7 +48,7 @@ export function SelectInput({
     const data = useTodosApi(category);
 
     if (!data) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     return (
         <div className="select-options">

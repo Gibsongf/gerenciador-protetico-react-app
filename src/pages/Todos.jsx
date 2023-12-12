@@ -10,12 +10,15 @@ import { ButtonNewForm } from "../components/NewFormButton.jsx";
 import { createContext, useState } from "react";
 import { ApiMonthExcel } from "../Api.js";
 import { downloadExcelAction } from "../utils.js";
+import PropTypes from "prop-types";
+import { Loading } from "../components/Loading.jsx";
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
     const row = ["Nome", "Telefone", "Endereço"];
     if (!data) {
         // Data is still being fetched
-        return <div>Loading...</div>;
+
+        return <Loading />;
     }
 
     return (
@@ -41,7 +44,7 @@ export function TodosLocais() {
     const row = ["Nome", "Telefone", "Endereço", "Tipo de Tabela"];
     if (!data) {
         // Data is still being fetched
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (
@@ -73,7 +76,7 @@ export function TodosProdutos() {
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (
@@ -102,8 +105,6 @@ export function TodosProdutos() {
     );
 }
 
-import PropTypes from "prop-types";
-
 TableService.propTypes = {
     providedData: PropTypes.object,
     isDetails: PropTypes.bool,
@@ -130,7 +131,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     };
     if (!data) {
         // Data is still being fetched
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     const updateFunction =
         setUpdateTable !== undefined ? setUpdateTable : setTableUpdate;

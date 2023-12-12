@@ -17,9 +17,9 @@ export const NewFormContext = createContext({
 });
 export function ButtonNewForm({ type, tableUpdate }) {
     const [showForm, setShowForm] = useState(false);
-    const [form, setForm] = useState();
+    // const [form, setForm] = useState(false);
 
-    const selectedForm = () => {
+    const SelectedForm = () => {
         const obj = {
             dentista: (
                 <FormDentist
@@ -40,14 +40,14 @@ export function ButtonNewForm({ type, tableUpdate }) {
                 />
             ),
         };
-        return obj[type];
+        return <>{obj[type]}</>;
     };
-    const Form = () => {
-        return <>{form}</>;
-    };
+    // const Form = () => {
+    //     return <>{form}</>;
+    // };
     const onClick = () => {
         // call a state that store the form to render
-        setForm(() => selectedForm());
+        // setForm((e) => !e);
         //boolean that will allow the form  to show
         setShowForm((e) => !e);
     };
@@ -62,7 +62,7 @@ export function ButtonNewForm({ type, tableUpdate }) {
             <NewFormContext.Provider
                 value={{ setClose: setShowForm, setTableUpdate: tableUpdate }}
             >
-                {showForm ? <Form /> : ""}
+                {showForm ? <SelectedForm /> : ""}
             </NewFormContext.Provider>
             <button onClick={onClick} style={btnStyle} className="new-form">
                 Novo{" "}
