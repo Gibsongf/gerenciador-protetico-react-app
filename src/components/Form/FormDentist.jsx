@@ -103,5 +103,4 @@ export function FormDentist({ initialState }) {
 
 FormDentist.propTypes = {
     initialState: PropTypes.object,
-    closeBtn: PropTypes.any,
 };

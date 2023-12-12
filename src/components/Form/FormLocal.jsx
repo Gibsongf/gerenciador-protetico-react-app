@@ -105,5 +105,4 @@ export function FormLocal({ initialState }) {
 
 FormLocal.propTypes = {
     initialState: PropTypes.object,
-    closeBtn: PropTypes.any,
 };

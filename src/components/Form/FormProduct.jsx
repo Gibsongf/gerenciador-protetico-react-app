@@ -10,7 +10,6 @@ import { PopUpEditContext } from "../../pages/Todos";
 
 FormProduct.propTypes = {
     initialState: PropTypes.object,
-    closeBtn: PropTypes.any,
 };
 export function FormProduct({ initialState }) {
     const ref = useRef();

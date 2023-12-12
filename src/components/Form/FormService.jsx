@@ -18,7 +18,6 @@ import { PopUpEditContext } from "../../pages/Todos";
 
 FormService.propTypes = {
     initialState: PropTypes.any,
-    closeBtn: PropTypes.any,
 };
 export const RefContext = createContext({
     checkBoxRef: "",
@@ -64,7 +63,6 @@ export function FormService({ initialState }) {
             return { ...prev };
         });
     };
-    // console.log(initialState, formData);
     const beforeSendSubmit = async (e) => {
         //before submit we format the product
         if (checkBoxRef.current) {

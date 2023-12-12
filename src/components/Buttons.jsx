@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import { EditContext } from "./GenerateDetails";
 import { AppContext } from "../App";
 import { ApiOneExcel } from "../Api.js";
 import Icon from "@mdi/react";
@@ -59,7 +58,7 @@ export function ButtonRegister() {
 }
 export function ButtonClose({ setClose }) {
     const { errorMsg } = useContext(AppContext);
-    
+
     const resetError = () => {
         setClose((e) => !e);
         Object.keys(errorMsg).forEach((k) => {
@@ -75,7 +74,7 @@ export function ButtonClose({ setClose }) {
     );
 }
 export function ButtonEdit() {
-    const { setEdit } = useContext(EditContext);
+    // const { setEdit } = useContext(EditContext);
     const divStyle = {
         display: "flex",
         flexDirection: "row",
@@ -95,13 +94,13 @@ export function ButtonEdit() {
                 Confirm
             </button>
 
-            <button
+            {/* <button
                 style={btnStyle}
                 type="button"
                 onClick={() => setEdit((e) => !e)}
             >
                 Cancel
-            </button>
+            </button> */}
         </div>
     );
 }
