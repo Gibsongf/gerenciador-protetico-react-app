@@ -14,12 +14,12 @@ import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 
-export function FormLocal({ initialState }) {
+export function FormLocal({ initialState, setEdit, setUpdate }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     const nomeTag = { id: "nome", txt: "Nome do Local" };
     const { setClose, setTableUpdate } = useContext(NewFormContext);
-    const { setEdit, setUpdate } = useContext(EditContext);
+    // const { setEdit, setUpdate } = useContext(EditContext);
     let legendTxt = "Editar Detalhes do Local";
     if (!initialState) {
         legendTxt = "Registrar Novo Local";

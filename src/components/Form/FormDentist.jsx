@@ -10,11 +10,11 @@ import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 
-export function FormDentist({ initialState }) {
+export function FormDentist({ initialState, setEdit, setUpdate }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     const { setClose, setTableUpdate } = useContext(NewFormContext);
-    const { setEdit, setUpdate } = useContext(EditContext);
+    // const { setEdit, setUpdate } = useContext(EditContext);
     let legendTxt = "Editar Detalhes do Dentista";
     if (!initialState) {
         legendTxt = "Registrar Novo Dentista";

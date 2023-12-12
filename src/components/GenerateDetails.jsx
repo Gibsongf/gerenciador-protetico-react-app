@@ -21,7 +21,6 @@ export const PopUpEditContext = createContext({
 export const EditContext = createContext({
     setEdit: () => {},
     setUpdate: () => {},
-    setExport: () => {},
 });
 
 const Info = ({ content }) => {
@@ -105,28 +104,20 @@ export function Details({ type, data, setUpdate }) {
     const { formState, infoContent } = stateDetails(data, type);
     const Form = () => {
         const obj = {
-            dentista: <FormDentist initialState={formState} />,
-            local: <FormLocal initialState={formState} />,
-            servico: <FormService initialState={formState} />,
-        };
-        return obj[type];
-    };
-    const Table = () => {
-        const obj = {
             dentista: (
-                <TableService
-                    providedData={data}
-                    setUpdateTable={setUpdate}
-                    isDetails={true}
+                <FormDentist
+                    initialState={formState}
+                    setUpdate={setUpdate}
+                    setEdit={setEdit}
                 />
             ),
             local: (
-                <LocalDentistWorkers
-                    data={data}
-                    setUpdateServices={setUpdate}
+                <FormLocal
+                    initialState={formState}
+                    setUpdate={setUpdate}
+                    setEdit={setEdit}
                 />
             ),
-            servico: "",
         };
         return obj[type];
     };
@@ -135,9 +126,20 @@ export function Details({ type, data, setUpdate }) {
         <>
             <EditContext.Provider value={{ setEdit, setUpdate }}>
                 <Info content={infoContent} />
-                <Table />
-                {edit ? <Form /> : ""}
+                {type === "dentista" ? (
+                    <TableService
+                        providedData={data}
+                        setUpdateTable={setUpdate}
+                        isDetails={true}
+                    />
+                ) : (
+                    <LocalDentistWorkers
+                        data={data}
+                        setUpdateServices={setUpdate}
+                    />
+                )}
             </EditContext.Provider>
+            {edit ? <Form /> : ""}
         </>
     );
 }
