@@ -23,7 +23,7 @@ FormService.propTypes = {
 export const RefContext = createContext({
     checkBoxRef: "",
 });
-export function FormService({ initialState, closeBtn }) {
+export function FormService({ initialState }) {
     const { errorMsg } = useContext(AppContext);
     const ref = useRef();
     const checkBoxRef = useRef();

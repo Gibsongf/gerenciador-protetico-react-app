@@ -14,7 +14,7 @@ import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 
-export function FormLocal({ initialState, closeBtn }) {
+export function FormLocal({ initialState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     const nomeTag = { id: "nome", txt: "Nome do Local" };
@@ -59,7 +59,11 @@ export function FormLocal({ initialState, closeBtn }) {
                 ref={ref}
                 id="pop-up-content"
             >
-                {setClose && <ButtonClose setClose={setClose} />}
+                <ButtonClose
+                    setClose={
+                        initialState.formType === "new" ? setClose : setEdit
+                    }
+                />
                 <legend>
                     <h3>{legendTxt}</h3>
                 </legend>

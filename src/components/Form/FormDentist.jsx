@@ -6,11 +6,11 @@ import PropTypes from "prop-types";
 
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
-import { ButtonEdit, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 import { EditContext } from "../GenerateDetails";
 
-export function FormDentist({ initialState, closeBtn }) {
+export function FormDentist({ initialState }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
     const { setClose, setTableUpdate } = useContext(NewFormContext);
@@ -46,6 +46,7 @@ export function FormDentist({ initialState, closeBtn }) {
             }
         }
     };
+
     return (
         <div className="form-container" id="pop-up">
             <form
@@ -54,7 +55,11 @@ export function FormDentist({ initialState, closeBtn }) {
                 ref={ref}
                 id="pop-up-content"
             >
-                {closeBtn}
+                <ButtonClose
+                    setClose={
+                        initialState.formType === "new" ? setClose : setEdit
+                    }
+                />
                 <legend>
                     <h3>{legendTxt}</h3>
                 </legend>
