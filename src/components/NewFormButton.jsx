@@ -91,7 +91,7 @@ const formatToForm = (type, data) => {
     return whichType[type]();
 };
 export function ButtonEditForm({ type, data }) {
-    const { setShowForm, setForm } = useContext(PopUpEditContext);
+    const { setShowForm, setForm, setUpdate } = useContext(PopUpEditContext);
     const initialState = formatToForm(type, data);
     const selectedForm = () => {
         const obj = {

@@ -74,7 +74,6 @@ export function ButtonClose({ setClose }) {
     );
 }
 export function ButtonEdit() {
-    // const { setEdit } = useContext(EditContext);
     const divStyle = {
         display: "flex",
         flexDirection: "row",

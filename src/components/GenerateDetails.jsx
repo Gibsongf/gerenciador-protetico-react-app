@@ -6,7 +6,7 @@ import { FormDentist } from "./Form/FormDentist";
 import { Caption, TableRow } from "./Table";
 import { formatTelefone, stateDetails } from "../utils.js";
 import { FormLocal } from "./Form/FormLocal";
-import { FormService } from "./Form/FormService";
+// import { FormService } from "./Form/FormService";
 import { DentistTableBody } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
@@ -23,8 +23,8 @@ export const EditContext = createContext({
     setUpdate: () => {},
 });
 
-const Info = ({ content }) => {
-    const { setEdit } = useContext(EditContext);
+const Info = ({ content, setEdit }) => {
+    // const { setEdit } = useContext(EditContext);
     const divBtnContainer = {
         textAlign: "end",
         padding: "5px 0 5px 0",
@@ -59,12 +59,14 @@ const Info = ({ content }) => {
 };
 
 //Table with  "dentista" that work at detailed page of a "local" place
-function LocalDentistWorkers({ data, setUpdateServices }) {
+function LocalDentistWorkers({ data }) {
     const row = ["Nome", "Telefone", "Endereço"];
-    const serviços = useGetServiceBy(data.local._id, "local");
+    const { data: serviços, setUpdate } = useGetServiceBy(
+        data.local._id,
+        "local"
+    );
     if (!data) {
         // Data is still being fetched
-
         return <Loading />;
     }
 
@@ -74,7 +76,7 @@ function LocalDentistWorkers({ data, setUpdateServices }) {
     return (
         <>
             {data.dentistas.length > 0 && (
-                <div>
+                <div className="table-container">
                     <table className="todos-table">
                         <Caption txt={"Dentistas"} />
 
@@ -85,16 +87,15 @@ function LocalDentistWorkers({ data, setUpdateServices }) {
                     </table>
                 </div>
             )}
-            <div>
-                {serviços !== undefined && serviços.length > 0 ? (
-                    <TableService
-                        providedData={{ serviços }}
-                        setUpdateTable={setUpdateServices}
-                    />
-                ) : (
-                    ""
-                )}
-            </div>
+
+            {serviços !== undefined && serviços.length > 0 ? (
+                <TableService
+                    providedData={{ serviços }}
+                    setUpdateTable={setUpdate}
+                />
+            ) : (
+                ""
+            )}
         </>
     );
 }
@@ -125,7 +126,7 @@ export function Details({ type, data, setUpdate }) {
     return (
         <>
             <EditContext.Provider value={{ setEdit, setUpdate }}>
-                <Info content={infoContent} />
+                <Info content={infoContent} setEdit={setEdit} />
                 {type === "dentista" ? (
                     <TableService
                         providedData={data}
@@ -133,10 +134,7 @@ export function Details({ type, data, setUpdate }) {
                         isDetails={true}
                     />
                 ) : (
-                    <LocalDentistWorkers
-                        data={data}
-                        setUpdateServices={setUpdate}
-                    />
+                    <LocalDentistWorkers data={data} />
                 )}
             </EditContext.Provider>
             {edit ? <Form /> : ""}
@@ -146,10 +144,11 @@ export function Details({ type, data, setUpdate }) {
 
 Info.propTypes = {
     content: PropTypes.object,
+    setEdit: PropTypes.func,
 };
 LocalDentistWorkers.propTypes = {
     data: PropTypes.object,
-    setUpdateServices: PropTypes.func,
+    // setUpdateServices: PropTypes.func,
 };
 Details.propTypes = {
     type: PropTypes.string,

@@ -44,6 +44,8 @@ export function useDetailsApi(category, id) {
 
 export function useGetServiceBy(id, by) {
     const [data, setData] = useState();
+    const [update, setUpdate] = useState(false);
+
     useEffect(() => {
         const fetchingData = async () => {
             try {
@@ -56,6 +58,6 @@ export function useGetServiceBy(id, by) {
         if (id) {
             fetchingData();
         }
-    }, [id, by]);
-    return data;
+    }, [id, by, update]);
+    return { data, setUpdate };
 }
