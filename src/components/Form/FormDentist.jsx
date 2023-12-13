@@ -1,9 +1,7 @@
 import { useContext, useRef } from "react";
-
 import { CpfInput, SelectInput, SimpleInput, TelefoneInput } from "../Inputs";
 import "../../styles/Forms.css";
 import PropTypes from "prop-types";
-
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
 import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";

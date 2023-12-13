@@ -112,7 +112,6 @@ TableService.propTypes = {
 };
 
 export function TableService({ providedData, setUpdateTable, isDetails }) {
-    // console.log(providedData);
     let { data, setTableUpdate } = useTodosApi("servico", true);
     const row = ["Dentista", "Paciente", "Produto", "Finalizado", "", ""];
     const [sortDate, setSortDate] = useState();
