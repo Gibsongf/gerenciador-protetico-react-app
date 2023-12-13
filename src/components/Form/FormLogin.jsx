@@ -16,7 +16,7 @@ export function FormLogin() {
         const valid = await apiLogin(formData);
         if (valid) {
             console.log("redirect to index page");
-            navigate("/");
+            navigate("/servicos/todos");
         }
     };
     return (
