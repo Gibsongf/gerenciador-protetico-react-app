@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { APIDetails, APIGetServiceBy, APItodos } from "../Api.js";
 
+// API GET all available data of provide category and return it
 export function useTodosApi(category, forTable) {
     const [data, setData] = useState();
     const [tableUpdate, setTableUpdate] = useState(false);
@@ -21,7 +22,7 @@ export function useTodosApi(category, forTable) {
         return data;
     }
 }
-
+// API GET data of provide id, category and return it
 export function useDetailsApi(category, id) {
     const [data, setData] = useState();
     const [update, setUpdate] = useState(false);
@@ -42,6 +43,7 @@ export function useDetailsApi(category, id) {
     return { data, setUpdate };
 }
 
+// GET data by =(Local or Dentist) with id
 export function useGetServiceBy(id, by) {
     const [data, setData] = useState();
     const [update, setUpdate] = useState(false);

@@ -42,20 +42,7 @@ export function BtnDownloadToExcel({ data }) {
         />
     );
 }
-export function ButtonRegister() {
-    const style = {
-        width: "20vw",
-        alignSelf: "center",
-        padding: "5px",
-        fontSize: "1em",
-        fontWeight: "bold",
-    };
-    return (
-        <button style={style} type="submit">
-            Registrar
-        </button>
-    );
-}
+
 export function ButtonClose({ setClose }) {
     const { errorMsg } = useContext(AppContext);
 
@@ -92,18 +79,23 @@ export function ButtonEdit() {
             <button style={btnStyle} type="submit">
                 Confirm
             </button>
-
-            {/* <button
-                style={btnStyle}
-                type="button"
-                onClick={() => setEdit((e) => !e)}
-            >
-                Cancel
-            </button> */}
         </div>
     );
 }
-
+export function ButtonRegister() {
+    const style = {
+        width: "20vw",
+        alignSelf: "center",
+        padding: "5px",
+        fontSize: "1em",
+        fontWeight: "bold",
+    };
+    return (
+        <button style={style} type="submit">
+            Registrar
+        </button>
+    );
+}
 export function ButtonConfirm() {
     const btnStyle = {
         width: "25vw",
