@@ -19,6 +19,10 @@ const Content = () => {
             <Header />
             <div className="content">
                 <Routes>
+                    <Route
+                        path="/gerenciador-protetico-react-app"
+                        element={<TableService />}
+                    />
                     <Route path="/dentista">
                         <Route
                             path="/dentista/todos"
