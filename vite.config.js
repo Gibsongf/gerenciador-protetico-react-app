@@ -9,5 +9,5 @@ export default defineConfig({
         globals: true,
         setupFiles: "src/_test_/setup.js",
     },
-    base: "/gerenciador-protetico-react-app",
+    base: "./gerenciador-protetico-react-app",
 });
