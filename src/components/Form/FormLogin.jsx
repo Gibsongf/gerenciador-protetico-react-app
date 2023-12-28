@@ -8,7 +8,6 @@ export function FormLogin() {
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        // newContentValidator(e);, apiRegister
     };
 
     const handleSubmit = async (e) => {

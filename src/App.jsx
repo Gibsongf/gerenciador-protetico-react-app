@@ -9,6 +9,7 @@ import {
     TodosProdutos,
     TableService,
 } from "./pages/Todos";
+import { FormLogin } from "./components/Form/FormLogin";
 
 export const AppContext = createContext({
     errorMsg: {},
@@ -51,11 +52,11 @@ const Content = () => {
 };
 function App() {
     const token = localStorage.getItem("token");
-
+    FormLogin;
     return (
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
-                {token ? <Content /> : "<FormLogin />"}
+                {token ? <Content /> : <FormLogin />}
             </AppContext.Provider>
         </div>
     );
