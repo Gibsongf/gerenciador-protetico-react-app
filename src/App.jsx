@@ -1,6 +1,6 @@
 import { Header } from "./components/Header";
-import { createContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import { createContext, useEffect } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./styles/App.css";
 import { DentistaDetails, LocalDetails } from "./pages/Details";
 import {
@@ -49,8 +49,16 @@ const Content = () => {
     );
 };
 function App() {
+    const nav = useNavigate();
+    const location = useLocation();
     const token = localStorage.getItem("token");
-    FormLogin;
+    useEffect(() => {
+        const currentUrl = location.pathname.split("/");
+        if (currentUrl.length === 2) {
+            console.log(currentUrl);
+            nav("gerenciador-protetico/servico/todos");
+        }
+    }, []);
     return (
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
