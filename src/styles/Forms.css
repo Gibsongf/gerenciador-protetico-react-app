@@ -131,11 +131,6 @@ select {
 
 }
 
-.login-container form {
-    padding: 35px;
-    border-top: 10px solid white;
-}
-
 .login-enter {
     /* width: 10vw; */
     align-self: center;
@@ -155,5 +150,9 @@ select {
         width: 35vw;
         border-top: none;
         margin: -5% auto;
+    }
+
+    .login-container form {
+        padding: 15px;
     }
 }
