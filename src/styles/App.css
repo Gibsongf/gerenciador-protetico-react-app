@@ -232,3 +232,9 @@ th {
     width: 15vw;
   }
 }
+
+@media only screen and (min-device-width: 480px) {
+  #root {
+    font-weight: bold;
+  }
+}

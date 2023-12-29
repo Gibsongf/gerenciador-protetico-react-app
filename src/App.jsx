@@ -52,13 +52,7 @@ function App() {
     const nav = useNavigate();
     const location = useLocation();
     const token = localStorage.getItem("token");
-    // useEffect(() => {
-    //     const currentUrl = location.pathname.split("/");
-    //     if (currentUrl.length === 2) {
-    //         console.log(currentUrl);
-    //         nav("/gerenciador-protetico/servico/todos");
-    //     }
-    // }, []);
+
     return (
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
