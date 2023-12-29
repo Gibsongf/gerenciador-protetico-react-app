@@ -36,25 +36,25 @@ export function Header() {
                 <div className="nav">
                     <NavLink
                         className="nav-btn"
-                        to="/gerenciador-protetico/servico/todos"
+                        to="/gerenciador-protetico-react-app/servico/todos"
                     >
                         Serviços
                     </NavLink>
                     <NavLink
                         className="nav-btn"
-                        to="/gerenciador-protetico/dentista/todos"
+                        to="/gerenciador-protetico-react-app/dentista/todos"
                     >
                         Dentistas
                     </NavLink>
                     <NavLink
                         className="nav-btn"
-                        to="/gerenciador-protetico/local/todos"
+                        to="/gerenciador-protetico-react-app/local/todos"
                     >
                         Locais
                     </NavLink>
                     <NavLink
                         className="nav-btn"
-                        to="/gerenciador-protetico/produtos/todos"
+                        to="/gerenciador-protetico-react-app/produtos/todos"
                     >
                         Produtos
                     </NavLink>

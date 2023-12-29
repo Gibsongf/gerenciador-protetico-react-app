@@ -15,7 +15,7 @@ export function FormLogin() {
         const valid = await apiLogin(formData);
         if (valid) {
             console.log("redirect to index page");
-            navigate("/gerenciador-protetico/servicos/todos");
+            navigate("/gerenciador-protetico-react-app/servicos/todos");
         }
     };
     return (

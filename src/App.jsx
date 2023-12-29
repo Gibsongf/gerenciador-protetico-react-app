@@ -21,10 +21,10 @@ const Content = () => {
             <div className="content">
                 <Routes>
                     <Route
-                        path="gerenciador-protetico"
+                        path="gerenciador-protetico-react-app"
                         element={<TableService />}
                     />
-                    <Route path="gerenciador-protetico/*">
+                    <Route path="gerenciador-protetico-react-app/*">
                         <Route path="dentista/*">
                             <Route path="todos/" element={<TodosDentistas />} />
                             <Route path=":id/" element={<DentistaDetails />} />
