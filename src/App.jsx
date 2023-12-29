@@ -21,30 +21,28 @@ const Content = () => {
             <div className="content">
                 <Routes>
                     <Route
-                        path="/gerenciador-protetico-react-app"
+                        path="gerenciador-protetico"
                         element={<TableService />}
                     />
-                    <Route path="/dentista">
+                    <Route path="gerenciador-protetico/*">
+                        <Route path="dentista/*">
+                            <Route path="todos/" element={<TodosDentistas />} />
+                            <Route path=":id/" element={<DentistaDetails />} />
+                        </Route>
                         <Route
-                            path="/dentista/todos"
-                            element={<TodosDentistas />}
-                        />
-                        <Route
-                            path="/dentista/:id"
-                            element={<DentistaDetails />}
-                        />
-                    </Route>
-                    <Route path="/servico">
-                        <Route
-                            path="/servico/todos"
+                            path="servico/todos"
                             element={<TableService />}
                         />
+
+                        <Route path="local/*">
+                            <Route path="todos/" element={<TodosLocais />} />
+                            <Route path=":id/" element={<LocalDetails />} />
+                        </Route>
+                        <Route
+                            path="produtos/todos"
+                            element={<TodosProdutos />}
+                        />
                     </Route>
-                    <Route path="/local">
-                        <Route path="/local/todos" element={<TodosLocais />} />
-                        <Route path="/local/:id" element={<LocalDetails />} />
-                    </Route>
-                    <Route path="/produtos/todos" element={<TodosProdutos />} />
                 </Routes>
             </div>
         </>

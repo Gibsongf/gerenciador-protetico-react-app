@@ -17,7 +17,7 @@ export function DentistTableBody({ data }) {
                     <Link
                         className="link"
                         onClick={saveDentistId}
-                        to={`/dentista/${d._id}`}
+                        to={`/gerenciador-protetico/dentista/${d._id}`}
                         id={d._id}
                     >
                         {d.nome} {d.sobrenome}{" "}
@@ -29,7 +29,7 @@ export function DentistTableBody({ data }) {
                     <Link
                         className="link"
                         onClick={saveLocalId}
-                        to={`/local/${d.local._id}`}
+                        to={`/gerenciador-protetico/local/${d.local._id}`}
                         id={d.local._id}
                     >
                         {d.local.nome}
@@ -52,7 +52,7 @@ export function LocalTableBody({ data }) {
                         className="link"
                         onClick={saveDbId}
                         id={d._id}
-                        to={`/local/${d._id}`}
+                        to={`/gerenciador-protetico/local/${d._id}`}
                     >
                         {d.nome}
                     </Link>
@@ -95,7 +95,7 @@ export function ServiceTableBody({ data, sortDate }) {
                     <Link
                         className="link"
                         onClick={saveDentistId}
-                        to={`/dentista/${d.dentista._id}`}
+                        to={`/gerenciador-protetico/dentista/${d.dentista._id}`}
                         id={d.dentista._id}
                     >
                         {d.dentista.nome} {d.dentista.sobrenome}

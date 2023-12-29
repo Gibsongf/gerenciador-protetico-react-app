@@ -34,16 +34,28 @@ export function Header() {
             <div className="header">
                 <ResponsiveLogo />
                 <div className="nav">
-                    <NavLink className="nav-btn" to="/servico/todos">
+                    <NavLink
+                        className="nav-btn"
+                        to="/gerenciador-protetico/servico/todos"
+                    >
                         Serviços
                     </NavLink>
-                    <NavLink className="nav-btn" to="/dentista/todos">
+                    <NavLink
+                        className="nav-btn"
+                        to="/gerenciador-protetico/dentista/todos"
+                    >
                         Dentistas
                     </NavLink>
-                    <NavLink className="nav-btn" to="/local/todos">
+                    <NavLink
+                        className="nav-btn"
+                        to="/gerenciador-protetico/local/todos"
+                    >
                         Locais
                     </NavLink>
-                    <NavLink className="nav-btn" to="/produtos/todos">
+                    <NavLink
+                        className="nav-btn"
+                        to="/gerenciador-protetico/produtos/todos"
+                    >
                         Produtos
                     </NavLink>
                 </div>
