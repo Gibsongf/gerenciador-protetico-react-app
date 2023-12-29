@@ -56,7 +56,7 @@ function App() {
         const currentUrl = location.pathname.split("/");
         if (currentUrl.length === 2) {
             console.log(currentUrl);
-            nav("gerenciador-protetico/servico/todos");
+            nav("/gerenciador-protetico/servico/todos");
         }
     }, []);
     return (
