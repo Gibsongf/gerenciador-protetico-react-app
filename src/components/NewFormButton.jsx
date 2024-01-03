@@ -5,6 +5,8 @@ import { FormProduct } from "./Form/FormProduct";
 import { FormService } from "./Form/FormService";
 import PropTypes from "prop-types";
 import { PopUpEditContext } from "../pages/Todos";
+import Icon from "@mdi/react";
+import { mdiFileEditOutline } from "@mdi/js";
 
 ButtonNewForm.propTypes = {
     type: PropTypes.string,
@@ -36,12 +38,12 @@ export function ButtonNewForm({ type, tableUpdate }) {
         //boolean that will allow the form  to show
         setShowForm((e) => !e);
     };
-    const btnStyle = {
-        fontSize: "1.1em",
-        fontWeight: "bold",
-        padding: "10px",
-        borderRadius: "15px",
-    };
+    // const btnStyle = {
+    //     fontSize: "1.1em",
+    //     fontWeight: "bold",
+    //     padding: "10px",
+    //     borderRadius: "15px",
+    // };
     return (
         <div className="new-form-container" style={{ justifySelf: "center" }}>
             <NewFormContext.Provider
@@ -49,7 +51,7 @@ export function ButtonNewForm({ type, tableUpdate }) {
             >
                 {showForm ? <SelectedForm /> : ""}
             </NewFormContext.Provider>
-            <button onClick={onClick} style={btnStyle} className="new-form">
+            <button onClick={onClick} className="new-form">
                 Novo{" "}
                 {type.toLowerCase().replace(type[0], type[0].toUpperCase())}
             </button>
@@ -90,6 +92,7 @@ const formatToForm = (type, data) => {
     };
     return whichType[type]();
 };
+
 export function ButtonEditForm({ type, data }) {
     const { setShowForm, setForm, setUpdate } = useContext(PopUpEditContext);
     const initialState = formatToForm(type, data);
@@ -108,7 +111,11 @@ export function ButtonEditForm({ type, data }) {
 
     return (
         <td className="edit-td" onClick={onClick}>
-            {type === "servico" ? "Editar" : data.nome}
+            {type === "servico" ? (
+                <Icon className="edit-btn" path={mdiFileEditOutline} />
+            ) : (
+                data.nome
+            )}
         </td>
     );
 }

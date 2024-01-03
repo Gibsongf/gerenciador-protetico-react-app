@@ -1,5 +1,7 @@
+let apiUrl = "https://gerenciador-protetico.adaptable.app";
+apiUrl = "http://localhost:3000";
 export async function apiLogin(loginData) {
-    const url = "https://gerenciador-protetico.adaptable.app/users/login";
+    const url = apiUrl + "/users/login";
     // console.log(loginData);
     try {
         const response = await fetch(url, {
@@ -23,7 +25,7 @@ export async function apiLogin(loginData) {
     }
 }
 export async function apiRegister(loginData) {
-    const url = "https://gerenciador-protetico.adaptable.app/users/register";
+    const url = apiUrl + "/users/register";
     // console.log(loginData);
     try {
         const response = await fetch(url, {
@@ -78,31 +80,31 @@ async function setupFetch(url, reqMethod = "get", body) {
     }
 }
 export async function APItodos(category) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/${category}/todos`;
+    const url = `${apiUrl}/api/${category}/todos`;
     const data = await setupFetch(url, "get");
     // console.log(data);
     return data;
 }
 export async function APIDetails(category, id) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/${category}/${id}`;
+    const url = `${apiUrl}/api/${category}/${id}`;
     const data = await setupFetch(url, "get");
     return data;
 }
 export async function APIGetServiceBy(id, by) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/servico/todos/${by}/${id}`;
+    const url = `${apiUrl}/api/servico/todos/${by}/${id}`;
     const data = await setupFetch(url, "get");
     return data;
 }
 
 export async function APIPostNewData(formData) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/${formData["category"]}/novo`;
+    const url = `${apiUrl}/api/${formData["category"]}/novo`;
     // console.log(formData);
     const data = await setupFetch(url, "post", formData);
     // console.log(data);
     return data;
 }
 export async function APIPutData(formData, id) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/${formData["category"]}/${id}/edit`;
+    const url = `${apiUrl}/api/${formData["category"]}/${id}/edit`;
     // console.log(formData);
     const data = await setupFetch(url, "put", formData);
     // console.log(data);
@@ -110,7 +112,7 @@ export async function APIPutData(formData, id) {
     return data;
 }
 export async function ApiOneExcel(id) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/export/${id}`;
+    const url = `${apiUrl}/api/export/${id}`;
     const reqConfig = {
         method: "Get",
         headers: {
@@ -131,7 +133,7 @@ export async function ApiOneExcel(id) {
 }
 
 export async function ApiMonthExcel(id, date) {
-    const url = `https://gerenciador-protetico.adaptable.app/api/export/${id}/${date}`;
+    const url = `${apiUrl}/api/export/${id}/${date}`;
     const reqConfig = {
         method: "Get",
         headers: {

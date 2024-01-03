@@ -102,11 +102,11 @@ export function ServiceTableBody({ data, sortDate }) {
                     </Link>
                 </td>
                 <td>{d.paciente}</td>
-                <td>
+                {/* <td>
                     {d.produto.length > 1
                         ? d.produto.map((produto) => produto.nome + ", ")
                         : d.produto[0].nome}
-                </td>
+                </td> */}
                 <td>{booleanToString(d.statusEntrega)}</td>
                 <ButtonEditForm type="servico" data={d} />
                 <td>

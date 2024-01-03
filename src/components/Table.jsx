@@ -18,16 +18,16 @@ export function NavSortTable({ setDate, isDetails, exportClick }) {
         setDate(() => null);
         ref.current.value = "";
     };
-    const btnStyle = {
-        fontWeight: "bold",
-        padding: "5px",
-        borderRadius: "5px",
-        backgroundColor: "White",
-    };
+    // const btnStyle = {
+    //     fontWeight: "bold",
+    //     padding: "5px",
+    //     borderRadius: "5px",
+    //     backgroundColor: "White",
+    // };
     return (
         <div className="table-sort">
-            <h5 style={{ fontSize: "1.1em" }}>Ordenar: </h5>
-            <button onClick={onClickTodos} style={btnStyle}>
+            <h5>Ordenar: </h5>
+            <button className="sort-todos-btn" onClick={onClickTodos}>
                 Todos
             </button>
             <label htmlFor="month">

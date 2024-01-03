@@ -1,4 +1,4 @@
-#root {
+/* #root {
   padding: 0;
   margin: 0;
   background-color: #141414;
@@ -233,8 +233,8 @@ th {
   }
 }
 
-@media only screen and (min-device-width: 480px) {
+/* @media only screen and (min-device-width: 480px) {
   #root {
     font-weight: bold;
   }
-}
+} */

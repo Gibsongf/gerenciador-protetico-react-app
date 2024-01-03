@@ -18,7 +18,8 @@ const Content = () => {
     return (
         <>
             <Header />
-            <div className="content">
+            <TableService />
+            {/* <div className="content">
                 <Routes>
                     <Route
                         path="gerenciador-protetico-react-app"
@@ -44,7 +45,7 @@ const Content = () => {
                         />
                     </Route>
                 </Routes>
-            </div>
+            </div> */}
         </>
     );
 };
