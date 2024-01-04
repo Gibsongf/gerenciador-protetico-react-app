@@ -7,13 +7,51 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  font-size: 16px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  /* padding: 2px; */
+  box-shadow: -2px -20px 20px 15px rgb(245, 245, 245);
+  margin-bottom: 15px;
+  height: 40px;
+  /* background-color: rgb(159, 160, 160) */
+}
+
+.nav-btn {
+  padding: 3px;
+  margin: 4px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  transition: transform 0.5s, background-color 0.5s;
+
+}
+
+
+
+button {
+  font-size: 16px;
+  border: none
+}
+
+input {
+  border: none
 }
 
 .content {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   gap: 30px;
-  align-items: center;
+  align-items: center; */
   justify-self: center;
 }
 
@@ -23,7 +61,7 @@ table {
 
 
 
-.nav-btn {
+/* .nav-btn {
   padding: 10px;
   text-align: center;
   font-weight: bold;
@@ -32,7 +70,7 @@ table {
   background-color: white;
   color: black;
   transition: transform 0.5s, background-color 0.5s;
-}
+} */
 
 .active {
   transform: translateY(-5px);
@@ -110,17 +148,17 @@ th {
 
 
 
-.nav {
+/* .nav {
   display: flex;
   justify-content: space-around;
   color: white;
-}
+} */
 
-.header {
+/* .header {
   box-shadow: -2px -20px 20px 15px rgb(77, 84, 83);
   min-height: 10vh;
   background-color: rgb(34, 35, 35)
-}
+} */
 
 .login-form {
   border: 2px solid black;
