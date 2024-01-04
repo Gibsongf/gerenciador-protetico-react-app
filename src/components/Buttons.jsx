@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { AppContext } from "../App";
 import { ApiOneExcel } from "../Api.js";
 import Icon from "@mdi/react";
-import { mdiDownloadBoxOutline } from "@mdi/js";
+import { mdiDownload } from "@mdi/js";
 import { downloadExcelAction } from "../utils.js";
 
 ButtonRegister.propTypes = {
@@ -33,14 +33,7 @@ export function BtnDownloadToExcel({ data }) {
         downloadExcelAction(blob, fileName);
     };
 
-    return (
-        <Icon
-            onClick={exportExcel}
-            path={mdiDownloadBoxOutline}
-            title="export-btn"
-            className="export-btn"
-        />
-    );
+    return <Icon onClick={exportExcel} path={mdiDownload} title="export-btn" />;
 }
 
 export function ButtonClose({ setClose }) {

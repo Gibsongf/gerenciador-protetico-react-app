@@ -4,7 +4,7 @@ import { useGetServiceBy } from "./ApiHooks";
 import "../styles/Details.css";
 import { Caption, TableRow } from "./Table";
 import { formatTelefone } from "../utils.js";
-import { DentistTableBody } from "./TableBody";
+import { DentistDivTodos } from "./TableBody";
 import { mdiPencil } from "@mdi/js";
 import { TableService } from "../pages/Todos";
 import Icon from "@mdi/react";
@@ -74,7 +74,7 @@ export function LocalDentistWorkers({ data }) {
 
                         <tbody>
                             <TableRow rowNames={row} />
-                            <DentistTableBody data={data.dentistas} />
+                            <DentistDivTodos data={data.dentistas} />
                         </tbody>
                     </table>
                 </div>

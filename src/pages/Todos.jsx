@@ -1,7 +1,7 @@
 import { useTodosApi } from "../components/ApiHooks";
 import { Caption, NavSortTable, TableRow } from "../components/Table";
 import {
-    DentistTableBody,
+    DentistDivTodos,
     LocalTableBody,
     ProductTableBody,
     ServiceTableBody,
@@ -23,17 +23,9 @@ export function TodosDentistas() {
 
     return (
         <>
-            {" "}
             <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
-            <div className="table-container">
-                <table className="todos-table">
-                    <Caption txt={"Dentistas"} />
-
-                    <tbody>
-                        <TableRow rowNames={row} />
-                        <DentistTableBody data={data} />
-                    </tbody>
-                </table>
+            <div className="dentist-content">
+                <DentistDivTodos data={data} />
             </div>
         </>
     );
@@ -48,19 +40,20 @@ export function TodosLocais() {
     }
 
     return (
-        <>
+        <div className="dentist-content">
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
-            <div className="table-container">
+            <LocalTableBody data={data} />
+            {/* <div className="table-container">
                 <table className="todos-table">
                     <Caption txt={"Locais"} />
 
                     <tbody>
                         <TableRow rowNames={row} />
-                        <LocalTableBody data={data} />
+                        
                     </tbody>
                 </table>
-            </div>
-        </>
+            </div> */}
+        </div>
     );
 }
 export const PopUpEditContext = createContext({
@@ -80,7 +73,7 @@ export function TodosProdutos() {
     }
 
     return (
-        <>
+        <div className="content">
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
             <PopUpEditContext.Provider
                 value={{
@@ -101,7 +94,7 @@ export function TodosProdutos() {
                     </table>
                 </div>
             </PopUpEditContext.Provider>
-        </>
+        </div>
     );
 }
 
@@ -139,27 +132,27 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     const newBtnRender = providedData === undefined ? true : false;
 
     return (
-        <>
+        <div className="service-content">
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
-            <div className="table-container">
-                <NavSortTable
-                    setDate={setSortDate}
-                    isDetails={isDetails}
-                    exportClick={onClickExport}
-                />
+            {/* <div className="table-container"> */}
+            <NavSortTable
+                setDate={setSortDate}
+                isDetails={isDetails}
+                exportClick={onClickExport}
+            />
 
-                <PopUpEditContext.Provider
-                    value={{
-                        setForm,
-                        setUpdate: updateFunction,
-                        setShowForm: setClose,
-                    }}
-                >
-                    {close ? form : ""}
-
-                    <table className="todos-table">
+            <PopUpEditContext.Provider
+                value={{
+                    setForm,
+                    setUpdate: updateFunction,
+                    setShowForm: setClose,
+                }}
+            >
+                {close ? form : ""}
+                <ServiceTableBody data={definiteData} sortDate={sortDate} />
+                {/* <table className="todos-table">
                         <Caption txt={"Serviços"} />
 
                         <tbody>
@@ -169,9 +162,9 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                                 sortDate={sortDate}
                             />
                         </tbody>
-                    </table>
-                </PopUpEditContext.Provider>
-            </div>
-        </>
+                    </table> */}
+            </PopUpEditContext.Provider>
+            {/* </div> */}
+        </div>
     );
 }

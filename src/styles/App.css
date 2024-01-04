@@ -1,26 +1,23 @@
-/* #root {
+#root {
   padding: 0;
   margin: 0;
-  background-color: #141414;
+  /* background-color: #141414; */
   min-height: 100vh;
-  background-image: url('../assets/bk-odonto.jpg');
+  /* background-image: url('../assets/bk-odonto.jpg'); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  justify-self: center;
+.content,
+.dentist-content,
+.service-content {
+  padding: 20px;
 }
 
 table {
   transition: all 0.3s;
 }
-
 
 
 .nav-btn {
@@ -41,12 +38,9 @@ table {
 }
 
 
-
-.edit-td {
+#edit {
   color: blue;
 }
-
-
 
 .todos-table,
 td {
@@ -63,6 +57,14 @@ th {
   padding: 10px;
 }
 
+.dentists-container,
+.service-container {
+  border-radius: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.8);
+}
 
 
 
@@ -107,9 +109,6 @@ th {
 }
 
 
-
-
-
 .nav {
   display: flex;
   justify-content: space-around;
@@ -122,6 +121,11 @@ th {
   background-color: rgb(34, 35, 35)
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 .login-form {
   border: 2px solid black;
   border-radius: 10px;
@@ -131,10 +135,9 @@ th {
 }
 
 .table-container {
-  background-color: #141414;
-  border: 1px solid white;
   padding: 15px;
   border-radius: 10px;
+  align-self: center;
 }
 
 .table-sort {
@@ -156,23 +159,51 @@ th {
   flex-direction: column;
 }
 
-.export-btn {
-  min-width: 6vw;
+.export-btn,
+.edit-btn {
+  min-height: 3vw;
 }
+
 
 #month {
   width: 30vw;
 }
 
+.header-container {
+  font-size: 1.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+#edit {
+  width: 4vw;
+}
+
+p {
+  margin: 5px;
+}
+
+.download-excel {
+  text-align: center;
+  width: 100%;
+}
+
+.download-excel svg {
+  width: 5vw
+}
+
 @media screen and (min-width: 820px) {
-
-
-  .export-btn {
-    min-width: 3vw;
-  }
 
   .nav {
     flex-direction: column;
+  }
+
+  .content,
+  .dentist-content,
+  .service-content {
+    padding: 5px;
   }
 
   .App {
@@ -184,7 +215,14 @@ th {
 
   .content {
     grid-column: 2;
+  }
 
+  .dentist-content,
+  .service-content {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 10px
   }
 
   .table-sort,
@@ -231,10 +269,58 @@ th {
   #month {
     width: 15vw;
   }
+
+  svg {
+    height: 3.5vh;
+  }
+
+
 }
 
-/* @media only screen and (min-device-width: 480px) {
+@media only screen and (max-device-width: 480px) {
   #root {
-    font-weight: bold;
+    font-size: 16px;
   }
-} */
+
+  .content,
+  .dentist-content,
+  .service-content {
+    padding: 10px;
+  }
+
+
+  .nav-btn {
+    padding: 2px;
+    margin: 4px;
+    border-radius: 5px;
+  }
+
+  .dentists-container {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .header-container {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .service-container {
+    gap: 10px;
+    padding: 5px 10px;
+  }
+
+  #edit {
+    width: 20px;
+  }
+
+  .download-excel svg {
+    width: 8vw;
+  }
+
+}

@@ -3,7 +3,7 @@ import { booleanToString, formatTelefone } from "../utils.js";
 import { ButtonEditForm } from "./NewFormButton";
 import { BtnDownloadToExcel } from "./Buttons";
 
-export function DentistTableBody({ data }) {
+export function DentistDivTodos({ data }) {
     const saveDentistId = (e) => {
         localStorage.setItem("dentistaID", e.target.id);
     };
@@ -12,8 +12,8 @@ export function DentistTableBody({ data }) {
     };
     return data.map((d) => {
         return (
-            <tr key={d._id}>
-                <td>
+            <div className="dentists-container" key={d._id}>
+                <p>
                     <Link
                         className="link"
                         onClick={saveDentistId}
@@ -22,10 +22,13 @@ export function DentistTableBody({ data }) {
                     >
                         {d.nome} {d.sobrenome}{" "}
                     </Link>
-                </td>
-                <td>{formatTelefone(d.telefone)}</td>
-
-                <td>
+                </p>
+                <p>
+                    <strong>Telefone:</strong> {formatTelefone(d.telefone)}
+                </p>
+                <p>
+                    {" "}
+                    <strong>Endereço: </strong>
                     <Link
                         className="link"
                         onClick={saveLocalId}
@@ -34,8 +37,8 @@ export function DentistTableBody({ data }) {
                     >
                         {d.local.nome}
                     </Link>
-                </td>
-            </tr>
+                </p>
+            </div>
         );
     });
 }
@@ -46,8 +49,9 @@ export function LocalTableBody({ data }) {
     };
     return data.map((d) => {
         return (
-            <tr key={d._id}>
-                <td>
+            <div className="dentists-container" key={d._id}>
+                <p>
+                    <strong>Nome: </strong>
                     <Link
                         className="link"
                         onClick={saveDbId}
@@ -56,11 +60,20 @@ export function LocalTableBody({ data }) {
                     >
                         {d.nome}
                     </Link>
-                </td>
-                <td>{formatTelefone(d.telefone)}</td>
-                <td>{d.endereço}</td>
-                <td>{d.tabela}</td>
-            </tr>
+                </p>
+                <p>
+                    <strong>Telefone: </strong>
+                    {formatTelefone(d.telefone)}
+                </p>
+                <p>
+                    <strong>Endereço: </strong>
+                    {d.endereço}
+                </p>
+                <p>
+                    <strong>Tabela: </strong>
+                    {d.tabela}
+                </p>
+            </div>
         );
     });
 }
@@ -90,8 +103,8 @@ export function ServiceTableBody({ data, sortDate }) {
             return;
         }
         return (
-            <tr key={d.dentista.nome + index}>
-                <td>
+            <div className="service-container" key={d.dentista.nome + index}>
+                <p className="header-container">
                     <Link
                         className="link"
                         onClick={saveDentistId}
@@ -100,19 +113,28 @@ export function ServiceTableBody({ data, sortDate }) {
                     >
                         {d.dentista.nome} {d.dentista.sobrenome}
                     </Link>
-                </td>
-                <td>{d.paciente}</td>
-                {/* <td>
+                    <ButtonEditForm type="servico" data={d} />
+                </p>
+                <p>
+                    <strong>Paciente: </strong>
+                    {d.paciente}
+                </p>
+                <p>
+                    <strong>Produto: </strong>
                     {d.produto.length > 1
                         ? d.produto.map((produto) => produto.nome + ", ")
                         : d.produto[0].nome}
-                </td> */}
-                <td>{booleanToString(d.statusEntrega)}</td>
-                <ButtonEditForm type="servico" data={d} />
-                <td>
+                </p>
+                <p>
+                    <strong>Finalizado: </strong>
+                    {booleanToString(d.statusEntrega)}
+                </p>
+
+                {/* <td> */}
+                <p className="download-excel">
                     <BtnDownloadToExcel data={d} />
-                </td>
-            </tr>
+                </p>
+            </div>
         );
     });
 }

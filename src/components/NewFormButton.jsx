@@ -6,7 +6,7 @@ import { FormService } from "./Form/FormService";
 import PropTypes from "prop-types";
 import { PopUpEditContext } from "../pages/Todos";
 import Icon from "@mdi/react";
-import { mdiFileEditOutline } from "@mdi/js";
+import { mdiPencil } from "@mdi/js";
 
 ButtonNewForm.propTypes = {
     type: PropTypes.string,
@@ -29,23 +29,13 @@ export function ButtonNewForm({ type, tableUpdate }) {
         };
         return <>{obj[type]}</>;
     };
-    // const Form = () => {
-    //     return <>{form}</>;
-    // };
+
     const onClick = () => {
-        // call a state that store the form to render
-        // setForm((e) => !e);
-        //boolean that will allow the form  to show
         setShowForm((e) => !e);
     };
-    // const btnStyle = {
-    //     fontSize: "1.1em",
-    //     fontWeight: "bold",
-    //     padding: "10px",
-    //     borderRadius: "15px",
-    // };
+
     return (
-        <div className="new-form-container" style={{ justifySelf: "center" }}>
+        <div className="new-form-container">
             <NewFormContext.Provider
                 value={{ setClose: setShowForm, setTableUpdate: tableUpdate }}
             >
@@ -96,6 +86,10 @@ const formatToForm = (type, data) => {
 export function ButtonEditForm({ type, data }) {
     const { setShowForm, setForm, setUpdate } = useContext(PopUpEditContext);
     const initialState = formatToForm(type, data);
+    let CustomTag = "td";
+    if (type === "servico") {
+        CustomTag = "p";
+    }
     const selectedForm = () => {
         const obj = {
             servico: <FormService initialState={initialState} />,
@@ -110,12 +104,12 @@ export function ButtonEditForm({ type, data }) {
     };
 
     return (
-        <td className="edit-td" onClick={onClick}>
+        <CustomTag id="edit" onClick={onClick}>
             {type === "servico" ? (
-                <Icon className="edit-btn" path={mdiFileEditOutline} />
+                <Icon title="edit-btn" path={mdiPencil} />
             ) : (
                 data.nome
             )}
-        </td>
+        </CustomTag>
     );
 }
