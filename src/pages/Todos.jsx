@@ -48,7 +48,7 @@ export function TodosLocais() {
     }
 
     return (
-        <>
+        <div className="content">
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
             <div className="table-container">
                 <table className="todos-table">
@@ -60,7 +60,7 @@ export function TodosLocais() {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     );
 }
 export const PopUpEditContext = createContext({
@@ -80,7 +80,7 @@ export function TodosProdutos() {
     }
 
     return (
-        <>
+        <div className="content">
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
             <PopUpEditContext.Provider
                 value={{
@@ -101,7 +101,7 @@ export function TodosProdutos() {
                     </table>
                 </div>
             </PopUpEditContext.Provider>
-        </>
+        </div>
     );
 }
 
@@ -139,7 +139,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     const newBtnRender = providedData === undefined ? true : false;
 
     return (
-        <>
+        <div className="content">
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
@@ -172,6 +172,6 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                     </table>
                 </PopUpEditContext.Provider>
             </div>
-        </>
+        </div>
     );
 }
