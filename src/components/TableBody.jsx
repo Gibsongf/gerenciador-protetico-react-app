@@ -107,7 +107,7 @@ export function ServiceTableBody({ data, sortDate }) {
                         ? d.produto.map((produto) => produto.nome + ", ")
                         : d.produto[0].nome}
                 </td>
-                <td>{booleanToString(d.statusEntrega)}</td>
+                {/* <td>{booleanToString(d.statusEntrega)}</td> */}
                 <ButtonEditForm type="servico" data={d} />
                 <td>
                     <BtnDownloadToExcel data={d} />

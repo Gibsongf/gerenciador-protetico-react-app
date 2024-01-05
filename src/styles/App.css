@@ -36,7 +36,10 @@
 
 }
 
-
+#dentista-table,
+#serviço-table {
+  padding: 0;
+}
 
 button {
   font-size: 16px;
@@ -169,6 +172,8 @@ th {
 }
 
 .table-container {
+  display: flex;
+  flex-direction: column;
   background-color: #141414;
   border: 1px solid white;
   padding: 15px;
@@ -220,7 +225,7 @@ th {
 
   }
 
-  .content {
+  .table-container {
     grid-column: 2;
 
   }
@@ -262,6 +267,12 @@ th {
 
   }
 
+  #dentista-table,
+  #serviço-table {
+    padding: 10px;
+
+  }
+
   .todos-table {
     border: none
   }
@@ -271,8 +282,8 @@ th {
   }
 }
 
-@media only screen and (min-device-width: 480px) {
+/* @media only screen and (min-device-width: 480px) {
   #root {
     font-weight: bold;
   }
-}
+} */

@@ -18,33 +18,25 @@ const Content = () => {
     return (
         <>
             <Header />
-            <div className="content">
-                <Routes>
-                    <Route
-                        path="gerenciador-protetico-react-app"
-                        element={<TableService />}
-                    />
-                    <Route path="gerenciador-protetico-react-app/*">
-                        <Route path="dentista/*">
-                            <Route path="todos/" element={<TodosDentistas />} />
-                            <Route path=":id/" element={<DentistaDetails />} />
-                        </Route>
-                        <Route
-                            path="servico/todos"
-                            element={<TableService />}
-                        />
-
-                        <Route path="local/*">
-                            <Route path="todos/" element={<TodosLocais />} />
-                            <Route path=":id/" element={<LocalDetails />} />
-                        </Route>
-                        <Route
-                            path="produtos/todos"
-                            element={<TodosProdutos />}
-                        />
+            <Routes>
+                <Route
+                    path="gerenciador-protetico-react-app"
+                    element={<TableService />}
+                />
+                <Route path="gerenciador-protetico-react-app/*">
+                    <Route path="dentista/*">
+                        <Route path="todos/" element={<TodosDentistas />} />
+                        <Route path=":id/" element={<DentistaDetails />} />
                     </Route>
-                </Routes>
-            </div>
+                    <Route path="servico/todos" element={<TableService />} />
+
+                    <Route path="local/*">
+                        <Route path="todos/" element={<TodosLocais />} />
+                        <Route path=":id/" element={<LocalDetails />} />
+                    </Route>
+                    <Route path="produtos/todos" element={<TodosProdutos />} />
+                </Route>
+            </Routes>
         </>
     );
 };

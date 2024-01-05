@@ -25,7 +25,7 @@ export function TodosDentistas() {
         <>
             {" "}
             <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
-            <div className="table-container">
+            <div className="table-container" id="dentista-table">
                 <table className="todos-table">
                     <Caption txt={"Dentistas"} />
 
@@ -48,9 +48,9 @@ export function TodosLocais() {
     }
 
     return (
-        <div className="content">
+        <>
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
-            <div className="table-container">
+            <div className="table-container" id="local-table">
                 <table className="todos-table">
                     <Caption txt={"Locais"} />
 
@@ -60,7 +60,7 @@ export function TodosLocais() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </>
     );
 }
 export const PopUpEditContext = createContext({
@@ -80,7 +80,8 @@ export function TodosProdutos() {
     }
 
     return (
-        <div className="content">
+        // <div className="content" >
+        <>
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
             <PopUpEditContext.Provider
                 value={{
@@ -90,7 +91,7 @@ export function TodosProdutos() {
                 }}
             >
                 {close ? form : ""}
-                <div className="table-container">
+                <div className="table-container" id="produto-table">
                     <table className="todos-table">
                         <Caption txt={"Produtos"} />
 
@@ -101,7 +102,8 @@ export function TodosProdutos() {
                     </table>
                 </div>
             </PopUpEditContext.Provider>
-        </div>
+        </>
+        // </div>
     );
 }
 
@@ -113,7 +115,7 @@ TableService.propTypes = {
 
 export function TableService({ providedData, setUpdateTable, isDetails }) {
     let { data, setTableUpdate } = useTodosApi("servico", true);
-    const row = ["Dentista", "Paciente", "Produto", "Finalizado", "", ""];
+    const row = ["Dentista", "Paciente", "Produto", "", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
@@ -139,11 +141,12 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     const newBtnRender = providedData === undefined ? true : false;
 
     return (
-        <div className="content">
+        <>
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
-            <div className="table-container">
+            {/* <div className="content" > */}
+            <div className="table-container" id="serviço-table">
                 <NavSortTable
                     setDate={setSortDate}
                     isDetails={isDetails}
@@ -172,6 +175,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                     </table>
                 </PopUpEditContext.Provider>
             </div>
-        </div>
+            {/* </div> */}
+        </>
     );
 }
