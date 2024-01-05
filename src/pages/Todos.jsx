@@ -12,6 +12,7 @@ import { ApiMonthExcel } from "../Api.js";
 import { downloadExcelAction } from "../utils.js";
 import PropTypes from "prop-types";
 import { Loading } from "../components/Loading.jsx";
+import { ServiceTodosDiv } from "../components/DivTodos.jsx";
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
     const row = ["Nome", "Telefone", "Endereço"];
@@ -161,8 +162,8 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                     }}
                 >
                     {close ? form : ""}
-
-                    <table className="todos-table">
+                    <ServiceTodosDiv data={definiteData} sortDate={sortDate} />
+                    {/* <table className="todos-table">
                         <Caption txt={"Serviços"} />
 
                         <tbody>
@@ -172,7 +173,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                                 sortDate={sortDate}
                             />
                         </tbody>
-                    </table>
+                    </table> */}
                 </PopUpEditContext.Provider>
             </div>
             {/* </div> */}

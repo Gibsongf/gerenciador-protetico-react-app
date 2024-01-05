@@ -34,12 +34,14 @@ export function BtnDownloadToExcel({ data }) {
     };
 
     return (
-        <Icon
-            onClick={exportExcel}
-            path={mdiDownloadBoxOutline}
-            title="export-btn"
-            className="export-btn"
-        />
+        <div className="export-container">
+            <Icon
+                onClick={exportExcel}
+                path={mdiDownloadBoxOutline}
+                title="export-btn"
+                className="export-icon"
+            />
+        </div>
     );
 }
 

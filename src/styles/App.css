@@ -50,12 +50,26 @@ input {
   border: none
 }
 
+.service-container {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.8);
+}
+
+#serviço-table {
+  color: black;
+  background-color: #ffffff;
+  padding: 5px
+}
+
 .content {
   /* display: flex;
   flex-direction: column;
   gap: 30px;
   align-items: center; */
-  justify-self: center;
+  /* justify-self: center; */
 }
 
 table {
@@ -81,13 +95,20 @@ table {
   color: white
 }
 
-
-
 .edit-td {
   color: blue;
 }
 
+.edit-icon {
+  width: 25px;
+}
 
+.header-container {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .todos-table,
 td {
@@ -199,19 +220,35 @@ th {
   flex-direction: column;
 }
 
-.export-btn {
-  min-width: 6vw;
+
+.export-container {
+  text-align: center;
+  width: 100%;
 }
+
+.export-icon {
+  width: 30px;
+}
+
+
 
 #month {
   width: 30vw;
 }
 
+p {
+  margin: 8px;
+}
+
 @media screen and (min-width: 820px) {
 
 
-  .export-btn {
-    min-width: 3vw;
+  .edit-icon {
+    width: 30px;
+  }
+
+  .export-icon {
+    width: 40px;
   }
 
   .nav {
