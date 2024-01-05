@@ -43,7 +43,7 @@
 
 button {
   font-size: 16px;
-  border: none
+  border: none;
 }
 
 input {
@@ -199,19 +199,39 @@ th {
   border: 1px solid white;
   padding: 15px;
   border-radius: 10px;
+  margin-top: 10px;
+}
+
+.new-form {
+  font-weight: bold;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #3498db;
+  color: white;
+}
+
+.new-form-container {
+  text-align: center;
 }
 
 .table-sort {
   margin-bottom: 15px;
-  max-height: 7vh;
-  padding: 0px 20px;
+  /* max-height: 7vh; */
+  padding: 0px 5px;
   display: flex;
-  justify-self: center;
-  color: white;
-  border-bottom: 3px white solid;
-  align-items: center;
-  gap: 10px;
+  /* justify-self: center; */
+  /* color: white; */
+  border: 1px black solid;
+  border-radius: 10px;
+  gap: 5px;
+  /* flex-direction: row; */
   justify-content: center;
+  align-items: center;
+}
+
+.todos-order-btn {
+  border-radius: 5px;
+  border-bottom: 1px black solid;
 }
 
 .username,
@@ -233,7 +253,9 @@ th {
 
 
 #month {
-  width: 30vw;
+  max-width: 35vw;
+  max-height: 10vh;
+  font-size: 16px;
 }
 
 p {
@@ -264,6 +286,9 @@ p {
 
   .table-container {
     grid-column: 2;
+    width: 65%;
+    align-self: center;
+    justify-self: center;
 
   }
 
@@ -292,16 +317,17 @@ p {
   }
 
   .nav-btn {
-    transition: border 0.3s;
+    transition: border 0.5s;
     color: white;
     background-color: black;
     border-left: solid 5px black;
-    border-radius: 0px;
+    /* border-radius: 0px; */
+    /* transition: transform 0.5s, background-color 0.5s; */
   }
 
   .active {
-    border-left: solid 10px red;
-
+    border-left: solid 20px red;
+    transform: translateY(-0px);
   }
 
   #dentista-table,
@@ -314,9 +340,14 @@ p {
     border: none
   }
 
-  #month {
-    width: 15vw;
+  .new-form {
+    padding: 10px;
+
   }
+
+  /* #month {
+    width: 15vw;
+  } */
 }
 
 /* @media only screen and (min-device-width: 480px) {

@@ -9,10 +9,7 @@ export function ServiceTodosDiv({ data, sortDate }) {
     };
 
     return data.map((d, index) => {
-        if (
-            sortDate &&
-            d.dataRegistro.split("-")[1] !== sortDate.split("-")[1]
-        ) {
+        if (sortDate && d.dataRegistro.split("-")[1] !== sortDate) {
             return;
         }
 

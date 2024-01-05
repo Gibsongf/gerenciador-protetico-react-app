@@ -42,7 +42,7 @@ export function TodosDentistas() {
 
 export function TodosLocais() {
     const { data, setTableUpdate } = useTodosApi("local", true);
-    const row = ["Nome", "Telefone", "Endereço", "Tipo de Tabela"];
+    const row = ["Nome", "Telefone", "Endereço", "Tabela"];
     if (!data) {
         // Data is still being fetched
         return <Loading />;
