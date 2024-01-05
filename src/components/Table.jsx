@@ -28,7 +28,7 @@ export function NavSortTable({ setDate, isDetails, exportClick }) {
 
     return (
         <div className="table-sort">
-            <h5>Ordenar: </h5>
+            <h5>Mês: </h5>
             {/* <button className="todos-order-btn" onClick={onClickTodos}>
                 Todos
             </button> */}

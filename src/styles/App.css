@@ -253,9 +253,11 @@ th {
 
 
 #month {
+  padding: 5px;
   max-width: 35vw;
   max-height: 10vh;
   font-size: 16px;
+  border: #141414 solid 1px
 }
 
 p {
