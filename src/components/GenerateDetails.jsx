@@ -68,7 +68,7 @@ export function LocalDentistWorkers({ data }) {
     return (
         <>
             {data.dentistas.length > 0 && (
-                <div className="table-container">
+                <div className="content-container">
                     <table className="todos-table">
                         <Caption txt={"Dentistas"} />
 

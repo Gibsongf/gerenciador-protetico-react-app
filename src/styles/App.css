@@ -16,11 +16,9 @@
 }
 
 .header {
-  /* padding: 2px; */
   box-shadow: -2px -20px 20px 15px rgb(245, 245, 245);
   margin-bottom: 15px;
   height: 40px;
-  /* background-color: rgb(159, 160, 160) */
 }
 
 .nav-btn {
@@ -36,11 +34,6 @@
 
 }
 
-/* #dentista-table,
-#serviço-table,
-#local-table {
-  padding: 0;
-} */
 
 button {
   font-size: 16px;
@@ -57,21 +50,17 @@ input {
   padding: 5px 10px;
   background-color: #ffffff;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.8);
+  animation: fadeInTable 0.5s ease-in-out;
+
 }
 
-#serviço-table {
+#serviço-content {
   color: black;
   background-color: #ffffff;
-  padding: 5px
+  padding: 5px;
+  animation: fadeInTable 0.5s ease-in-out;
 }
 
-.content {
-  /* display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center; */
-  /* justify-self: center; */
-}
 
 table {
   transition: all 0.3s;
@@ -79,16 +68,7 @@ table {
 
 
 
-/* .nav-btn {
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 15px;
-  background-color: white;
-  color: black;
-  transition: transform 0.5s, background-color 0.5s;
-} */
+
 
 .active {
   transform: translateY(-5px);
@@ -170,21 +150,6 @@ th {
 }
 
 
-
-
-
-/* .nav {
-  display: flex;
-  justify-content: space-around;
-  color: white;
-} */
-
-/* .header {
-  box-shadow: -2px -20px 20px 15px rgb(77, 84, 83);
-  min-height: 10vh;
-  background-color: rgb(34, 35, 35)
-} */
-
 .login-form {
   border: 2px solid black;
   border-radius: 10px;
@@ -193,12 +158,11 @@ th {
 
 }
 
-.table-container {
+.content-container {
   display: flex;
   flex-direction: column;
   background-color: #141414;
   border: 1px solid white;
-  /* padding: 15px; */
   border-radius: 10px;
   margin-top: 10px;
 }
@@ -215,17 +179,13 @@ th {
   text-align: center;
 }
 
-.table-sort {
+.sort-nav {
   margin-bottom: 15px;
-  /* max-height: 7vh; */
   padding: 0px 5px;
   display: flex;
-  /* justify-self: center; */
-  /* color: white; */
   border: 1px black solid;
   border-radius: 10px;
   gap: 5px;
-  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
 }
@@ -292,7 +252,7 @@ p {
 
   }
 
-  .table-container {
+  .content-container {
     grid-column: 2;
     width: 65%;
     align-self: center;
@@ -300,7 +260,7 @@ p {
     padding: 15px;
   }
 
-  .table-sort,
+  .sort-nav,
   .new-form-container,
   table {
     grid-column: 2;
@@ -338,12 +298,7 @@ p {
     transform: translateY(-0px);
   }
 
-  /* #dentista-table,
-  #serviço-table,
-  #local-table {
-    padding: 10px;
 
-  } */
 
   .todos-table {
     border: none
@@ -354,13 +309,5 @@ p {
 
   }
 
-  /* #month {
-    width: 15vw;
-  } */
-}
 
-/* @media only screen and (min-device-width: 480px) {
-  #root {
-    font-weight: bold;
-  }
-} */
+}

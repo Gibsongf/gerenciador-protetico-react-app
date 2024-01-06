@@ -31,7 +31,7 @@ form>div {
 
 
 form {
-    padding: 75px;
+    /* padding: 75px; */
     background-color: #1f1f1f;
     color: whitesmoke;
     text-align: center;
@@ -51,7 +51,7 @@ input[type='password'] {
     border-radius: 10px;
     padding: 5px;
     appearance: none;
-    min-width: 300px;
+    /* min-width: 300px; */
 }
 
 

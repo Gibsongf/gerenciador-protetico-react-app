@@ -26,7 +26,7 @@ export function TodosDentistas() {
         <>
             {" "}
             <ButtonNewForm type="dentista" tableUpdate={setTableUpdate} />
-            <div className="table-container" id="dentista-table">
+            <div className="content-container" id="dentista-table">
                 <table className="todos-table">
                     <Caption txt={"Dentistas"} />
 
@@ -51,7 +51,7 @@ export function TodosLocais() {
     return (
         <>
             <ButtonNewForm type="local" tableUpdate={setTableUpdate} />
-            <div className="table-container" id="local-table">
+            <div className="content-container" id="local-table">
                 <table className="todos-table">
                     <Caption txt={"Locais"} />
 
@@ -92,7 +92,7 @@ export function TodosProdutos() {
                 }}
             >
                 {close ? form : ""}
-                <div className="table-container" id="produto-table">
+                <div className="content-container" id="produto-table">
                     <table className="todos-table">
                         <Caption txt={"Produtos"} />
 
@@ -147,7 +147,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
             {/* <div className="content" > */}
-            <div className="table-container" id="serviço-table">
+            <div className="content-container" id="serviço-content">
                 <NavSortTable
                     setDate={setSortDate}
                     isDetails={isDetails}
