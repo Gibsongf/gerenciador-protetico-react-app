@@ -1,5 +1,5 @@
 let apiUrl = "https://gerenciador-protetico.adaptable.app";
-apiUrl = "http://localhost:3000";
+// apiUrl = "http://localhost:3000";
 export async function apiLogin(loginData) {
     const url = apiUrl + "/users/login";
     // console.log(loginData);
