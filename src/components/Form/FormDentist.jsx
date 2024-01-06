@@ -61,14 +61,14 @@ export function FormDentist({ initialState, setEdit, setUpdate }) {
                 </legend>
                 <SimpleInput
                     id={"nome"}
-                    labelTxt={"Nome"}
+                    labelTxt={"Nome:"}
                     value={formData.nome}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.nome}
                 />
                 <SimpleInput
                     id={"sobrenome"}
-                    labelTxt={"Sobrenome"}
+                    labelTxt={"Sobrenome:"}
                     value={formData.sobrenome}
                     onChange={handleChange}
                 />
@@ -87,7 +87,7 @@ export function FormDentist({ initialState, setEdit, setUpdate }) {
                     initialValue={formData.local}
                     onChange={handleChange}
                     category={"local"}
-                    labelTxt={"Local de Trabalho"}
+                    labelTxt={"Local de Trabalho:"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
                 {initialState.formType === "edit" && <ButtonEdit />}

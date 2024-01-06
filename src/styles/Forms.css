@@ -2,8 +2,8 @@ form>div {
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap: 10px;
-    padding-bottom: 10px;
+    gap: 5px;
+    padding-bottom: 5px;
 
 }
 
@@ -48,17 +48,18 @@ input[type="text"],
 input[type="tel"],
 input[type="number"],
 input[type='password'] {
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 5px;
     appearance: none;
-    /* min-width: 300px; */
+    height: 20px;
+    font-size: 16px;
 }
 
 
 
 select {
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
     border: none;
 
 }
@@ -74,24 +75,23 @@ select {
 }
 
 #pop-up {
-    position: fixed;
-    z-index: 1;
-    padding-top: 50px;
-    left: 0;
-    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    left: 0px;
+    top: 50px;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    min-height: 100%;
 }
+
 
 #pop-up-content {
     border-top: 15px solid rgb(255, 244, 244);
-    border-radius: 1em;
-    margin: 5% auto;
-    width: 70%;
+    width: 80%;
+    padding: 15px;
     animation: fadeIn 0.5s ease-in-out;
 }
-
 
 @keyframes fadeIn {
     0% {
@@ -141,15 +141,34 @@ select {
 
 }
 
+.container-edit-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.container-edit-btn button,
+.register-form-btn {
+    align-self: center;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
 @media screen and (min-width: 721px) {
     form {
         padding: 40px
     }
 
+    #pop-up {
+        position: fixed;
+    }
+
     #pop-up-content {
         width: 35vw;
         border-top: none;
-        margin: -5% auto;
     }
 
     .login-container form {

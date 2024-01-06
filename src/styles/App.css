@@ -129,10 +129,10 @@ th {
 }
 
 .select-product {
-  width: 40%;
   align-self: center;
   padding: 5px;
   font-weight: bold;
+  border-radius: 3px;
 }
 
 .form-close-btn {
@@ -142,7 +142,7 @@ th {
 }
 
 .close-btn {
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   font-weight: bold;
   background: none;
   border: white solid 1px;
@@ -289,8 +289,6 @@ p {
     color: white;
     background-color: black;
     border-left: solid 5px black;
-    /* border-radius: 0px; */
-    /* transition: transform 0.5s, background-color 0.5s; */
   }
 
   .active {

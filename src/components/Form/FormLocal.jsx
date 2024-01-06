@@ -15,7 +15,7 @@ import { NewFormContext } from "../NewFormButton";
 export function FormLocal({ initialState, setEdit, setUpdate }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
-    const nomeTag = { id: "nome", txt: "Nome do Local" };
+    const nomeTag = { id: "nome", txt: "Nome do Local:" };
     const { setClose, setTableUpdate } = useContext(NewFormContext);
 
     let legendTxt = "Editar Detalhes do Local";
@@ -75,7 +75,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                 />
                 <SimpleInput
                     id={"endereço"}
-                    labelTxt={"Endereço"}
+                    labelTxt={"Endereço:"}
                     value={formData.endereço}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.endereço}

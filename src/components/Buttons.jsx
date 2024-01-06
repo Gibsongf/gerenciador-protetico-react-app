@@ -77,37 +77,21 @@ export function ButtonEdit() {
         borderRadius: "10px",
     };
     return (
-        <div className="container-edit-btn" style={divStyle}>
-            <button style={btnStyle} type="submit">
-                Confirm
-            </button>
+        <div className="container-edit-btn">
+            <button type="submit">Confirm</button>
         </div>
     );
 }
 export function ButtonRegister() {
-    const style = {
-        width: "20vw",
-        alignSelf: "center",
-        padding: "5px",
-        fontSize: "1em",
-        fontWeight: "bold",
-    };
     return (
-        <button style={style} type="submit">
+        <button className="register-form-btn" type="submit">
             Registrar
         </button>
     );
 }
 export function ButtonConfirm() {
-    const btnStyle = {
-        width: "25vw",
-        padding: "5px",
-        fontSize: "1em",
-        fontWeight: "bold",
-        borderRadius: "10px",
-    };
     return (
-        <button style={btnStyle} type="submit">
+        <button className="confirm-form-btn" type="submit">
             Confirm
         </button>
     );
