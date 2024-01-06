@@ -59,7 +59,7 @@ export function LocalTableBody({ data }) {
                 </td>
                 <td>{formatTelefone(d.telefone)}</td>
                 <td>{d.endereço}</td>
-                <td>{d.tabela}</td>
+                {/* <td>{d.tabela}</td> */}
             </tr>
         );
     });

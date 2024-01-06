@@ -36,10 +36,11 @@
 
 }
 
-#dentista-table,
-#serviço-table {
+/* #dentista-table,
+#serviço-table,
+#local-table {
   padding: 0;
-}
+} */
 
 button {
   font-size: 16px;
@@ -110,18 +111,17 @@ table {
   align-items: center;
 }
 
-.todos-table,
 td {
   color: black;
-  border: 2px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   padding: 10px 5px 10px 5px;
 }
 
 th {
   height: 70px;
   color: black;
-  border: 2px solid rgb(0, 0, 0);
-  border-bottom: 4px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: 2px solid rgb(0, 0, 0);
   padding: 10px;
 }
 
@@ -134,6 +134,7 @@ th {
   color: white;
   text-align: center;
   animation: fadeInTable 0.5s ease-in-out;
+  border-radius: 15px;
 
 }
 
@@ -197,7 +198,7 @@ th {
   flex-direction: column;
   background-color: #141414;
   border: 1px solid white;
-  padding: 15px;
+  /* padding: 15px; */
   border-radius: 10px;
   margin-top: 10px;
 }
@@ -264,6 +265,11 @@ p {
   margin: 8px;
 }
 
+#edit {
+  color: blue;
+
+}
+
 @media screen and (min-width: 820px) {
 
 
@@ -291,7 +297,7 @@ p {
     width: 65%;
     align-self: center;
     justify-self: center;
-
+    padding: 15px;
   }
 
   .table-sort,
@@ -332,11 +338,12 @@ p {
     transform: translateY(-0px);
   }
 
-  #dentista-table,
-  #serviço-table {
+  /* #dentista-table,
+  #serviço-table,
+  #local-table {
     padding: 10px;
 
-  }
+  } */
 
   .todos-table {
     border: none

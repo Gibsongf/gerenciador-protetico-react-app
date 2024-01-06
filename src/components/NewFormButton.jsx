@@ -118,7 +118,9 @@ export function ButtonEditForm({ type, data }) {
                     // size={0.5}
                 />
             ) : (
-                <td id="edit"> {data.nome}</td>
+                <td onClick={onClick} id="edit">
+                    {data.nome}
+                </td>
             )}
         </>
         /* </CustomTag> */
