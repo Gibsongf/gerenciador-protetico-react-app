@@ -3,7 +3,7 @@
   margin: 0;
   background-color: #141414;
   min-height: 100vh;
-  background-image: url('../assets/bk-odonto.jpg');
+  background-image: url('../images/bk-odonto.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -89,6 +89,10 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logo-header {
+  width: 20vw;
 }
 
 td {

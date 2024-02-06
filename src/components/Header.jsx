@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import srcLogo from "src/images/dglogoblack.png";
 
 const ResponsiveLogo = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const style = {
-        width: "20vw",
-    };
+
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -22,11 +21,7 @@ const ResponsiveLogo = () => {
             {windowWidth < 820 ? (
                 ""
             ) : (
-                <img
-                    style={style}
-                    src={"../src/assets/dglogoblack.png"}
-                    alt="dg-logo"
-                />
+                <img src={srcLogo} alt="dg-logo" className="logo-header" />
             )}
         </>
     );
