@@ -38,6 +38,11 @@
 button {
   font-size: 16px;
   border: none;
+  cursor: pointer;
+}
+
+svg {
+  cursor: pointer;
 }
 
 input {
@@ -330,5 +335,9 @@ p {
   .loading svg {
     height: 20%;
     width: 20%;
+  }
+
+  button:hover {
+    background-color: #2b77aa;
   }
 }
