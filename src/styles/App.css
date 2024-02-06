@@ -237,6 +237,7 @@ p {
 .loading {
   fill: white;
   text-align: center;
+
 }
 
 .loading svg {
@@ -321,5 +322,13 @@ p {
 
   }
 
+  .loading {
+    grid-column: 2;
+    grid-row: 5;
+  }
 
+  .loading svg {
+    height: 20%;
+    width: 20%;
+  }
 }
