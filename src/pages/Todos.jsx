@@ -7,7 +7,7 @@ import {
     ServiceTableBody,
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { ApiMonthExcel } from "../Api.js";
 import { downloadExcelAction } from "../utils.js";
 import PropTypes from "prop-types";
@@ -73,7 +73,11 @@ export function TodosProdutos() {
     const { data, setTableUpdate } = useTodosApi("produto", true);
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
-
+    useEffect(() => {
+        if (form) {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }
+    }, [form]);
     const row = ["Nome", "Valor Normal", "Valor Reduzido"];
     if (!data) {
         // Data is still being fetched
@@ -81,7 +85,6 @@ export function TodosProdutos() {
     }
 
     return (
-        // <div className="content" >
         <>
             <ButtonNewForm type="produto" tableUpdate={setTableUpdate} />
             <PopUpEditContext.Provider
@@ -104,7 +107,6 @@ export function TodosProdutos() {
                 </div>
             </PopUpEditContext.Provider>
         </>
-        // </div>
     );
 }
 
@@ -130,6 +132,11 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
             downloadExcelAction(blob, fileName);
         }
     };
+    useEffect(() => {
+        if (form) {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }
+    }, [form]);
 
     if (!data) {
         // Data is still being fetched
@@ -164,7 +171,6 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                     <ServiceTodosDiv data={definiteData} sortDate={sortDate} />
                 </PopUpEditContext.Provider>
             </div>
-            {/* </div> */}
         </>
     );
 }
