@@ -21,9 +21,7 @@ export const Info = ({ content, setEdit }) => {
         textAlign: "end",
         padding: "5px 0 5px 0",
     };
-    const pStyle = {
-        borderBottom: "2px solid black",
-    };
+
     return (
         <div className="info">
             <div style={divBtnContainer}>
@@ -40,7 +38,11 @@ export const Info = ({ content, setEdit }) => {
                 }
 
                 return (
-                    <p style={pStyle} key={index + k}>
+                    <p
+                        className="info-content"
+                        key={index + k}
+                        id={k.toLocaleLowerCase()}
+                    >
                         <strong>{k}: </strong>
                         {content[k]}
                     </p>
