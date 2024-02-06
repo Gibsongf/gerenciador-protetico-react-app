@@ -28,12 +28,8 @@ export function ButtonNewForm({ type, tableUpdate }) {
         };
         return <>{obj[type]}</>;
     };
-    // const Form = () => {
-    //     return <>{form}</>;
-    // };
+
     const onClick = () => {
-        // call a state that store the form to render
-        // setForm((e) => !e);
         //boolean that will allow the form  to show
         setShowForm((e) => !e);
     };
