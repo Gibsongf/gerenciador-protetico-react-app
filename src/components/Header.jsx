@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import srcLogo from "src/images/dglogoblack.png";
+import srcLogo from "/src/images/dglogoblack.png";
 
 const ResponsiveLogo = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
