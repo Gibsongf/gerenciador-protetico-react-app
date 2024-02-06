@@ -1,5 +1,5 @@
 import { Header } from "./components/Header";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 import { DentistaDetails, LocalDetails } from "./pages/Details";
@@ -38,12 +38,12 @@ const Content = () => {
     );
 };
 function App() {
-    const token = localStorage.getItem("token");
+    const [token, setToken] = useState(localStorage.getItem("token"));
 
     return (
         <div className="App">
             <AppContext.Provider value={{ errorMsg: {} }}>
-                {token ? <Content /> : <FormLogin />}
+                {token ? <Content /> : <FormLogin setToken={setToken} />}
             </AppContext.Provider>
         </div>
     );

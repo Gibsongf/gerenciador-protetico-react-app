@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiLogin } from "../../Api.js";
+import PropTypes from "prop-types";
 
-export function FormLogin() {
+FormLogin.propTypes = {
+    setToken: PropTypes.func,
+};
+export function FormLogin({ setToken }) {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -14,7 +18,8 @@ export function FormLogin() {
         e.preventDefault();
         const valid = await apiLogin(formData);
         if (valid) {
-            navigate("/");
+            setToken(() => localStorage.getItem("token"));
+            navigate("/servico/todos");
         }
     };
     return (
