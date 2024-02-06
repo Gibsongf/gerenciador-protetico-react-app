@@ -89,10 +89,7 @@ const formatToForm = (type, data) => {
 export function ButtonEditForm({ type, data }) {
     const { setShowForm, setForm, setUpdate } = useContext(PopUpEditContext);
     const initialState = formatToForm(type, data);
-    let CustomTag = "td";
-    if (type === "servico") {
-        CustomTag = "";
-    }
+
     const selectedForm = () => {
         const obj = {
             servico: <FormService initialState={initialState} />,
@@ -107,7 +104,6 @@ export function ButtonEditForm({ type, data }) {
     };
 
     return (
-        // <CustomTag id="edit" onClick={onClick}>
         <>
             {type === "servico" ? (
                 <Icon
@@ -115,7 +111,6 @@ export function ButtonEditForm({ type, data }) {
                     title="edit-btn"
                     path={mdiPencil}
                     onClick={onClick}
-                    // size={0.5}
                 />
             ) : (
                 <td onClick={onClick} id="edit">
@@ -123,28 +118,5 @@ export function ButtonEditForm({ type, data }) {
                 </td>
             )}
         </>
-        /* </CustomTag> */
     );
 }
-// export function ButtonEditForm({ type, data }) {
-//     const { setShowForm, setForm, setUpdate } = useContext(PopUpEditContext);
-//     const initialState = formatToForm(type, data);
-//     const selectedForm = () => {
-//         const obj = {
-//             servico: <FormService initialState={initialState} />,
-//             produto: <FormProduct initialState={initialState} />,
-//         };
-//         return obj[type];
-//     };
-
-//     const onClick = () => {
-//         setForm(() => selectedForm());
-//         setShowForm((e) => !e);
-//     };
-
-//     return (
-//         <td className="edit-td" onClick={onClick}>
-//             {type === "servico" ? "Editar" : data.nome}
-//         </td>
-//     );
-// }

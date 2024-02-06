@@ -116,7 +116,6 @@ TableService.propTypes = {
 
 export function TableService({ providedData, setUpdateTable, isDetails }) {
     let { data, setTableUpdate } = useTodosApi("servico", true);
-    const row = ["Dentista", "Paciente", "Produto", "", ""];
     const [sortDate, setSortDate] = useState();
     const [close, setClose] = useState(false);
     const [form, setForm] = useState();
@@ -131,7 +130,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
             downloadExcelAction(blob, fileName);
         }
     };
-    return <Loading />;
+
     if (!data) {
         // Data is still being fetched
         return <Loading />;
