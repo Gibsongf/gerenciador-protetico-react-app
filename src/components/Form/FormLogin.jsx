@@ -14,8 +14,7 @@ export function FormLogin() {
         e.preventDefault();
         const valid = await apiLogin(formData);
         if (valid) {
-            console.log("redirect to index page");
-            navigate("/gerenciador-protetico-react-app/servico/todos");
+            navigate("/");
         }
     };
     return (

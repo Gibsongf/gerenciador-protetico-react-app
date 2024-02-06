@@ -29,12 +29,7 @@ export function NavSortTable({ setDate, isDetails, exportClick }) {
     return (
         <div className="sort-nav">
             <h5>Mês: </h5>
-            {/* <button className="todos-order-btn" onClick={onClickTodos}>
-                Todos
-            </button> */}
-            {/* <label htmlFor="month">
-                <strong>Mês: </strong>
-            </label> */}
+
             <select ref={ref} id="month" value={value} onChange={onChangeMonth}>
                 <option value="">Todos</option>
                 <option value="01">Janeiro</option>

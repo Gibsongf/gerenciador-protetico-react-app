@@ -22,7 +22,11 @@ const ResponsiveLogo = () => {
             {windowWidth < 820 ? (
                 ""
             ) : (
-                <img style={style} src="../src/assets/dglogoblack.png" alt="" />
+                <img
+                    style={style}
+                    src={"../src/assets/dglogoblack.png"}
+                    alt="dg-logo"
+                />
             )}
         </>
     );
@@ -34,28 +38,16 @@ export function Header() {
             <div className="header">
                 <ResponsiveLogo />
                 <div className="nav">
-                    <NavLink
-                        className="nav-btn"
-                        to="/gerenciador-protetico-react-app/servico/todos"
-                    >
+                    <NavLink className="nav-btn" to="/servico/todos">
                         Serviços
                     </NavLink>
-                    <NavLink
-                        className="nav-btn"
-                        to="/gerenciador-protetico-react-app/dentista/todos"
-                    >
+                    <NavLink className="nav-btn" to="/dentista/todos">
                         Dentistas
                     </NavLink>
-                    <NavLink
-                        className="nav-btn"
-                        to="/gerenciador-protetico-react-app/local/todos"
-                    >
+                    <NavLink className="nav-btn" to="/local/todos">
                         Locais
                     </NavLink>
-                    <NavLink
-                        className="nav-btn"
-                        to="/gerenciador-protetico-react-app/produtos/todos"
-                    >
+                    <NavLink className="nav-btn" to="/produtos/todos">
                         Produtos
                     </NavLink>
                 </div>

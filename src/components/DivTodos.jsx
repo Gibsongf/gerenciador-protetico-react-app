@@ -21,7 +21,7 @@ export function ServiceTodosDiv({ data, sortDate }) {
                         <Link
                             className="link"
                             onClick={saveDentistId}
-                            to={`/gerenciador-protetico-react-app/dentista/${d.dentista._id}`}
+                            to={`/dentista/${d.dentista._id}`}
                             id={d.dentista._id}
                         >
                             {d.dentista.nome} {d.dentista.sobrenome}

@@ -39,14 +39,12 @@ export function useForm(initialState, formElements) {
     }, [result, formElements, errorMsg]);
 
     const callAPI = (arr) => {
-        // console.log(arr);
         if (Object.keys(arr).includes("errors")) {
             setResult(arr.errors);
             return false;
         } else {
             setResult(arr);
             return true;
-            // nav("/");
         }
     };
 

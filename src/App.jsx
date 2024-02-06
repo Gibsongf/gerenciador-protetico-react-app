@@ -1,6 +1,6 @@
 import { Header } from "./components/Header";
 import { createContext } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 import { DentistaDetails, LocalDetails } from "./pages/Details";
 import {
@@ -19,11 +19,8 @@ const Content = () => {
         <>
             <Header />
             <Routes>
-                <Route
-                    path="gerenciador-protetico-react-app"
-                    element={<TableService />}
-                />
-                <Route path="gerenciador-protetico-react-app/*">
+                <Route path="/" element={<TableService />} />
+                <Route path="/*">
                     <Route path="dentista/*">
                         <Route path="todos/" element={<TodosDentistas />} />
                         <Route path=":id/" element={<DentistaDetails />} />
@@ -41,8 +38,6 @@ const Content = () => {
     );
 };
 function App() {
-    const nav = useNavigate();
-    const location = useLocation();
     const token = localStorage.getItem("token");
 
     return (
