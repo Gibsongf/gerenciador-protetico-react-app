@@ -13,7 +13,7 @@ export function NavSortTable({ setDate, isDetails, exportClick }) {
     const [value, setValue] = useState("");
     const ref = useRef();
     const onChangeMonth = (e) => {
-        console.log(e.target.value);
+        e.target.value;
         // if(e.target.value === ''){
         //     onClickTodos()
         // }

@@ -1,8 +1,7 @@
 let apiUrl = "https://gerenciador-protetico.adaptable.app";
-apiUrl = "http://localhost:3000";
+// apiUrl = "http://localhost:3000";
 export async function apiLogin(loginData) {
     const url = apiUrl + "/users/login";
-    // console.log(loginData);
     try {
         const response = await fetch(url, {
             method: "post",
@@ -14,7 +13,7 @@ export async function apiLogin(loginData) {
 
         if (response.status === 200) {
             const data = await response.json();
-            // console.log("Login successfully");
+            //  ("Login successfully");
             localStorage.setItem("token", data.token);
             return true;
         } else {
@@ -26,7 +25,7 @@ export async function apiLogin(loginData) {
 }
 export async function apiRegister(loginData) {
     const url = apiUrl + "/users/register";
-    // console.log(loginData);
+    //  (loginData);
     try {
         const response = await fetch(url, {
             method: "post",
@@ -38,7 +37,7 @@ export async function apiRegister(loginData) {
 
         if (response.status === 200) {
             const data = await response.json();
-            // console.log("Login successfully");
+            //  ("Login successfully");
             localStorage.setItem("token", data.token);
             return true;
         } else {
@@ -82,7 +81,7 @@ async function setupFetch(url, reqMethod = "get", body) {
 export async function APItodos(category) {
     const url = `${apiUrl}/api/${category}/todos`;
     const data = await setupFetch(url, "get");
-    // console.log(data);
+    //  (data);
     return data;
 }
 export async function APIDetails(category, id) {
@@ -98,16 +97,16 @@ export async function APIGetServiceBy(id, by) {
 
 export async function APIPostNewData(formData) {
     const url = `${apiUrl}/api/${formData["category"]}/novo`;
-    // console.log(formData);
+    //  (formData);
     const data = await setupFetch(url, "post", formData);
-    // console.log(data);
+    //  (data);
     return data;
 }
 export async function APIPutData(formData, id) {
     const url = `${apiUrl}/api/${formData["category"]}/${id}/edit`;
-    // console.log(formData);
+    //  (formData);
     const data = await setupFetch(url, "put", formData);
-    // console.log(data);
+    //  (data);
 
     return data;
 }
@@ -124,7 +123,7 @@ export async function ApiOneExcel(id) {
         const response = await fetch(url, reqConfig);
         if (response.status === 200) {
             const blob = await response.blob();
-            // console.log(data);
+            //  (data);
             return blob;
         }
     } catch (err) {
@@ -145,7 +144,7 @@ export async function ApiMonthExcel(id, date) {
         const response = await fetch(url, reqConfig);
         if (response.status === 200) {
             const blob = await response.blob();
-            // console.log(data);
+            //  (data);
             return blob;
         }
     } catch (err) {

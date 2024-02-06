@@ -135,7 +135,7 @@ export function stateDetails(data, type) {
             formType: "edit",
             dbId: data.serviço._id,
         };
-        // console.log(data, formState);
+        //  (data, formState);
         return { infoContent, formState };
     };
     const obj = {
