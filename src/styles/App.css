@@ -71,7 +71,7 @@ table {
 
 
 .active {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   background-color: red;
   color: white
 }
@@ -222,7 +222,7 @@ th {
 }
 
 p {
-  margin: 8px;
+  margin: 2px;
 }
 
 #edit {
