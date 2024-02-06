@@ -1,5 +1,5 @@
 import { Header } from "./components/Header";
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./styles/App.css";
 import { DentistaDetails, LocalDetails } from "./pages/Details";

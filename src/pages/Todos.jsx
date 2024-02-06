@@ -131,6 +131,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
             downloadExcelAction(blob, fileName);
         }
     };
+    return <Loading />;
     if (!data) {
         // Data is still being fetched
         return <Loading />;
@@ -146,7 +147,6 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
             {newBtnRender === true && (
                 <ButtonNewForm type="serviço" tableUpdate={updateFunction} />
             )}
-            {/* <div className="content" > */}
             <div className="content-container" id="serviço-content">
                 <NavSortTable
                     setDate={setSortDate}
@@ -163,17 +163,6 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
                 >
                     {close ? form : ""}
                     <ServiceTodosDiv data={definiteData} sortDate={sortDate} />
-                    {/* <table className="todos-table">
-                        <Caption txt={"Serviços"} />
-
-                        <tbody>
-                            <TableRow rowNames={row} />
-                            <ServiceTableBody
-                                data={definiteData}
-                                sortDate={sortDate}
-                            />
-                        </tbody>
-                    </table> */}
                 </PopUpEditContext.Provider>
             </div>
             {/* </div> */}

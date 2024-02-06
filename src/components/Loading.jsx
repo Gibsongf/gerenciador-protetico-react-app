@@ -5,8 +5,8 @@ export const Loading = () => {
         <ReactLoading
             type={"spin"}
             color={"white"}
-            height={"10%"}
-            width={"10%"}
+            height={"100%"}
+            width={"100%"}
             className="loading"
         />
     );

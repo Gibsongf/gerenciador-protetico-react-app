@@ -230,6 +230,16 @@ p {
 
 }
 
+.loading {
+  fill: white;
+  text-align: center;
+}
+
+.loading svg {
+  height: 10%;
+  width: 5%;
+}
+
 @media screen and (min-width: 820px) {
 
 
