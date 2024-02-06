@@ -1,9 +1,7 @@
 .info {
-    margin-top: 10px;
-    /* font-size: 1.2em; */
     text-align: center;
     background-color: rgb(218, 199, 174);
-    padding: 0px 10px 0px 10px;
+    padding: 0px 10px 5px 10px;
     border-radius: 5px;
 }
 
@@ -12,12 +10,20 @@
 }
 
 .pencil-edit {
-    width: 18px;
+    width: 15px;
     padding: 3px;
     border: black solid 1px;
     border-radius: 6px;
     background: white;
 }
+
+.info-content {
+    border-bottom: 1px black solid;
+    border-right: 1px black dotted;
+    border-left: 1px black dotted;
+    margin: 5px;
+}
+
 
 
 @media screen and (min-width: 721px) {
@@ -26,5 +32,10 @@
         padding: 4px;
     }
 
+    .info {
+        grid-column: 2;
+        width: 50vw;
+        justify-self: center;
+    }
 
 }
