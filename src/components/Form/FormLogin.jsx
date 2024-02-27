@@ -18,6 +18,7 @@ export function FormLogin({ setToken }) {
         e.preventDefault();
         const valid = await apiLogin(formData);
         if (valid) {
+            //change state at App to update content
             setToken(() => localStorage.getItem("token"));
             navigate("/servico/todos");
         }
@@ -29,6 +30,7 @@ export function FormLogin({ setToken }) {
                 method="POST"
                 action=""
                 className="login-form"
+                role="login-form"
             >
                 <div className="username">
                     <label htmlFor="username">Nome de Usuário:</label>
@@ -46,9 +48,9 @@ export function FormLogin({ setToken }) {
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         value={formData.password}
                         onChange={handleInputChange}
-                        name="password"
                         required
                     />
                 </div>
