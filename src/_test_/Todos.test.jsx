@@ -1,19 +1,18 @@
 /* eslint-disable no-undef */
 import { render, screen } from "@testing-library/react";
-// import { FormLogin } from "../components/Form/FormLogin";
 import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { HashRouter } from "react-router-dom";
 import App from "../App";
-import { apiLogin } from "../Api";
 
-// vi.mock("../Api", () => ({
-//     apiLogin: jest.fn().mockReturnValue(false),
-// }));
+let loginCall = false;
 vi.mock("../Api", () => {
     return {
         default: { apiLogin: vi.fn() },
-        apiLogin: vi.fn(),
+        apiLogin: vi.fn(() => {
+            loginCall = true;
+            return true;
+        }),
         // etc...
     };
 });
@@ -44,13 +43,14 @@ describe("App component", () => {
         });
         const password = screen.getByLabelText("Senha:");
         const button = screen.getByRole("button", { name: "Entrar" });
-        const form = screen.getByRole("login-form");
         await user.tripleClick(username);
         await user.keyboard("test");
         await user.tripleClick(password);
         await user.keyboard("test");
-        await user.tripleClick(button);
+        await user.click(button);
         expect(username.value).toBe("test");
         expect(password.value).toBe("test");
+        //confirm that the API is being called
+        expect(loginCall).toBeTruthy();
     });
 });
