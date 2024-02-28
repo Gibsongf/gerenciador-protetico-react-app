@@ -56,7 +56,7 @@ describe("App component", () => {
         expect(apiLogin).toBeCalledTimes(1);
         expect(apiLogin).toBeCalledWith({ username: "test", password: "test" });
     });
-    it("Dont call ApiLogin with empty required element", async () => {
+    it("Don't call ApiLogin with empty required element", async () => {
         const user = userEvent.setup();
         render(
             //HashRouter for useNavigate to work
