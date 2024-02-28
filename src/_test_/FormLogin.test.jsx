@@ -5,21 +5,20 @@ import userEvent from "@testing-library/user-event";
 import { HashRouter } from "react-router-dom";
 import App from "../App";
 
+//to confirm the form call the login api
 let loginCall = false;
 vi.mock("../Api", () => {
     return {
         default: { apiLogin: vi.fn() },
         apiLogin: vi.fn(() => {
             loginCall = true;
-            return true;
         }),
-        // etc...
     };
 });
 describe("App component", () => {
     it("renders form correct when no token registered", () => {
         const { container } = render(
-            //has to use browserRouter for useNavigate to work
+            //HashRouter for useNavigate to work
             <HashRouter>
                 <App />
             </HashRouter>
@@ -28,11 +27,10 @@ describe("App component", () => {
         expect(container).toMatchSnapshot();
         expect(form).toBeInTheDocument();
     });
-    it.only("Form Login successfully", async () => {
+    it("Form Login successfully", async () => {
         const user = userEvent.setup();
-        localStorage.setItem("token", "");
         render(
-            //has to use browserRouter for useNavigate to work
+            //HashRouter for useNavigate to work
             <HashRouter>
                 <App />
             </HashRouter>
