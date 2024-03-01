@@ -4,7 +4,7 @@ import { expect, vi } from "vitest";
 import { HashRouter } from "react-router-dom";
 import App from "../App";
 
-//mock api post login
+//mock api get content
 vi.mock("../components/ApiHooks", () => {
     return {
         useTodosApi: vi.fn(() => {
@@ -15,7 +15,7 @@ vi.mock("../components/ApiHooks", () => {
     };
 });
 describe("App component", () => {
-    it("renders form correct when no token registered", () => {
+    it("renders login form correct when no token registered", () => {
         const { container } = render(
             //HashRouter for useNavigate to work
             <HashRouter>
