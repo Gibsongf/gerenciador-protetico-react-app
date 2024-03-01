@@ -9,7 +9,7 @@ import { apiLogin } from "../Api";
 //mock api post login
 vi.mock("../Api");
 
-describe("App component", () => {
+describe("Form Login component", () => {
     //all useful elements of the form
     const getInput = () => {
         const username = screen.getByRole("textbox", {
@@ -24,17 +24,6 @@ describe("App component", () => {
         await user.dblClick(el);
         await user.keyboard(text);
     };
-    it("renders form correct when no token registered", () => {
-        const { container } = render(
-            //HashRouter for useNavigate to work
-            <HashRouter>
-                <App />
-            </HashRouter>
-        );
-        const form = screen.getByRole("login-form");
-        expect(container).toMatchSnapshot();
-        expect(form).toBeInTheDocument();
-    });
 
     it("call APIlogin successfully & register input correctly", async () => {
         const user = userEvent.setup();

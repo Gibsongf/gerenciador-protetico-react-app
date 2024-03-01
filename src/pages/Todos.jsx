@@ -147,7 +147,7 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     const definiteData =
         providedData !== undefined ? providedData.serviços : data;
     const newBtnRender = providedData === undefined ? true : false;
-
+    console.log(data);
     return (
         <>
             {newBtnRender === true && (
