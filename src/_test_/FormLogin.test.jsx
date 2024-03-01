@@ -11,7 +11,7 @@ vi.mock("../Api");
 
 describe("Form Login component", () => {
     //all useful elements of the form
-    const getInput = () => {
+    const getEl = () => {
         const username = screen.getByRole("textbox", {
             name: "Nome de Usuário:",
         });
@@ -33,7 +33,7 @@ describe("Form Login component", () => {
                 <App />
             </HashRouter>
         );
-        let { username, password, button } = getInput();
+        let { username, password, button } = getEl();
         await inputText(username, "test", user);
         await inputText(password, "test", user);
         await user.click(button);
@@ -53,7 +53,7 @@ describe("Form Login component", () => {
                 <App />
             </HashRouter>
         );
-        let { username, button } = getInput();
+        let { username, button } = getEl();
         await inputText(username, "test", user);
         await user.click(button);
 
