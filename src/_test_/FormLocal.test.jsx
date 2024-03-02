@@ -2,20 +2,17 @@
 import { render, screen } from "@testing-library/react";
 import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { HashRouter } from "react-router-dom";
 import { FormLocal } from "../components/Form/FormLocal";
 import { APIPostNewData, APIPutData } from "../Api";
 
 vi.mock("../Api", () => {
     return {
-        APIPostNewData: vi.fn((e) => {
-            // console.log(e);
+        APIPostNewData: vi.fn(() => {
             return {
                 errors: "",
             };
         }),
-        APIPutData: vi.fn((e) => {
-            console.log(e);
+        APIPutData: vi.fn(() => {
             return {
                 errors: "",
             };
@@ -24,6 +21,10 @@ vi.mock("../Api", () => {
 });
 //need to get id of some local and mock useForm return a local?
 describe("Form Local component", () => {
+    afterEach(() => {
+        vi.clearAllMocks(); // Reset mocks after each test
+    });
+
     //all useful elements of the form
     const formInfo = {
         nome: "local",
@@ -57,6 +58,7 @@ describe("Form Local component", () => {
         const user = userEvent.setup();
         render(<FormLocal />);
         const { local, endereço, cep, telefone, button } = getEl();
+        const header = screen.getByRole("heading");
 
         await inputText(local, formInfo.nome, user);
         await inputText(endereço, formInfo["endereço"], user);
@@ -64,6 +66,8 @@ describe("Form Local component", () => {
         await inputText(telefone, formInfo.telefone, user);
         await user.click(button);
 
+        //heading changes without initialState
+        expect(header.textContent).toBe("Registrar Novo Local");
         expect(local.value).toBe(formInfo.nome);
         expect(endereço.value).toBe(formInfo["endereço"]);
         expect(cep.value).toBe(formInfo.cep);
@@ -90,28 +94,23 @@ describe("Form Local component", () => {
         expect(endereço.value).toBe(formInfo["endereço"]);
         expect(cep.value).toBe(formInfo.cep);
         expect(telefone.value).toBe(formInfo.telefone);
+        //heading changes with initialState
         expect(header.textContent).toBe("Editar Detalhes do Local");
         //call api update data
         expect(APIPutData).toBeCalled();
         //when success
         //close the form element
         expect(setEdit).toBeCalled();
-        //will update current page local info
+        //will update current page info
         expect(setUpdate).toBeCalled();
     });
     it("submit empty form, won't call API", async () => {
         const user = userEvent.setup();
         render(<FormLocal />);
-        const { local, button } = getEl();
-        await inputText(local, "local", user);
+        const { button } = getEl();
         await user.click(button);
 
         //confirm that the API was called once in the previous test
-        expect(APIPostNewData).toBeCalledTimes(1);
+        expect(APIPostNewData).toBeCalledTimes(0);
     });
-    //legend changes with initialState or without it
-    //mock useForm handle submit
-    //close button
-    //load the right value when there is initialState
-    //the error message is showed correct
 });

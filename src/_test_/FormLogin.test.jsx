@@ -10,6 +10,9 @@ import { apiLogin } from "../Api";
 vi.mock("../Api");
 
 describe("Form Login component", () => {
+    afterEach(() => {
+        vi.clearAllMocks(); // Reset mocks after each test
+    });
     //all useful elements of the form
     const getEl = () => {
         const username = screen.getByRole("textbox", {
@@ -58,6 +61,6 @@ describe("Form Login component", () => {
         await user.click(button);
 
         //confirm that the API was called once in the previous test
-        expect(apiLogin).toBeCalledTimes(1);
+        expect(apiLogin).toBeCalledTimes(0);
     });
 });
