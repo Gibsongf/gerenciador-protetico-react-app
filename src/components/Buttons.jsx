@@ -12,7 +12,7 @@ ButtonRegister.propTypes = {
 ButtonConfirm.propTypes = {
     handleSubmit: PropTypes.func,
 };
-ButtonEdit.propTypes = {
+ButtonConfirm.propTypes = {
     handleSubmit: PropTypes.func,
 };
 ButtonClose.propTypes = {
@@ -62,26 +62,7 @@ export function ButtonClose({ setClose }) {
         </span>
     );
 }
-export function ButtonEdit() {
-    const divStyle = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: "5px",
-    };
-    const btnStyle = {
-        width: "25vw",
-        padding: "5px",
-        fontSize: "1em",
-        fontWeight: "bold",
-        borderRadius: "10px",
-    };
-    return (
-        <div className="container-edit-btn">
-            <button type="submit">Confirm</button>
-        </div>
-    );
-}
+
 export function ButtonRegister() {
     return (
         <button className="register-form-btn" type="submit">
@@ -92,7 +73,7 @@ export function ButtonRegister() {
 export function ButtonConfirm() {
     return (
         <button className="confirm-form-btn" type="submit">
-            Confirm
+            Confirmar
         </button>
     );
 }
