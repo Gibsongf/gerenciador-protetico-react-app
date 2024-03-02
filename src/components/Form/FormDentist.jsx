@@ -4,7 +4,7 @@ import "../../styles/Forms.css";
 import PropTypes from "prop-types";
 import { useForm } from "./useForm";
 import { AppContext } from "../../App";
-import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 
 export function FormDentist({ initialState, setEdit, setUpdate }) {
@@ -90,7 +90,7 @@ export function FormDentist({ initialState, setEdit, setUpdate }) {
                     labelTxt={"Local de Trabalho:"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
-                {initialState.formType === "edit" && <ButtonEdit />}
+                {initialState.formType === "edit" && <ButtonConfirm />}
                 {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>

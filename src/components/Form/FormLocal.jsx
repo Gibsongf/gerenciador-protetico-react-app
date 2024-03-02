@@ -9,15 +9,13 @@ import "../../styles/Forms.css";
 import { AppContext } from "../../App";
 import { useForm } from "./useForm";
 import PropTypes from "prop-types";
-import { ButtonClose, ButtonEdit, ButtonRegister } from "../Buttons";
+import { ButtonClose, ButtonConfirm, ButtonRegister } from "../Buttons";
 import { NewFormContext } from "../NewFormButton";
 
 export function FormLocal({ initialState, setEdit, setUpdate }) {
     const ref = useRef();
     const { errorMsg } = useContext(AppContext);
-    const nomeTag = { id: "nome", txt: "Nome do Local:" };
     const { setClose, setTableUpdate } = useContext(NewFormContext);
-
     let legendTxt = "Editar Detalhes do Local";
     if (!initialState) {
         legendTxt = "Registrar Novo Local";
@@ -56,6 +54,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                 action=""
                 ref={ref}
                 id="pop-up-content"
+                role="local-form"
             >
                 <ButtonClose
                     setClose={
@@ -67,11 +66,12 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                 </legend>
 
                 <SimpleInput
-                    id={nomeTag.id}
-                    labelTxt={nomeTag.txt}
+                    id={"nome"}
+                    labelTxt={"Nome do Local:"}
                     value={formData.nome}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.nome}
+                    require={true}
                 />
                 <SimpleInput
                     id={"endereço"}
@@ -79,6 +79,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                     value={formData.endereço}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.endereço}
+                    require={true}
                 />
                 <CepInput
                     value={formData.cep}
@@ -94,7 +95,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                     value={formData.tabela}
                     onChange={handleChange}
                 />
-                {initialState.formType === "edit" && <ButtonEdit />}
+                {initialState.formType === "edit" && <ButtonConfirm />}
                 {initialState.formType === "new" && <ButtonRegister />}
             </form>
         </div>
