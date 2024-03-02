@@ -1,3 +1,5 @@
+import { APIGetServiceBy, APIPutData } from "./Api";
+
 export function downloadExcelAction(blob, fileName) {
     const downloadLink = document.createElement("a");
     downloadLink.download = fileName;
@@ -156,3 +158,15 @@ export function sortBy(key, data) {
     );
     return { ascending, descending };
 }
+// When a change occurs in a dentist's location of work,
+// update all that dentist services with the new location
+export const updateDentistServicesLocation = async (dentista) => {
+    const data = await APIGetServiceBy(dentista._id, "dentista");
+    data.serviço.forEach(async (s) => {
+        s.category = "servico";
+        if (s.local !== dentista.local) {
+            s.local = dentista.local;
+            await APIPutData(s, s._id);
+        }
+    });
+};
