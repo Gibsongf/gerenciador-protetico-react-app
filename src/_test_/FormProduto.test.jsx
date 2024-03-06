@@ -24,9 +24,20 @@ describe("Form Product component", () => {
     afterEach(() => {
         vi.clearAllMocks(); // Reset mocks after each test
     });
+    const product = {
+        nome: "test",
+        valor_normal: "100",
+        valor_reduzido: "50",
+        category: "produto",
+        formType: "edit",
+    };
 
+    const expectFormElements = async (el) => {
+        expect(el.nome.value).toBe(product.nome);
+        expect(el.valorNormal.value).toBe(product.valor_normal);
+        expect(el.valorReduzido.value).toBe(product.valor_reduzido);
+    };
     //all useful elements of the form
-
     const getEl = () => {
         const nome = screen.getByLabelText("Nome:");
         const valorNormal = screen.getByLabelText("Valor Normal:");
@@ -45,52 +56,32 @@ describe("Form Product component", () => {
         expect(container).toMatchSnapshot();
         expect(form).toBeInTheDocument();
     });
-    it.only("register all input, submit form & call API", async () => {
+    it("register all input, submit form & call API", async () => {
         const user = userEvent.setup();
         render(<FormProduct />);
         const { nome, valorNormal, valorReduzido, button } = getEl();
-        const header = screen.getByRole("heading");
-
-        await inputText(nome, "produto", user);
-        await inputText(valorNormal, "455", user);
-        await inputText(valorReduzido, "100", user);
+        await inputText(nome, product.nome, user);
+        await inputText(valorNormal, product.valor_normal, user);
+        await inputText(valorReduzido, product.valor_reduzido, user);
         await user.click(button);
-        console.log(header.textContent);
-        expect(header).toBeInTheDocument();
-        expect(nome.value).toBe("produto");
-        expect(valorNormal.value).toBe("455");
-        expect(valorReduzido.value).toBe("100");
+
+        //inputs expected has values correctly
+        expectFormElements({ nome, valorNormal, valorReduzido });
+
+        //call the right API to put new data
         expect(APIPostNewData).toBeCalled();
     });
     it("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
-        const setUpdate = vi.fn();
-        const setEdit = vi.fn();
 
-        render(
-            <FormProduct
-                initialState={formInfo}
-                setEdit={setEdit}
-                setUpdate={setUpdate}
-            />
-        );
-        const { local, endereço, cep, telefone, button } = getEl();
-        const header = screen.getByRole("heading");
+        render(<FormProduct initialState={product} />);
+        const { nome, valorNormal, valorReduzido, button } = getEl();
         await user.click(button);
 
-        expect(local.value).toBe(formInfo.nome);
-        expect(endereço.value).toBe(formInfo["endereço"]);
-        expect(cep.value).toBe(formInfo.cep);
-        expect(telefone.value).toBe(formInfo.telefone);
-        //heading changes with initialState
-        expect(header.textContent).toBe("Editar Detalhes do Local");
-        //call api update data
+        //inputs expected has values correctly
+        expectFormElements({ nome, valorNormal, valorReduzido });
+        //call the right API to update data
         expect(APIPutData).toBeCalled();
-        //when success
-        //close the form element
-        expect(setEdit).toBeCalled();
-        //will update current page info
-        expect(setUpdate).toBeCalled();
     });
     it("submit empty form, won't call API", async () => {
         const user = userEvent.setup();
@@ -98,7 +89,6 @@ describe("Form Product component", () => {
         const { button } = getEl();
         await user.click(button);
 
-        //confirm that the API was called once in the previous test
         expect(APIPostNewData).toBeCalledTimes(0);
     });
 });
