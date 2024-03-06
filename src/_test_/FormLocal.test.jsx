@@ -54,27 +54,31 @@ describe("Form Local component", () => {
         expect(container).toMatchSnapshot();
         expect(form).toBeInTheDocument();
     });
-    it("register all input, submit form & call API", async () => {
+    it.only("register all input, submit form & call API", async () => {
         const user = userEvent.setup();
         render(<FormLocal />);
         const { local, endereço, cep, telefone, button } = getEl();
         const header = screen.getByRole("heading");
+        const tabelaSelector = screen.getByLabelText("Tipo de Tabela");
 
         await inputText(local, formInfo.nome, user);
         await inputText(endereço, formInfo["endereço"], user);
         await inputText(cep, formInfo.cep, user);
         await inputText(telefone, formInfo.telefone, user);
-        await user.click(button);
+        await user.selectOptions(tabelaSelector, ["Reduzido"]);
 
+        await user.click(button);
         //heading changes without initialState
         expect(header.textContent).toBe("Registrar Novo Local");
         expect(local.value).toBe(formInfo.nome);
         expect(endereço.value).toBe(formInfo["endereço"]);
         expect(cep.value).toBe(formInfo.cep);
         expect(telefone.value).toBe(formInfo.telefone);
+        expect(tabelaSelector.value).toBe("Reduzido");
+
         expect(APIPostNewData).toBeCalled();
     });
-    it("Form edit mode, save data at right inputs", async () => {
+    it.only("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
         const setUpdate = vi.fn();
         const setEdit = vi.fn();
@@ -94,6 +98,7 @@ describe("Form Local component", () => {
         expect(endereço.value).toBe(formInfo["endereço"]);
         expect(cep.value).toBe(formInfo.cep);
         expect(telefone.value).toBe(formInfo.telefone);
+
         //heading changes with initialState
         expect(header.textContent).toBe("Editar Detalhes do Local");
         //call api update data
