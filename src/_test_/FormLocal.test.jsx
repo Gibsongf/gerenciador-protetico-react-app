@@ -115,7 +115,6 @@ describe("Form Local component", () => {
         const { button } = getEl();
         await user.click(button);
 
-        //confirm that the API was called once in the previous test
-        expect(APIPostNewData).toBeCalledTimes(0);
+        expect(APIPostNewData).not.toBeCalled();
     });
 });

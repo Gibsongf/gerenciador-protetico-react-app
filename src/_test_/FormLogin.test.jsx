@@ -60,7 +60,6 @@ describe("Form Login component", () => {
         await inputText(username, "test", user);
         await user.click(button);
 
-        //confirm that the API was called once in the previous test
-        expect(apiLogin).toBeCalledTimes(0);
+        expect(apiLogin).not.toBeCalled();
     });
 });

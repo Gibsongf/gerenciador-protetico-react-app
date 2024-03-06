@@ -89,6 +89,6 @@ describe("Form Product component", () => {
         const { button } = getEl();
         await user.click(button);
 
-        expect(APIPostNewData).toBeCalledTimes(0);
+        expect(APIPostNewData).not.toBeCalled();
     });
 });
