@@ -63,10 +63,6 @@ vi.mock("../Api", () => {
 });
 //need to get id of some local and mock useForm return a local?
 describe("Form Dentist component", () => {
-    afterEach(() => {
-        vi.clearAllMocks(); // Reset mocks after each test
-    });
-
     const expectFormElements = async (el) => {
         expect(el.nome.value).toBe(dentist.nome);
         expect(el.sobrenome.value).toBe(dentist.sobrenome);

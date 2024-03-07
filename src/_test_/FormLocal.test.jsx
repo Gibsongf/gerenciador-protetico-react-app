@@ -21,10 +21,6 @@ vi.mock("../Api", () => {
 });
 //need to get id of some local and mock useForm return a local?
 describe("Form Local component", () => {
-    afterEach(() => {
-        vi.clearAllMocks(); // Reset mocks after each test
-    });
-
     //all useful elements of the form
     const formInfo = {
         nome: "local",

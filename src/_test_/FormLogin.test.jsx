@@ -10,9 +10,6 @@ import { apiLogin } from "../Api";
 vi.mock("../Api");
 
 describe("Form Login component", () => {
-    afterEach(() => {
-        vi.clearAllMocks(); // Reset mocks after each test
-    });
     //all useful elements of the form
     const getEl = () => {
         const username = screen.getByRole("textbox", {
