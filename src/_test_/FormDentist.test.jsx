@@ -4,42 +4,12 @@ import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormDentist } from "../components/Form/FormDentist";
+import { testDentist, testLocal } from "./utilsTest";
 
-const fakeLocal = [
-    {
-        _id: "local-1",
-        nome: "Franco EIRELI",
-        endereço: "333 Felícia Marginal",
-        cep: "23147-272",
-        telefone: "1174-0086",
-        tabela: "Reduzido",
-        __v: 0,
-    },
-    {
-        _id: "local-2",
-        nome: "Moraes LTDA",
-        endereço: "1047 Luiza Alameda",
-        cep: "63006-953",
-        telefone: "5541-7666",
-        tabela: "Normal",
-        __v: 0,
-    },
-];
-const dentist = {
-    nome: "nome",
-    sobrenome: "sobrenome",
-    local: fakeLocal[0]._id,
-    telefone: "40028922",
-    cpf: "12345678910",
-    category: "dentista",
-    formType: "edit",
-    _id: "some id",
-    serviço: [],
-};
 vi.mock("../components/ApiHooks", () => {
     return {
         useTodosApi: vi.fn(() => {
-            return fakeLocal;
+            return testLocal;
         }),
     };
 });
@@ -53,21 +23,21 @@ vi.mock("../Api", () => {
         APIPutData: vi.fn(() => {
             return {
                 errors: "",
-                dentista: dentist,
+                dentista: testDentist,
             };
         }),
         APIGetServiceBy: vi.fn(() => {
-            return dentist;
+            return testDentist;
         }),
     };
 });
 //need to get id of some local and mock useForm return a local?
 describe("Form Dentist component", () => {
     const expectFormElements = async (el) => {
-        expect(el.nome.value).toBe(dentist.nome);
-        expect(el.sobrenome.value).toBe(dentist.sobrenome);
-        expect(el.telefone.value).toBe(dentist.telefone);
-        expect(el.cpf.value).toBe(dentist.cpf);
+        expect(el.nome.value).toBe(testDentist.nome);
+        expect(el.sobrenome.value).toBe(testDentist.sobrenome);
+        expect(el.telefone.value).toBe(testDentist.telefone);
+        expect(el.cpf.value).toBe(testDentist.cpf);
     };
 
     //all useful elements of the form
@@ -99,10 +69,10 @@ describe("Form Dentist component", () => {
         const header = screen.getByRole("heading", {
             name: "Registrar Novo Dentista",
         });
-        await inputText(nome, dentist.nome, user);
-        await inputText(sobrenome, dentist.sobrenome, user);
-        await inputText(telefone, dentist.telefone, user);
-        await inputText(cpf, dentist.cpf, user);
+        await inputText(nome, testDentist.nome, user);
+        await inputText(sobrenome, testDentist.sobrenome, user);
+        await inputText(telefone, testDentist.telefone, user);
+        await inputText(cpf, testDentist.cpf, user);
         await user.selectOptions(tabelaSelector, ["local-2"]);
         await user.click(button);
 
@@ -121,7 +91,7 @@ describe("Form Dentist component", () => {
 
         render(
             <FormDentist
-                initialState={dentist}
+                initialState={testDentist}
                 setEdit={setEdit}
                 setUpdate={setUpdate}
             />
@@ -141,6 +111,11 @@ describe("Form Dentist component", () => {
 
         //call the right API to update data
         expect(APIPutData).toBeCalled();
+        //success
+        //close the form element
+        expect(setEdit).toBeCalled();
+        //will update current page info
+        expect(setUpdate).toBeCalled();
     });
     it("submit empty form, won't call API", async () => {
         const user = userEvent.setup();
