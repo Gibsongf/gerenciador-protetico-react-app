@@ -1,38 +1,17 @@
 /* eslint-disable no-undef */
 import { render, screen } from "@testing-library/react";
-import { expect, vi } from "vitest";
+import { expect } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormProduct } from "../components/Form/FormProduct";
+import { testProduct } from "./utilsTest";
 
-vi.mock("../Api", () => {
-    return {
-        APIPostNewData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-        APIPutData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-    };
-});
 //need to get id of some local and mock useForm return a local?
 describe("Form Product component", () => {
-    const product = {
-        nome: "test",
-        valor_normal: "100",
-        valor_reduzido: "50",
-        category: "produto",
-        formType: "edit",
-    };
-
     const expectFormElements = async (el) => {
-        expect(el.nome.value).toBe(product.nome);
-        expect(el.valorNormal.value).toBe(product.valor_normal);
-        expect(el.valorReduzido.value).toBe(product.valor_reduzido);
+        expect(el.nome.value).toBe(testProduct.nome);
+        expect(el.valorNormal.value).toBe(testProduct.valor_normal);
+        expect(el.valorReduzido.value).toBe(testProduct.valor_reduzido);
     };
     //all useful elements of the form
     const getEl = () => {
@@ -57,9 +36,9 @@ describe("Form Product component", () => {
         const user = userEvent.setup();
         render(<FormProduct />);
         const { nome, valorNormal, valorReduzido, button } = getEl();
-        await inputText(nome, product.nome, user);
-        await inputText(valorNormal, product.valor_normal, user);
-        await inputText(valorReduzido, product.valor_reduzido, user);
+        await inputText(nome, testProduct.nome, user);
+        await inputText(valorNormal, testProduct.valor_normal, user);
+        await inputText(valorReduzido, testProduct.valor_reduzido, user);
         await user.click(button);
 
         //inputs expected has values correctly
@@ -71,7 +50,7 @@ describe("Form Product component", () => {
     it("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
 
-        render(<FormProduct initialState={product} />);
+        render(<FormProduct initialState={testProduct} />);
         const { nome, valorNormal, valorReduzido, button } = getEl();
         await user.click(button);
 

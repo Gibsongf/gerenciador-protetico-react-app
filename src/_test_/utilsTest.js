@@ -1,10 +1,18 @@
+export const testProduct = {
+    _id: "id-produto-1",
+    nome: "produto-1",
+    valor_normal: "100",
+    valor_reduzido: "50",
+    category: "produto",
+    formType: "edit",
+};
 export const testService = {
     dentista: "first-dentist-id",
     local: "local-0",
     paciente: "Meire Macedo",
     category: "servico",
     formType: "edit",
-    produto: [{ _id: "id-produto-1", nome: "produto-1" }],
+    produto: [testProduct],
 };
 export const testDentist = {
     nome: "first dentist",
@@ -14,6 +22,7 @@ export const testDentist = {
     category: "dentista",
     formType: "edit",
     _id: "first-dentist-id",
+    local: "local-0",
     serviço: [],
 };
 export const testDentist2 = {
@@ -24,6 +33,7 @@ export const testDentist2 = {
     category: "dentista",
     formType: "edit",
     _id: "second-dentist-id",
+    local: "local-1",
     serviço: [],
 };
 export const testLocal = [
@@ -34,6 +44,7 @@ export const testLocal = [
         cep: "23147-272",
         telefone: "1174-0086",
         tabela: "Reduzido",
+        formType: "edit",
         dentistas: [testDentist],
         __v: 0,
     },
@@ -44,7 +55,21 @@ export const testLocal = [
         cep: "63006-953",
         telefone: "5541-7666",
         tabela: "Normal",
+        formType: "edit",
         dentistas: [testDentist2],
         __v: 0,
     },
 ];
+export const mockServiceData = {
+    produto: [
+        {
+            nome: "produto-1",
+            _id: "id-produto-1",
+        },
+        {
+            nome: "produto-2",
+            _id: "id-produto-2",
+        },
+    ],
+    local: testLocal,
+};

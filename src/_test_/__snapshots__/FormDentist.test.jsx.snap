@@ -120,12 +120,12 @@ exports[`Form Dentist component > renders correctly 1`] = `
         >
           <option />
           <option
-            value="local-1"
+            value="local-0"
           >
             Franco EIRELI
           </option>
           <option
-            value="local-2"
+            value="local-1"
           >
             Moraes LTDA
           </option>

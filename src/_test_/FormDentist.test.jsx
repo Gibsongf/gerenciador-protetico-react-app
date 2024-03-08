@@ -4,34 +4,8 @@ import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormDentist } from "../components/Form/FormDentist";
-import { testDentist, testLocal } from "./utilsTest";
+import { testDentist } from "./utilsTest";
 
-vi.mock("../components/ApiHooks", () => {
-    return {
-        useTodosApi: vi.fn(() => {
-            return testLocal;
-        }),
-    };
-});
-vi.mock("../Api", () => {
-    return {
-        APIPostNewData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-        APIPutData: vi.fn(() => {
-            return {
-                errors: "",
-                dentista: testDentist,
-            };
-        }),
-        APIGetServiceBy: vi.fn(() => {
-            return testDentist;
-        }),
-    };
-});
-//need to get id of some local and mock useForm return a local?
 describe("Form Dentist component", () => {
     const expectFormElements = async (el) => {
         expect(el.nome.value).toBe(testDentist.nome);
@@ -73,14 +47,14 @@ describe("Form Dentist component", () => {
         await inputText(sobrenome, testDentist.sobrenome, user);
         await inputText(telefone, testDentist.telefone, user);
         await inputText(cpf, testDentist.cpf, user);
-        await user.selectOptions(tabelaSelector, ["local-2"]);
+        await user.selectOptions(tabelaSelector, ["local-1"]);
         await user.click(button);
 
         //header without initialState
         expect(header.textContent).toBe("Registrar Novo Dentista");
         //inputs expected has values correctly
         expectFormElements({ nome, sobrenome, telefone, cpf });
-        expect(tabelaSelector.value).toBe("local-2");
+        expect(tabelaSelector.value).toBe("local-1");
         //call the right API to put new data
         expect(APIPostNewData).toBeCalled();
     });
@@ -107,7 +81,7 @@ describe("Form Dentist component", () => {
         expect(header.textContent).toBe("Editar Detalhes do Dentista");
         //inputs expected has values correctly
         expectFormElements({ nome, sobrenome, telefone, cpf });
-        expect(tabelaSelector.value).toBe("local-1");
+        expect(tabelaSelector.value).toBe("local-0");
 
         //call the right API to update data
         expect(APIPutData).toBeCalled();

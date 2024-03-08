@@ -1,61 +1,10 @@
 /* eslint-disable no-undef */
 import { render, screen } from "@testing-library/react";
-import { expect, vi } from "vitest";
+import { expect } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormService } from "../components/Form/FormService";
-import { testLocal, testService } from "./utilsTest";
-
-//need to pass api mock to another file from all form tests
-const mockApiData = {
-    produto: [
-        {
-            nome: "produto-1",
-            _id: "id-produto-1",
-        },
-        {
-            nome: "produto-2",
-            _id: "id-produto-2",
-        },
-    ],
-    local: testLocal,
-};
-vi.mock("../components/ApiHooks", () => {
-    return {
-        useTodosApi: vi.fn((e) => {
-            if (e) {
-                return mockApiData[e];
-            }
-            return testLocal;
-        }),
-        useDetailsApi: vi.fn((e, id) => {
-            if (e) {
-                if (e === "local" && id) {
-                    const indx = Number(id.split("-")[1]);
-                    return { data: mockApiData[e][indx] };
-                }
-                return mockApiData[e];
-            }
-        }),
-    };
-});
-vi.mock("../Api", () => {
-    return {
-        APIPostNewData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-        APIPutData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-        APIGetServiceBy: vi.fn(() => {
-            return;
-        }),
-    };
-});
+import { testService, mockServiceData } from "./utilsTest";
 
 //need to get id of some local and mock useForm return a local?
 describe("Form Dentist component", () => {
@@ -64,7 +13,7 @@ describe("Form Dentist component", () => {
         expect(el.paciente.value).toBe(testService.paciente);
         expect(el.local.value).toBe(testService.local);
         expect(el.dentista.value).toBe(testService.dentista);
-        expect(el.checkBoxProduct.value).toBe(mockApiData.produto[0]._id);
+        expect(el.checkBoxProduct.value).toBe(mockServiceData.produto[0]._id);
     };
     const getEl = () => {
         const paciente = screen.getByLabelText("Nome do Paciente:");
@@ -120,7 +69,7 @@ describe("Form Dentist component", () => {
 
         //render a checkbox after click button to add product to the service
         const checkBoxProduct = screen.getByRole("checkbox", {
-            name: mockApiData.produto[0].nome,
+            name: mockServiceData.produto[0].nome,
         });
 
         //header without initialState
@@ -150,7 +99,7 @@ describe("Form Dentist component", () => {
         const localDentist = await screen.findByText("first dentist");
         //render a checkbox after click button to add product to the service
         const checkBoxProduct = screen.getByRole("checkbox", {
-            name: mockApiData.produto[0].nome,
+            name: mockServiceData.produto[0].nome,
         });
         //header without initialState
         expect(header.textContent).toBe("Editar Detalhes do Serviço");

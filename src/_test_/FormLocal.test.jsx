@@ -4,32 +4,12 @@ import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { FormLocal } from "../components/Form/FormLocal";
 import { APIPostNewData, APIPutData } from "../Api";
+import { testLocal } from "./utilsTest";
 
-vi.mock("../Api", () => {
-    return {
-        APIPostNewData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-        APIPutData: vi.fn(() => {
-            return {
-                errors: "",
-            };
-        }),
-    };
-});
 //need to get id of some local and mock useForm return a local?
 describe("Form Local component", () => {
     //all useful elements of the form
-    const formInfo = {
-        nome: "local",
-        endereço: "endereço",
-        cep: "13344635",
-        telefone: "40028922",
-        formType: "edit",
-        tabela: "Normal",
-    };
+    const formInfo = testLocal[0];
     const expectFormElements = (el) => {
         expect(el.local.value).toBe(formInfo.nome);
         expect(el.endereço.value).toBe(formInfo["endereço"]);
