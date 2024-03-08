@@ -56,6 +56,7 @@ export function FormProduct({ initialState }) {
                 action=""
                 ref={ref}
                 id="pop-up-content"
+                role="product-form"
             >
                 <ButtonClose
                     setClose={
@@ -72,6 +73,7 @@ export function FormProduct({ initialState }) {
                     value={formData.nome}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.nome}
+                    require={true}
                 />
                 <SimpleInput
                     id={"valor_normal"}
@@ -80,6 +82,7 @@ export function FormProduct({ initialState }) {
                     onChange={handleChange}
                     type={"number"}
                     msg={!errorMsg ? "" : errorMsg.valor_normal}
+                    require={true}
                 />
                 <SimpleInput
                     id={"valor_reduzido"}

@@ -29,7 +29,6 @@ export function FormService({ initialState }) {
     const { setClose, setTableUpdate } = useContext(NewFormContext);
     const { setShowForm, setUpdate } = useContext(PopUpEditContext);
     let legendTxt = "Editar Detalhes do Serviço";
-
     if (!initialState) {
         legendTxt = "Registrar Novo Serviço";
         initialState = {
@@ -89,6 +88,7 @@ export function FormService({ initialState }) {
                 action=""
                 ref={ref}
                 id="pop-up-content"
+                role="service-form"
             >
                 <ButtonClose
                     setClose={
@@ -105,6 +105,7 @@ export function FormService({ initialState }) {
                     value={formData.paciente}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.paciente}
+                    require={true}
                 />
 
                 <SelectInput

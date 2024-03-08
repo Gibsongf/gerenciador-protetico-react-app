@@ -50,6 +50,7 @@ export function FormDentist({ initialState, setEdit, setUpdate }) {
                 action=""
                 ref={ref}
                 id="pop-up-content"
+                role="dentist-form"
             >
                 <ButtonClose
                     setClose={
