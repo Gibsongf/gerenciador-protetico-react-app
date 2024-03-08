@@ -7,7 +7,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  font-size: 16px;
+  font-size: 1vh;
 }
 
 .nav {
@@ -70,10 +70,6 @@ input {
 table {
   transition: all 0.3s;
 }
-
-
-
-
 
 .active {
   transform: translateY(-3px);
@@ -153,9 +149,8 @@ th {
 .close-btn {
   /* font-size: 1.3em; */
   font-weight: bold;
-  background: none;
   border: white solid 1px;
-  color: white;
+  color: black;
 }
 
 
@@ -190,7 +185,7 @@ th {
 
 .sort-nav {
   margin-bottom: 15px;
-  padding: 0px 5px;
+  padding: 5px;
   display: flex;
   border: 1px black solid;
   border-radius: 10px;
@@ -236,7 +231,7 @@ p {
 
 #edit {
   color: blue;
-
+  cursor: pointer;
 }
 
 .loading {
@@ -337,7 +332,17 @@ p {
     width: 20%;
   }
 
-  button:hover {
+  .new-form:hover {
     background-color: #2b77aa;
+  }
+
+  button[type='submit'] {
+    margin-top: 5px;
+  }
+
+  button[type='submit']:hover,
+  .close-btn:hover {
+    background-color: #c2bfbf;
+
   }
 }

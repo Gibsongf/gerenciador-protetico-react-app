@@ -58,10 +58,10 @@ input[type='password'] {
 
 
 select {
+    font-size: 1vh;
     border-radius: 10px;
     padding: 5px;
     border: none;
-
 }
 
 
@@ -148,7 +148,7 @@ select {
     padding: 5px;
 }
 
-.container-edit-btn button,
+.confirm-form-btn,
 .register-form-btn {
     align-self: center;
     padding: 5px;
@@ -157,7 +157,7 @@ select {
 }
 
 
-@media screen and (min-width: 721px) {
+@media screen and (min-width: 820px) {
     form {
         padding: 40px
     }
