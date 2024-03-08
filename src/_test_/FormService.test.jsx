@@ -72,11 +72,19 @@ describe("Form Dentist component", () => {
         const paciente = screen.getByLabelText("Nome do Paciente:");
         const local = screen.getByLabelText("Local:");
         const dentista = screen.getByLabelText("Dentistas:");
-        const produto = screen.getByLabelText("Produto:"); //select?
-        const button = screen.getByRole("button", {
+        const produto = screen.getByLabelText("Produto:");
+        const btnConfirmProduct = screen.getByRole("button", {
             name: "Selecionar Produto",
         });
-        return { paciente, local, dentista, produto, button };
+        const submit = screen.getAllByRole("button")[2];
+        return {
+            paciente,
+            local,
+            dentista,
+            produto,
+            btnConfirmProduct,
+            submit,
+        };
     };
 
     const inputText = async (el, text, user) => {
@@ -93,25 +101,44 @@ describe("Form Dentist component", () => {
         const user = userEvent.setup();
         render(<FormService />);
 
-        const { paciente, local, dentista, button } = getEl();
+        const { paciente, local, dentista, btnConfirmProduct, submit } =
+            getEl();
         const header = screen.getByRole("heading", {
             name: "Registrar Novo Serviço",
         });
+        const optionProduct = screen.getAllByRole("combobox")[2];
 
         await inputText(paciente, testService.paciente, user);
         await user.selectOptions(local, ["local-0"]);
-        await user.click(button);
-        const localDentist = await screen.findByText("first dentist1");
+        await user.selectOptions(dentista, ["first-dentist-id"]);
+        await user.selectOptions(optionProduct, ["id-produto-1"]);
+
+        //after select product click to add it to that service
+        await user.click(btnConfirmProduct);
+        await user.click(submit);
+
+        //show just the dentist of the selected Local
+        const localDentist = await screen.findByText("first dentist");
+
+        //render a checkbox after click button to add product to the service
+        const checkBoxProduct = screen.getByRole("checkbox", {
+            name: mockApiData.produto[0].nome,
+        });
+
         //header without initialState
         expect(header.textContent).toBe("Registrar Novo Serviço");
-        //inputs expected has values correctly
+
+        //inputs has values correctly
         expect(paciente.value).toBe(testService.paciente);
         expect(local.value).toBe("local-0");
+        expect(dentista.value).toBe("first-dentist-id");
+        expect(checkBoxProduct.value).toBe(mockApiData.produto[0]._id);
 
         //input with value of the dentist that work at selected Local is render
         expect(localDentist).toBeInTheDocument();
+
         //call the right API to put new data
-        // expect(APIPostNewData).toBeCalled();
+        expect(APIPostNewData).toBeCalled();
     });
     it("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
