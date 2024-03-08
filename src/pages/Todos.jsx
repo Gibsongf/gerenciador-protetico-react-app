@@ -4,7 +4,6 @@ import {
     DentistTableBody,
     LocalTableBody,
     ProductTableBody,
-    ServiceTableBody,
 } from "../components/TableBody";
 import { ButtonNewForm } from "../components/NewFormButton.jsx";
 import { createContext, useEffect, useState } from "react";
@@ -147,7 +146,6 @@ export function TableService({ providedData, setUpdateTable, isDetails }) {
     const definiteData =
         providedData !== undefined ? providedData.serviços : data;
     const newBtnRender = providedData === undefined ? true : false;
-    console.log(data);
     return (
         <>
             {newBtnRender === true && (
