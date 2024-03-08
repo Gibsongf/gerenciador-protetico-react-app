@@ -46,7 +46,6 @@ export function SelectInput({
     msg,
 }) {
     const data = useTodosApi(category);
-
     if (!data) {
         return <Loading />;
     }
@@ -127,7 +126,6 @@ export function CpfInput({ value, onChange, msg }) {
                 id="cpf"
                 pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
                 placeholder="xxx.xxx.xxx-xx"
-                required
             ></input>
         </div>
     );
