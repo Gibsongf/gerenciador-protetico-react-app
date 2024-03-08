@@ -4,7 +4,7 @@ export const testService = {
     paciente: "Meire Macedo",
     category: "servico",
     formType: "edit",
-    produto: ["id-produto-1"],
+    produto: [{ _id: "id-produto-1", nome: "produto-1" }],
 };
 export const testDentist = {
     nome: "first dentist",
