@@ -20,7 +20,6 @@ const mockApiData = {
     ],
     local: testLocal,
 };
-//mock apiDetails
 vi.mock("../components/ApiHooks", () => {
     return {
         useTodosApi: vi.fn((e) => {
@@ -97,7 +96,7 @@ describe("Form Dentist component", () => {
         expect(container).toMatchSnapshot();
         expect(form).toBeInTheDocument();
     });
-    it.only("register all input, submit form & call API", async () => {
+    it("register all input, submit form & call API", async () => {
         const user = userEvent.setup();
         render(<FormService />);
 
@@ -130,8 +129,8 @@ describe("Form Dentist component", () => {
 
         //inputs has values correctly
         expect(paciente.value).toBe(testService.paciente);
-        expect(local.value).toBe("local-0");
-        expect(dentista.value).toBe("first-dentist-id");
+        expect(local.value).toBe(testService.local);
+        expect(dentista.value).toBe(testService.dentista);
         expect(checkBoxProduct.value).toBe(mockApiData.produto[0]._id);
 
         //input with value of the dentist that work at selected Local is render
@@ -140,30 +139,30 @@ describe("Form Dentist component", () => {
         //call the right API to put new data
         expect(APIPostNewData).toBeCalled();
     });
-    it("Form edit mode, save data at right inputs", async () => {
+    it.only("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
-        const setUpdate = vi.fn();
-        const setEdit = vi.fn();
 
-        render(
-            <FormService
-                initialState={testDentist}
-                setEdit={setEdit}
-                setUpdate={setUpdate}
-            />
-        );
+        render(<FormService initialState={testService} />);
         const header = screen.getByRole("heading", {
             name: "Editar Detalhes do Serviço",
         });
-        const { nome, sobrenome, telefone, cpf, button } = getEl();
-        const tabelaSelector = screen.getByLabelText("Local de Trabalho:");
-        await user.click(button);
+        const { paciente, local, dentista, submit } = getEl();
 
-        //header with initialState
+        await user.click(submit);
+
+        //show just the dentist of the selected Local
+        const localDentist = await screen.findByText("first dentist");
+
+        //header without initialState
         expect(header.textContent).toBe("Editar Detalhes do Serviço");
-        //inputs expected has values correctly
-        expectFormElements({ nome, sobrenome, telefone, cpf });
-        expect(tabelaSelector.value).toBe("local-1");
+
+        //inputs has values correctly
+        expect(paciente.value).toBe(testService.paciente);
+        expect(local.value).toBe(testService.local);
+        expect(dentista.value).toBe(testService.dentista);
+
+        //input with value of the dentist that work at selected Local is render
+        expect(localDentist).toBeInTheDocument();
 
         //call the right API to update data
         expect(APIPutData).toBeCalled();

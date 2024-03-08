@@ -1,27 +1,10 @@
 export const testService = {
+    dentista: "first-dentist-id",
+    local: "local-0",
     paciente: "Meire Macedo",
-    dentista: "dentista-1",
-    local: "local-1",
-    produto: [
-        {
-            _id: "65dd5ff530d103b5e6f12059",
-            nome: "Sem marca Granito Teclado",
-            valor_normal: 132,
-            valor_reduzido: 66,
-            __v: 0,
-        },
-        {
-            _id: "65dd5ff530d103b5e6f12053",
-            nome: "Ergonômico Madeira Queijo",
-            valor_normal: 200,
-            valor_reduzido: 67,
-            __v: 0,
-        },
-    ],
-    statusEntrega: false,
     category: "servico",
     formType: "edit",
-    dbId: "65dd5ff530d103b5e6f12067",
+    produto: ["id-produto-1"],
 };
 export const testDentist = {
     nome: "first dentist",
