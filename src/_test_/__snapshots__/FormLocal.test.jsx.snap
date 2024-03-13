@@ -32,7 +32,7 @@ exports[`Form Local component > renders correctly 1`] = `
         <label
           for="nome"
         >
-          Nome do Local:
+          Nome do Local
         </label>
         <div
           class="error-message"
@@ -51,7 +51,7 @@ exports[`Form Local component > renders correctly 1`] = `
         <label
           for="endereço"
         >
-          Endereço:
+          Endereço
         </label>
         <div
           class="error-message"

@@ -20,7 +20,7 @@ exports[`App component > renders login form correct when no token registered 1`]
           <label
             for="username"
           >
-            Nome de Usuário:
+            Nome de Usuário
           </label>
           <input
             id="username"
@@ -36,7 +36,7 @@ exports[`App component > renders login form correct when no token registered 1`]
           <label
             for="password"
           >
-            Senha:
+            Senha
           </label>
           <input
             id="password"

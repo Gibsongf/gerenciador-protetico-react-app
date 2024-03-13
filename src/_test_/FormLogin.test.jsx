@@ -13,9 +13,9 @@ describe("Form Login component", () => {
     //all useful elements of the form
     const getEl = () => {
         const username = screen.getByRole("textbox", {
-            name: "Nome de Usuário:",
+            name: "Nome de Usuário",
         });
-        const password = screen.getByLabelText("Senha:");
+        const password = screen.getByLabelText("Senha");
         const button = screen.getByRole("button", { name: "Entrar" });
         return { username, password, button };
     };

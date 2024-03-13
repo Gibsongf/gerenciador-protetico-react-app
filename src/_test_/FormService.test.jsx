@@ -16,10 +16,10 @@ describe("Form Dentist component", () => {
         expect(el.checkBoxProduct.value).toBe(mockServiceData.produto[0]._id);
     };
     const getEl = () => {
-        const paciente = screen.getByLabelText("Nome do Paciente:");
-        const local = screen.getByLabelText("Local:");
-        const dentista = screen.getByLabelText("Dentistas:");
-        const produto = screen.getByLabelText("Produto:");
+        const paciente = screen.getByLabelText("Nome do Paciente");
+        const local = screen.getByLabelText("Local");
+        const dentista = screen.getByLabelText("Dentistas");
+        const produto = screen.getByLabelText("Produto");
         const btnConfirmProduct = screen.getByRole("button", {
             name: "Selecionar Produto",
         });

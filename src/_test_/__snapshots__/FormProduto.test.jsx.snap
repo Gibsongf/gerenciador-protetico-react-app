@@ -34,7 +34,7 @@ exports[`Form Product component > renders correctly 1`] = `
         <label
           for="nome"
         >
-          Nome:
+          Nome
         </label>
         <div
           class="error-message"
@@ -53,7 +53,7 @@ exports[`Form Product component > renders correctly 1`] = `
         <label
           for="valor_normal"
         >
-          Valor Normal:
+          Valor Normal
         </label>
         <div
           class="error-message"
@@ -72,7 +72,7 @@ exports[`Form Product component > renders correctly 1`] = `
         <label
           for="valor_reduzido"
         >
-          Valor Reduzido:
+          Valor Reduzido
         </label>
         <div
           class="error-message"

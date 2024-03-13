@@ -5,7 +5,6 @@ import userEvent from "@testing-library/user-event";
 import { FormLocal } from "../components/Form/FormLocal";
 import { APIPostNewData, APIPutData } from "../Api";
 import { testLocal } from "./utilsTest";
-
 //need to get id of some local and mock useForm return a local?
 describe("Form Local component", () => {
     //all useful elements of the form
@@ -17,8 +16,8 @@ describe("Form Local component", () => {
         expect(el.telefone.value).toBe(formInfo.telefone);
     };
     const getEl = () => {
-        const local = screen.getByLabelText("Nome do Local:");
-        const endereço = screen.getByLabelText("Endereço:");
+        const local = screen.getByLabelText("Nome do Local");
+        const endereço = screen.getByLabelText("Endereço");
         const cep = screen.getByLabelText("Cep");
         const telefone = screen.getByLabelText("Telefone");
         const tabela = screen.getByLabelText("Tipo de Tabela");

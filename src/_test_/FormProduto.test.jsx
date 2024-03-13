@@ -15,9 +15,9 @@ describe("Form Product component", () => {
     };
     //all useful elements of the form
     const getEl = () => {
-        const nome = screen.getByLabelText("Nome:");
-        const valorNormal = screen.getByLabelText("Valor Normal:");
-        const valorReduzido = screen.getByLabelText("Valor Reduzido:");
+        const nome = screen.getByLabelText("Nome");
+        const valorNormal = screen.getByLabelText("Valor Normal");
+        const valorReduzido = screen.getByLabelText("Valor Reduzido");
         const button = screen.getAllByRole("button")[1];
         return { nome, valorNormal, valorReduzido, button };
     };

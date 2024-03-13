@@ -16,8 +16,8 @@ describe("Form Dentist component", () => {
 
     //all useful elements of the form
     const getEl = () => {
-        const nome = screen.getByLabelText("Nome:");
-        const sobrenome = screen.getByLabelText("Sobrenome:");
+        const nome = screen.getByLabelText("Nome");
+        const sobrenome = screen.getByLabelText("Sobrenome");
         const telefone = screen.getByLabelText("Telefone");
         const cpf = screen.getByLabelText("CPF");
         const button = screen.getAllByRole("button")[1];
@@ -39,7 +39,7 @@ describe("Form Dentist component", () => {
         render(<FormDentist />);
 
         const { nome, sobrenome, telefone, cpf, button } = getEl();
-        const tabelaSelector = screen.getByLabelText("Local de Trabalho:");
+        const tabelaSelector = screen.getByLabelText("Local de Trabalho");
         const header = screen.getByRole("heading", {
             name: "Registrar Novo Dentista",
         });
@@ -74,7 +74,7 @@ describe("Form Dentist component", () => {
             name: "Editar Detalhes do Dentista",
         });
         const { nome, sobrenome, telefone, cpf, button } = getEl();
-        const tabelaSelector = screen.getByLabelText("Local de Trabalho:");
+        const tabelaSelector = screen.getByLabelText("Local de Trabalho");
         await user.click(button);
 
         //header with initialState

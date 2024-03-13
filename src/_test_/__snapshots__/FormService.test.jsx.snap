@@ -32,7 +32,7 @@ exports[`Form Dentist component > renders correctly 1`] = `
         <label
           for="paciente"
         >
-          Nome do Paciente:
+          Nome do Paciente
         </label>
         <div
           class="error-message"
@@ -51,7 +51,7 @@ exports[`Form Dentist component > renders correctly 1`] = `
         <label
           for="local"
         >
-          Local:
+          Local
         </label>
         <div
           class="error-message"
@@ -79,7 +79,7 @@ exports[`Form Dentist component > renders correctly 1`] = `
         <label
           for="dentista"
         >
-          Dentistas:
+          Dentistas
         </label>
         <div
           class="error-message"
@@ -98,7 +98,7 @@ exports[`Form Dentist component > renders correctly 1`] = `
         <label
           for="search-product"
         >
-          Produto:
+          Produto
         </label>
         <div
           class="error-message"
