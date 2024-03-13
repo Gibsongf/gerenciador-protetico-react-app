@@ -101,7 +101,7 @@ export function FormService({ initialState }) {
 
                 <SimpleInput
                     id={"paciente"}
-                    labelTxt={"Nome do Paciente:"}
+                    labelTxt={"Nome do Paciente"}
                     value={formData.paciente}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.paciente}
@@ -112,7 +112,7 @@ export function FormService({ initialState }) {
                     initialValue={formData.local}
                     onChange={handleChange}
                     category={"local"}
-                    labelTxt={"Local:"}
+                    labelTxt={"Local"}
                     msg={!errorMsg ? "" : errorMsg.local}
                 />
 

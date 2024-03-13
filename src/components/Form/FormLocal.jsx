@@ -67,7 +67,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
 
                 <SimpleInput
                     id={"nome"}
-                    labelTxt={"Nome do Local:"}
+                    labelTxt={"Nome do Local"}
                     value={formData.nome}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.nome}
@@ -75,7 +75,7 @@ export function FormLocal({ initialState, setEdit, setUpdate }) {
                 />
                 <SimpleInput
                     id={"endereço"}
-                    labelTxt={"Endereço:"}
+                    labelTxt={"Endereço"}
                     value={formData.endereço}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.endereço}

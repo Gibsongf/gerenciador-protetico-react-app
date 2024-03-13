@@ -69,7 +69,7 @@ export function FormProduct({ initialState }) {
                 </legend>
                 <SimpleInput
                     id={"nome"}
-                    labelTxt={"Nome:"}
+                    labelTxt={"Nome"}
                     value={formData.nome}
                     onChange={handleChange}
                     msg={!errorMsg ? "" : errorMsg.nome}
@@ -77,7 +77,7 @@ export function FormProduct({ initialState }) {
                 />
                 <SimpleInput
                     id={"valor_normal"}
-                    labelTxt={"Valor Normal:"}
+                    labelTxt={"Valor Normal"}
                     value={formData.valor_normal}
                     onChange={handleChange}
                     type={"number"}
@@ -86,7 +86,7 @@ export function FormProduct({ initialState }) {
                 />
                 <SimpleInput
                     id={"valor_reduzido"}
-                    labelTxt={"Valor Reduzido:"}
+                    labelTxt={"Valor Reduzido"}
                     value={formData.valor_reduzido}
                     onChange={handleChange}
                     type={"number"}
