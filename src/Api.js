@@ -1,5 +1,5 @@
 let apiUrl = "https://gerenciador-protetico.adaptable.app";
-apiUrl = "http://localhost:3000";
+// apiUrl = "http://localhost:3000";
 export async function apiLogin(loginData) {
     const url = apiUrl + "/users/login";
     try {
@@ -46,11 +46,6 @@ export async function apiRegister(loginData) {
     }
 }
 async function setupFetch(url, reqMethod = "get", body) {
-    if (!localStorage["token"]) {
-        await apiLogin();
-
-        // localStorage.setItem("token", data.token);
-    }
     const reqConfig = {
         method: reqMethod,
         headers: {
