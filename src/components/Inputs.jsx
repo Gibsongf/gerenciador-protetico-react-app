@@ -97,7 +97,7 @@ export function FilterDentistsByLocation({
     };
     return (
         <div className="select-options">
-            <label htmlFor="dentista">Dentistas:</label>
+            <label htmlFor="dentista">Dentistas</label>
             <div className="error-message">{msg}</div>
             <select
                 value={initialValue}
@@ -234,7 +234,7 @@ export function SearchProducts({
     };
     return (
         <div className="search-product">
-            <label htmlFor="search-product">Produto:</label>
+            <label htmlFor="search-product">Produto</label>
             <div className="error-message">{msg}</div>
 
             <input
