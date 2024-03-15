@@ -12,6 +12,7 @@ import { downloadExcelAction } from "../utils.js";
 import PropTypes from "prop-types";
 import { Loading } from "../components/Loading.jsx";
 import { ServiceTodosDiv } from "../components/DivTodos.jsx";
+
 export function TodosDentistas() {
     const { data, setTableUpdate } = useTodosApi("dentista", true);
     const row = ["Nome", "Telefone", "Endereço"];
@@ -20,7 +21,6 @@ export function TodosDentistas() {
 
         return <Loading />;
     }
-
     return (
         <>
             {" "}

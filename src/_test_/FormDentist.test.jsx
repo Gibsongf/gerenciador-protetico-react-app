@@ -4,14 +4,15 @@ import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormDentist } from "../components/Form/FormDentist";
-import { testDentist } from "./utilsTest";
+import { mockServiceData } from "./utilsTest";
 
 describe("Form Dentist component", () => {
+    const dentistaInfo = mockServiceData.dentista;
     const expectFormElements = async (el) => {
-        expect(el.nome.value).toBe(testDentist.nome);
-        expect(el.sobrenome.value).toBe(testDentist.sobrenome);
-        expect(el.telefone.value).toBe(testDentist.telefone);
-        expect(el.cpf.value).toBe(testDentist.cpf);
+        expect(el.nome.value).toBe(dentistaInfo.nome);
+        expect(el.sobrenome.value).toBe(dentistaInfo.sobrenome);
+        expect(el.telefone.value).toBe(dentistaInfo.telefone);
+        expect(el.cpf.value).toBe(dentistaInfo.cpf);
     };
 
     //all useful elements of the form
@@ -43,10 +44,10 @@ describe("Form Dentist component", () => {
         const header = screen.getByRole("heading", {
             name: "Registrar Novo Dentista",
         });
-        await inputText(nome, testDentist.nome, user);
-        await inputText(sobrenome, testDentist.sobrenome, user);
-        await inputText(telefone, testDentist.telefone, user);
-        await inputText(cpf, testDentist.cpf, user);
+        await inputText(nome, dentistaInfo.nome, user);
+        await inputText(sobrenome, dentistaInfo.sobrenome, user);
+        await inputText(telefone, dentistaInfo.telefone, user);
+        await inputText(cpf, dentistaInfo.cpf, user);
         await user.selectOptions(tabelaSelector, ["local-1"]);
         await user.click(button);
 
@@ -65,7 +66,7 @@ describe("Form Dentist component", () => {
 
         render(
             <FormDentist
-                initialState={testDentist}
+                initialState={dentistaInfo}
                 setEdit={setEdit}
                 setUpdate={setUpdate}
             />

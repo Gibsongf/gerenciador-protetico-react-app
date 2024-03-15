@@ -63,13 +63,57 @@ export const testLocal = [
 export const mockServiceData = {
     produto: [
         {
-            nome: "produto-1",
             _id: "id-produto-1",
+            nome: "produto-1",
+            valor_normal: "100",
+            valor_reduzido: "50",
+            category: "produto",
+            formType: "edit",
         },
         {
             nome: "produto-2",
             _id: "id-produto-2",
+            valor_normal: "100",
+            valor_reduzido: "50",
+            category: "produto",
+            formType: "edit",
         },
     ],
     local: testLocal,
+    servico: {
+        _id: "65dd5ff530d103b5e6f12067",
+        dentista: {
+            _id: "65dd5ff530d103b5e6f1205d",
+            nome: "Benício",
+            sobrenome: "Oliveira",
+            local: "65dd5ff530d103b5e6f1205b",
+            telefone: "5910-3548",
+            cpf: 57246203537,
+        },
+        local: "65dd5ff530d103b5e6f1205b",
+        paciente: "Meire Macedo",
+        produto: [testProduct],
+        statusEntrega: false,
+    },
+    dentista: testDentist,
 };
+// export const mockServiceData = {
+//     'serviço':{
+//         _id: "65dd5ff530d103b5e6f12067",
+//         dentista: {
+//             _id: "65dd5ff530d103b5e6f1205d",
+//             nome: "Benício",
+//             sobrenome: "Oliveira",
+//             local: "65dd5ff530d103b5e6f1205b",
+//             telefone: "5910-3548",
+//             cpf: 57246203537,
+//         },
+//         local: "65dd5ff530d103b5e6f1205b",
+//         paciente: "Meire Macedo",
+//         produto: [
+//             testProduct
+//         ],
+//         statusEntrega: false,
+//     },
+//     local:testLocal[0],
+// }

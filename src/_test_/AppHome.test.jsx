@@ -3,15 +3,12 @@ import { act, render, screen } from "@testing-library/react";
 import { expect, vi } from "vitest";
 import { HashRouter } from "react-router-dom";
 import App from "../App";
+import { apiLogin } from "../Api";
 
-//mock api get content
-vi.mock("../components/ApiHooks", () => {
+vi.mock("../Api", async () => {
+    const actual = await vi.importActual("../Api");
     return {
-        useTodosApi: vi.fn(() => {
-            return {
-                all: "",
-            };
-        }),
+        ...actual,
     };
 });
 describe("App component", () => {
@@ -29,7 +26,6 @@ describe("App component", () => {
     it("renders service when there is a token", async () => {
         //not valid token the content won't load
         //the header load normally
-        localStorage.setItem("token", "some-token");
         await act(async () => {
             render(
                 //HashRouter for useNavigate to work
@@ -37,7 +33,12 @@ describe("App component", () => {
                     <App />
                 </HashRouter>
             );
+            await apiLogin({
+                username: "test",
+                password: "test",
+            });
         });
+
         const linkDentista = screen.getByRole("link", { name: "Dentistas" });
         const logo = screen.getByRole("img", { name: "dg-logo" });
 

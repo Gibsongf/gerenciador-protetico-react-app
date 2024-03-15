@@ -4,14 +4,16 @@ import { expect } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { APIPostNewData, APIPutData } from "../Api";
 import { FormProduct } from "../components/Form/FormProduct";
-import { testProduct } from "./utilsTest";
+import { mockServiceData } from "./utilsTest";
 
 //need to get id of some local and mock useForm return a local?
 describe("Form Product component", () => {
+    const produtoInfo = mockServiceData.produto[0];
+
     const expectFormElements = async (el) => {
-        expect(el.nome.value).toBe(testProduct.nome);
-        expect(el.valorNormal.value).toBe(testProduct.valor_normal);
-        expect(el.valorReduzido.value).toBe(testProduct.valor_reduzido);
+        expect(el.nome.value).toBe(produtoInfo.nome);
+        expect(el.valorNormal.value).toBe(produtoInfo.valor_normal);
+        expect(el.valorReduzido.value).toBe(produtoInfo.valor_reduzido);
     };
     //all useful elements of the form
     const getEl = () => {
@@ -36,9 +38,9 @@ describe("Form Product component", () => {
         const user = userEvent.setup();
         render(<FormProduct />);
         const { nome, valorNormal, valorReduzido, button } = getEl();
-        await inputText(nome, testProduct.nome, user);
-        await inputText(valorNormal, testProduct.valor_normal, user);
-        await inputText(valorReduzido, testProduct.valor_reduzido, user);
+        await inputText(nome, produtoInfo.nome, user);
+        await inputText(valorNormal, produtoInfo.valor_normal, user);
+        await inputText(valorReduzido, produtoInfo.valor_reduzido, user);
         await user.click(button);
 
         //inputs expected has values correctly
@@ -50,7 +52,7 @@ describe("Form Product component", () => {
     it("Form edit mode, save data at right inputs", async () => {
         const user = userEvent.setup();
 
-        render(<FormProduct initialState={testProduct} />);
+        render(<FormProduct initialState={produtoInfo} />);
         const { nome, valorNormal, valorReduzido, button } = getEl();
         await user.click(button);
 
