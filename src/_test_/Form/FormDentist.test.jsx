@@ -2,9 +2,9 @@
 import { render, screen } from "@testing-library/react";
 import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { APIPostNewData, APIPutData } from "../Api";
-import { FormDentist } from "../components/Form/FormDentist";
-import { mockServiceData } from "./utilsTest";
+import { APIPostNewData, APIPutData } from "../../Api";
+import { FormDentist } from "../../components/Form/FormDentist";
+import { mockServiceData } from "../utilsTest";
 
 describe("Form Dentist component", () => {
     const dentistaInfo = mockServiceData.dentista;

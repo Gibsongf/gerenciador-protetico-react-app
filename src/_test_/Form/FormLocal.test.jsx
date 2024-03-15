@@ -2,9 +2,10 @@
 import { render, screen } from "@testing-library/react";
 import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { FormLocal } from "../components/Form/FormLocal";
-import { APIPostNewData, APIPutData } from "../Api";
-import { mockServiceData } from "./utilsTest";
+import { FormLocal } from "../../components/Form/FormLocal";
+import { APIPostNewData, APIPutData } from "../../Api";
+import { mockServiceData } from "../utilsTest";
+
 //need to get id of some local and mock useForm return a local?
 describe("Form Local component", () => {
     //all useful elements of the form

@@ -3,11 +3,11 @@ import { render, screen } from "@testing-library/react";
 import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { HashRouter } from "react-router-dom";
-import App from "../App";
-import { apiLogin } from "../Api";
+import App from "../../App";
+import { apiLogin } from "../../Api";
 
 //mock api post login
-vi.mock("../Api");
+vi.mock("../../Api");
 
 describe("Form Login component", () => {
     //all useful elements of the form

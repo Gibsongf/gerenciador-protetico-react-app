@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Form Product component > renders correctly 1`] = `
+<div>
+  <div
+    class="form-container"
+    id="pop-up"
+  >
+    <form
+      action=""
+      id="pop-up-content"
+      role="product-form"
+    >
+      <span
+        class="form-close-btn"
+      >
+        <button
+          class="close-btn"
+          type="button"
+        >
+          X
+        </button>
+      </span>
+      <legend>
+        <h3>
+           
+          Registrar Novo Produto
+           
+        </h3>
+      </legend>
+      <div
+        class="nome"
+      >
+        <label
+          for="nome"
+        >
+          Nome
+        </label>
+        <div
+          class="error-message"
+        />
+        <input
+          id="nome"
+          name="nome"
+          required=""
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="valor_normal"
+      >
+        <label
+          for="valor_normal"
+        >
+          Valor Normal
+        </label>
+        <div
+          class="error-message"
+        />
+        <input
+          id="valor_normal"
+          name="valor_normal"
+          required=""
+          type="number"
+          value=""
+        />
+      </div>
+      <div
+        class="valor_reduzido"
+      >
+        <label
+          for="valor_reduzido"
+        >
+          Valor Reduzido
+        </label>
+        <div
+          class="error-message"
+        />
+        <input
+          id="valor_reduzido"
+          name="valor_reduzido"
+          required=""
+          type="number"
+          value=""
+        />
+      </div>
+      <button
+        class="register-form-btn"
+        type="submit"
+      >
+        Registrar
+      </button>
+    </form>
+  </div>
+</div>
+`;
