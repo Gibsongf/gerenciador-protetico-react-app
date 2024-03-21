@@ -40,7 +40,7 @@ export function useForm(initialState, formElements) {
         return setResult(() => "");
     }, [result, formElements, errorMsg]);
 
-    const callAPI = (arr) => {
+    const checkResponseErrors = (arr) => {
         if (arr.errors) {
             setResult(arr.errors);
             return false;
@@ -70,13 +70,15 @@ export function useForm(initialState, formElements) {
         }
 
         const response = await whichAPI[type](data, initialState.dbId);
-
-        if (type === "edit" && formData.category === "dentista") {
-            // update all the current dentist services with the new location
-            updateDentistServicesLocation(response.dentista);
+        const finalResult = checkResponseErrors(response);
+        if (finalResult) {
+            if (type === "edit" && formData.category === "dentista") {
+                // update all the current dentist services with the new location
+                updateDentistServicesLocation(response.dentista);
+            }
+            clearErrorMsg();
         }
-        clearErrorMsg();
-        return callAPI(response);
+        return finalResult;
     };
     return { formData, handleChange, handleSubmit, setFormData };
 }
