@@ -8,6 +8,7 @@ import { formatToForm } from "../utils";
 import { APIPutData } from "../Api";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { ptBR } from "@mui/x-data-grid/locales";
 
 const columns = [
     {
@@ -37,8 +38,7 @@ const columns = [
 ];
 //need to fix the update of the values, maybe changing the name of valor_normal to valorNormal
 // at the models for db
-export function DataTable() {
-    const { data, setTableUpdate } = useTodosApi("produto", true);
+export function DataTable({ data, setTableUpdate }) {
     const { setShowForm, setForm } = useContext(PopUpEditContext);
     const [snackbar, setSnackbar] = useState(null);
     const handleCloseSnackbar = () => setSnackbar(null);
@@ -78,11 +78,12 @@ export function DataTable() {
     }
     return (
         <div
-            style={{ width: "100%", backgroundColor: "white" }}
+            style={{ backgroundColor: "white" }}
             className="content-container"
             id="produto-table"
         >
             <DataGrid
+                localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
                 rows={data}
                 columns={columns}
                 initialState={{
