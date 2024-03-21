@@ -31,7 +31,7 @@ export function Header() {
     return (
         <>
             <div className="header">
-                <ResponsiveLogo />
+                {/* <ResponsiveLogo /> */}
                 <div className="nav">
                     <NavLink className="nav-btn" to="/servico/todos">
                         Serviços

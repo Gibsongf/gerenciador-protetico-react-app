@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { PopUpEditContext } from "../pages/Todos";
 import Icon from "@mdi/react";
 import { mdiPencil } from "@mdi/js";
+import { formatToForm } from "../utils";
 ButtonNewForm.propTypes = {
     type: PropTypes.string,
     tableUpdate: PropTypes.any,
@@ -53,39 +54,9 @@ ButtonEditForm.propTypes = {
     data: PropTypes.any,
 };
 
-const formatToForm = (type, data) => {
-    const produto = () => {
-        return {
-            nome: data.nome,
-            valor_normal: data.valor_normal,
-            valor_reduzido: data.valor_reduzido,
-            category: "produto",
-            formType: "edit",
-            dbId: data._id,
-        };
-    };
-    const servico = () => {
-        return {
-            paciente: data.paciente,
-            dentista: data.dentista._id,
-            local: data.local,
-            produto: data.produto,
-            statusEntrega: data.statusEntrega,
-            category: "servico",
-            formType: "edit",
-            dbId: data._id,
-        };
-    };
-    const whichType = {
-        servico,
-        produto,
-    };
-    return whichType[type]();
-};
 export function ButtonEditForm({ type, data }) {
     const { setShowForm, setForm } = useContext(PopUpEditContext);
     const initialState = formatToForm(type, data);
-
     const selectedForm = () => {
         const obj = {
             servico: <FormService initialState={initialState} />,
